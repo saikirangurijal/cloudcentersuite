@@ -31,9 +31,10 @@ function getMembers() {
   memberIPs="[$memberIPs]"
 }
 
+
 function createParamsJSON() {
 paramLine=""
-while IFS=',' read -r displayName paramName paramType defValue varVisible optionalParam
+while IFS=',' read -r displayName paramName paramType defValue
 do
   if [ "$paramType" == "cliqrtier" ]
   then
@@ -41,10 +42,21 @@ do
   else
     if [[ -z "${!paramName}" ]]
     then
-      paramLine=$paramLine"  \"${paramName}\": \"${defValue}\",\n"
+      if [ "$paramType" == "list" ]; then
+        defValue="["`echo "\"${defValue}\"" | sed 's/,/","/g'`"]"
+        paramLine=$paramLine"  \"${paramName}\": ${defValue},\n"
+      else
+        paramLine=$paramLine"  \"${paramName}\": \"${defValue}\",\n"
+      fi
     else
-      paramLine=$paramLine"  \"${paramName}\": \"${!paramName}\",\n"
-     fi
+      if [ "$paramType" == "list" ]
+      then
+        listLine="["`echo "\"${!paramName}\"" | sed 's/,/","/g'`"]"
+        paramLine=$paramLine"  \"${paramName}\": ${listLine},\n"
+      else
+        paramLine=$paramLine"  \"${paramName}\": \"${!paramName}\",\n"
+      fi
+    fi
    fi
 done < "$dictionaryFileName"
 paramLine=`echo $paramLine |sed s'/...$//'`
