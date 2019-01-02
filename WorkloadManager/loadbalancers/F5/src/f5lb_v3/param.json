@@ -1,0 +1,12 @@
+{
+"name": "Jenkins_v2",
+ "template": "http",
+ "vip_addr": "10.0.5.8",
+ "vip_port": "80",
+ "pool_name": "momagic_pool",
+ "pool_members": ["10.0.0.26"],
+ "service_port": "80",
+ "monitor_type": "http",
+ "irules_list": ["/Common/Demo-iRules-1","/Common/Demo-iRules-2"],
+ "client_ssl_profile": "clientssl"
+}

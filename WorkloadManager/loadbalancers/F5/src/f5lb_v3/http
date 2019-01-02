@@ -1,0 +1,53 @@
+{
+     "class": "AS3",
+     "action": "deploy",
+     "persist": true,
+     "declaration": {
+         "class": "ADC",
+         "schemaVersion": "3.0.0",
+         "id": "{{ name }}",
+         "label": "{{ name }}",
+         "remark": "Simple HTTP application with round robin pool",
+         "{{ name }}": {
+             "class": "Tenant",
+             "defaultRouteDomain": 0,
+             "Application": {
+                 "class": "Application",
+                 "template": "http",
+             "serviceMain": {
+                 "class": "Service_HTTP",
+                 "virtualAddresses": [
+                     "{{ vip_addr }}"
+                 ],
+                 "virtualPort": {{ vip_port }},
+                 {% if irules_list|length > 1 %}
+                 "iRules": [
+                    {% for irule in irules_list %}
+                    {"bigip": "{{ irule }}"}
+                    {% if not loop.last %},{% endif %}
+                    {% endfor %}
+                ],
+		{% endif %}
+                 "pool": "{{ pool_name }}"
+                 },
+                 "{{ pool_name }}": {
+                     "class": "Pool",
+                     "monitors": [
+                         "{{ monitor_type }}"
+                     ],
+                     "members": [
+                         {
+                             "servicePort": {{ service_port }},
+                             "serverAddresses": [
+                                {% for member_IP in pool_members %}
+                                "{{ member_IP }}"
+                                {% if not loop.last %},{% endif %}
+                                {% endfor %}
+                             ]
+                         }
+                     ]
+                 }
+             }
+         }
+     }
+}

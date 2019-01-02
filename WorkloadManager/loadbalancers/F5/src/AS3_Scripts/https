@@ -1,0 +1,48 @@
+{
+  "class": "AS3",
+  "action": "deploy",
+  "persist": true,
+  "declaration": {
+     "class": "ADC",
+     "schemaVersion": "3.0.0",
+     "id": "{{ name }}",
+     "label": "{{ name }}",
+	 "remark": "An HTTP and an HTTPS application",
+	 "{{ name }}": {
+	   "class": "Tenant",
+	   "A1": {
+		  "class": "Application",
+		  "template": "https",
+		  "serviceMain": {
+			"class": "Service_HTTPS",
+			"virtualAddresses": [
+			  "{{ vip_addr }}"
+			],
+                        {% if irules_list|length > 1 %}
+                        "iRules": [
+                        {% for irule in irules_list %}
+                           {"bigip": "{{ irule }}"}
+                           {% if not loop.last %},{% endif %}
+                        {% endfor %}
+			"pool": "{{ pool_name }}",
+			"serverTLS": { "bigip": "{{ client_ssl_profile }}" }
+		  },
+		  "{{ pool_name }}": {
+			"class": "Pool",
+			"monitors": [
+			  "http"
+			],
+			"members": [{
+			  "servicePort": {{ service_port }},
+			  "serverAddresses": [
+				{% for member_IP in pool_members %}
+				"{{ member_IP }}"
+				{% if not loop.last %},{% endif %}
+				{% endfor %}
+			  ]
+			}]
+		  }
+ 	    }
+      }
+   }
+}
