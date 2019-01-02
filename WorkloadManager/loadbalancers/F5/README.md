@@ -34,3 +34,8 @@ e.g. Root Volume Size,root_volume_size,10
 ```
 - bigip_rest.py: script that calls the F5 APIs. This python script is called from the main service script
 - cliqr.template: F5 template file use by bigip_rest.py
+
+## Import Service
+```
+Instructions to add service
+```
