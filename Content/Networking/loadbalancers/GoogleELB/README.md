@@ -61,7 +61,7 @@ Deployement Parameters
 
 ###### Step 4 : Save the service
 
-##### Detailed steps for creating a service through UI
+##### Detailed steps for creating a service through the service import script
 
 Step 1 : unzip  service import script zip file on any Linux System.
 
