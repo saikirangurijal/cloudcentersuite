@@ -22,11 +22,11 @@ Cisco Cloud Center will maintain the application services catalog, provide consi
 
 ## Download the service bundles
 
- Step 1 : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/loadbalancers/F5/WorkloadManager/ServiceBundle/f5lb.zip).
+ **Step 1** : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/loadbalancers/F5/WorkloadManager/ServiceBundle/f5lb.zip).
 
- Step 2 : Download the application bundle to be used with application profile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/loadbalancers/F5/WorkloadManager/ApplicationProfiles/artifacts/opencartapppkg.zip).
+ **Step 2** : Download the application bundle to be used with application profile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/loadbalancers/F5/WorkloadManager/ApplicationProfiles/artifacts/opencartapppkg.zip).
 
- Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and application bundle from Step 2 under apps/<your_package_name> in your file repository.
+ **Step 3** : Place the service bundle from Step 1 under services/<bundle.zip> and application bundle from Step 2 under apps/<your_package_name> in your file repository.
 
             - Service Bundle under services/<bundle.zip>
 
@@ -36,15 +36,15 @@ Cisco Cloud Center will maintain the application services catalog, provide consi
 
                     Example : http://<Your_REPO_Server_IP>/apps/opencartapppkg.zip
 
- Step 4 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/loadbalancers/F5/WorkloadManager/f5_iu.zip)
+ **Step 4** : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/loadbalancers/F5/WorkloadManager/f5_iu.zip)
 
- Step 5: Extract the above bundle on any linux based machine and navigate to extracted folder
+ **Step 5**: Extract the above bundle on any linux based machine and navigate to extracted folder
 
- Step 6 : Download the Service Import script zip file from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Scripts/serviceimport.zip)
+ **Step 6** : Download the Service Import script zip file from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Scripts/serviceimport.zip)
 
- Step 7: Copy the Service Import script zip file to the directory extracted above in Step 5 and Unzip the service import script bundle.
+ **Step 7**: Copy the Service Import script zip file to the directory extracted above in Step 5 and Unzip the service import script bundle.
 
- Step 8 : Download the Dockerfile from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
+ **Step 8** : Download the Dockerfile from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
 
  ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
 
