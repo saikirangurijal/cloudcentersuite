@@ -8,7 +8,6 @@ F5 BIG-IP provides a wide range of application delivery services, such as server
 
 Cisco Cloud Center will maintain the application services catalog, provide consistent and agile L4-L7 services to application deployment in both private and public cloud environments.
 
-## Introduction
 
 ### CloudCenter
 - CloudCenter 5.0 and above
