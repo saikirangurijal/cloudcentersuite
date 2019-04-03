@@ -16,7 +16,8 @@ Cisco Cloud Center will maintain the application services catalog, provide consi
 
 ### F5 BIG-IP
 - Release 12.1.x
-- Download App Services iApps 2.0 from GitHub and import into BIG-IP
+- Download App Services RPM package from https://github.com/F5Networks/f5-appsvcs-extension/tree/master/dist/latest
+- Load it on the BIG-IP - https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/installation.html#installgui-ref
 - BIG-IP management interface must be configured and reachable by Cloud Center
 - BIG-IP must be licensed
 
