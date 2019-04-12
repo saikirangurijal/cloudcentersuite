@@ -12,8 +12,12 @@
     Please refer the below link for more details.
 
     https://cloud.google.com/sql/docs/
+## Pre-Requisites
+#### CloudCenter
+- CloudCenter 5.0.1 and above
+- Knowledge on how to use CloudCenter
 
-## Where to Download the service bundles
+## Download the service bundles
 
  Step 1 : Download the Service Bundle zip from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Databases/GoogleSQL/WorkloadManager/ServiceBundle/googlesql.zip). 
    
@@ -29,7 +33,7 @@
             
                     Example : http://<Your_REPO_Server_IP>/apps/googlesql-petclinic-app.zip
    
- Step 4 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Databases/GoogleSQL/WorkloadManager/GoogleSQL.zip)
+ Step 4 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Databases/GoogleSQL/WorkloadManager/googlesql_iu.zip)
  
  Step 5: Extract the above bundle on any linux based machine and navigate to extracted folder
 
@@ -43,12 +47,12 @@
    
  Ensure your directory in the linux based client machine contains :
 
-- Service import json file (named as googlesql.json)
+- Service import json file (named as googlesql_service.json)
 - Service import script zip file (named as serviceimport.zip)
 - main.py file
 - serviceimport.sh
 - Google SQL logo (named as logo.png)
-- Modelled application profile(named as googlesql-app.zip)
+- Modelled application profile(named as googlesql_sample_app.zip)
 - Dockerfile (named as Dockerfile) , **Only needed if you wish to create a Docker image for the first time**
    
 ## How to Create a Service in Cisco Workload Manager
@@ -71,7 +75,7 @@ Install Docker by following the steps provided [here](https://wwwin-github.cisco
     
     
 Example : 
-    [root@ip-172-31-27-127 googlesql]# chmod 755 googlesql.json serviceimport.zip logo.png googlesql-app.zip Dockerfile
+    [root@ip-172-31-27-127 googlesql]# chmod 755 googlesql_service.json serviceimport.zip logo.png googlesql_sample_app.zip Dockerfile
 
 ##### Step 2: Build a docker image from the same directory where the docker file and other service files are placed. A docker image tagged "ccs_service_import:v1" will be built.
 
@@ -110,7 +114,7 @@ Step 6: You will be prompted to select the file repository in which you have pre
 
 If service creation is successful, You will be presented with a message **"Google SQL Service imported successfully. Imported Application Profile Successfully"**
 
-## Integration Unit Bundle
+## Service Package Bundle
 
 The Package Service bundle consists of the following files:
 
