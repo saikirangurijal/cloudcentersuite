@@ -19,9 +19,9 @@
 
 ## Download the service bundles
 
- Step 1 : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/Content/raw/master/Databases/GoogleSQL/WorkloadManager/ServiceBundle/googlesql.zip). 
+ Step 1 : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/GoogleSQL/WorkloadManager/ServiceBundle/googlesql.zip). 
    
- Step 2 : Download the application bundle to be used with application profile from [here](https://github.com/datacenter/cloudcentersuite/Content/raw/master/Databases/GoogleSQL/WorkloadManager/ApplicationProfiles/artifacts/googlesql-petclinic-app.zip).
+ Step 2 : Download the application bundle to be used with application profile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/GoogleSQL/WorkloadManager/ApplicationProfiles/artifacts/googlesql-petclinic-app.zip).
    
  Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and application bundle from Step 2 under apps/<your_package_name> in your file repository.
           
@@ -33,15 +33,15 @@
             
                     Example : http://<Your_REPO_Server_IP>/apps/googlesql-petclinic-app.zip
    
- Step 4 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/Content/raw/master/Databases/GoogleSQL/WorkloadManager/googlesql_iu.zip)
+ Step 4 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/GoogleSQL/WorkloadManager/googlesql_iu.zip)
  
  Step 5: Extract the above bundle on any linux based machine and navigate to extracted folder
 
- Step 6 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/Content/raw/master/Scripts/serviceimport.zip) 
+ Step 6 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
  
  Step 7: Copy the Service Import script zip file to the directory extarcted above in Step 5 and Unzip the service import script bundle.
 
- Step 8 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/Content/raw/master/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
+ Step 8 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
  
  ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
    
@@ -61,7 +61,7 @@ User can create the service by using **Import Service** functionality using scri
 
 #### Prerequisite for creating a service through service import script:
 
-Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/Content/raw/master/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx) on any linux based client machine.
+Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx) on any linux based client machine.
 
 **NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
 - You can check , if docker is installed , by running docker -v
