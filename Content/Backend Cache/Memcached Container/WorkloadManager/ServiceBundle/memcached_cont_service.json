@@ -1,0 +1,35 @@
+{
+	"displayName": "MemcachedContainer",
+	"name": "memcachedcontainer",
+	"description": "Memcached Running in Container",
+	"parentServiceId": "39",
+	"costPerHour": "0.00",
+	"bundleLocation": "",
+	"systemService": false,
+	"serviceType": "CONTAINER",
+	"logoPath": "null",
+	"serviceActions": [],
+	"externalBundleLocation": "",
+	"externalActions": [],
+	"actions": [],
+	"serviceParamSpecs": [],
+	"servicePorts": [],
+	"images": [],
+	"defaultImageId": "",
+	"containerImages": [{
+			"url": "memcached:1.5.12",
+			"default": "true"
+		},
+		{
+			"url": "memcached:1.5.12-alpine"
+		}
+	],
+	"containerPorts": [{
+		"ipProtocol": "TCP",
+		"name": "memport",
+		"port": "11211"
+	}],
+	"repositories": [{
+		"id": "1"
+	}]
+}
