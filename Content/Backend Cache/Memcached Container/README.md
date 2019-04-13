@@ -18,15 +18,15 @@
 	
 # Download the service bundles
    
- Step 1 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Backend%20Cache/Memcached%20Container/WorkloadManager/memcached_cont_iu.zip).
+ Step 1 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Backend%20Cache/Memcached%20Container/WorkloadManager/memcached_cont_iu.zip).
  
  Step 2 : Extract the above bundle on any linux based machine and navigate to extracted folder.
  
- Step 3 : Download the service import script zip file from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Scripts/serviceimport.zip)
+ Step 3 : Download the service import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip)
    
  Step 4 : Copy the Service Import script zip file to the directory extarcted above in Step 2 and Unzip the service import script bundle.
 
- Step 5 : Download the Dockerfile from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Dockerfile) and copy to the extracted folder in Step 2
+ Step 5 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 2
  
  ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
    
@@ -46,7 +46,7 @@ User can create the service by using **Import Service** functionality.
   
 #### Prerequisite for creating a service through service import script:
 
-Install Docker by following the steps provided [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx) on any linux based client machine.
+Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx) on any linux based client machine.
 
 **NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
 - You can check , if docker is installed , by running docker -v
