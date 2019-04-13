@@ -1,0 +1,62 @@
+{
+  "AdminContact":{
+                "FirstName": "",
+                "LastName": "",
+                "ContactType": "",
+                "OrganizationName": "",
+                "AddressLine1": "",
+                "AddressLine2": "",
+                "City": "",
+                "State": "",
+                "CountryCode": "IN",
+                "ZipCode": "",
+                "PhoneNumber": "",
+                "Email": "",
+                "ExtraParams": [
+                    {
+                        "Name": "BIRTH_DEPARTMENT",
+                        "Value": ""
+                    }
+                ]
+            },
+  "RegistrantContact":{
+                "FirstName": "",
+                "LastName": "",
+                "ContactType": "",
+                "OrganizationName": "",
+                "AddressLine1": "",
+                "AddressLine2": "",
+                "City": "",
+                "State": "",
+                "CountryCode": "IN",
+                "ZipCode": "",
+                "PhoneNumber": "",
+                "Email": "",
+                "ExtraParams": [
+                    {
+                        "Name": "BIRTH_DEPARTMENT",
+                        "Value": ""
+                    }
+                ]
+            },
+  "TechContact":{
+                "FirstName": "",
+                "LastName": "",
+                "ContactType": "",
+                "OrganizationName": "",
+                "AddressLine1": "",
+                "AddressLine2": "",
+                "City": "",
+                "State": "",
+                "CountryCode": "",
+                "ZipCode": "",
+                "PhoneNumber": "",
+                "Email": "",
+                "ExtraParams": [
+                    {
+                        "Name": "BIRTH_DEPARTMENT",
+                        "Value": ""
+                    }
+                ]
+            }
+}

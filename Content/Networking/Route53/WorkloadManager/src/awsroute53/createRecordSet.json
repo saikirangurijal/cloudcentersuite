@@ -1,0 +1,92 @@
+{
+  "AdminContact":{
+                "FirstName": "",
+                "LastName": "",
+                "ContactType": "",
+                "OrganizationName": "",
+                "AddressLine1": "",
+                "AddressLine2": "",
+                "City": "",
+                "State": "",
+                "CountryCode": "IN",
+                "ZipCode": "",
+                "PhoneNumber": "",
+                "Email": "",
+                "ExtraParams": [
+                    {
+                        "Name": "BIRTH_DEPARTMENT",
+                        "Value": ""
+                    }
+                ]
+            },
+  "RegistrantContact":{
+                "FirstName": "",
+                "LastName": "",
+                "ContactType": "",
+                "OrganizationName": "",
+                "AddressLine1": "",
+                "AddressLine2": "",
+                "City": "",
+                "State": "",
+                "CountryCode": "IN",
+                "ZipCode": "",
+                "PhoneNumber": "",
+                "Email": "",
+                "ExtraParams": [
+                    {
+                        "Name": "BIRTH_DEPARTMENT",
+                        "Value": ""
+                    }
+                ]
+            },
+  "TechContact":{
+                "FirstName": "",
+                "LastName": "",
+                "ContactType": "",
+                "OrganizationName": "",
+                "AddressLine1": "",
+                "AddressLine2": "",
+                "City": "",
+                "State": "",
+                "CountryCode": "",
+                "ZipCode": "",
+                "PhoneNumber": "",
+                "Email": "",
+                "ExtraParams": [
+                    {
+                        "Name": "BIRTH_DEPARTMENT",
+                        "Value": ""
+                    }
+                ]
+            },
+  "Changes": {
+              "Changes": [
+                {
+                  "Action": "",
+                  "ResourceRecordSet": {
+                    "Name": "",
+                    "Type": "A",
+                    "Region": "us-east-2",
+                    "SetIdentifier": "test",
+                    "TTL":"",
+                    "ResourceRecords": [
+                      {
+                        "Value": ""
+                      }
+                    ],
+                    "HealthCheckId": ""
+                  }
+
+                }
+              ]
+            },
+  "HealthCheckConfig":{
+                "IPAddress": "35.193.130.138",
+                "Port": 80,
+                "Type": "HTTP",
+                "FullyQualifiedDomainName":"sathisknq.qwertyuioptest12345.com",
+                "ResourcePath": "/ui/auth/login",
+                "RequestInterval": 30,
+                "FailureThreshold": 5
+            }
+}
