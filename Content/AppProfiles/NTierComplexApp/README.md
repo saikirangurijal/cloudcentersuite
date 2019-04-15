@@ -51,11 +51,11 @@ NTierComplexApp - Typical J2EE Web App
    3. Mongo DB Cluster Service should be created in Workload Manager for the NOSQL Database Tier 
       - How to Create Mongo DB Cluster Server - Refer from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/NoSQL%20Databases/MongoDB%20Cluster)
 
-   4. Make sure that you keep the  Artifacts/Application Package Bundle for the Profiles in your repository under '<repoistory>/apps/complexapp/' folder. Download the Artificat from [here](https://github.com/datacenter/cloudcentersuite/blob/master/Content/AppProfiles/NTierComplexApp/artifacts/complexapp.zip) 
+   4. Make sure that you keep the  Artifacts/Application Package Bundle for the Profiles in your repository under '<repoistory>/apps/complexapp/' folder. Download the Artificat from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/AppProfiles/NTierComplexApp/artifacts/complexapp.zip) 
    
    5. Make sure that Sensu Service is exist in Workload Manager.  Refer the Sensu Server service creation steps [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Monitoring/Sensu) 
    
-   6. For Weblogic: In addition to Step 4, Make sure that you keep the War for Weblogic in your repository under '<repoistory>/apps/complexapp/' folder. Download the war from [here](https://github.com/datacenter/cloudcentersuite/blob/master/ContentAppProfiles/NTierComplexApp/artifacts/multi-tier-app.war) 
+   6. For Weblogic: In addition to Step 4, Make sure that you keep the War for Weblogic in your repository under '<repoistory>/apps/complexapp/' folder. Download the war from [here](https://github.com/datacenter/cloudcentersuite/raw/master/ContentAppProfiles/NTierComplexApp/artifacts/multi-tier-app.war) 
 
    7. For Weblogic : App With Middleware/Weblogic Cluster option, after steps 4,  Refer the Weblogic Cluster service creation steps [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Middleware/Oracle%20Weblogic)
    
