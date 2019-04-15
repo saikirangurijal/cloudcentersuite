@@ -31,13 +31,13 @@
             
                     Example : http://<Your_REPO_Server_IP>/apps/dynamodb-php-app.zip
    
- Step 4 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/NoSQL%20Databases/DynamoDB/WorkloadManager/dynamodb_iu.zip  )
+ Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/NoSQL%20Databases/DynamoDB/WorkloadManager/dynamodb_iu.zip  )
  
  Step 5: Extract the above bundle on any linux based machine and navigate to extracted folder
 
  Step 6 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
  
- Step 7: Copy the Service Import script zip file to the directory extarcted above in Step 5 and Unzip the service import script bundle.
+ Step 7: Copy the Service Import script zip file to the directory extractedcted above in Step 5 and Unzip the service import script bundle.
 
  Step 8 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
  ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
@@ -146,7 +146,7 @@ External Lifecycle Actions:
 | ------ | ------ | ------ |------ | ------ |
 | tableName |	string | Table name to be configured for the service.	 | User defined value | testdb |
 | partitionKey | string| Primary key for the table | User defined value | id |
-| partitionAttrType | list| Type of attrribute. For more details on the type of attribute, check DynamoDB documentation	 | Number,String,Binary | Number |
+| partitionAttrType | list| Type of attribute. For more details on the type of attribute, check DynamoDB documentation	 | Number,String,Binary | Number |
 | streamEnabled | list| Stream enable for the table | True,False | True |
 | streamViewType | list | Stream View Type | NEW_IMAGE,OLD_IMAGE,NEW_AND_OLD_IMAGES,KEYS_ONLY | NEW_AND_OLD_IMAGES |
 
