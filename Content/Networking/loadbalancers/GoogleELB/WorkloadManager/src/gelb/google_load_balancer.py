@@ -816,7 +816,7 @@ class http_load_balancer():
                 print_log('forwarding rule added Successfully.')
 
             result = {"hostName": "HTTPloadbalancer"}
-            result['ipAddress'] = str(Ipaddress)
+            result['ipAddress'] = str(Ipaddress+':8080')
             print("Result is :", result)
             print_result(json.dumps(result))
 
