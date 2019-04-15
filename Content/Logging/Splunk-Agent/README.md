@@ -27,129 +27,43 @@
 - Ensure Splunk server is up and running.
   
 ## Where to Download the service bundles
- Step 1 : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk-Agent/WorkloadManager/ServiceBundle/splunk-agent.zip).
+ Step 1 : Fetch Splunk agent File by copying & pasting the contents from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk-Agent/WorkloadManager/src/splunk-agent/splunk-agent) into a new file named "splunk-agent". Place the file in a repository and its location is http://YourIP/services/splunk-agent/splunk-agent.
  
- Step 2 : Create the Splunk Agent File by copying & pasting the contents from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk-Agent/WorkloadManager/src/splunk-agent/splunk-agent) into a new file named "splunk-agent". 
-	
- Step 3 : Place the service bundle from Step 1 under services/splunk-agent.zip and splunk-agent file from Step 2 under services/splunk-agent/splunk-agent in your file repository.
-          
-            - Service Bundle under services/splunk-agent.zip
-                    
-                    Example : http://<Your_REPO_Server_IP>/services/splunk-agent.zip
-					
-            - Splunk Agent under services/splunk-agent/splunk-agent
-			        
-		      Example : http://<Your_REPO_Server_IP>/services/splunk-agent/splunk-agent
+ Step 2 : With any existing App Profile, this agent script can be configured by defining value with proper repository path like  "services/splunk-agent/splunk-agent" under "Post Start script" in service Initialization  Actions. Sample App Profile has been given for demo.
    
- Step 4 : Download the integration unit bundle (that conatins application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk-Agent/WorkloadManager/splunk-agent_iu.zip)
+ Step 3 : Download the Sample Modelled Application Profiles with splunk agent pre-configured in Service lifecycle action, from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk-Agent/WorkloadManager/splunk-agent_iu.zip)
  
- Step 5 : Extract the above bundle on any linux based machine and navigate to extracted folder
-
- Step 6 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
- 
- Step 7 : Copy the Service Import script zip file to the directory extarcted above in Step 5 and Unzip the service import script bundle.
-
- Step 8 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in    Step 5 
- 
- ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
+ Step 4 : Verify the location of the application packages and Agent File in file Repository. Make sure its placed correctly, By default Application Package will be under apps/your-packages and Node Lifecycle Agent file will be under services/splunk-agent/<splunk-agent-file>.
    
- Ensure your directory in the linux based client machine contains :
-
-- Service import script zip file (named as serviceimport.zip)
-- main.py file
-- serviceimport.sh
-- Modelled application profile(named as splunk_agent_app_profile.zip)
-- Dockerfile (named as Dockerfile) , **Only needed if you wish to create a Docker image for the first time**
-
-
-## How to Create a Service in Cisco Workload Manager
-
-User can create the service by using **Import Service** functionality using script.
-
-#### Prerequisite for creating a service through service import script:
-
-Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx) on any linux based client machine.
-
-**NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
-- You can check , if docker is installed , by running docker -v
-- You can check , if docker is running , by executing the command "systemctl status docker"
-  
-#### Detailed steps for creating a service through the service import script:
-
-##### Step 1 :Provide executable permissions to the above files. Navigate to the directory where all the files are placed and run the below command:
+ Step 5 : Login into your Cloud Center Suite with your credentials namely IP address, Email address, Password & Tenant ID. Navigate to App profiles section under Workload Manager. Click on "Import" button found on the top right corner of App profiles section. You will be prompted to choose the application profile that needs to be imported. Choose the Modelled Application Profile Zip file extracted from Step-3 downloaded splunk-agent_iu.zip file. Then You will be prompted to map your file repository in which you have placed the Node Lifecycle Agent file. Map your file repository.
    
-   chmod 755 <your file>
+You will be presented with a message saying "Application Profile Imported Successfully".
+   
+# Service Package Bundle
 
-Example : 
-    [root@ip-172-31-27-127 splunk-agent]# chmod 755 serviceimport.zip splunk_agent_app_profile.zip Dockerfile
-
-##### Step 2: Build a docker image from the same directory where the docker file and other service files are placed. A docker image tagged "ccs_service_import:v1" will be built.
-
-**NOTE BEFORE YOU RUN: Please do not build a new docker image if an image "ccs_service_import:v1" is already created any time before. In such cases , Skip to Step 5.**
-
-###### [root@ip-172-31-27-127 splunk-agent]# docker build --no-cache -t ccs_service_import:v1 .
-
-##### Step 3: List the docker images by using "docker images" command
-
-[root@ip-172-31-27-127 splunk-agent]# docker images
-
-##### Step 4 : Copy the Image ID of the "ccs_service_import:v1" image, and execute the following command to run the docker image.
-
-    docker run -v **[DIRECTORY WHERE DOWNLOADED FILES ARE PLACED]**:/ccsworker -w /ccsworker -it 
-    **[Your IMAGE ID]** /bin/bash
-
-Example:  
-
-[root@ip-172-31-27-127 splunk-agent]# docker run -v /root/serviceimport/:/ccsworker -w /ccsworker -it **[Your IMAGE ID]** /bin/bash
-
-##### Step 5: User will be requested for the following inputs namely the IP address, Email address, password & the tenant ID of the cloud center suite.
-
-Enter IP Address for Cloud Center Suite: XXX.XXX.XXX.XXX
-
-Enter Cloud Center Suite Email Address : YourEmail@XXX.com
-
-Enter the password: ***********
-
-Enter the Tenant ID  : YourTenant
-
-**Note :  App profile zip bundle is implicitly read by the script. However, Please ensure that the above mentioned directory contains only above listed files.**
-
-Step 6: You will be prompted to select the file repository in which you have previously added the downloaded service bundle zip file as per section "Where to Download The Service Bundles". 
-
-    - Select the corresponding Repository ID and Hit Enter.
-
-If application proflie is successful, You will be presented with a message **"Imported Application Profile Successfully"**
-
-
-## Integration Unit Bundle
-
-The Package Service bundle consists of the following files:
+The Package of Service bundle consists of the following files:
 
 Shell script:
+ - splunk-agent: This script will install agent and configure the splunk agent with splunk server.
 
-Shell script:
 
- - splunk-agent: This script will install and configure splunk agent.
-
-# Supported Cloud and OS
+# Service Initialization actions
+   - Under "Post-Start Script" lifecycle action, agent script would be configured like services/splunk-agent/splunk-agent
+   
+# Minimum Resource Specifications
+     
+S.No    | Resource    |  Value   | Remarks
+----    | ----------  | ---------| ------- 
+ 1      |  CPU        | 1        |        
+ 2      |  Memory     | 1 GB     |     
+ 
+ # Supported Cloud and OS
 
 S.No    | Cloud   |  OS   
 ------  | ---------- | --------- 
- 1      |  Google    |  CentOS 7  and Ubuntu 14               
- 2      |  Azure     |  CentOS 7  and Ubuntu 14
+ 1      |  Google    |  CentOS 7 , Ubuntu 16 and Ubuntu 14               
+ 2      |  Azure     |  CentOS 7 , Ubuntu 16 and Ubuntu 14
  3      |  AWS     |  CentOS 7 and Ubuntu 14
-
-## External Lifecycle Actions 
-
-External Action Bundle:  
-
- Node Lifecycle Action File:  
- - http://YourIP/services/splunk-agent/splunk-agent - Location where your Node Lifecycle action file is found.
-
-
-# Notes
-  - splunk-agent file can be used in Node Life Cycle Actions.
-  
 
  # Global Parameters in Application Profile
 
@@ -159,7 +73,6 @@ External Action Bundle:
 | splunkForwarderPort | Number | Data Forwarder Port to Server as same as Receiver Port in Splunk Server | 81-65534 (Splunk Server Receiver Port) | 9997 | 
 | splunkServerUserName | String | Splunk Server UserName | | admin |
 | splunkServerPassword | Password | Splunk Server Password | | |
-| logPath | String | Monitoring Log File Path | | | 
-
+| logPath | String | Monitoring Log File Path | | /var/log | 
    
  
