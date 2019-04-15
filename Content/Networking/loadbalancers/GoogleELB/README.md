@@ -145,4 +145,4 @@ error_utils.py: A script that handles error functionalities
 | ------ | ------ | ------ |------ | ------ |
 | gelbLoadBalancerType |	List |	Type of Load Balancer. For more details on the type of load balancer to choose, check Google cloud documentation | TCP / HTTP / UDP | 
 | gelbLoadBalancerName|string  | Give google load balancer name in small case. | <googleloadbalncer> |
-| gelbHealthCheck |	String |	The health check name to be configured for the service. Existing healthcheck have to mention For eg : healthcheck-1| 
+| gelbHealthCheck |	String |	The health check name to be configured for the service. | 
