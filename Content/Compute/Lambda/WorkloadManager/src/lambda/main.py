@@ -11,6 +11,7 @@ try:
     function_description = os.environ["functionDescription"]
     run_time = os.environ["runtimes"]
     app_package = os.environ["appPackage"]
+    role_for_lambda=os.environ["roleForLambda"]
     dynamo_db_table_name = ""
     dependents = False
     if 'CliqrDependencies' in os.environ:
@@ -32,11 +33,13 @@ try:
     print_log(function_description)
     print_log(run_time)
     print_log(app_package)
+    print_log(role_for_lambda)
+
 
 except Exception as er:
     print_log("some of the parameters are not given properly...")
     print("my error",er)
-    print_error("some of the parameters are not given properly")
+    print_error("some of the parameters are not given properly.")
 
     sys.exit(127)
 
@@ -58,7 +61,7 @@ def start():
 
     app_package_local="/opt/remoteFiles/cliqr_local_file/"+app_package_base_name+".zip"
 
-    fun_response = object.function_creation(function_name, run_time, handler, function_description, app_package_local)
+    fun_response = object.function_creation(function_name, run_time, handler, function_description, app_package_local,role_for_lambda)
 
 
     if fun_response["FunctionArn"] is not None:
@@ -69,9 +72,7 @@ def start():
     trigger_response=object.event_source_mapping(fun_response["FunctionArn"], dynamo_db_table_name)
 
     trigger_uuid = trigger_response["UUID"]
-    print("Trigger UUID :",trigger_uuid)
-    print_log("Trigger UUID is")
-    print_log(trigger_uuid)
+
 
     result = {
         "hostName": os.environ.get('appTierName', ""),
@@ -80,7 +81,7 @@ def start():
         }
     }
 
-    print_result(json.dumps(result))
+
 
 
 def stop():
@@ -88,13 +89,10 @@ def stop():
         object = LambdaManagement()
 
         trigger_uuid = os.environ.get("trigger_uuid", "")
-        print_log("UUID is:")
-        print_log(trigger_uuid)
-        print("UUID is ", trigger_uuid)
 
         object.delete_trigger_mapping(trigger_uuid)
 
-        object.delete_role_created()
+        object.delete_role_created(role_for_lambda)
 
         object.delete_lambda_function(function_name)
 

@@ -134,6 +134,7 @@ Python script :
         Stop:
             Script from bundle: service stop
 
+
 # Service Parameters:
 | Parameter Name| Type	 | Mandatory |Description | Allowed Value |Default Value |
 | ------ | ------ | ------ | ------ |------ | ------ |
@@ -143,3 +144,9 @@ Python script :
 | initFile | String | Yes | File name lambda function zipped in appPackage. |  | |
 | invokeMethod | String | Yes | Lambda Handler Name where lambda functions starts execution. |  | |
 | runtimes | List | Yes | Need to select required Run time for the lambda function. |  | |
+
+
+# Deployement Parameters:
+| Parameter Name| Type	 | Mandatory |Description | Allowed Value |Default Value |
+| ------ | ------ | ------ | ------ |------ | ------ |
+| roleForLambda |	String | Yes | A role will be created for lambda with dynamodb access policy attached|  |   |

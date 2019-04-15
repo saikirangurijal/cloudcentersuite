@@ -33,7 +33,7 @@ class LambdaManagement(object):
             print_error(er)
             sys.exit(127)
 
-    def function_creation(self,function_name,run_time,handler,function_description, app_package_local):
+    def function_creation(self,function_name,run_time,handler,function_description, app_package_local,role_for_lambda):
         """
         method to create lambda function with the provided values
 
@@ -45,10 +45,8 @@ class LambdaManagement(object):
             print("Lambda function creation under progress.......")
             print_log("Lambda function creation under progress.......")
 
-            role_arn=self.creating_role_attach_policy()
+            role_arn=self.creating_role_attach_policy(role_for_lambda)
             time.sleep(30)
-            print_log(role_arn)
-            print(role_arn)
 
             if not app_package_local:
                 print_error("Application Package Not Available")
@@ -109,7 +107,7 @@ class LambdaManagement(object):
                     print_log("Stream functionaliity on dynamodb table is disabled.")
 
            else:
-               print_log("Specified tabled is not found.")
+               print_log("Specified table is not found.")
 
         except Exception as er:
             print_error(er)
@@ -165,7 +163,7 @@ class LambdaManagement(object):
             sys.exit(127)
 
 
-    def creating_role_attach_policy(self):
+    def creating_role_attach_policy(self,role_for_lambda):
         """
         Method for creating a role dynamically for aws lambda service and attaching suitable policy(policy which will give access the dynamo db streams)
         :return:
@@ -184,12 +182,12 @@ class LambdaManagement(object):
             }
             role_response=self.client_iam.create_role(
 
-                RoleName='dynamic_lambda_role',
+                RoleName=role_for_lambda  ,
                 AssumeRolePolicyDocument=json.dumps(data),
                 Description='Role created from the API'
                 )
             response= self.client_iam.attach_role_policy(
-                RoleName='dynamic_lambda_role',
+                RoleName=role_for_lambda,
                 PolicyArn='arn:aws:iam::aws:policy/AmazonDynamoDBFullAccesswithDataPipeline'
             )
 
@@ -200,22 +198,22 @@ class LambdaManagement(object):
             print(er)
             print_error(er)
 
-    def delete_role_created(self):
+    def delete_role_created(self,role_for_lambda):
         """
         Method to delete the role which  we created during the creation of the lambda function
         :return:
         """
         try:
             policy_d_response = self.client_iam.detach_role_policy(
-                RoleName='dynamic_lambda_role',
+                RoleName=role_for_lambda,
                 PolicyArn='arn:aws:iam::aws:policy/AmazonDynamoDBFullAccesswithDataPipeline'
             )
-            print("policy ditached")
+            print("Policy ditached")
             response = self.client_iam.delete_role(
-                RoleName='dynamic_lambda_role'
+                RoleName=role_for_lambda
             )
-            print("role deleted....")
-            print_log("policy ditached...role deleted...")
+            print("Role deleted....")
+            print_log("Policy ditached...Role deleted...")
         except Exception as er:
             print(er)
             print_error(er)
@@ -230,8 +228,8 @@ class LambdaManagement(object):
             response = self.client_lambda.delete_event_source_mapping(
                 UUID=trigger_uuid
             )
-            print("trigger disabled.....")
-            print_log("trigger disabled for the function")
+            print("Trigger disabled.....")
+            print_log("Trigger disabled for the function")
         except Exception as er:
             print(er)
             print_error(er)

@@ -7,7 +7,7 @@
    "bundleLocation":"",
    "systemService":false,
    "serviceType":"EXTERNAL",
-   "logoPath":"tmpfiles-upload-folder/uploads/243d1406-a974-4181-82bb-eb6bc81d94a7.png",
+   "logoPath":"custom/assets/img/serviceLogo/49d68022-1bd9-42b6-ad96-9f19695d37ac.png",
    "serviceActions":[
 
    ],
@@ -167,6 +167,30 @@
          "multiselectSupported":false,
          "webserviceListParams":null,
          "systemParam":true
+      },
+      {
+         "paramName":"roleForLambda",
+         "displayName":"Role For Lambda",
+         "helpText":"A role willl be created for lambda withj dynamodb access policy attached",
+         "type":"string",
+         "valueConstraint":{
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
       }
    ],
    "servicePorts":[
@@ -183,7 +207,5 @@
 
    ],
    "repositories":[
-      
-   ]
-   
+       ]
 }
