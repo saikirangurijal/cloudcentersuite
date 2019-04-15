@@ -1,0 +1,126 @@
+{
+  "displayName": "Splunk Server",
+  "name": "splunk",
+  "description": "Data Logging",
+  "parentServiceId": "61",
+  "costPerHour": "0.00",
+  "bundleLocation": "services/splunk.zip",
+  "systemService": false,
+  "serviceType": "VM_AGENT",
+  "logoPath": "logo.png",
+  "serviceActions": [
+    {
+      "actionName": "INSTALL",
+      "actionType": "SCRIPT",
+      "actionValue": "service install",
+      "value": "service install",
+      "key": "INSTALL"
+    },
+    {
+      "actionName": "CONFIGURE",
+      "actionType": "SCRIPT",
+      "actionValue": "service configure",
+      "value": "service configure",
+      "key": "CONFIGURE"
+    },
+    {
+      "actionName": "START",
+      "actionType": "SCRIPT",
+      "actionValue": "service start",
+      "value": "service start",
+      "key": "START"
+    },
+    {
+      "actionName": "STOP",
+      "actionType": "SCRIPT",
+      "actionValue": "service stop",
+      "value": "service stop",
+      "key": "STOP"
+    },
+    {
+      "actionName": "RESTART",
+      "actionType": "SCRIPT",
+      "actionValue": "service restart",
+      "value": "service restart",
+      "key": "RESTART"
+    }
+  ],
+  "externalBundleLocation": "null",
+  "externalActions": [],
+  "actions": [],
+  "serviceParamSpecs": [
+    {
+      "paramName": "serverPort",
+      "displayName": "Splunk Server Port No",
+      "helpText": "",
+      "type": "number",
+      "valueConstraint": {
+        "minValue": "0",
+        "maxValue": "999999"
+      },
+      "valueList": null,
+      "collectionList": null,
+      "defaultValue": "80",
+      "secret": null,
+      "confirmValue": null,
+      "pathSuffixValue": null,
+      "userVisible": true,
+      "userEditable": true,
+      "optional": false,
+      "multiselectSupported": false,
+      "webserviceListParams": null,
+      "systemParam": true
+    },
+    {
+      "paramName": "receiverPort",
+      "displayName": "Data Receiver Port",
+      "helpText": "",
+      "type": "number",
+      "valueConstraint": {
+        "minValue": "0",
+        "maxValue": "999999"
+      },
+      "valueList": null,
+      "collectionList": null,
+      "defaultValue": "9997",
+      "secret": null,
+      "confirmValue": null,
+      "pathSuffixValue": null,
+      "userVisible": true,
+      "userEditable": true,
+      "optional": false,
+      "multiselectSupported": false,
+      "webserviceListParams": null,
+      "systemParam": true
+    }
+  ],
+  "servicePorts": [
+    {
+      "fromPort": "80",
+      "toPort": "80",
+      "protocol": "TCP"
+    }
+  ],
+  "images": [
+    {
+      "id": "4"
+    },
+    {
+      "id": "21"
+    },
+	{
+      "id": "26"
+    },
+    {
+      "id": "20"
+    }
+  ],
+  "defaultImageId": "4",
+  "containerImages": [],
+  "containerPorts": [],
+  "repositories": [
+    {
+      "id": "1"
+    }
+  ]
+}
