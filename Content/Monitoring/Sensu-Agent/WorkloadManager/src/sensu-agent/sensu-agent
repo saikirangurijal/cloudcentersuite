@@ -1,0 +1,246 @@
+#!/bin/bash
+#Sensu Agent
+
+# Log while running agent script
+exec > >(tee -a /usr/local/osmosix/logs/service.log) 2>&1
+
+#Install and configure Sensu Agent
+installSensuAgentsentos() {
+
+#Configure Sensu
+echo '[sensu]
+name=sensu
+baseurl=https://sensu.global.ssl.fastly.net/yum/$releasever/$basearch/
+gpgcheck=0
+enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
+
+#Install Plugins
+yum update -y
+yum install sensu -y
+yum groupinstall "Development tools" -y
+sensu-install -p uptime-checks
+sensu-install -p process-checks
+sensu-install -p http
+sensu-install -p filesystem-checks
+sensu-install -p cpu-checks
+sensu-install -p memory-checks
+sensu-install -p disk-checks
+sensu-install -p load-checks
+sensu-install -p network-checks
+chmod -R 755 /opt/sensu/embedded/bin/
+
+# Create Directory for Configuration
+mkdir -p /etc/sensu/conf.d/
+
+#Configure Client
+echo "{
+	\"client\": {
+		\"address\": \"$cliqrNodePrivateIp\",
+		\"environment\": \"development\",
+		\"name\": \"$cliqrNodeId\",
+		\"subscriptions\": [
+			\"linux\",
+			\"production\",
+			\"httpd\",
+			\"mysqld\",
+			\"system\"
+		]
+	}
+}" |  tee /etc/sensu/conf.d/client.json
+
+
+# Configure which transport to use
+echo '{
+	"transport": {
+		"name": "rabbitmq",
+		"reconnect_on_error": true
+	}
+}' | tee /etc/sensu/conf.d/transport.json
+
+
+# Configure the transport ( in this case rabbitmq)
+echo "{
+	\"rabbitmq\": {
+		\"host\": \"$sensuServerHost\",
+		\"password\": \"secret\",
+		\"port\": 5672,
+		\"user\": \"sensu\",
+		\"vhost\": \"/sensu\"
+	}
+}" | tee /etc/sensu/conf.d/rabbitmq.json
+
+
+# Configure Checks
+echo '{
+    "checks": {
+        "httpd": {
+            "command": "/opt/sensu/embedded/bin/check-process.rb -p httpd",
+            "handlers": [
+                "default",
+                "pushover"
+            ],
+            "interval": 180,
+            "occurences": 3,
+            "refresh": "1800",
+            "standalone": true,
+            "ttl": 1200
+        },
+        "mysqld": {
+            "command": "/opt/sensu/embedded/bin/check-process.rb -p mysqld",
+            "handlers": [
+                "default",
+                "pushover"
+            ],
+            "interval": 180,
+            "occurences": 3,
+            "refresh": "1800",
+            "standalone": true,
+            "ttl": 1200
+        }
+    }
+}' | tee /etc/sensu/conf.d/checks.json
+
+
+# Change owner to user sensu
+chown -R sensu:sensu /etc/sensu/conf.d
+
+# Set permissions for configuration directory
+chmod -R 755 /etc/sensu/conf.d/
+ls -la /etc/sensu/conf.d/
+
+}
+
+installSensuAgentubuntu() {
+
+wget -q https://sensu.global.ssl.fastly.net/apt/pubkey.gpg -O- | sudo apt-key add -
+CODENAME=$(lsb_release -cd | grep Codename | cut -d ":" -f2)
+echo "deb     https://sensu.global.ssl.fastly.net/apt $CODENAME main" | sudo tee /etc/apt/sources.list.d/sensu.list
+apt-get update -y
+apt-get install sensu -y
+sensu-install -p uptime-checks
+sensu-install -p process-checks
+sensu-install -p http
+sensu-install -p filesystem-checks
+sensu-install -p cpu-checks
+sensu-install -p memory-checks
+sensu-install -p disk-checks
+sensu-install -p load-checks
+sensu-install -p network-checks
+chmod -R 755 /opt/sensu/embedded/bin/
+
+# Create Directory for Configuration
+mkdir -p /etc/sensu/conf.d/
+echo "{
+	\"client\": {
+		\"address\": \"$cliqrNodePrivateIp\",
+		\"environment\": \"development\",
+		\"name\": \"$cliqrNodeId\",
+		\"subscriptions\": [
+			\"linux\",
+			\"production\",
+			\"httpd\",
+			\"mysqld\",
+			\"system\"
+		]
+	}
+}" |  tee /etc/sensu/conf.d/client.json
+
+
+# Configure which transport to use
+echo '{
+	"transport": {
+		"name": "rabbitmq",
+		"reconnect_on_error": true
+	}
+}' | tee /etc/sensu/conf.d/transport.json
+
+
+# Configure the transport ( in this case rabbitmq)
+echo "{
+	\"rabbitmq\": {
+		\"host\": \"$sensuServerHost\",
+		\"password\": \"secret\",
+		\"port\": 5672,
+		\"user\": \"sensu\",
+		\"vhost\": \"/sensu\"
+	}
+}" | tee /etc/sensu/conf.d/rabbitmq.json
+
+
+# Configure Checks
+echo '{
+    "checks": {
+        "httpd": {
+            "command": "/opt/sensu/embedded/bin/check-process.rb -p httpd",
+            "handlers": [
+                "default",
+                "pushover"
+            ],
+            "interval": 180,
+            "occurences": 3,
+            "refresh": "1800",
+            "standalone": true,
+            "ttl": 1200
+        },
+        "mysqld": {
+            "command": "/opt/sensu/embedded/bin/check-process.rb -p mysqld",
+            "handlers": [
+                "default",
+                "pushover"
+            ],
+            "interval": 180,
+            "occurences": 3,
+            "refresh": "1800",
+            "standalone": true,
+            "ttl": 1200
+        }
+    }
+}' | tee /etc/sensu/conf.d/checks.json
+
+
+# Change owner to user sensu
+chown -R sensu:sensu /etc/sensu/conf.d
+
+# Set permissions for configuration directory
+chmod -R 755 /etc/sensu/conf.d/
+ls -la /etc/sensu/conf.d/
+}
+start() {
+
+		# Start sensu-client service
+		sudo service sensu-client start
+		
+		return 0
+
+}
+
+stop() {
+
+		# Stop sensu-client service
+		sudo service sensu-client stop
+		
+		return 0
+
+}
+
+restart() {
+
+		# Restart sensu-client service
+		stop
+		start
+		
+		return 0
+
+}
+
+
+if [ -f /etc/redhat-release ]; then
+        echo "Centos\n"
+		installSensuAgentsentos
+		start
+elif [ -f /etc/lsb-release ]; then
+        echo "Ubuntu\n"
+		installSensuAgentubuntu
+		start
+fi
+
