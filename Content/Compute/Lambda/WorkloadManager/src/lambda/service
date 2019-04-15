@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Utils package
+. /utils.sh
+
+# Input parameter
+cmd=$1
+
+# RUN EVERYTHING AS ROOT
+if [ "$(id -u)" != "0" ]; then
+    exec sudo "$0" "$@"
+fi
+
+print_log "env() : `env`"
+
+# while executing shell error msg will write on FAILURE file.
+function executionStatus() {
+ FILE="FAILURE"
+ if [ -f $FILE ];
+ then
+    status=`cat $FILE`
+    print_error "Service execution failed"
+    print_error "$status"
+    exit 127
+  else
+    FILE="SUCCESS"
+    status="Service execution successful"
+    print_log "$status"
+ fi
+}
+
+# Start command will install required python peackages
+# Will invoke the AWS sdk and creating aws-lambda functions
+# stop command  reverting aws lambda functions.
+case $cmd in
+	start)
+		print_log "Executing Service.."
+		python install_setup.py start
+
+		executionStatus
+		sleep 5m
+		exit 0
+		;;
+	stop)
+		print_log "Deleting Service.."
+		python install_setup.py stop
+		sleep 5m
+		executionStatus
+		exit 0
+		;;
+	*)
+		serviceStatus="Invalid command"
+		exit 127
+		;;
+esac
