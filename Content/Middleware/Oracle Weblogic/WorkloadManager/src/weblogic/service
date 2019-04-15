@@ -1,0 +1,383 @@
+#!/bin/bash
+
+exec > >(tee -a /usr/local/osmosix/logs/service.log) 2>&1
+
+# Service Home Directory
+OSSVC_HOME=/usr/local/osmosix/service
+
+# Utility Shell Scripts
+. /usr/local/osmosix/etc/.osmosix.sh
+. /usr/local/osmosix/etc/userenv
+. $OSSVC_HOME/utils/cfgutil.sh
+. $OSSVC_HOME/utils/nosqlutil.sh
+. $OSSVC_HOME/utils/install_util.sh
+
+# Input command
+cmd=$1
+SVCNAME=weblogic
+
+# Install JAVA 8
+export JAVA_HOME="/usr/lib/jvm/java-8-sun"
+installJava8
+if [ $? -ne 0 ]
+then
+    log "[ERROR] Failed to install java 8"
+    exit 1
+fi
+
+# Install WGET
+installWget
+if [ $? -ne 0 ]
+then
+    log "[ERROR] Failed to install wget"
+    exit 1
+fi
+
+# Install Unzip
+installUnzip
+if [ $? -ne 0 ]
+then
+    log "[ERROR] Failed to install unzip"
+    exit 1
+fi
+
+# Decalre all necessary parameters
+USERNAME=cliqruser
+PASSWORD=$adminPassword
+USER_HOME=/home/$USERNAME
+ORACLE_BASE=$USER_HOME/wls/oracle 
+ORACLE_HOME=$ORACLE_BASE/product/fmw12 
+MW_HOME=$ORACLE_HOME 
+WLS_HOME=$MW_HOME/wlserver 
+WL_HOME=$WLS_HOME 
+DOMAIN_BASE=$ORACLE_HOME/user_projects/domains
+DOMAIN_HOME=$DOMAIN_BASE/basicWLSDomain
+INVENTORY_LOC=$USER_HOME/wls/oraInventory
+PATH=$JAVA_HOME/bin:$PATH:$HOME/bin 
+ORAINST_LOCATION=$USER_HOME/wls/oraInst.loc
+RESPONSE_LOCATION=$USER_HOME/wls/wls.rsp
+
+# Export all parameters to environment
+export INST_GROUP=$USERNAME
+export INVENTORY_LOC=$INVENTORY_LOC
+export ORACLE_BASE=$ORACLE_BASE
+export ORACLE_HOME=$ORACLE_HOME
+export MW_HOME=$MW_HOME
+export WLS_HOME=$WLS_HOME
+export WL_HOME=$WL_HOME
+export DOMAIN_BASE=$DOMAIN_BASE
+export DOMAIN_HOME=$DOMAIN_HOME
+export JAVA_HOME=$JAVA_HOME
+export USER_HOME_DIR=$USER_HOME
+export ORAINST_LOCATION=$ORAINST_LOCATION
+export RESPONSE_LOCATION=$RESPONSE_LOCATION
+
+# Pre Install method will check VM Instance swap space, processor other CPU Info.
+# Check Swap Space and No of CPUs required for weblogic Installation.
+# Check Disk Space for weblogic Installation
+preInstall() {
+    cd $SVCHOME
+    if [ $( cat /proc/cpuinfo | grep -i processor | wc -l) -ge 4 ]
+    then
+       log "[INSTALL] Number of CPU shoudld be greater than 4. PASS"
+    else
+       log "[ERROR] Number of CPU is less than 4.. FAILED"
+       exit 127
+    fi
+
+    # SWAP Space 
+    if [ $(free -h | grep "Swap" | grep "4.0" | wc -l) -eq 1 ]
+    then
+       log "[INSTALL] Enough SWAP Space available. PASS"
+    else
+	   ./create-swapspace.sh
+    fi
+
+    if [ $(free -h | grep "Swap" | grep "4.0" | wc -l) -eq 1 ]
+    then
+       log "[INSTALL] Enough SWAP Space available. PASS"
+    else
+	   log "[ERROR] Enough SWAP Space not available.. FAILED"
+       exit 127
+    fi
+
+    if [ $(cat /proc/meminfo | grep -i MemTotal | awk '{ print int($2/1024/1024)}') -ge 7 ]
+    then
+       log "[INSTALL] Disk Space available more than 16 GB. PASS"
+    else
+	   log "[ERROR] Less Disk Space is available. Expected more than 1 GB FAILED"
+       exit 127
+    fi
+
+}
+
+# Allocate Temp
+allocateTMPDir() {
+    mkdir /dev/tmp -p
+    chown -R root:root /dev/tmp
+    chmod 1777 /dev/tmp
+    echo "export TEMP=/dev/tmp" >> /usr/local/osmosix/etc/userenv
+    echo "export TMPDIR=/dev/tmp " >> /usr/local/osmosix/etc/userenv
+    source /usr/local/osmosix/etc/userenv
+    export TEMP=/dev/tmp
+    export TMPDIR=/dev/tmp
+}
+
+deAllocateTMPDir(){
+    rmdir /dev/tmp
+    unset TEMP
+    unset TMPDIR
+}
+
+# Install Weblogic
+installWeblogic() {
+	echo "################ VARIABLES DEFINED #######################"
+    echo "$USERNAME"
+    echo "$INVENTORY_LOC" 
+    echo "$ORACLE_BASE"
+    echo "$ORACLE_HOME"
+    echo "$MW_HOME" 
+    echo "$WLS_HOME" 
+    echo "$WL_HOME" 
+    echo "$DOMAIN_BASE" 
+    echo "$DOMAIN_HOME" 
+    echo "$JAVA_HOME" 
+    echo "$USER_HOME" 
+    echo "$ORAINST_LOCATION" 
+    echo "$RESPONSE_LOCATION" 
+
+    echo "################  VARIABLE DEFINED ###################"
+
+    log "[INSTALL] Creating all Folders"
+
+    su -c " mkdir -p $ORACLE_BASE  " -s /bin/sh $USERNAME
+    su -c " mkdir -p $DOMAIN_BASE " -s /bin/sh $USERNAME
+    su -c " mkdir -p $ORACLE_HOME " -s /bin/sh $USERNAME
+    su -c " mkdir -p $ORACLE_BASE/config/applications " -s /bin/sh $USERNAME 
+    su -c " mkdir -p $USER_HOME_DIR/wls/oraInventory"  -s /bin/sh $USERNAME
+    su -c " echo \"inventory_loc=$INVENTORY_LOC\" >> $ORAINST_LOCATION  && echo \"inst_group=$INST_GROUP\" >> $ORAINST_LOCATION " -s /bin/sh $USERNAME 
+
+    log "[INSTALL] Creating all Response and Inventory Files"
+
+    su -c " echo \"[ENGINE]\" >> $RESPONSE_LOCATION " -s /bin/sh $USERNAME 
+    su -c " echo \" Response File Version=1.0.0.0.0 \" >> $RESPONSE_LOCATION  " -s /bin/sh $USERNAME 
+    su -c " echo \"[GENERIC]\" >> $RESPONSE_LOCATION " -s /bin/sh $USERNAME 
+    su -c " echo \"ORACLE_HOME=$ORACLE_HOME\" >> $RESPONSE_LOCATION  " -s /bin/sh $USERNAME 
+    su -c " echo \"INSTALL_TYPE=WebLogic Server\" >> $RESPONSE_LOCATION  " -s /bin/sh $USERNAME 
+    su -c " echo \"DECLINE_SECURITY_UPDATES=true\" >> $RESPONSE_LOCATION  " -s /bin/sh $USERNAME 
+    su -c " echo \"SECURITY_UPDATES_VIA_MYORACLESUPPORT=false\" >> $RESPONSE_LOCATION  " -s /bin/sh $USERNAME 
+	
+    log "[INSTALL] Starting $SVCNAME installation"
+    preInstall "package-update"
+
+    if ([ $os == "CentOS" ] || [ $os == "RHEL" ])
+    then
+        log "[INSTALL] OS: $os and version: $ver. Installing openssl-devel"
+	yum install -y openssl-devel
+    fi
+
+    echo "******************weblogic jar path"
+    echo $webLogicJARPath
+
+    if [ $( ls -la | grep ".jar" | wc -l) -eq 1 ]
+        then
+            log "[INSTALL] JAR is already exist. No download required "
+        else
+            log "[INSTALL] JAR does not exist. Needs to be downloaded from REPO"
+            unzip $webLogicJARPath
+        fi
+
+    export WLS_BUNDLE=$(ls | grep ".jar")
+    chmod 755 $WLS_BUNDLE
+
+    ls -la $WLS_BUNDLE
+    rm -rf $ORACLE_HOME
+
+    if [ $( cat /usr/local/osmosix/etc/userenv | grep "weblogic" | grep "amazonaws" | wc -l) -ge 0 ]
+        then
+            log "[INSTALL] AWS Cloud. PASS"
+            allocateTMPDir
+            su -c "$JAVA_HOME/bin/java -jar -Djava.io.tmpdir=$TMPDIR -Djava.security.egd=file:/dev/./urandom $WLS_BUNDLE -silent -responseFile $RESPONSE_LOCATION -invPtrLoc $ORAINST_LOCATION" -s /bin/sh $USERNAME
+        else
+            su -c "$JAVA_HOME/bin/java -jar -Djava.security.egd=file:/dev/./urandom $WLS_BUNDLE -silent -responseFile $RESPONSE_LOCATION -invPtrLoc $ORAINST_LOCATION" -s /bin/sh $USERNAME
+        fi
+
+    #su -c "$JAVA_HOME/bin/java -jar -Djava.security.egd=file:/dev/./urandom $WLS_BUNDLE -silent -responseFile $RESPONSE_LOCATION -invPtrLoc $ORAINST_LOCATION" -s /bin/sh $USERNAME
+    return 0
+}
+
+# Create Domain and start Node Manager
+# Move Domains to other Nodes
+# Once Domain Moved to other Nodes, it will start Node Manager.
+invokeDomain() {
+    . $WL_HOME/server/bin/setWLSEnv.sh
+    echo "Setting up Scripts..."
+
+    export JAVA_OPTIONS="$JAVA_OPTIONS -Djava.security.egd=file:/dev/./urandom"
+    export CONFIG_JVM_ARGS="$CONFIG_JVM_ARGS  -Djava.security.egd=file:/dev/./urandom"
+
+    echo "Creating Domain....."
+
+    $JAVA_HOME/bin/java weblogic.WLST  ./initialize_weblogic_server.py -Djava.security.egd=file:/dev/./urandom -Dweblogic.security.TrustKeyStore=DemoTrust -Dssl.debug=true -Dweblogic.secureity.SSL.ignoreHostnameVerification=true
+
+    su -c " mkdir -p $DOMAIN_BASE " -s /bin/sh $USERNAME
+    
+    python move_domains.py
+
+    . $DOMAIN_HOME/bin/startNodeManager.sh >> /tmp/nodemanager.out 2>&1 &
+}
+
+# Deploy Application
+deployWebapp() {
+	echo "Deploying webapp $appPackage..."
+
+    export db_Tier_IP="CliqrTier_${CliqrDependencies}_IP"
+	contextRoot="ROOT"
+	if [ "$contextRoot" == "ROOT" ]; then
+		filename=$(basename "$appPackage")
+		contextRoot="${filename%.*}"
+	fi
+
+	rm -rf $DOMAIN_HOME/autodeploy/$contextRoot
+	cp $appPackage $DOMAIN_HOME/autodeploy/$contextRoot.war
+	cd $DOMAIN_HOME/autodeploy
+	unzip -o -q $contextRoot.war -d $contextRoot
+	rm -rf $DOMAIN_HOME/autodeploy/*.war
+	cd $contextRoot
+	overrideNosqlIp
+	CFG_LIST=(`echo $appConfigFile | tr ";" "\n"`)
+	for cfgFile in "${CFG_LIST[@]}"
+	do
+        replaceToken $cfgFile "%DB_TIER_IP%" ${!db_Tier_IP}
+		replaceToken $cfgFile "%MB_TIER_IP%" $CliqrTier_MsgBug_IP
+		replaceToken $cfgFile "%BC_TIER_IP%" $CliqrTier_BackendCache_IP
+		replaceToken $cfgFile "%NOSQLDB_TIER_IP%" $CliqrTier_NoSQLDatabase_IP
+		
+		replaceTierIpToken $cfgFile
+	done	
+}
+
+# Weblogic Shut Down Wait time
+SHUTDOWN_WAIT=30
+
+# Weblogic Process ID
+weblogic_pid() {
+  echo `ps aux | grep weblogic.Server | grep -v grep | awk '{ print $2 }'`
+}
+
+# Start Weblogic Server
+start() {
+  pid=$(weblogic_pid)
+  if [ -n "$pid" ]
+     then
+        echo "WebLogic Server is already running (pid: $pid)"
+     else
+        echo "Starting WebLogic Server"
+        . $WL_HOME/server/bin/setWLSEnv.sh
+        echo "Setting up Scripts..."
+
+        export JAVA_OPTIONS="$JAVA_OPTIONS -Djava.security.egd=file:/dev/./urandom"
+        export CONFIG_JVM_ARGS="$CONFIG_JVM_ARGS  -Djava.security.egd=file:/dev/./urandom"
+
+        $JAVA_HOME/bin/java weblogic.WLST  ./run_server.py -Djava.security.egd=file:/dev/./urandom -Dweblogic.security.TrustKeyStore=DemoTrust -Dssl.debug=true -Dweblogic.secureity.SSL.ignoreHostnameVerification=true
+   fi
+ 
+   return 0
+} 
+
+# Stop Weblogic Server
+# Kill Weblogic Server Process Id
+stop() {
+    . $DOMAIN_HOME/bin/stopNodeManager.sh
+    pid=$(weblogic_pid)
+    if [ -n "$pid" ]
+    then
+    
+        echo "Stoping WebLogic Server"
+        kill $pid &
+    
+        echo -n "Waiting for processes to exit ["
+        let kwait=$SHUTDOWN_WAIT
+        count=0;
+        until [ `ps -p $pid | grep -c $pid` = '0' ] || [ $count -gt $kwait ]
+        do
+        echo -n ".";
+        sleep 1
+        let count=$count+1;
+        done
+        echo "Done]"
+    
+        if [ $count -gt $kwait ]
+        then
+        echo "Killing processes ($pid) which didn't stop after $SHUTDOWN_WAIT seconds"
+        kill -9 $pid
+        fi
+    else
+        echo "WebLogic Server is not running"
+    fi
+    
+    return 0
+} 
+
+# Logger for Service
+log() {
+	logger -t "OSMOSIX" "[$SVCNAME] $*"
+}
+
+# main entry
+if [ -z "$OSSVC_HOME" ]; then
+	log "missing parameter, exit now"
+	exit 127
+fi
+
+# Service Home Directory
+SVCHOME="$OSSVC_HOME/$SVCNAME"
+
+# Agent Life-Cyle actions
+runScripts(){
+    case $cmd in
+        install)
+            log "[INSTALL] Installing $SVCNAME"
+            preInstall
+            ;;
+        deploy)
+            echo "[DEPLOY] Deploying webapp"
+            installWeblogic
+            invokeDomain
+            deployWebapp
+            ;;
+        configure)
+            echo "[CONFIGURE] configuring WebLogic Server"
+            ;;
+        start)
+            echo "[CONFIGURE] Starting WebLogic Server"
+            start
+            ;;
+        stop)
+            echo "[STOP] stop WebLogic Server"
+            stop
+            ;;
+        restart)
+            stop
+            start
+            echo "[RESTART] Invoking pre-restart user script"
+            echo "[RESTART] Restarting $SVCNAME"
+            echo "[RESTART] Invoking post-restart user script"
+            ;;
+        cleanup)
+            echo "cleanup"
+            ;;
+        reload)
+            echo "reload"
+            ;;
+        upgrade)
+            echo "upgrade"
+            ;;
+        *)
+            exit 127
+            ;;
+    esac
+}
+
+runScripts
+

@@ -1,0 +1,278 @@
+{
+   "displayName":"WebLogic",
+   "name":"weblogic",
+   "description":"Oracle WebLogic Server",
+   "parentServiceId":"37",
+   "costPerHour":"0.00",
+   "bundleLocation":"services/weblogic.zip",
+   "systemService":false,
+   "serviceType":"VM_AGENT",
+   "logoPath":"logo.png",
+   "serviceActions":[
+      {
+         "actionName":"INSTALL",
+         "actionType":"SCRIPT",
+         "actionValue":"service install",
+         "value":"service install",
+         "key":"INSTALL"
+      },
+      {
+         "actionName":"DEPLOY",
+         "actionType":"SCRIPT",
+         "actionValue":"service deploy",
+         "value":"service deploy",
+         "key":"DEPLOY"
+      },
+      {
+         "actionName":"CONFIGURE",
+         "actionType":"SCRIPT",
+         "actionValue":"service configure",
+         "value":"service configure",
+         "key":"CONFIGURE"
+      },
+      {
+         "actionName":"START",
+         "actionType":"SCRIPT",
+         "actionValue":"service start",
+         "value":"service start",
+         "key":"START"
+      },
+      {
+         "actionName":"STOP",
+         "actionType":"SCRIPT",
+         "actionValue":"service stop",
+         "value":"service stop",
+         "key":"STOP"
+      },
+      {
+         "actionName":"RESTART",
+         "actionType":"SCRIPT",
+         "actionValue":"service restart",
+         "value":"service restart",
+         "key":"RESTART"
+      }
+   ],
+   "externalBundleLocation":"null",
+   "externalActions":[
+
+   ],
+   "actions":[
+
+   ],
+   "serviceParamSpecs":[
+      {
+         "paramName":"webLogicVersion",
+         "displayName":"WebLogic Version",
+         "helpText":"WebLogic Version",
+         "type":"list",
+         "valueConstraint":{
+            "allowSpaces":true
+         },
+         "valueList":"12:12",
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {
+         "paramName":"appPackage",
+         "displayName":"Application Package",
+         "helpText":"",
+         "type":"path",
+         "valueConstraint":{
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":"",
+         "userVisible":true,
+         "userEditable":true,
+         "optional":true,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {
+         "paramName":"appConfigFile",
+         "displayName":"Application Config File",
+         "helpText":"Config file path",
+         "type":"string",
+         "valueConstraint":{
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":true,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {
+         "paramName":"appDeployFolder",
+         "displayName":"Deploy Folder",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"/",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {
+         "paramName":"JDK",
+         "displayName":"JDK",
+         "helpText":"JDK Version",
+         "type":"list",
+         "valueConstraint":{
+            "allowSpaces":true
+         },
+         "valueList":"7,8",
+         "collectionList":null,
+         "defaultValue":"8",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {
+         "paramName":"webLogicJARPath",
+         "displayName":"WebLogic JAR Path",
+         "helpText":"WebLogic JAR Repo Path",
+         "type":"path",
+         "valueConstraint":{
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":"",
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {
+         "paramName":"adminUserName",
+         "displayName":"Admin UserName",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {
+         "paramName":"adminPassword",
+         "displayName":"Admin Password",
+         "helpText":"Admin Password",
+         "type":"password_input",
+         "valueConstraint":{
+
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      }
+   ],
+   "servicePorts": [
+    {
+      "fromPort": "5001",
+      "toPort": "7010",
+      "protocol": "TCP"
+    },
+    {
+      "fromPort": "443",
+      "toPort": "443",
+      "protocol": "TCP"
+    }
+  ],
+   "images":[
+      {
+      "id": "4"
+    },
+    {
+      "id": "21"
+    },
+    {
+      "id": "20"
+    },
+    {
+      "id": "26"
+    }
+   ],
+   "defaultImageId":"4",
+   "containerImages":[
+
+   ],
+   "containerPorts":[
+
+   ],
+   "repositories":[
+
+   ]
+}
