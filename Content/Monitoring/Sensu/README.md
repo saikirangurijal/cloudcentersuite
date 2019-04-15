@@ -115,6 +115,13 @@ S.No    | Resource    |  Value   | Remarks
  1      |  CPU        | 1        |        
  2      |  Memory     | 1 GB     |        
  
+# Supported Cloud and OS
+
+S.No    | Cloud   |  OS   
+------  | ---------- | --------- 
+ 1      |  Google    |  CentOS 7 , Ubuntu 16 and Ubuntu 14               
+ 2      |  Azure     |  CentOS 7 , Ubuntu 16 and Ubuntu 14
+ 3      |  AWS     |  CentOS 7 and Ubuntu 14
  
 # Agent Lifecycle Actions 
 Agent Action Bundle:  
