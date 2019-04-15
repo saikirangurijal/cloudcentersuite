@@ -7,10 +7,16 @@
     Splunk Enterprise is a software product that enables you to search, analyze, 
 	and visualize the data gathered from the components of your IT infrastructure or business. 
 	Splunk Enterprise takes in data from websites, applications, sensors, devices, and so on. 
+	The latest released version of splunk enterprise is '6.5'.
 	After you define the data source, Splunk Enterprise indexes the data stream and parses it into a series of individual events that you can view and search.
-
+      
     Please refer the below link for more details.
     https://docs.splunk.com/Documentation
+ 
+ ## Pre-Requisites
+#### CloudCenter
+- CloudCenter 5.0.1 and above
+- Knowledge on how to use CloudCenter 
   
 # Download the service bundles
  Step 1 : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk/WorkloadManager/ServiceBundle/splunk.zip).
