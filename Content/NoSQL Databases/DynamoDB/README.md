@@ -37,7 +37,7 @@
 
  Step 6 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
  
- Step 7: Copy the Service Import script zip file to the directory extractedcted above in Step 5 and Unzip the service import script bundle.
+ Step 7: Copy the Service Import script zip file to the directory extracted above in Step 5 and Unzip the service import script bundle.
 
  Step 8 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
  ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
