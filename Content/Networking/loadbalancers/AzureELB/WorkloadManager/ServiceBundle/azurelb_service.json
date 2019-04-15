@@ -1,0 +1,291 @@
+{
+   "displayName":"Azure Load Balancer",
+   "name":"azurelb",
+   "description":"Distributes network or application traffic across a number of servers. Load balancers are used to increase capacity and reliability of applications",
+   "parentServiceId":"36",
+   "costPerHour":"0.00",
+   "bundleLocation":"",
+   "systemService":false,
+   "serviceType":"EXTERNAL",
+   "logoPath":"null",
+   "serviceActions":[
+
+   ],
+   "externalBundleLocation":"services/azurelb.zip",
+   "externalActions":[
+      {
+         "actionName":"START",
+         "actionType":"SCRIPT",
+         "actionValue":"azurelb/service start",
+         "value":"azurelb/service start",
+         "key":"START"
+      },
+      {
+         "actionName":"STOP",
+         "actionType":"SCRIPT",
+         "actionValue":"azurelb/service stop",
+         "value":"azurelb/service stop",
+         "key":"STOP"
+      }
+   ],
+   "actions":[
+
+   ],
+   "serviceParamSpecs":[
+      {
+         "paramName":"lbType",
+         "displayName":"Type",
+         "helpText":"Load Balancer Type",
+         "type":"list",
+         "valueConstraint":{
+            "allowSpaces":true
+         },
+         "valueList":"Private:Private,Public:Public",
+         "collectionList":null,
+         "defaultValue":"Public",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {
+         "paramName":"loadBalancerRules",
+         "displayName":"Load Balancer Rules",
+         "helpText":"Add the Rules",
+         "type":"collection",
+         "valueList":null,
+         "defaultValue":"[[\"TCP\",\"80\",\"80\",\"30\"]]",
+         "confirmValue":"",
+         "pathSuffixValue":"",
+         "userVisible":true,
+         "userEditable":true,
+         "systemParam":true,
+         "exampleValue":null,
+         "dataUnit":null,
+         "optional":false,
+         "deploymentParam":false,
+         "multiselectSupported":false,
+         "useDefault":true,
+         "valueConstraint":{
+            "minValue":0,
+            "maxValue":0,
+            "maxLength":0,
+            "regex":null,
+            "allowSpaces":false,
+            "sizeValue":0,
+            "step":0,
+            "calloutWorkflowName":null
+         },
+         "scope":null,
+         "webserviceListParams":null,
+         "secret":null,
+         "tabularTypeData":null,
+         "collectionList":[
+            {
+               "collectionType":"list",
+               "collectionName":"loadBalancerProtocol",
+               "collectionDisplayName":"Load Balancer Protocol",
+               "collectionValue":"TCP:TCP,UDP:UDP",
+               "collectionDefaultValue":"TCP",
+               "collectionHelpText":"Provide communication protocol for Load Balancer",
+               "collectionSampleText":"Load Balancer Protocol",
+               "optional":false,
+               "unique":false
+            },
+            {
+               "collectionType":"number",
+               "collectionName":"frontEndPort",
+               "collectionDisplayName":"Load Balancer FrontEnd Port",
+               "collectionValue":"",
+               "collectionDefaultValue":"80",
+               "collectionHelpText":"Provide communication port for Load Balancer",
+               "collectionSampleText":"Load Balancer FrontEnd Port",
+               "optional":false,
+               "unique":false
+            },
+            {
+               "collectionType":"number",
+               "collectionName":"backEndPort",
+               "collectionDisplayName":"Load Balancer BackEnd Port",
+               "collectionValue":"",
+               "collectionDefaultValue":"80",
+               "collectionHelpText":"Provide communication port for Load Balancer",
+               "collectionSampleText":"Load Balancer BackEnd Port",
+               "optional":false,
+               "unique":false
+            },
+            {
+               "collectionType":"number",
+               "collectionName":"idleTimeout",
+               "collectionDisplayName":"Load Balancer Idle Timeout Minutes (Max: 30 Minutes)",
+               "collectionValue":"",
+               "collectionDefaultValue":"30",
+               "collectionHelpText":"Provide communication port for Load Balancer",
+               "collectionSampleText":"Load Balancer Idle Timeout Minutes",
+               "optional":false,
+               "unique":false
+            }
+         ],
+         "value":"[[\"TCP\",\"80\",\"80\",\"30\"]]",
+         "isInvalid":true,
+         "isUniqueData":false
+      },
+      {
+         "paramName":"healthProbeRequestPath",
+         "displayName":"Health Probe Request Path",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {
+         "paramName":"healthProbePort",
+         "displayName":"Health Probe Port",
+         "helpText":"",
+         "type":"number",
+         "valueConstraint":{
+            "minValue":"0",
+            "maxValue":"65534"
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"80",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {
+         "paramName":"healthCheckProtocol",
+         "displayName":"Ping Protocol",
+         "helpText":"Provide ping protocol to ping the instances",
+         "type":"list",
+         "valueConstraint":{
+            "allowSpaces":true
+         },
+         "valueList":"TCP:TCP,HTTP:HTTP,HTTPS:HTTPS",
+         "collectionList":null,
+         "defaultValue":"HTTP",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {
+         "paramName":"healthCheckInterval",
+         "displayName":"Health Check Interval (in Seconds)",
+         "helpText":"Amount of time between health checks (5 sec - 300 sec).",
+         "type":"number",
+         "valueConstraint":{
+            "minValue":"5",
+            "maxValue":"300"
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"30",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {
+         "paramName":"unhealthThreshold",
+         "displayName":"Unhealthy Threshold",
+         "helpText":"Number of consecutive health check failures before declaring an instance unhealthy.",
+         "type":"number",
+         "valueConstraint":{
+            "minValue":"2",
+            "maxValue":"10"
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"2",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {
+         "paramName":"loadBalancerName",
+         "displayName":"Load Balancer Name",
+         "helpText":"Load Balancer Name",
+         "type":"string",
+         "valueConstraint":{
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      }
+   ],
+   "servicePorts":[
+
+   ],
+   "images":[
+
+   ],
+   "defaultImageId":"",
+   "containerImages":[
+
+   ],
+   "containerPorts":[
+
+   ],
+   "repositories":[
+      {
+         "id":"1"
+      }
+   ]
+}

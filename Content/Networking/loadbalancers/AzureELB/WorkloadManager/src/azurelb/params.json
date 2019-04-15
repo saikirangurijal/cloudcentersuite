@@ -1,0 +1,114 @@
+{
+    "account": {
+        "subscriptionId": "",
+        "tenantId": "",
+        "clientId": "",
+        "clientSecret": "",
+        "location": ""
+    },
+    "resourceGroup": "",
+    "vmResourceGroup": "",
+    "vnet": false,
+    "subnet": false,
+    "loadBalancer": {
+        "name": "",
+        "rules": [
+
+        ],
+        "rulesAttr": {
+            "name": "azure-c-ext-service-lb-rule",
+            "protocol": "tcp",
+            "frontend_port": 80,
+            "backend_port": 80,
+            "idle_timeout_in_minutes": 4,
+            "enable_floating_ip": false,
+            "load_distribution": "Default",
+            "frontend_ip_configuration": {
+                "id": ""
+            },
+            "backend_address_pool": {
+                "id": ""
+            },
+            "probe": {
+                "id": ""
+            }
+        },
+        "inboundNatRules": [
+
+        ],
+        "inboundNatRulesAttr": {
+            "name": "azure-c-ext-service-netrule",
+            "protocol": "tcp",
+            "frontend_port": 21,
+            "backend_port": 22,
+            "enable_floating_ip": false,
+            "idle_timeout_in_minutes": 4,
+            "frontend_ip_configuration": {
+                "id": ""
+            }   
+        },
+        "healthProbes": [
+
+        ],
+        "checkHealthProbe": true,
+        "healthProbeAttr": {
+            "name": "azure-c-ext-service-probe",
+            "protocol": "http",
+            "port": 80,
+            "interval_in_seconds": 15,
+            "number_of_probes": 4,
+            "request_path": "/"
+        },
+        "frontEndIp": [],
+        "frontEndIpAttr":{
+            "name": "azure-c-ext-service-fend",
+            "private_ip_allocation_method": "Dynamic",
+            "public_ip_address": {
+                "id": ""
+            }
+        },
+        "backEndPools": [],
+        "backEndPoolAttr":{
+            "name": "azure-c-ext-service-addr-pool"
+        }
+    },
+    "availabilitySet": "",
+    "vms": [],
+    "vmAttr":{
+        "name": ""
+    },
+    "publicIp": {
+        "name": "azure-c-ext-service-publicip",
+        "createNew": true,
+        "defaults":{
+            "location": "",
+            "public_ip_allocation_method": "static",
+            "dns_settings": {
+                "domain_name_label": ""
+            },
+            "idle_timeout_in_minutes": 4
+        }
+    },
+    "vmParams":{
+        "location": false,
+        "network_profile": {
+            "network_interfaces": [{
+                "id": false,
+                "primary": true
+            }]
+        }
+    },
+    "nicParams": {
+        "location": "",
+        "ip_configurations": [{
+            "name": "",
+            "subnet": {
+                "id": null
+            },
+            "load_balancer_backend_address_pools": [{
+                "id": false
+            }],
+            "load_balancer_inbound_nat_rules": null
+        }]
+    }       
+}

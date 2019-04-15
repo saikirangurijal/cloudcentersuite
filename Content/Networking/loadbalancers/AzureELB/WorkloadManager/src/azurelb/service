@@ -1,0 +1,65 @@
+#!/bin/bash
+# Author: Riyas Ahamed
+# Type: External Service Azure Load Balancer
+
+#For external-service
+. /utils.sh
+
+cmd=$1
+
+# RUN EVERYTHING AS ROOT
+if [ "$(id -u)" != "0" ]; then
+    exec sudo "$0" "$@"
+fi
+
+
+# Check OS
+# If OS is Alipine, update base packages and add openssl
+apk add --update build-base
+apk add libffi-dev openssl-dev
+
+
+# Return execution status
+function executionStatus() {
+ FILE="FAILURE"
+ if [ -f $FILE ];
+ then
+    status=`cat $FILE`
+    print_log "Configuration Failed"
+    print_log "$status"
+    exit 127   
+  else
+    FILE="SUCCESS"
+    status="Successfully Configured"
+    print_log "$status"
+ fi
+}
+
+# External Life-Cycle actions
+# - ACTIONS
+#      - START
+#          - Install Required Python Packages
+#          - Create Load Balancer with configuration
+#          - Attached with dependent tier application
+#      - STOP
+#          - Install Required Python Packages
+#          - Delete Load Balancer
+#          - Detached with dependent tier
+case $cmd in
+	start)
+		print_log "Executing Service.."
+        python install_setup.py start
+		executionStatus
+		exit 0
+		;;
+	stop)
+		echo "Service Action -  $cmd"
+		python install_setup.py stop
+		executionStatus
+        exit 0
+		;;
+	*)
+		echo "unknown command"
+		exit 127
+		;;
+esac
