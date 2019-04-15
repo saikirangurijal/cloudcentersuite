@@ -37,6 +37,9 @@
 
  Step 7 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 4
  
+## Notes
+- Once Splunk Server deployed, please select applicable license or chose free trial license to test above application profile. 
+ 
  ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
    
  Ensure your directory in the linux based client machine contains :
