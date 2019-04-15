@@ -21,27 +21,21 @@
 # Download the service bundles
  Step 1 : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk/WorkloadManager/ServiceBundle/splunk.zip).
  
- Step 2 : Create the Splunk File by copying & pasting the contents from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk/WorkloadManager/src/splunk/service) into a new file named "service". 
-   
- Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and splunk file from Step 2 under services/splunk/service in your file repository.
+ Step 2 : Place the service bundle from Step 1 under services/<bundle.zip>
           
             - Service Bundle under services/<bundle.zip>
                     
                     Example : http://<Your_REPO_Server_IP>/services/splunk.zip
-					
-            - Service file under services/splunk/service
-			        
-		    Example : http://<Your_REPO_Server_IP>/services/splunk/service
   
- Step 4 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk/WorkloadManager/splunk_iu.zip)
+ Step 3 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk/WorkloadManager/splunk_iu.zip)
  
- Step 5 : Extract the above bundle on any linux based machine and navigate to extracted folder
+ Step 4 : Extract the above bundle on any linux based machine and navigate to extracted folder
 
- Step 6 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
+ Step 5 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
  
- Step 7 : Copy the Service Import script zip file to the directory extarcted above in Step 5 and Unzip the service import script bundle.
+ Step 6 : Copy the Service Import script zip file to the directory extarcted above in Step 4 and Unzip the service import script bundle.
 
- Step 8 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in    Step 5 
+ Step 7 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 4
  
  ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
    
