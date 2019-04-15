@@ -16,11 +16,11 @@
 - Knowledge on how to use CloudCenter
 	
 # Download the service bundles
-   Step 1 : Fetch sensu agent File by copying & pasting the contents from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Monitoring/Sensu-Agent/WorkloadManager/src/sensu-agent/sensu-agent) into a new file named "sensu-agent". Place the file in a repository and its location is http://YourIP/services/sensu-agent/sensunew.
+   Step 1 : Fetch sensu agent File by copying & pasting the contents from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Monitoring/Sensu-Agent/WorkloadManager/src/sensu-agent/sensu-agent) into a new file named "sensu-agent". Place the file in a repository and its location is http://YourIP/services/sensu-agent/sensu-agent.
    
    Step 2 : With any existing App Profile, this agent script can be configured by defining value with proper repository path like  "services/sensu-agent/sensu-agent" under "Post Start script" in service Initialization  Actions  OR "Initialization script" in Node Initialization. Sample App Profile has been given for demo.
    
-   Step 3 : Download the Sample Modelled Application Profiles with sensu agent pre-configured in Service lifecycle action, from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Monitoring/Sensu-Agent/WorkloadManager/sensuagent_iu.zip).
+   Step 3 : Download the Sample Modelled Application Profiles with sensu agent pre-configured in Service lifecycle action, from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Monitoring/Sensu-Agent/WorkloadManager/sensuagent_iu.zip?raw=true).
    
    Step 4 : Verify the location of the application packages and Agent File in file Repository. Make sure its placed correctly, By default Application Package will be under apps/your-packages and Node Lifecycle Agent file will be under services/sensu-agent/<sensu-agent-file>.
    
