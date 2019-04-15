@@ -1,0 +1,78 @@
+#!/bin/bash
+# Splunk Agent
+
+exec > >(tee -a /usr/local/osmosix/logs/service.log) 2>&1
+
+# Service Home Directory
+OSSVC_HOME=/usr/local/osmosix/service
+
+# Utility Scripts
+. /usr/local/osmosix/etc/.osmosix.sh
+. /usr/local/osmosix/etc/userenv
+. $OSSVC_HOME/utils/cfgutil.sh
+. $OSSVC_HOME/utils/nosqlutil.sh
+. $OSSVC_HOME/utils/install_util.sh
+
+# Service Name
+SVCNAME=splunk-agent
+
+# Install WGET
+installWget
+if [ $? -ne 0 ]
+then
+    log "[ERROR] Failed to install wget"
+    exit 1
+fi
+
+# Download and Install Splunk Agent
+installSplunkAgent() {
+    wget -O splunkforwarder-6.0-182037-Linux-x86_64.tgz 'http://www.splunk.com/page/download_track?file=6.0/universalforwarder/linux/splunkforwarder-6.0-182037-Linux-x86_64.tgz&ac=&wget=true&name=wget&platform=Linux&architecture=x86_64&version=6.0&product=splunkd&typed=release'
+    tar xvfz splunkforwarder-6.0-182037-Linux-x86_64.tgz 
+}
+
+# Configure Splunk Agent with parameters
+configureSplunkAgent() {
+    cd splunkforwarder/bin
+    ./splunk start --accept-license
+    ./splunk enable boot-start
+    stop
+    ./splunk add forward-server $splunkServerHost:$splunkForwarderPort -auth $splunkServerUserName:$splunkServerPassword
+    ./splunk add monitor $logPath
+}
+
+# Start Splunk Agent
+start() {
+  /etc/init.d/splunk start
+ 
+   return 0
+} 
+ 
+# Stop Splunk Agent
+stop() {
+  /etc/init.d/splunk stop
+ 
+  return 0
+} 
+
+# Restart Splunk Agent
+restart() {
+    stop
+    start
+
+    return 0
+}
+
+# Run Logger
+log() {
+	logger -t "OSMOSIX" "[$SVCNAME] $*"
+}
+
+# main entry
+if [ -z "$OSSVC_HOME" ]; then
+	log "missing parameter, exit now"
+	exit 127
+fi
+
+installSplunkAgent
+configureSplunkAgent
+start
