@@ -18,7 +18,7 @@
 			The universal forwarder supersedes the light forwarder for nearly all purposes and represents the best tool for sending data to indexers.
 
     Please refer the below link for more details.
-    https://docs.splunk.com/Documentation/Splunk/7.2.4/Forwarding/Typesofforwarders
+    https://docs.splunk.com/Documentation/Splunk/6.0/Forwarding/Typesofforwarders
 	
 ## Pre-Requisites
 #### CloudCenter
