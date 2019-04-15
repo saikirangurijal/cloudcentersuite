@@ -21,7 +21,7 @@
 # Download the service bundles
  Step 1 : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk/WorkloadManager/ServiceBundle/splunk.zip).
  
- Step 2 : Create the Splunk File by copying & pasting the contents from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk/WorkloadManager/src/splunk/service)into a new file named "service". 
+ Step 2 : Create the Splunk File by copying & pasting the contents from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk/WorkloadManager/src/splunk/service) into a new file named "service". 
    
  Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and splunk file from Step 2 under services/splunk/service in your file repository.
           
