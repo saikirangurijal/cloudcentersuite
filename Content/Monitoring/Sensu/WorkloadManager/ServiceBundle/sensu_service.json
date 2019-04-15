@@ -1,0 +1,94 @@
+{  
+   "displayName":"Sensu Server",
+   "name":"sensunew",
+   "description":"Application Monitoring",
+   "parentServiceId":"61",
+   "costPerHour":"0.00",
+   "bundleLocation":"services/sensuservers.zip",
+   "systemService":false,
+   "serviceType":"VM_AGENT",
+   "logoPath":"null",
+   "serviceActions":[
+      {  
+         "actionName":"INSTALL",
+         "actionType":"SCRIPT",
+         "actionValue":"service install",
+         "value":"service install",
+         "key":"INSTALL"
+      },
+      {  
+         "actionName":"START",
+         "actionType":"SCRIPT",
+         "actionValue":"service start",
+         "value":"service start",
+         "key":"START"
+      },
+      {  
+         "actionName":"STOP",
+         "actionType":"SCRIPT",
+         "actionValue":"service stop",
+         "value":"service stop",
+         "key":"STOP"
+      },
+      {  
+         "actionName":"RESTART",
+         "actionType":"SCRIPT",
+         "actionValue":"service restart",
+         "value":"service restart",
+         "key":"RESTART"
+      }
+   ],
+   "externalBundleLocation":"null",
+   "externalActions":[  
+
+   ],
+   "actions":[  
+
+   ],
+   "serviceParamSpecs":[  
+
+   ],
+   "servicePorts":[  
+      {  
+         "protocol":"TCP",
+         "fromPort":"5000",
+         "toPort":"6000"
+      },
+      {  
+         "protocol":"TCP",
+         "fromPort":"3000",
+         "toPort":"3500"
+      },
+      {  
+         "protocol":"TCP",
+         "fromPort":"1",
+         "toPort":"1000"
+      }
+   ],
+   "images":[  
+      {  
+         "id":"4"
+      },
+      {  
+         "id":"21"
+      },
+      {  
+         "id":"20"
+      },
+      {  
+         "id":"26"
+      }
+   ],
+   "defaultImageId":"21",
+   "containerImages":[  
+
+   ],
+   "containerPorts":[  
+
+   ],
+   "repositories":[  
+      {  
+         "id":"1"
+      }
+   ]
+}

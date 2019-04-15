@@ -1,0 +1,486 @@
+#!/bin/bash
+#works for installing sensu server on ubuntu 14.04/16.04 LTS
+#installs rabbitmq, redis, sensu(server, client, api) and Uchiwa
+cmd=$1
+source /usr/local/osmosix/etc/userenv
+
+# Install Sensu Server
+function install_sensuscentos() {
+
+
+    sudo log ['INFO'] 'Starting sensu server installation'
+	source /usr/local/osmosix/etc/userenv
+
+	# Install EPEL runtime version
+    sudo yum install epel-release -y
+	sudo log ['INFO'] 'Completed EPEL installation'
+
+	# Create configuration for Sensu
+	sudo cat <<'EOF' >> /etc/yum.repos.d/sensu.repo
+[sensu]
+name=sensu
+baseurl=https://sensu.global.ssl.fastly.net/yum/$releasever/$basearch/
+gpgkey=https://repositories.sensuapp.org/yum/pubkey.gpg
+gpgcheck=1
+enabled=1
+EOF
+
+	sudo log ['INFO'] 'Configured Sensu'
+
+    # Install Redis
+	sudo yum install redis -y
+
+	#Convert Redis to protected mode no
+	sudo yum install sed -y
+	sudo sed -i 's/protected-mode yes/protected-mode no/' etc/redis.conf
+
+	# Enable & start redis
+	sudo systemctl enable redis
+	sudo systemctl start redis
+
+	#Install Erlang
+	sudo yum install https://github.com/rabbitmq/erlang-rpm/releases/download/v1.3.0/erlang-18.3.4-1.el7.centos.x86_64.rpm -y
+
+
+	#Install RabbitMQ
+	sudo yum install https://www.rabbitmq.com/releases/rabbitmq-server/v3.6.10/rabbitmq-server-3.6.10-1.el7.noarch.rpm -y
+
+	#Create sensu directory
+	sudo rm -rf /etc/sensu/
+	sudo mkdir -p /etc/sensu/conf.d
+	chmod -R 755 /etc/sensu/
+
+	#Configuring Rabbitmq Message Queue
+	source /usr/local/osmosix/etc/userenv
+    echo "{\"rabbitmq\": {\"host\": \"$cliqrNodePrivateIp\",\"port\": 5672,\"vhost\": \"/sensu\",\"user\": \"sensu\",\"password\": \"secret\",\"heartbeat\": 30,\"prefetch\": 50} }" | tee /etc/sensu/conf.d/rabbitmq.json
+
+    #Listing out the file system whetehr rabbitmq Json created or not
+    ls -la /etc/sensu/conf.d
+
+	#Enable & Start RabbitMQ Server
+
+	sudo systemctl start rabbitmq-server
+	sudo systemctl enable rabbitmq-server
+
+	#Create a virtual host and user for rabbitmq ( with permissions for user to connect to virtual host)
+	sudo rabbitmqctl add_vhost /sensu
+	sudo rabbitmqctl add_user sensu secret
+	sudo rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"
+
+
+	#Install Uchiwa Dashboard
+	sudo yum install sensu uchiwa -y
+
+	#Install Plugins
+	yum groupinstall "Development tools" -y
+	sensu-install -p uptime-checks
+	sensu-install -p process-checks
+	sensu-install -p http
+	sensu-install -p filesystem-checks
+	sensu-install -p cpu-checks
+	sensu-install -p memory-checks
+	sensu-install -p disk-checks
+	sensu-install -p load-checks
+	sensu-install -p network-checks
+	chmod -R 755 /opt/sensu/embedded/bin/
+
+	#Configure Sensu Client
+	sudo cat <<'EOF' >> /etc/sensu/conf.d/client.json
+{
+  "client": {
+	"environment": "development",
+	"subscriptions": [
+	  "dev"
+	]
+  }
+}
+EOF
+
+
+	#Configure Uchiwa Dashboard
+	sudo cat <<'EOF' > /etc/sensu/uchiwa.json
+{
+   "sensu": [
+	 {
+	   "name": "sensu",
+	   "host": "127.0.0.1",
+	   "port": 4567
+	 }
+   ],
+   "uchiwa": {
+	 "host": "0.0.0.0",
+	 "port": 3000
+   }
+ }
+EOF
+
+	#Configure Checks
+	echo '{
+  "checks": {
+    "check_disk_usage": {
+      "command": "/opt/sensu/embedded/bin/check-disk-usage.rb -w :::disk.warning|80::: -c :::disk.critical|90:::",
+      "subscribers": [
+        "production",
+		"dev",
+		"development",
+		"linux"
+      ],
+      "interval": 60,
+      "environment": ":::environment|production:::"
+
+  },
+    "system_cpu_metrics": {
+       "type": "metric",
+       "command": "/opt/sensu/embedded/bin/metrics-cpu.rb --scheme sensu.:::service|undefined:::.:::environment|undefined:::.:::zone|undefined:::.:::name:::.cpu",
+       "subscribers": [
+         "system"
+        ],
+        "handlers": [
+          "graphite"
+        ],
+        "interval": 60,
+        "ttl": 180
+     },
+	"httpd": {
+            "command": "/opt/sensu/embedded/bin/check-process.rb -p httpd",
+			"subscribers": [
+              "httpd"
+             ],
+            "handlers": [
+                "default",
+                "pushover"
+            ],
+            "interval": 180,
+            "occurences": 3,
+            "refresh": "1800",
+            "standalone": true,
+            "ttl": 1200
+        },
+    "mysqld": {
+            "command": "/opt/sensu/embedded/bin/check-process.rb -p mysqld",
+			"subscribers": [
+              "mysqld"
+             ],
+            "handlers": [
+                "default",
+                "pushover"
+            ],
+            "interval": 180,
+            "occurences": 3,
+            "refresh": "1800",
+            "standalone": true,
+            "ttl": 1200
+        }
+    }
+}' | tee /etc/sensu/conf.d/checks.json
+
+
+	#To change owner for config files
+	sudo chmod -R 755 /etc/sensu
+	sudo chown -R sensu:sensu /etc/sensu
+	sudo chmod -R 755 /etc/sensu/conf.d
+
+
+	#To enable sensu services
+	sudo systemctl enable sensu-{server,api,client}
+	sudo systemctl start sensu-{server,api,client}
+	#systemctl stop sensu-{server,api,client}
+	sudo systemctl enable uchiwa
+	sudo systemctl start uchiwa
+	stop
+	start
+
+
+}
+function install_sensuubuntu() {
+sudo log ['INFO'] "installing rabbitmq and redis server \n\n"
+apt-get update
+apt-get install rabbitmq-server redis-server -y
+sudo log ['INFO'] "enabling rabbitmq_management plugin \n\n"
+service rabbitmq-server restart
+sudo log ['INFO'] "adding rabbitmq virtual host username: sensu pwd: secret \n\n"
+rabbitmqctl add_vhost /sensu
+rabbitmqctl add_user sensu secret
+rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"
+
+#get the gpg key
+sudo log ['INFO'] "now adding sensu repo \n\n"
+wget -q https://sensu.global.ssl.fastly.net/apt/pubkey.gpg -O- | sudo apt-key add -
+CODENAME=$(lsb_release -cd | grep Codename | cut -d ":" -f2)
+echo "deb     https://sensu.global.ssl.fastly.net/apt $CODENAME main" | sudo tee /etc/apt/sources.list.d/sensu.list
+
+#update repo and install sensu
+apt-get update -y
+sudo log ['INFO'] "installing sensu serve, client and api \n\n"
+apt-get install sensu -y
+sudo log ['INFO'] "adding config.json file with rabbitmq, redis and api settings \n\n"
+cat <<EOT > /etc/sensu/config.json
+{
+	"rabbitmq": {
+	  "host": "localhost",
+	  "vhost": "/sensu",
+	  "user": "sensu",
+	  "password": "secret"
+	},
+	"redis": {
+	  "host": "localhost"
+	},
+	"api": {
+	  "host": "localhost",
+      "port": 4567
+	}
+}
+EOT
+sudo log ['INFO'] "adding client \n\n"
+ip=$(ip route get 1 | awk '{print $NF;exit}')
+hostname=$(hostname -f)
+cat <<EOT > /etc/sensu/conf.d/client.json
+{
+        "client": {
+                "name": "$hostname",
+                "address": "$ip"
+        }
+}
+EOT
+
+sudo log ['INFO'] "starting sensu server, cliend and api"
+
+if [[ $CODENAME == "xenial" ]]; then
+	service sensu-server start
+	service sensu-client start
+	service sensu-api start
+else
+	/etc/init.d/sensu-server start
+	/etc/init.d/sensu-client start
+	/etc/init.d/sensu-api start
+fi
+
+
+#install uchiwa web interface
+apt-get -y install uchiwa
+cat <<EOT > /etc/sensu/uchiwa.json
+{
+  "sensu": [
+    {
+      "name": "SensuServer",
+      "host": "localhost",
+      "port": 4567,
+      "ssl": false,
+      "path": "",
+      "user": "sensu",
+      "pass": "secret",
+      "timeout": 5
+    }
+  ],
+  "uchiwa": {
+    "host": "0.0.0.0",
+    "port":3000 ,
+    "user": "sensu",
+    "password": "secret",
+    "interval": 5
+  }
+}
+
+EOT
+sudo log ['INFO'] "adding rabbitmq.json file \n\n"
+cat <<EOT > /etc/sensu/conf.d/rabbitmq.json
+{
+	"rabbitmq": {
+	  "host": "$cliqrNodePrivateIp",
+	  "port": 5672,
+	  "vhost": "/sensu",
+	  "user": "sensu",
+	  "password": "secret"
+	}
+}
+EOT
+
+sudo log ['INFO'] "adding transport.json file  \n\n"
+cat <<EOT > /etc/sensu/conf.d/transport.json
+{
+  "transport": {
+    "name": "rabbitmq",
+    "reconnect_on_error": true
+  }
+}
+EOT
+
+echo '{
+  "checks": {
+    "check_disk_usage": {
+      "command": "/opt/sensu/embedded/bin/check-disk-usage.rb -w :::disk.warning|80::: -c :::disk.critical|90:::",
+      "subscribers": [
+        "production",
+		"dev",
+		"development",
+		"linux"
+      ],
+      "interval": 60,
+      "environment": ":::environment|production:::"
+
+  },
+    "system_cpu_metrics": {
+       "type": "metric",
+       "command": "/opt/sensu/embedded/bin/metrics-cpu.rb --scheme sensu.:::service|undefined:::.:::environment|undefined:::.:::zone|undefined:::.:::name:::.cpu",
+       "subscribers": [
+         "system"
+        ],
+        "handlers": [
+          "graphite"
+        ],
+        "interval": 60,
+        "ttl": 180
+     },
+	"httpd": {
+            "command": "/opt/sensu/embedded/bin/check-process.rb -p httpd",
+			"subscribers": [
+              "httpd"
+             ],
+            "handlers": [
+                "default",
+                "pushover"
+            ],
+            "interval": 180,
+            "occurences": 3,
+            "refresh": "1800",
+            "standalone": true,
+            "ttl": 1200
+        },
+    "mysqld": {
+            "command": "/opt/sensu/embedded/bin/check-process.rb -p mysqld",
+			"subscribers": [
+              "mysqld"
+             ],
+            "handlers": [
+                "default",
+                "pushover"
+            ],
+            "interval": 180,
+            "occurences": 3,
+            "refresh": "1800",
+            "standalone": true,
+            "ttl": 1200
+        }
+    }
+}' | tee /etc/sensu/conf.d/checks.json
+
+
+	#To change owner for config files
+sudo chmod -R 755 /etc/sensu
+sudo chown -R sensu:sensu /etc/sensu
+sudo chmod -R 755 /etc/sensu/conf.d
+sudo log ['INFO'] "starting Uchiwa web interface on port 7000"
+#loging to http://localhost:7000 with user sensu and password secret
+
+if [[ $CODENAME == "xenial" ]]; then
+	service uchiwa start
+else
+	/etc/init.d/uchiwa start
+fi
+#install nagios plugins
+sudo log ['INFO'] "installing nagios plugins \n\n"
+apt-get install nagios-plugins -y
+
+ }
+
+install() {
+	if [ -f /etc/redhat-release ]; then
+        echo "Centos\n"
+		install_sensuscentos
+	elif [ -f /etc/lsb-release ]; then
+        echo "Ubuntu\n"
+		install_sensuubuntu
+	fi
+
+}
+
+start() {
+
+    # Sourcing again & adding rabbitmq json ( if not added)
+    source /usr/local/osmosix/etc/userenv
+
+    # Validate before starting Sensu Server
+	   # Checking whether rabbitmq json exists or not
+	   [ ! -f /etc/sensu/conf.d/rabbitmq.json ] && echo "rabbitmq.json file does not exist"
+	   #exit 127
+	   
+	   # Checking whether client json exists or not
+	   [ ! -f /etc/sensu/conf.d/client.json ] && echo "client.json file does not exist"
+	   #exit 127
+
+	   # Checking whether sensu configuration file exists or not
+	   [ ! -f /etc/yum.repos.d/sensu.repo ] && echo "sensu.repo file does not exist"
+	   #exit 127
+
+	   # Checking whether checks json exists or not
+	   [ ! -f /etc/sensu/conf.d/checks.json ] && echo "checks.json file does not exist"
+	   #exit 127
+
+	   # Checking whether uchiwa json exists or not
+	   [ ! -f /etc/sensu/uchiwa.json ] && echo "uchiwa.json file does not exist"
+	   #exit 127
+	   
+	# Starting Redis data store
+    sudo systemctl enable redis
+	sudo systemctl start redis
+	
+	# Starting Rabbitmq message queue
+	sudo systemctl start rabbitmq-server
+	sudo systemctl enable rabbitmq-server
+	
+	#Starting Sensu services
+	sudo systemctl enable sensu-{server,api,client}
+	sudo systemctl start sensu-{server,api,client}
+	
+	#Starting Uchiwa Dashboard
+	sudo systemctl enable uchiwa
+	sudo systemctl start uchiwa
+	
+}
+
+
+stop() {
+
+    #Stopping Redis data store
+    sudo systemctl stop redis
+	
+	#Stopping Rabbitmq message queue
+	sudo systemctl stop rabbitmq-server
+	
+	#Stopping Sensu services
+	sudo systemctl stop sensu-{server,api,client}
+	
+	#Stopping Uchiwa Dashboard
+	sudo systemctl stop uchiwa
+
+}
+    
+
+runscripts() {
+    case $cmd in
+        install)
+            log "[INSTALL] Installing Sensu Server"
+            install
+            ;;
+		start)
+		    log "[START] Starting Sensu Server"
+		    start
+		    ;;
+		stop)
+		    log "[STOP] Stopping Sensu Server"
+			stop
+			;;
+		restart)
+		    log "[RESTART] Restarting Sensu Server"
+			stop 
+			start
+			;;
+		*)
+		    exit 127
+			;;
+		   
+	esac
+	
+}
+
+runscripts
