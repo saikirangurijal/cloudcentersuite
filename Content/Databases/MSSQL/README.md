@@ -136,6 +136,7 @@ S.No | Resource   |  Value   | Remarks
 S.No    | Cloud   |  OS
 ------  | ---------- | ---------
  1      |  Google    |  Ubuntu16
+ 2      |  Azure     |  Ubuntu16
 
 ## Agent Lifecycle Actions 
 
