@@ -12,7 +12,7 @@ Please refer the below link for more details.
 # Pre-Requisites
 #### CloudCenter
 - CloudCenter 5.0.1 and above
-- Knowledge on how to use CloudCenter
+- Knowledge on how to use Workload Manager  
 
 # Download the service bundles
 
@@ -30,13 +30,13 @@ Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and ap
             
                     Example : http://<Your_REPO_Server_IP>/apps/petclinic.war
 
-Step 4 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/loadbalancers/GoogleELB/WorkloadManager/googleelb_iu.zip)
+Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/loadbalancers/GoogleELB/WorkloadManager/googleelb_iu.zip)
 																													
 Step 5: Extract the above bundle on any linux based machine and navigate to extracted folder
 
 Step 6 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
  
-Step 7: Copy the Service Import script zip file to the directory extarcted above in Step 5 and Unzip the service import script bundle.
+Step 7: Copy the Service Import script zip file to the directory extracted above in Step 5 and Unzip the service import script bundle.
 
 Step 8 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
 
@@ -115,7 +115,7 @@ If service creation is successful, You will be presented with a message **"Googl
 
 Shell script:
 
-service: Intiates the python script to start intergration.
+service: Initiates the python script to start integration.
 
 Python script :
 
@@ -139,7 +139,7 @@ error_utils.py: A script that handles error functionalities
         Stop:
             Script from bundle: service stop
 
-# Deployement Parameters:
+# Deployment Parameters:
 
 | Parameter Name	| Type	 | Description | Allowed Value |Default Value |
 | ------ | ------ | ------ |------ | ------ |
