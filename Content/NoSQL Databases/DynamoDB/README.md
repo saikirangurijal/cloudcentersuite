@@ -14,6 +14,7 @@
 #### CloudCenter
 - CloudCenter 5.0.1 and above
 - Knowledge on how to use Workload Manager
+- Table name should be unique
 	
 ## Download the service bundles
 
