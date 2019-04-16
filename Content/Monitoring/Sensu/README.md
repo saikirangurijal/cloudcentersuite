@@ -12,7 +12,8 @@
 # Pre-Requisites
 #### CloudCenter
 - CloudCenter 5.0.1 and above
-- Knowledge on how to use CloudCenter
+- Knowledge on how to use Workload Manager 
+- Supported OS: CentOS 7
 
 # Download the service bundles
    Step 1 : Download the Service Bundle zip file [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Monitoring/Sensu/WorkloadManager/ServiceBundle/sensu.zip). 
@@ -114,14 +115,6 @@ S.No    | Resource    |  Value   | Remarks
 ----    | ----------  | ---------| ------- 
  1      |  CPU        | 1        |        
  2      |  Memory     | 1 GB     |        
- 
-# Supported Cloud and OS
-
-S.No    | Cloud   |  OS   
-------  | ---------- | --------- 
- 1      |  Google    |  CentOS 7 , Ubuntu 16 and Ubuntu 14               
- 2      |  Azure     |  CentOS 7 , Ubuntu 16 and Ubuntu 14
- 3      |  AWS     |  CentOS 7 and Ubuntu 14
  
 # Agent Lifecycle Actions 
 Agent Action Bundle:  
