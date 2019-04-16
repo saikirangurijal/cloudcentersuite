@@ -45,7 +45,7 @@
  Ensure your directory in the linux based client machine contains :
 
 - Service import json file (named as dynamodb_service.json)
-- Service import script zip file (named as dynamodb.zip)
+- Service import script zip file (named as serviceimport.zip)
 - main.py
 - serviceimport.sh
 - DynamoDB logo (named as dynamodb.png)
