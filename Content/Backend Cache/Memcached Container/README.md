@@ -14,17 +14,17 @@
 ## Pre-Requisites
 #### CloudCenter
 - CloudCenter 5.0.1 and above
-- Knowledge on how to use CloudCenter 
+- Knowledge on how to use Workload Manager 
 	
 # Download the service bundles
    
- Step 1 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Backend%20Cache/Memcached%20Container/WorkloadManager/memcached_cont_iu.zip).
+ Step 1 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Backend%20Cache/Memcached%20Container/WorkloadManager/memcached_cont_iu.zip).
  
  Step 2 : Extract the above bundle on any linux based machine and navigate to extracted folder.
  
  Step 3 : Download the service import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip)
    
- Step 4 : Copy the Service Import script zip file to the directory extarcted above in Step 2 and Unzip the service import script bundle.
+ Step 4 : Copy the Service Import script zip file to the directory extracted above in Step 2 and Unzip the service import script bundle.
 
  Step 5 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 2
  
