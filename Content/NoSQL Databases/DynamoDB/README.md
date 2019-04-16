@@ -146,7 +146,7 @@ External Lifecycle Actions:
 | ------ | ------ | ------ |------ | ------ |
 | tableName |	string | Table name to be configured for the service.	 | User defined value | testdb |
 | partitionKey | string| Primary key for the table | User defined value | id |
-| partitionAttrType | list| Type of attribute. For more details on the type of attribute, check DynamoDB documentation	 | Number,String,Binary | Number |
+| partitionAttrType | list| Type of attribute. For more details on the type of attribute, check DynamoDB documentation	 | Number,String,Binary | String |
 | streamEnabled | list| Stream enable for the table | True,False | True |
 | streamViewType | list | Stream View Type | NEW_IMAGE,OLD_IMAGE,NEW_AND_OLD_IMAGES,KEYS_ONLY | NEW_AND_OLD_IMAGES |
 
