@@ -16,7 +16,8 @@
  ## Pre-Requisites
 #### CloudCenter
 - CloudCenter 5.0.1 and above
-- Knowledge on how to use CloudCenter 
+- Knowledge on how to use Workload Manager 
+- Supported OS: CentOS 7  
   
 # Download the service bundles
  Step 1 : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk/WorkloadManager/ServiceBundle/splunk.zip).
@@ -27,13 +28,13 @@
                     
                     Example : http://<Your_REPO_Server_IP>/services/splunk.zip
   
- Step 3 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk/WorkloadManager/splunk_iu.zip)
+ Step 3 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk/WorkloadManager/splunk_iu.zip)
  
  Step 4 : Extract the above bundle on any linux based machine and navigate to extracted folder
 
  Step 5 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
  
- Step 6 : Copy the Service Import script zip file to the directory extarcted above in Step 4 and Unzip the service import script bundle.
+ Step 6 : Copy the Service Import script zip file to the directory extracted above in Step 4 and Unzip the service import script bundle.
 
  Step 7 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 4
  
@@ -118,7 +119,7 @@ The Package Service bundle consists of the following files:
 
 Shell script:
 
- - service: This script will install splunk server and load configuration from service parameters and installs necessary packages and also invokes the external life cycle actions.
+ - service: This script will install splunk server and load configuration from service parameters and installs necessary packages and also invokes the agent life cycle actions.
 
 
 # Minimum Resource Specifications
@@ -127,22 +128,14 @@ S.No    | Resource   |  Value   | Remarks
 ------  | ---------- | ---------| ------- 
  1      |  CPU       |  1       |        
  2      |  Memory    |  8 GB    |   
-   
-# Supported Cloud and OS
+ 
+ 
+## Agent Lifecycle Actions 
 
-S.No    | Cloud   |  OS   
-------  | ---------- | --------- 
- 1      |  Google    |  CentOS 7  and Ubuntu 14               
- 2      |  Azure     |  CentOS 7  and Ubuntu 14
- 3      |  AWS     |  CentOS 7 and Ubuntu 14
+Agent Action Bundle:  
+ - http://YourIP/services/splunk.zip - Location where your agent action bundle zip (service bundle zip file) is found.
  
- 
-## External Lifecycle Actions 
-
-External Action Bundle:  
- - http://YourIP/services/splunk.zip - Location where your external action bundle zip (service bundle zip file) is found.
- 
-External Lifecycle Actions:
+Agent Lifecycle Actions:
  - Install: Script from bundle: **service install**
  - Configure: Script from bundle: **service configure**
  - Start: Script from bundle: **service start**
