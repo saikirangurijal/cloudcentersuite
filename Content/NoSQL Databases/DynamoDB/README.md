@@ -128,7 +128,7 @@ Python script :
 
  - util.py: utility file
 
- - error_utils.py: The script that handles error functionalities
+ - error_utils.py: The script that handles error functionality
 
 ## External Lifecycle Actions 
 

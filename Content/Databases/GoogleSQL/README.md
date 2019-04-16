@@ -130,11 +130,11 @@ Python script :
 
 - google_management_client.py : The script will invoke the main method of google cloud sql.
 
-- common.py: The script contains common functionalities which is required for other script files.
+- common.py: The script contains common functionality which is required for other script files.
 
 - util.py: utility file
 
-- error_utils.py: The script that handles error functionalities
+- error_utils.py: The script that handles error functionality
 
 ## External Lifecycle Actions 
 
