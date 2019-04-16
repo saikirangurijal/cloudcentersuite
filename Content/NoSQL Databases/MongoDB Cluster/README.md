@@ -20,7 +20,8 @@
 ## Pre-Requisites
 #### CloudCenter
 - CloudCenter 5.0.1 and above
-- Knowledge on how to use CloudCenter 
+- Knowledge on how to use Workload Manager 
+- Supported OS: CentOS 7
 	
 # Download the service bundles
 Step 1 : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/NoSQL%20Databases/MongoDB%20Cluster/WorkloadManager/ServiceBundle/mongodbcluster.zip).
@@ -122,7 +123,7 @@ If service creation is successful, You will be presented with a message **"Mongo
 The Packer Service bundle consists of the following files:
 
 Shell script:
- - service: The script will set all required environmental variables and installs necessary packages also invokes all external life cycle action.
+ - service: The script will set all required environmental variables and installs necessary packages also invokes all agent life cycle action.
  
 conf file:
  - ubuntu_conf: This file used to Configure for Ubuntu.
@@ -143,21 +144,14 @@ S.No    | Resource   |  Value   | Remarks
 ------  | ---------- | ---------| ------- 
  1      |  CPU       |  1       |        
  2      |  Memory    |  1 GB    |   
-
-# Supported Cloud and OS
-
-S.No    | Cloud   |  OS   
-------  | ---------- | --------- 
- 1      |  Google    |  CentOS 7 and Ubuntu 16                
- 2      |  Azure     |  CentOS 7 and Ubuntu 16
- 3      |  AWS     |  CentOS 7
-
-## External Lifecycle Actions 
-
-External Action Bundle:  
- - http://YourIP/services/mongodbcluster.zip the external action bundle zip file is found.
  
-External Lifecycle Actions:
+ 
+## Agent Lifecycle Actions 
+
+Agent Action Bundle:  
+ - http://YourIP/services/mongodbcluster.zip the agent action bundle zip file is found.
+ 
+Agent Lifecycle Actions:
  - Install: Script from bundle : **service install**
  - Configure: Script from bundle : **service configure**
  - Stop: Script from bundle : **service stop**

@@ -33,7 +33,7 @@ Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and ap
             
                     Example : http://<Your_REPO_Server_IP>/apps/ntier-cassandra-app.zip 
    
- Step 4 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/NoSQL%20Databases/Cassandra%20Cluster/WorkloadManager/cassandracluster_iu.zip).
+ Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/NoSQL%20Databases/Cassandra%20Cluster/WorkloadManager/cassandracluster_iu.zip).
  
  Step 5 : Extract the above bundle on any linux based machine and navigate to extracted folder.
  
@@ -117,7 +117,7 @@ If service creation is successful, You will be presented with a message **"Cassa
 The Packer Service bundle consists of the following files:
 
 Shell script:
- - service: The script will set all required environmental variables and installs necessary packages also invokes all external life cycle action.
+ - service: The script will set all required environmental variables and installs necessary packages also invokes all agent life cycle action.
  
 SQL file:
  - dbsetup: The script will create Keyspace on cassandra db with replication factor.
@@ -133,7 +133,7 @@ S.No | Resource   |  Value   | Remarks
 ## Agent Lifecycle Actions 
 
 Agent Action Bundle:  
- - http://YourIP/cassandra/cassandracluster.zip the external action bundle zip file is found.
+ - http://YourIP/cassandra/cassandracluster.zip the agent action bundle zip file is found.
  
 Agent Lifecycle Actions:
  - Install: Script from bundle: **service install**
