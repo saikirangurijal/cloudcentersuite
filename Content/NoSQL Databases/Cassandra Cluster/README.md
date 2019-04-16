@@ -129,20 +129,13 @@ S.No | Resource   |  Value   | Remarks
  1   |  CPU       | 2        |        
  2   |  Memory    | 8 GB     |        
 
-# Supported Cloud and OS
+  
+## Agent Lifecycle Actions 
 
-S.No    | Cloud   |  OS   
-------  | ---------- | --------- 
- 1      |  Google    |  CentOS 7                
- 2      |  Azure     |  CentOS 7  
- 3 		|  AWS       |  CentOS 7
- 
-## External Lifecycle Actions 
-
-External Action Bundle:  
+Agent Action Bundle:  
  - http://YourIP/cassandra/cassandracluster.zip the external action bundle zip file is found.
  
-External Lifecycle Actions:
+Agent Lifecycle Actions:
  - Install: Script from bundle: **service install**
  - Start: Script from bundle: **service start**
  - Stop: Script from bundle: **service stop**
