@@ -15,7 +15,7 @@ Please refer the below link for more details.
 ## Pre-Requisites
 #### CloudCenter
 - CloudCenter 5.0.1 and above.
-- Knowledge on how to use aws-lambda. 
+- Knowledge on how to use Workload Manager. 
 - Deployment Package(appPackage)-Lambda function package with proper handler in your apps repository.
  
 
@@ -33,13 +33,13 @@ Step 3 : Download the application bundle to be used with application profile fro
 
 Step 4 :DynamoDB Service should be created in WorkLoad Manager for the DynamoDb Tier. How to create DynamoDB service - refer [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/NoSQL%20Databases/DynamoDB)
  					
-Step 5 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/lambda_iu.zip)
+Step 5 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/lambda_iu.zip)
 
 Step 6: Extract the above bundle on any linux based machine and navigate to extracted folder
 
 Step 7 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
  
-Step 8: Copy the Service Import script zip file to the directory extarcted above in Step 6 and Unzip the service import script bundle.
+Step 8: Copy the Service Import script zip file to the directory extracted above in Step 6 and Unzip the service import script bundle.
 
 Step 9 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 4
  
@@ -117,7 +117,7 @@ If service creation is successful, You will be presented with a message **"lambd
 ### The Packer Service bundle consists of the following files:
 
 Shell script:
- - service: Intiates the python script to start intergration.
+ - service: Initiates the python script to start integration.
 
 Python script :
  - install_setup.py: The script will check all mandatory parameters available and installs necessary python packages also invokes external life cycle action.
@@ -146,7 +146,7 @@ Python script :
 | runtimes | List | Yes | Need to select required Run time for the lambda function. |  | |
 
 
-# Deployement Parameters:
+# Deployment Parameters:
 | Parameter Name| Type	 | Mandatory |Description | Allowed Value |Default Value |
 | ------ | ------ | ------ | ------ |------ | ------ |
 | roleForLambda |	String | Yes | A role will be created for lambda with dynamodb access policy attached|  |   |
