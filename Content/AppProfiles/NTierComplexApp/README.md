@@ -46,7 +46,7 @@ NTierComplexApp - Typical J2EE Web App
 
    1. CloudCenter 5.0.1 and above
    
-   2. Knowledge on how to use CloudCenter
+   2. Knowledge on how to Workload Manager  
    
    3. Mongo DB Cluster Service should be created in Workload Manager for the NOSQL Database Tier 
       - How to Create Mongo DB Cluster Server - Refer from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/NoSQL%20Databases/MongoDB%20Cluster)
@@ -62,6 +62,7 @@ NTierComplexApp - Typical J2EE Web App
    8. For Weblogic : According to details steps in WebLogic, Make sure download Weblogic Installation Bundle from Oracle website and keept it in your repository under 'images' as 'images/fmw_12.2.1.3.0_wls.zip'.
       Please refer Weblogic pre-requisite.
     
+   9. Supported OS: CentOS 7  
 
 
 # Download the Application Profile and Package Bundle
