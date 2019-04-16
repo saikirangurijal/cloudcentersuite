@@ -16,7 +16,8 @@
   
 #### CloudCenter
  - CloudCenter 5.0.1 and above
- - Knowledge on how to use CloudCenter 
+ - Knowledge on how to use Workload Manager 
+ - Supported OS: CentOS 7 
 	
 # Download the service bundles
    Step 1 : Download the service bundle from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Middleware/Oracle%20Weblogic/WorkloadManager/ServiceBundle/weblogic.zip).
@@ -39,7 +40,7 @@
     
                Example :  http://<Your_REPO_Server_IP>/images/weblogicjar.zip
               
-  Step 5 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Middleware/Oracle%20Weblogic/WorkloadManager/weblogic_iu.zip).
+  Step 5 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Middleware/Oracle%20Weblogic/WorkloadManager/weblogic_iu.zip).
     
   Step 6 : Extract the above bundle on any linux based machine and navigate to extracted folder.
 
@@ -153,20 +154,12 @@ S.No    | Resource     |  Value   | Remarks
  2      |  Memory      | 8 GB    |        
  3      |  Disk Space  | 30 GB     | 
 
-# Supported Cloud and OS
 
-S.No    | Cloud   |  OS   
-------  | ---------- | --------- 
- 1      |  Google    |  CentOS 7 and Ubuntu 16                
- 2      |  Azure     |  CentOS 7 and Ubuntu 16
- 3      |  AWS     |  CentOS 7 and Ubuntu 16
+# Agent Lifecycle Actions 
+Agent Action Bundle:  
+ - http://YourIP/services/weblogic.zip - Location where your agent action bundle zip is found.
 
-
-# External Lifecycle Actions 
-External Action Bundle:  
- - http://YourIP/services/weblogic.zip - Location where your external action bundle zip is found.
-
-External Lifecycle Actions:
+Agent Lifecycle Actions:
  - Install: Script from bundle: **service install**
  - Deploy: Script from bundle: **service deploy**
  - Start: Script from bundle: **service start**
