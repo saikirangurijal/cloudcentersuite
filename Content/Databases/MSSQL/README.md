@@ -17,7 +17,9 @@
 ## Pre-Requisites
 #### CloudCenter
 - CloudCenter 5.0.1 and above
-- Knowledge on how to use CloudCenter
+- Knowledge on how to use Workload Manager
+- Supported OS: Ubuntu16
+
 
 ## Download the service bundles
 
@@ -35,7 +37,7 @@
             
                     Example : http://<Your_REPO_Server_IP>/apps/mssql-app.zip
    
- Step 4 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/MSSQL/WorkloadManager/mssql_iu.zip)
+ Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/MSSQL/WorkloadManager/mssql_iu.zip)
  
  Step 5: Extract the above bundle on any linux based machine and navigate to extracted folder
 
@@ -130,13 +132,6 @@ S.No | Resource   |  Value   | Remarks
 ---- | ---------- |--------- | ------- 
  1   |  CPU       | 1        |        
  2   |  Memory    | 4GB      |        
-
-# Supported Cloud and OS
-
-S.No    | Cloud   |  OS
-------  | ---------- | ---------
- 1      |  Google    |  Ubuntu16
- 2      |  Azure     |  Ubuntu16
 
 ## Agent Lifecycle Actions 
 
