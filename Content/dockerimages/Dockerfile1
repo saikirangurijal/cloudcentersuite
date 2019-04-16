@@ -1,4 +1,4 @@
-FROM alpine:latest as alpine
+FROM alpine:latest
 
 ENV PACKAGES="\
   bash \
