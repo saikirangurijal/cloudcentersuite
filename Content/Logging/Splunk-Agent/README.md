@@ -23,9 +23,10 @@
 ## Pre-Requisites
 #### CloudCenter
 - CloudCenter 5.0.1 and above
-- Knowledge on how to use CloudCenter 
-- Ensure Splunk server is up and running.
-  
+- Knowledge on how to use Workload Manager  
+- Ensure Splunk server is up and running
+- Supported OS: CentOS 7  
+
 ## Where to Download the service bundles
  Step 1 : Fetch Splunk agent File by copying & pasting the contents from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk-Agent/WorkloadManager/src/splunk-agent/splunk-agent) into a new file named "splunk-agent". Place the file in a repository and its location is http://YourIP/services/splunk-agent/splunk-agent.
  
@@ -57,13 +58,6 @@ S.No    | Resource    |  Value   | Remarks
  1      |  CPU        | 1        |        
  2      |  Memory     | 1 GB     |     
  
- # Supported Cloud and OS
-
-S.No    | Cloud   |  OS   
-------  | ---------- | --------- 
- 1      |  Google    |  CentOS 7 , Ubuntu 16 and Ubuntu 14               
- 2      |  Azure     |  CentOS 7 , Ubuntu 16 and Ubuntu 14
- 3      |  AWS     |  CentOS 7 and Ubuntu 14
 
  # Global Parameters in Application Profile
 
