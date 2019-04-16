@@ -10,7 +10,7 @@ Please refer the below link for more details.
 ## Pre-Requisites
 #### CloudCenter
 - CloudCenter 5.0.1 and above
-- Knowledge on how to use CloudCenter 
+- Knowledge on how to use Workload Manager 
 
 # Download the service bundles
 
@@ -23,13 +23,13 @@ Step 2 : Place the service bundle from Step 1 under services/<bundle.zip> and ap
                     
                     Example : http://<Your_REPO_Server_IP>/services/awsroute53.zip
 					
-Step 3 : Download the integration unit bundle (that conatins logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Route53/WorkloadManager/route53_iu.zip)
+Step 3 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Route53/WorkloadManager/route53_iu.zip)
 
 Step 4: Extract the above bundle on any linux based machine and navigate to extracted folder
 
 Step 5 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
  
-Step 6: Copy the Service Import script zip file to the directory extarcted above in Step 5 and Unzip the service import script bundle.
+Step 6: Copy the Service Import script zip file to the directory extracted above in Step 5 and Unzip the service import script bundle.
 
 Step 7 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 4
  
@@ -107,7 +107,7 @@ If service creation is successful, You will be presented with a message **"Route
 The Package Service bundle consists of the following files:
 
 Shell script:
- - service: Intiates the python script to start intergration.
+ - service: Initiates the python script to start integration.
 
 Python script :
  - install_setup.py: The script will check all mandatory parameters available and installs necessary python packages also invokes external life cycle action.
@@ -125,7 +125,7 @@ Python script :
         Stop:
             Script from bundle: service stop
 
-# Deployement Parameters:
+# Deployment Parameters:
 | Parameter Name| Type	 | Mandatory |Description | Allowed Value |Default Value |
 | ------ | ------ | ------ | ------ |------ | ------ |
 | DomainName |	String | Yes | Mention Existing Registered Domain Name in AWS,If DomainName is not there , click[here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/blob/master/Networking/Route53domain/README.md) to Refer another service for Domain creation |  |   |
