@@ -116,7 +116,7 @@ Python script :
  - prerequiste_environments.py : Script will check required parameter for route53 management
  - domaincreation.json : input template json for route53 domain creation
  - util.py: utility file
- - error_utils.py: A script that handles error functionalities
+ - error_utils.py: A script that handles error functionality
 
 # External Lifecycle Actions as below
     - External Action Bundle:  services/awsroute53.zip
@@ -127,7 +127,7 @@ Python script :
 # Deployment Parameters:
 | Parameter Name| Type	 | Mandatory |Description | Allowed Value |Default Value |
 | ------ | ------ | ------ | ------ |------ | ------ |
-| DomainName |	String | Yes | Mention Uniqie Domain Name for creating domain in AWS  |  |   |
+| DomainName |	String | Yes | Mention Unique Domain Name for creating domain in AWS  |  |   |
 | FirstName | String | Yes	| Mention First Name |  | |
 | LastName | String |	Yes | Mention Last Name | | |
 | ContactType | String | Yes | Mention Contact type of Person | <PERSON','COMPANY','ASSOCIATION','PUBLIC_BODY','RESELLER'> | |
