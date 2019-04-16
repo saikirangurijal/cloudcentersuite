@@ -11,9 +11,10 @@
     http://cassandra.apache.org/doc/latest/
 	https://github.com/GoogleCloudPlatform/cassandra-docker/blob/master/3/README.md	
 # Pre-Requisites
-#### CloudCenter
+#### CloudCenter Suite
 - CloudCenter 5.0.1 and above
-- Knowledge on how to use CloudCenter
+- Knowledge on how to use Workload Manager
+- Supported OS: CentOS 7
 
 	
 ## Download the service bundles
