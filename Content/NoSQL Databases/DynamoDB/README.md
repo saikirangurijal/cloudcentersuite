@@ -13,7 +13,7 @@
 ## Pre-Requisites
 #### CloudCenter
 - CloudCenter 5.0.1 and above
-- Knowledge on how to use CloudCenter
+- Knowledge on how to use Workload Manager
 	
 ## Download the service bundles
 
@@ -135,7 +135,7 @@ External Action Bundle:
  - http://YourIP/services/dynamodb.zip the external action bundle zip file is found.
  
 External Lifecycle Actions:
- - Install: Script from bundle : **service install** 
+ - Start: Script from bundle : **service start** 
  - Stop: Script from bundle : **service stop**
 
 		
