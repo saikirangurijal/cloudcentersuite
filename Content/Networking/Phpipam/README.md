@@ -14,9 +14,9 @@
 	
 # Download and configure the callouts
 
-   Step 1 : To Install Phpipam server,follow the guide [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Phpipam/Php-Ipam%20Setup%20Guide.docx)
+   Step 1 : To Install Phpipam server,follow the guide [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Networking/Phpipam/Php-Ipam%20Setup%20Guide.docx)
    
-   Step 2 : Download the Callout script from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Phpipam/php-ipam.zip)
+   Step 2 : Download the Callout script from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Networking/Phpipam/php-ipam.zip)
    
    Step 3 :  Extract the above bundle on any linux based machine and navigate to extracted folder. 
    
@@ -61,7 +61,7 @@
                     Example : http://<Your_REPO_Server_IP>/callouts/php-ipam.zip 
    
    Step 10 : Open the phpipam server application and add two required subnet custom fields(custom_Gateway,custom_NetworkId).
-             Prefer the link to create the custom fields [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Phpipam/Php-Ipam%20Setup%20Guide.docx)
+             Prefer the link to create the custom fields [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Networking/Phpipam/Php-Ipam%20Setup%20Guide.docx)
              For example:
              
                 Gateway - 10.193.72.1
