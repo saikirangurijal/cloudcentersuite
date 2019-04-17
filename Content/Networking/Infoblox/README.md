@@ -64,9 +64,10 @@
                     
                     Example : http://<Your_REPO_Server_IP>/callouts/infoblox-ipam.zip 
    
-   Step 10: Open the infoblox server application and add required external attributes(Gateway,NetworkId) in the network.
-            Refer the link to know how to create external attributes [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Infoblox/Infoblox-Ipam%20Setup%20Guide.docx)
-            For example:
+   Step 10: Open the infoblox server application and add required external attributes(Gateway,NetworkId) in the network. 
+   Refer the link on how to create external attributes [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Infoblox/Infoblox-Ipam%20Setup%20Guide.docx)
+            
+	    For example:
             
                 Gateway - 10.193.72.1
                 NetworkId - VM Network
