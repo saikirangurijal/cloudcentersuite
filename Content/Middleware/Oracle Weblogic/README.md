@@ -78,7 +78,7 @@ Install Docker by following the steps provided [here](https://github.com/datacen
 
 ##### Step 1 :Provide executable permissions to the above files. Navigate to the directory where all the files are placed and run the below command:
    
-      chmod 755 <your file>
+      chmod 755 <your file> or chmod 755 *
 
 Example : 
     [root@ip-172-31-27-127 weblogic]# chmod 755 weblogic_service.json serviceimport.zip logo.png weblogic_sample_app.zip Dockerfile
@@ -97,6 +97,8 @@ Example :
 
     docker run -v **[DIRECTORY WHERE DOWNLOADED FILES ARE PLACED]**:/ccsworker -w /ccsworker -it 
     **[Your IMAGE ID]** /bin/bash
+
+#### Note: Make sure there is no other zip file than app profile zip before execute docker run.
 
 Example:  
 

@@ -39,7 +39,7 @@ Step 6 : Download the Service Import script zip file from [here](https://github.
  
 Step 7: Copy the Service Import script zip file to the directory extracted above in Step 5 and Unzip the service import script bundle.
 
-Step 8 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
+Step 8 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy into the extracted folder in Step 5
  
  ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
    
@@ -69,10 +69,10 @@ Install Docker by following the steps provided [here](https://github.com/datacen
 
 ##### Step 1 :Provide executable permissions to the above files. Navigate to the directory where all the files are placed and run the below command:
    
-   chmod 755 <your file>
+   chmod 744 <"your file"> or chmod 755 *
 
 Example : 
-    [root@ip-172-31-27-127 azurelb]# chmod 755 azurelb_service.json serviceimport.zip logo.png azurelb_sample_app.zip Dockerfile
+    [root@ip-172-31-27-127 azurelb]# chmod 744 <"list of files that has been moved">
 
 ##### Step 2: Build a docker image from the same directory where the docker file and other service files are placed. A docker image tagged "ccs_service_import:v1" will be built.
 
@@ -88,6 +88,8 @@ Example :
 
     docker run -v **[DIRECTORY WHERE DOWNLOADED FILES ARE PLACED]**:/ccsworker -w /ccsworker -it 
     **[Your IMAGE ID]** /bin/bash
+
+#### Note: Make sure there is no other zip file than app profile zip before execute docker run.
 
 Example:  
 
@@ -127,6 +129,10 @@ Python script :
  - common.py: This script contains common functionalities which is required for other script files.
  - util.py: utility file
  - error_utils.py: A script that handles error functionalities
+ 
+Other Files:
+ - error_messages.json: Custom error message for load balancer
+ - params.json: JSON Template of Azure Load Balancer Configuration
 
 # External Lifecycle Actions 
 

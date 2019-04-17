@@ -76,7 +76,7 @@ Install Docker by following the steps provided [here](https://github.com/datacen
 
 ##### Step 1 : Provide executable permissions to the above files, Navigate to the directory where the files are placed and run the below command
 
-	chmod 755 <your file>
+	chmod 755 <your file> or chmod 755 *
 
 Example :
 
@@ -95,6 +95,8 @@ Example :
 ##### Step 4 : Copy the Image ID of the "ccs_service_import:v1" image, and execute the following command to run the docker image.
 
 docker run -v **[DIRECTORY WHERE DOWNLOADED FILES ARE PLACED]**:/ccsworker -w /ccsworker -it **[Your IMAGE ID]** /bin/bash
+
+#### Note: Make sure there is no other zip file than app profile zip before execute docker run.
 
 Example : 
 

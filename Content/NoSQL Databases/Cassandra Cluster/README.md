@@ -71,7 +71,7 @@ Install Docker by following the steps provided [here](https://github.com/datacen
 
 ##### Step 1 : Provide executable permissions to the above files, Navigate to the directory where the files are placed and Run the below command
 
-	chmod 755 <your file>
+	chmod 755 <your file> or chmod 755 *
 
 Example : 
 	[root@ip-172-31-27-127 cass]# chmod 755 cassandra_service.json serviceimport.zip logo.png cassandra_sample_app.zip Dockerfile
@@ -89,6 +89,8 @@ Example :
 
 	docker run -v **[HOST_DIRECTORY_WHERE_DOWNLOADED_FILES_ARE_PLACED]**:/ccsworker -w /ccsworker -it 
 	**[Your IMAGE ID]** /bin/bash
+
+#### Note: Make sure there is no other zip file than app profile zip before execute docker run.
 
 Example: 
 
