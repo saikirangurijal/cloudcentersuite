@@ -134,6 +134,8 @@ Python script :
 
 - util.py: utility file
 
+- error_messages.json : Json file contails error messages.
+
 - error_utils.py: The script that handles error functionality
 
 ## External Lifecycle Actions 
