@@ -27,10 +27,10 @@ Please refer the below link for more details.
 
 ## Download the service bundles
 
-Step 1 : Download the service bundle from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Compute/Lambda/WorkloadManager/ServiceBundle/aws_lambda.zip).
+Step 1 : Download the service bundle from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ServiceBundle/aws_lambda.zip).
 
-Step 2 : Download the application bundles to be used with application profile for dynamodb from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/dynamodb-php-app.zip) and
-         for lambda from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/lambda.zip).
+Step 2 : Download the application bundles to be used with application profile for dynamodb from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/dynamodb-php-app.zip) and
+         for lambda from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/lambda.zip).
 
 Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and application bundles from Step 2 under apps/<your_package_name> in your file repository.
           
@@ -46,15 +46,15 @@ Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and ap
                                         
 Step 4 : DynamoDB Service should be created in WorkLoad Manager for the DynamoDb Tier. How to create DynamoDB service - refer [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/tree/master/NoSQL%20Databases/DynamoDB)
  					
-Step 5 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Compute/Lambda/WorkloadManager/lambda_iu.zip)
+Step 5 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/lambda_iu.zip)
 
 Step 6 : Extract the above bundle on any linux based machine and navigate to extracted folder
 
-Step 7 : Download the Service Import script zip file from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Scripts/serviceimport.zip) 
+Step 7 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
 
 Step 8: Copy the Service Import script zip file to the directory extracted above in Step 6 and Unzip the service import script bundle.
 
-Step 9 : Download the Dockerfile from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Dockerfile) and copy to the extracted folder in Step 4
+Step 9 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 4
  
 ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
    
@@ -74,7 +74,7 @@ User can create the service by using **Import Service** functionality using scri
 
 #### Prerequisite for creating a service through service import script:
 
-Install Docker by following the steps provided [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx) on any linux based client machine.
+Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx) on any linux based client machine.
 
 **NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
 - You can check , if docker is installed , by running docker -v
