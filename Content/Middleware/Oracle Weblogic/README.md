@@ -11,7 +11,6 @@
     https://www.oracle.com/middleware/technologies/weblogic.html
  
 ## Pre-Requisites
-  - This Application Profile uses Azure ELB Service, so first need to import Azure ELB Service from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/loadbalancers/AzureELB).
   - Oracle WebLogic 12C JAR file is mandatory to run weblogic, Please make it available, by purchasing the same from its proprietor. For further details please refer [here](http://download.oracle.com/otn/nt/middleware/12c/12213/fmw_12.2.1.3.0_wls_Disk1_1of1.zip).
   
 #### CloudCenter
