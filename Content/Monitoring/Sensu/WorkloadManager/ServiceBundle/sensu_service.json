@@ -1,10 +1,10 @@
 {  
    "displayName":"Sensu Server",
-   "name":"sensunew",
+   "name":"sensu",
    "description":"Application Monitoring",
    "parentServiceId":"61",
    "costPerHour":"0.00",
-   "bundleLocation":"services/sensuservers.zip",
+   "bundleLocation":"services/sensu.zip",
    "systemService":false,
    "serviceType":"VM_AGENT",
    "logoPath":"null",
