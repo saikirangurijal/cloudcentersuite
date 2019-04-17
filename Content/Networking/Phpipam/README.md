@@ -1,5 +1,5 @@
 
-# Phpipam IPAM
+# phpIPAM IP Address Management
 ## Introduction
     The  Workload Manager platform supports integration to PHP IPAM (IP address management).
     This document provides information on Phpipam (IPAM) integration with Cisco Workload Manager.
