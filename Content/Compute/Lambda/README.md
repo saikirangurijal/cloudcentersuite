@@ -44,7 +44,7 @@ Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and ap
               
                     Example : http://<Your_REPO_Server_IP>/apps/dynamodb-php-app.zip
                                         
-Step 4 : DynamoDB Service should be created in WorkLoad Manager for the DynamoDb Tier. How to create DynamoDB service - refer [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/tree/master/NoSQL%20Databases/DynamoDB)
+Step 4 : DynamoDB Service should be created in WorkLoad Manager for the DynamoDb Tier. How to create DynamoDB service - refer [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/NoSQL%20Databases/DynamoDB)
  					
 Step 5 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/lambda_iu.zip)
 
