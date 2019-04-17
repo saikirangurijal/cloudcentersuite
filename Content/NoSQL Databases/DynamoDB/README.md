@@ -69,7 +69,7 @@ Install Docker by following the steps provided [here](https://github.com/datacen
 
 ##### Step 1 :Provide executable permissions to the above files. Navigate to the directory where all the files are placed and run the below command:
    
-    chmod 755 <your file>
+    chmod 755 <your file> or chmod 755 *
     
     
 Example : 

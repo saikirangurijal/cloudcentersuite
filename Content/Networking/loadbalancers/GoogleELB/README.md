@@ -131,7 +131,7 @@ common.py: This script contains common functionalities which is required for oth
 
 util.py: utility file.
 
-error_messages.json : Json file contails error messages.
+error_messages.json : Json file contains error messages.
 
 error_utils.py: A script that handles error functionality.
 
