@@ -127,9 +127,11 @@ google_management.py : Script will invoke the main method of google load balance
 
 common.py: This script contains common functionalities which is required for other script files.
 
-util.py: utility file
+util.py: utility file.
 
-error_utils.py: A script that handles error functionalities
+error_messages.json : Json file contails error messages.
+
+error_utils.py: A script that handles error functionality.
 
 # External Lifecycle Actions as below
     - External Action Bundle:  http://YourIP/services/gelb.zip - Location where your external action bundle zip is found.
