@@ -394,7 +394,7 @@ install() {
 
 }
 
-start() {
+centosstart() {
 
     # Sourcing again & adding rabbitmq json ( if not added)
     source /usr/local/osmosix/etc/userenv
@@ -438,8 +438,63 @@ start() {
 	
 }
 
+ubuntustart() {
 
-stop() {
+    # Sourcing again & adding rabbitmq json ( if not added)
+    source /usr/local/osmosix/etc/userenv
+
+    # Validate before starting Sensu Server
+	   # Checking whether rabbitmq json exists or not
+	   [ ! -f /etc/sensu/conf.d/rabbitmq.json ] && echo "rabbitmq.json file does not exist"
+	   #exit 127
+	   
+	   # Checking whether client json exists or not
+	   [ ! -f /etc/sensu/conf.d/client.json ] && echo "client.json file does not exist"
+	   #exit 127
+
+	   # Checking whether sensu configuration file exists or not
+	   [ ! -f /etc/yum.repos.d/sensu.repo ] && echo "sensu.repo file does not exist"
+	   #exit 127
+
+	   # Checking whether checks json exists or not
+	   [ ! -f /etc/sensu/conf.d/checks.json ] && echo "checks.json file does not exist"
+	   #exit 127
+
+	   # Checking whether uchiwa json exists or not
+	   [ ! -f /etc/sensu/uchiwa.json ] && echo "uchiwa.json file does not exist"
+	   #exit 127
+	   
+	# Starting Redis data store
+   
+	sudo service  redis start
+	
+	
+	
+	# Starting Rabbitmq message queue
+	sudo service  rabbitmq-server start
+	
+	
+	#Starting Sensu services
+	
+	sudo service sensu-server start
+	sudo service sensu-api start
+	sudo service sensu-client start
+	
+	#Starting Uchiwa Dashboard
+	sudo service  uchiwa start
+	
+}
+start() {
+	if [ -f /etc/redhat-release ]; then
+        echo "Centos\n"
+		centosstart
+	elif [ -f /etc/lsb-release ]; then
+        echo "Ubuntu\n"
+		ubuntustart
+	fi
+
+}
+centosstop() {
 
     #Stopping Redis data store
     sudo systemctl stop redis
@@ -454,8 +509,32 @@ stop() {
 	sudo systemctl stop uchiwa
 
 }
-    
+ubuntustop() {
 
+    #Stopping Redis data store
+    sudo service  redis stop
+	
+	#Stopping Rabbitmq message queue
+	sudo service  rabbitmq-server stop
+	
+	#Stopping Sensu services
+	sudo service  sensu-server stop
+	sudo service sensu-api stop
+	sudo service sensu-client stop
+	#Stopping Uchiwa Dashboard
+	sudo service  uchiwa stop
+
+}
+stop() {
+	if [ -f /etc/redhat-release ]; then
+        echo "Centos\n"
+		centosstop
+	elif [ -f /etc/lsb-release ]; then
+        echo "Ubuntu\n"
+		ubuntustop
+	fi
+
+}
 runscripts() {
     case $cmd in
         install)
