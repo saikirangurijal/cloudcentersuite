@@ -18,9 +18,9 @@
 
 # Download and configure the callouts	
 
-   Step 1 : To Install Infoblox server,follow the guide [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Networking/Infoblox/Infoblox-Ipam%20Setup%20Guide.docx)
+   Step 1 : To Install Infoblox server,follow the guide [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Infoblox/Infoblox-Ipam%20Setup%20Guide.docx)
    
-   Step 2 : Download the Callout script from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Networking/Infoblox/infoblox-ipam.zip)
+   Step 2 : Download the Callout script from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Infoblox/infoblox-ipam.zip)
    
    Step 3 : Extract the above bundle on any linux based machine and navigate to extracted folder. 
    
@@ -65,7 +65,7 @@
                     Example : http://<Your_REPO_Server_IP>/callouts/infoblox-ipam.zip 
    
    Step 10: Open the infoblox server application and add required external attributes(Gateway,NetworkId) in the network.
-            Prefer the link to know how to create external attributes [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Networking/Infoblox/Infoblox-Ipam%20Setup%20Guide.docx)
+            Refer the link to know how to create external attributes [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Infoblox/Infoblox-Ipam%20Setup%20Guide.docx)
             For example:
             
                 Gateway - 10.193.72.1
@@ -101,7 +101,7 @@ IP De-allocation :
 
 ##### Detailed steps for configuring a Callout 
 
-Step 1 : Please point to cisco cloud suite documentation for configuring callout bundles in strategy. 
+Step 1 : Please refer the documentation on how to configure call out scripts [here](https://docs.cloudcenter.cisco.com/display/SHARED/VM+Naming+and+IPAM+Strategies)
 
 Step 2 : Deploy an application.
 
