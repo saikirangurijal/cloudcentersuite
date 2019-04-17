@@ -4,6 +4,7 @@ import sys
 from util import *
 from lambda_management import LambdaManagement
 import json
+import base64
 
 try:
 
@@ -12,6 +13,9 @@ try:
     run_time = os.environ["runtimes"]
     app_package = os.environ["appPackage"]
     role_for_lambda=os.environ["roleForLambda"]
+    param1 = os.environ["CliqrCloudAccountPwd"]
+    param2 = os.environ["CliqrCloud_AccessSecretKey"]
+    region = os.environ["region"]
     dynamo_db_table_name = ""
     dependents = False
     if 'CliqrDependencies' in os.environ:
@@ -75,12 +79,18 @@ def start():
 
 
     result = {
-        "hostName": os.environ.get('appTierName', ""),
+        "hostName": dependents,
+        "ipAddress": "",
         "environment": {
-            "trigger_uuid": trigger_uuid
+            "trigger_uuid": trigger_uuid,
+	    "tableName": dynamo_db_table_name,
+	    "region": region,
+            "param1": base64.b64encode(param1),
+            "param2": base64.b64encode(param2)
         }
     }
-
+    print_log(result)	
+    print_result(json.dumps(result))
 
 
 
@@ -90,7 +100,7 @@ def stop():
 
         trigger_uuid = os.environ.get("trigger_uuid", "")
 
-        object.delete_trigger_mapping(trigger_uuid)
+        #object.delete_trigger_mapping(trigger_uuid)
 
         object.delete_role_created(role_for_lambda)
 

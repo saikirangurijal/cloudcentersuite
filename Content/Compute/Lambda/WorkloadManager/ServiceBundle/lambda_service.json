@@ -7,7 +7,7 @@
    "bundleLocation":"",
    "systemService":false,
    "serviceType":"EXTERNAL",
-   "logoPath":"custom/assets/img/serviceLogo/49d68022-1bd9-42b6-ad96-9f19695d37ac.png",
+   "logoPath":"custom/assets/img/serviceLogo/defefcf1-4cf0-4bdd-90d7-9efa225bab3c.png",
    "serviceActions":[
 
    ],
@@ -32,52 +32,6 @@
 
    ],
    "serviceParamSpecs":[
-      {
-         "paramName":"functionName",
-         "displayName":"Function Name",
-         "helpText":"",
-         "type":"string",
-         "valueConstraint":{
-            "maxLength":255,
-            "allowSpaces":true,
-            "remainingChars":255
-         },
-         "valueList":null,
-         "collectionList":null,
-         "defaultValue":"",
-         "secret":null,
-         "confirmValue":null,
-         "pathSuffixValue":null,
-         "userVisible":true,
-         "userEditable":true,
-         "optional":false,
-         "multiselectSupported":false,
-         "webserviceListParams":null,
-         "systemParam":true
-      },
-      {
-         "paramName":"functionDescription",
-         "displayName":"Function Description",
-         "helpText":"",
-         "type":"string",
-         "valueConstraint":{
-            "maxLength":255,
-            "allowSpaces":true,
-            "remainingChars":255
-         },
-         "valueList":null,
-         "collectionList":null,
-         "defaultValue":"",
-         "secret":null,
-         "confirmValue":null,
-         "pathSuffixValue":null,
-         "userVisible":true,
-         "userEditable":true,
-         "optional":true,
-         "multiselectSupported":false,
-         "webserviceListParams":null,
-         "systemParam":true
-      },
       {
          "paramName":"appPackage",
          "displayName":"Application Package ",
@@ -117,7 +71,7 @@
          "pathSuffixValue":null,
          "userVisible":true,
          "userEditable":true,
-         "optional":true,
+         "optional":false,
          "multiselectSupported":false,
          "webserviceListParams":null,
          "systemParam":true
@@ -169,9 +123,57 @@
          "systemParam":true
       },
       {
+         "paramName":"functionName",
+         "displayName":"Function Name",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      },
+      {
+         "paramName":"functionDescription",
+         "displayName":"functionDescription",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":true,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      },
+      {
          "paramName":"roleForLambda",
          "displayName":"Role For Lambda",
-         "helpText":"A role willl be created for lambda withj dynamodb access policy attached",
+         "helpText":"A role will be created for lambda with dynamodb access policy attached.",
          "type":"string",
          "valueConstraint":{
             "maxLength":255,
@@ -207,5 +209,7 @@
 
    ],
    "repositories":[
-       ]
+      
+   ]
+   
 }
