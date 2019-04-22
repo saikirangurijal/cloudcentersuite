@@ -20,7 +20,7 @@
 
    Step 1 : To Install Infoblox server,follow the guide [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Infoblox/Infoblox-Ipam%20Setup%20Guide.docx)
    
-   Step 2 : Download the Callout script from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Infoblox/infoblox-ipam.zip)
+   Step 2 : Download the Callout script from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Infoblox/InfobloxIPAM.zip)
    
    Step 3 : Extract the above bundle on any linux based machine and navigate to extracted folder. 
    
