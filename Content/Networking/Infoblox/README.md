@@ -14,7 +14,7 @@
 #### CloudCenter
 - CloudCenter 5.0.1 and above
 - Knowledge on how to use Workload Manager
-- Knowledge on IP Address management and the purpose of the IPAM tools.
+- Knowledge on Installation and Configuration of Infoblox IPAM.
 
 # Download and configure the callouts	
 
