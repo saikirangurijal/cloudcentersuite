@@ -17,7 +17,7 @@
 
    Step 1 : To Install PHP Ipam server,follow the guide [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Phpipam/Php-Ipam%20Setup%20Guide.docx)
    
-   Step 2 : Download the Callout script from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Phpipam/php-ipam.zip)
+   Step 2 : Download the Callout script from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Phpipam/PhpIPAM.zip)
    
    Step 3 :  Extract the above bundle on any linux based machine and navigate to extracted folder. 
    
