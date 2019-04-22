@@ -11,7 +11,7 @@
 #### CloudCenter
 - CloudCenter 5.0.1 and above
 - Knowledge on how to use Workload Manager
-- Knowledge on IP Address management and PHP Ipam . 	
+- Knowledge on Installation and Configuration of PHP IPAM. 	
 	
 # Download and configure the callouts
 
