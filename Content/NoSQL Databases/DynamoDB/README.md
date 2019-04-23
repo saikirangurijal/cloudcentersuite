@@ -6,7 +6,7 @@
     
     DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. 
     
-    The service which we have created will support Dynamo DB to create tables that can store and retrieve any amount of data, and serve any level of request traffic.
+    The service which we have created will support Dynamo DB to create tables or can use existing table by giving table name in deployment parameters that can store and retrieve any amount of data, and serve any level of request traffic.
     
     Please refer the below link for more details.
     https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html
@@ -145,9 +145,15 @@ External Lifecycle Actions:
 
 | Parameter Name	| Type	 | Description | Allowed Value |Default Value |
 | ------ | ------ | ------ |------ | ------ |
-| tableName |	string | Table name to be configured for the service.	 | User defined value | testdb |
 | partitionKey | string| Primary key for the table | User defined value | id |
 | partitionAttrType | list| Type of attribute. For more details on the type of attribute, check DynamoDB documentation	 | Number,String,Binary | String |
 | streamEnabled | list| Stream enable for the table | True,False | True |
 | streamViewType | list | Stream View Type | NEW_IMAGE,OLD_IMAGE,NEW_AND_OLD_IMAGES,KEYS_ONLY | NEW_AND_OLD_IMAGES |
+
+## Deployment parameters
+
+
+| Parameter Name	| Type	 | Description | Allowed Value |Default Value |
+| ------ | ------ | ------ |------ | ------ |
+| tableName |	string | Table name to be configured for the service.	 | User defined value | users |
 

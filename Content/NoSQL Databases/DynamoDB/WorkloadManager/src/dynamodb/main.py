@@ -4,7 +4,9 @@ import time
 import os
 import sys
 import json
-from util import print_error,print_log,print_result,write_error
+from util import print_error, print_log, print_result, write_error
+
+
 # External Life Cycle Action
 # Start - Create Load Balancer and attach VMS
 
@@ -17,15 +19,32 @@ def aws_conncetion(env_data):
 
     try:
         # boto3 client configuration
-        client = boto3.client('dynamodb',aws_access_key_id=env_data["ACCESS_KEY"],aws_secret_access_key=env_data["SECRET_KEY"],region_name=env_data["region"])
+        client = boto3.client('dynamodb', aws_access_key_id=env_data["ACCESS_KEY"],
+                              aws_secret_access_key=env_data["SECRET_KEY"], region_name=env_data["region"])
         # boto3 resource configuration
-        dynamodb = boto3.resource('dynamodb',aws_access_key_id=env_data["ACCESS_KEY"],aws_secret_access_key=env_data["SECRET_KEY"],region_name=env_data["region"])
-        return dynamodb
-
+        dynamodb = boto3.resource('dynamodb', aws_access_key_id=env_data["ACCESS_KEY"],
+                                  aws_secret_access_key=env_data["SECRET_KEY"], region_name=env_data["region"])
+        conn  = {
+            'dynamodb': dynamodb,
+            'client': client
+        }
+        return conn
     except Exception as err:
-        #write_error(err)
+        # write_error(err)
         print_error(err)
         sys.exit(127)
+
+
+###
+def check_table_exists(client, tableName):
+    try:
+        response = client.describe_table(TableName=tableName)
+        print("Table Exists")
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
 
 ### Start Functionality #####
 def start(env_data, dynamodb):
@@ -39,10 +58,10 @@ def start(env_data, dynamodb):
         table = dynamodb.create_table(
             TableName=env_data["tableName"],
             KeySchema=[
-				{'AttributeName': env_data["Partitionkey"], 'KeyType': 'HASH'}
+                {'AttributeName': env_data["Partitionkey"], 'KeyType': 'HASH'}
             ],
             AttributeDefinitions=[
-				{'AttributeName': env_data["Partitionkey"], 'AttributeType': env_data["AttributeType"]}
+                {'AttributeName': env_data["Partitionkey"], 'AttributeType': env_data["AttributeType"]}
             ],
             ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5},
             StreamSpecification={
@@ -63,19 +82,15 @@ def start(env_data, dynamodb):
             }
         )
         print_log("Items added in table.")
-        response = {
-            'tableName': env_data['tableName'],
-            'region': env_data['region'],
-            'param1': base64.b64encode(env_data['ACCESS_KEY']),
-            'param2': base64.b64encode(env_data['SECRET_KEY']),
-
-        }
-
-        return response
+        print_log("Table and Items Added Successfully!")
+        return True
+    except dynamodb.exceptions.ResourceInUseException as e:
+        return True
     except Exception as err:
         print_error(err)
         sys.exit(127)
-		
+
+
 def stop(env_data, dynamodb):
     print_log('Deleting table')
     try:
@@ -85,7 +100,6 @@ def stop(env_data, dynamodb):
         # write_error(err)
         print_error(err)
         sys.exit(127)
-
 
 
 def main(cmd):
@@ -101,28 +115,42 @@ def main(cmd):
         # get environmantal data and stored in dict
         print_log("Getting environment variables")
         env_data = {}
-        env_data["tableName"] = os.environ["tableName"]
+        env_data["tableName"] =  os.environ["tableName"]
         env_data["ACCESS_KEY"] = os.environ["CliqrCloudAccountPwd"]
         env_data["SECRET_KEY"] = os.environ["CliqrCloud_AccessSecretKey"]
         env_data["region"] = os.environ["region"]
         print_log("Start AWS Connection")
-        dynamodb = aws_conncetion(env_data)
+        aws_conn = aws_conncetion(env_data)
+        dynamodb = aws_conn['dynamodb']
+        client = aws_conn['client']
         print_log("AWS Connected")
         dependents = os.environ.get('CliqrDependencies', "")
         if arguments in "start":
-            env_data["Partitionkey"] = os.environ["partitionKey"]
-            env_data["AttributeType"] = os.environ["partitionAttrType"][0]
-            env_data["StreamEnabled"] = bool(os.environ["streamEnabled"])
-            env_data["StreamViewType"] = os.environ["streamViewType"]
-            env_data["value"] = 'testuser' if env_data["AttributeType"] == 'S' else 1
-            response = start(env_data, dynamodb)
-            print_log("Table and Items Added Successfully!")
-            json_result = {
-                "hostName": dependents,
-                "ipAddress": "",
-                "environment": response
-            }
-            print_result(json.dumps(json_result))
+            table_exists = check_table_exists(client, env_data["tableName"])
+            if table_exists == False:
+                env_data["Partitionkey"] = os.environ["partitionKey"]
+                env_data["AttributeType"] = os.environ["partitionAttrType"][0]
+                env_data["StreamEnabled"] = bool(os.environ["streamEnabled"])
+                env_data["StreamViewType"] = os.environ["streamViewType"]
+                env_data["value"] = 'testuser' if env_data["AttributeType"] == 'S' else 1
+                response = start(env_data, dynamodb)
+            else:
+                response = True
+
+            if response == True:
+                response = {
+                    'tableName': env_data['tableName'],
+                    'region': env_data['region'],
+                    'param1': base64.b64encode(env_data['ACCESS_KEY']),
+                    'param2': base64.b64encode(env_data['SECRET_KEY']),
+
+                }
+                json_result = {
+                    "hostName": dependents,
+                    "ipAddress": "",
+                    "environment": response
+                }
+                print_result(json.dumps(json_result))
         elif arguments in "stop":
             print_log("Deleting Table...")
             stop(env_data, dynamodb)
@@ -135,3 +163,5 @@ def main(cmd):
         f.close()
         print_error("Unable to get environmental variables")
         sys.exit(127)
+
+
