@@ -24,7 +24,7 @@
    
    Step 3 : Extract the above bundle on any linux based machine and navigate to extracted folder. 
    
-   Step 4 : Open Ipam folder, Open infoipam.py file and change the below settings based on infoblox ipam setup configuration settings.
+   Step 4 : Open Ipam folder, Open config.json file and change the below settings based on infoblox ipam setup configuration settings.
   
              - "wapi_version" : Infoblox Version
                      For example: 2.3.1
@@ -41,8 +41,10 @@
              - "dns_server_list": Set the Dns Server List.
              - "exclude_from_ipam" : To Exclude these given networks from ipam. Must match the networkId
                    For example: ['apps-201', 'apps-202', 'VM Network']
+   
+   Step 5 : Open  ipamdealloc folder.   
             
-   Step 4 : Open deallocinfoipam.py file in ipamdealloc folder and change the below settings based on infoblox ipam setup configuration settings,
+   Step 6 : Open config.json file and change the below settings based on infoblox ipam setup configuration settings,
    
              - "wapi_version" : Infoblox Version
                      For example: 2.3.1
@@ -52,11 +54,11 @@
              - "ib_user": Username to login in to infoblox ipam application. By default 'admin' is the username.
              - "ib_pass": Password to login in to infoblox application. By default 'infoblox' is the password.
              
-   Step 6 : Provide executable permissions to the extracted files. Navigate to the directory where all the files are placed and run the below command:
+   Step 7 : Provide executable permissions to the extracted files. Navigate to the directory where all the files are placed and run the below command:
    
               chmod 755 <your file>
               
-   Step 7 : Zip the folder with out creating a new folder for all the extracted folders.
+   Step 8 : Zip the folder with out creating a new folder for all the extracted folders.
    
    Step 9 : Place the modified callout bundle in callouts/<calloutbundle.zip>
    
@@ -64,15 +66,14 @@
                     
                     Example : http://<Your_REPO_Server_IP>/callouts/infoblox-ipam.zip 
    
-   Step 10: Open the infoblox server application and add required external attributes(Gateway,NetworkId) in the network. 
-   Refer the link on how to create external attributes [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Infoblox/Infoblox-Ipam%20Setup%20Guide.docx)
-            
-	    For example:
+   Step 10: Open the infoblox server application and add required external attributes(Gateway,NetworkId) in the network.
+            Prefer the link to know how to create external attributes [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Infoblox/Infoblox-Ipam%20Setup%20Guide.docx)
+            For example:
             
                 Gateway - 10.193.72.1
                 NetworkId - VM Network
   
-   Step 11: Configure the external attribute values by modifying each network.
+   Step 11: Configure the external attribute values by modifying each network in infoblox ipam application.
 
 ## Callout Script Bundle
 
@@ -92,7 +93,7 @@ IP De-allocation :
 
 | Action | Value |
 |  ------ |------ |
-| Strategy Bundle|callouts/infoblox-ipam.zip
+| Strategy Bundle|callouts/InfobloxIPAM.zip
 | Instance Naming Strategy|Hostname callout
 | Custom VM Name|vmnaming/run.sh
 | Instance Ipam Strategy|Ipam Callout
@@ -102,8 +103,10 @@ IP De-allocation :
 
 ##### Detailed steps for configuring a Callout 
 
-Step 1 : Please refer the documentation on how to configure call out scripts [here](https://docs.cloudcenter.cisco.com/display/SHARED/VM+Naming+and+IPAM+Strategies)
-
+Step 1 : Please refer to cisco workload manager documentation for configuring callout bundles in strategy
+           [here](https://docs.cloudcenter.cisco.com/display/SHARED/VM+Naming+and+IPAM+Strategies).
+           
+           
 Step 2 : Deploy an application.
 
 

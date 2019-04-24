@@ -1,11 +1,10 @@
 
-# phpIPAM IP Address Management
+# Phpipam IPAM
 ## Introduction
     The  Workload Manager platform supports integration to PHP IPAM (IP address management).
     This document provides information on Phpipam (IPAM) integration with Cisco Workload Manager.
 
-    Phpipam is an IP address and DNS management tool that is commonly deployed in large IT departments.
-    Often,it is used in conjunction with Vmware or other private clouds for ip allocationa and de allocation.
+    Phpipam is an IP address and DNS management tool that is commonly deployed in large IT departments.Often,it is used in conjunction with Vmware or other private clouds for ip allocationa and de allocation.
 
 ## Pre-Requisites
 #### CloudCenter
@@ -15,9 +14,9 @@
 	
 # Download and configure the callouts
 
-   Step 1 : To Install PHP Ipam server,follow the guide [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Phpipam/Php-Ipam%20Setup%20Guide.docx)
+   Step 1 : To Install Phpipam server,follow the guide [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Networking/Phpipam/Php-Ipam%20Setup%20Guide.docx)
    
-   Step 2 : Download the Callout script from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Phpipam/PhpIPAM.zip)
+   Step 2 : Download the Callout script from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Networking/Phpipam/PhpIPAM.zip)
    
    Step 3 :  Extract the above bundle on any linux based machine and navigate to extracted folder. 
    
@@ -61,15 +60,14 @@
                     
                     Example : http://<Your_REPO_Server_IP>/callouts/php-ipam.zip 
    
-   Step 10 : Open the phpipam server application and add two required subnet custom fields(custom_Gateway,custom_NetworkId).
-   Refer the link to create the custom fields [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Phpipam/Php-Ipam%20Setup%20Guide.docx)
-             
-	     For example:
+   Step 10 : Open the phpipam server application and add two required subnet custom fields(Gateway,NetworkId).
+             Prefer the link to create the custom fields [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Networking/Phpipam/Php-Ipam%20Setup%20Guide.docx)
+             For example:
              
                 Gateway - 10.193.72.1
                 NetworkId - VM Network
                               
-   Step 11 : Configure the custom field values by modifying each subnet.
+   Step 11 : Configure the custom field values by modifying each subnet in php ipam application.
    
 ## Callout Script Bundle
 
@@ -89,7 +87,7 @@ IP De-allocation :
 
 | Action | Value |
 |  ------ |------ |
-| Strategy Bundle|callouts/php-ipam.zip
+| Strategy Bundle|callouts/PhpIPAM.zip
 | Instance Naming Strategy|Hostname callout
 | Custom VM Name|vmnaming/run.sh
 | Instance Ipam Strategy|Ipam Callout
@@ -97,10 +95,10 @@ IP De-allocation :
 | Ipam dealloc rule |ipamdealloc/run.sh
 
 
-##### Detailed steps for configuring Callout 
+##### Detailed steps for configuring a Callout 
 
-Please follow the following procedure IPAM callout:
-
-Step 1 : Please refer the documentation on how to configure call out scripts [here](https://docs.cloudcenter.cisco.com/display/SHARED/VM+Naming+and+IPAM+Strategies) 
-
+Step 1 : Please refer to cisco workload manager documentation for configuring callout bundles in strategy
+           [here](https://docs.cloudcenter.cisco.com/display/SHARED/VM+Naming+and+IPAM+Strategies).
+           
+           
 Step 2 : Deploy an application.
