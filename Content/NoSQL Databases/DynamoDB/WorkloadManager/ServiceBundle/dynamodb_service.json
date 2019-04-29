@@ -53,7 +53,8 @@
          "optional":false,
          "multiselectSupported":false,
          "webserviceListParams":null,
-         "systemParam":true
+         "systemParam":false,
+         "deploymentParam":true
       },
       {  
          "paramName":"partitionKey",
