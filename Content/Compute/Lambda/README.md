@@ -65,7 +65,7 @@ Step 9 : Download the Dockerfile from [here](https://github.com/datacenter/cloud
 - main.py file
 - serviceimport.sh
 - lambda logo (named as logo.png)
-- Modelled application profile(named as lambda_app_profile.zip)
+- Modelled application profile(named as lambda_sample_app.zip)
 - Dockerfile (named as Dockerfile) , **Only needed if you wish to create a Docker image for the first time**
 
 ## How to Create a Service in Cisco Workload Manager
@@ -87,7 +87,7 @@ Install Docker by following the steps provided [here](https://github.com/datacen
    chmod 755 <your file> or chmod 755 * 
 
 Example : 
-    [root@ip-172-31-28-215 lambda]# chmod 755 lambda_service.json serviceimport.zip logo.png lambda_app_profile.zip Dockerfile
+    [root@ip-172-31-28-215 lambda]# chmod 755 lambda_service.json serviceimport.zip logo.png lambda_sample_app.zip Dockerfile
 
 ##### Step 2: Build a docker image from the same directory where the docker file and other service files are placed. A docker image tagged "ccs_service_import:v1" will be built.
 
