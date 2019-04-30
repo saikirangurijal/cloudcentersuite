@@ -20,13 +20,19 @@
    
  Step 1 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Backend%20Cache/Memcached%20Container/WorkloadManager/memcached_cont_iu.zip).
  
- Step 2 : Extract the above bundle on any linux based machine and navigate to extracted folder.
+ step 2 : Download the application bundle to be used with application profile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Backend%20Cache/Memcached%20Container/WorkloadManager/ApplicationProfiles/artifacts/memcache-app.zip) and Place apps/<your_package_name> in your file repository.
  
- Step 3 : Download the service import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip)
+		 - Application Bundle under apps/<your_package_name>
+        
+                Example : http://<Your_REPO_Server_IP>/apps/memcache-app.zip
+ 
+ Step 3 : Extract the bundle on any linux based machine and navigate to extracted folder.
+ 
+ Step 4 : Download the service import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip)
    
- Step 4 : Copy the Service Import script zip file to the directory extracted above in Step 2 and Unzip the service import script bundle.
+ Step 5 : Copy the Service Import script zip file to the directory extracted above in Step 3 and Unzip the service import script bundle.
 
- Step 5 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 2
+ Step 6 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 3
  
  ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
    
@@ -56,7 +62,7 @@ Install Docker by following the steps provided [here](https://github.com/datacen
 
 ##### Step 1 : Provide executable permissions to the above files, Navigate to the directory where the files are placed and Run the below command
 
-	chmod 755 <your file> or chmod 755 *
+	chmod 755 <your file>
 
 Example : 
 	[root@ip-172-31-27-127 mem]# chmod 755 memcached_cont_service.json serviceimport.zip logo.png memcached_cont_sample_app.zip Dockerfile
@@ -75,8 +81,6 @@ Example :
 
 	docker run -v **[HOST_DIRECTORY_WHERE_DOWNLOADED_FILES_ARE_PLACED]**:/ccsworker -w /ccsworker -it 
 	**[Your IMAGE ID]** /bin/bash
-
-#### Note: Make sure there is no other zip file than app profile zip before execute docker run.
 
 Example: 
 
@@ -100,6 +104,7 @@ Enter the Tenant ID  : YourTenant
 	
 If service creation is successful, You will be presented with a message **"Memcached Container Service imported successfully. Imported Application Profile Successfully"**
 
+**Note : Make Sure your deployment shoud be in hybrid cloud
  
 # Minimum Resource Specifications
 
