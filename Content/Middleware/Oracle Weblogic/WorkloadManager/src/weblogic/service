@@ -86,14 +86,14 @@ preInstall() {
     fi
 
     # SWAP Space 
-    if [ $(free -h | grep "Swap" | grep "4.0" | wc -l) -eq 1 ]
+    if [ $(free --bytes | awk '/^Swap:/ { print $2 }') -gt 4294963119 ]
     then
        log "[INSTALL] Enough SWAP Space available. PASS"
     else
 	   ./create-swapspace.sh
     fi
 
-    if [ $(free -h | grep "Swap" | grep "4.0" | wc -l) -eq 1 ]
+    if [ $(free --bytes | awk '/^Swap:/ { print $2 }') -gt 4294963119 ]
     then
        log "[INSTALL] Enough SWAP Space available. PASS"
     else

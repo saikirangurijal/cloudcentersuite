@@ -14,6 +14,7 @@ Please refer the below link for more details.
 #### CloudCenter
 - CloudCenter 5.0.1 and above
 - Knowledge on how to use Workload Manager  
+- Azure needs access to create load balancer through REST API, please refer for more details [here](https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal).
 
 ## Download the service bundles
 
