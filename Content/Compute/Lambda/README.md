@@ -29,6 +29,7 @@ This application generates an email on such events. user can configure your emai
 ## Download the service bundles
 
 Step 1 : Download the service bundle from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ServiceBundle/aws_lambda.zip)
+
 Step 2 : Download the application bundles to be used with application profile for dynamodb from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/dynamodb-php-app.zip) and
          for lambda from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/lambda.zip).
 
