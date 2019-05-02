@@ -10,12 +10,14 @@
 	For your reference : https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
 	
 ## Before you start	
-Before importing the lambda service, user need to import dynamodb service in workload manager for the dynamo db table creation. 
+Before importing the lambda service, user must import dynamodb service in workload manager 'cause Lambda function will be invoked on dynamo db table events (Any CRUD operation).
       
-Refer Readme on how to import Dynamo DB Service from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/blob/master/NoSQL%20Databases/DynamoDB/README.md).
+Refer Readme on how to import Dynamo DB Service from [here](https://github.com/datacenter/cloudcentersuite/blob/master/Content/NoSQL%20Databases/DynamoDB/README.md).
       
-The lambda service will create a lambda function with your uploaded Deployment Package and triggers on dynamo db table change event. 
-User need to upload the appPackage that consists of init file with proper handler of Lambda function.
+The lambda service will create a lambda function with provided name in AWS.
+when Lambda function creates , a trigger point is created with Dynamo DB Streams. As a result of it, Any change in the stream will invoke the lambda function.
+
+This application generates an email on such events. user can configure your email in application bundle (lambda.zip)
 	
 ## Pre-Requisites
 #### CloudCenter
@@ -26,10 +28,9 @@ User need to upload the appPackage that consists of init file with proper handle
 
 ## Download the service bundles
 
-Step 1 : Download the service bundle from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Compute/Lambda/WorkloadManager/ServiceBundle/aws_lambda.zip).
-
-Step 2 : Download the application bundles to be used with application profile for dynamodb from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/dynamodb-php-app.zip) and
-         for lambda from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/lambda.zip).
+Step 1 : Download the service bundle from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ServiceBundle/aws_lambda.zip)
+Step 2 : Download the application bundles to be used with application profile for dynamodb from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/dynamodb-php-app.zip) and
+         for lambda from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/lambda.zip).
 
 Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and application bundles from Step 2 under apps/<your_package_name> in your file repository.
           
@@ -44,15 +45,15 @@ Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and ap
                     Example : http://<Your_REPO_Server_IP>/apps/dynamodb-php-app.zip
                                         
 		
-Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Compute/Lambda/WorkloadManager/lambda_iu.zip)
+Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/lambda_iu.zip)
 
 Step 5 : Extract the above bundle on any linux based machine and navigate to extracted folder
 
-Step 6 : Download the Service Import script zip file from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Scripts/serviceimport.zip) 
+Step 6 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
 
 Step 7: Copy the Service Import script zip file to the directory extracted above in Step 5 and Unzip the service import script bundle.
 
-Step 8 : Download the Dockerfile from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
+Step 8 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
  
 ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
    
@@ -63,7 +64,7 @@ Step 8 : Download the Dockerfile from [here](https://wwwin-github.cisco.com/Clou
 - main.py file
 - serviceimport.sh
 - lambda logo (named as logo.png)
-- Modelled application profile(named as lambda_app_profile.zip)
+- Modelled application profile(named as lambda_sample_app.zip)
 - Dockerfile (named as Dockerfile) , **Only needed if you wish to create a Docker image for the first time**
 
 ## How to Create a Service in Cisco Workload Manager
@@ -72,7 +73,7 @@ User can create the service by using **Import Service** functionality using scri
 
 #### Prerequisite for creating a service through service import script:
 
-Install Docker by following the steps provided [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx) on any linux based client machine.
+Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx) on any linux based client machine.
 
 **NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
 - You can check , if docker is installed , by running docker -v
@@ -85,7 +86,7 @@ Install Docker by following the steps provided [here](https://wwwin-github.cisco
    chmod 755 <your file>
 
 Example : 
-    [root@ip-172-31-28-215 lambda]# chmod 755 lambda_service.json serviceimport.zip logo.png lambda_app_profile.zip Dockerfile
+    [root@ip-172-31-28-215 lambda]# chmod 755 lambda_service.json serviceimport.zip logo.png lambda_sample_app.zip Dockerfile
 
 ##### Step 2: Build a docker image from the same directory where the docker file and other service files are placed. A docker image tagged "ccs_service_import:v1" will be built.
 
@@ -156,7 +157,7 @@ Python script :
 # Deployment Parameters:
 | Parameter Name| Type	 | Mandatory |Description | Allowed Value |Default Value |
 | ------ | ------ | ------ | ------ |------ | ------ |
-| roleForLambda |	String | Yes | A role will be created for lambda with dynamodb access policy attached.|  |   |
-| functionName |	String | Yes | Name of the lambda function to be created. |  |   |
-| functionDescription | String | No	| Description for the lambda function. |  | |
+| roleForLambda |	String | Yes | A role will be created for lambda with dynamodb access policy attached.|  | RoleForLambda   |
+| functionName |	String | Yes | Name of the lambda function to be created. |  | TestLambdaFunction   |
+| functionDescription | String | No	| Description for the lambda function. |  | Sample lambda function |
 
