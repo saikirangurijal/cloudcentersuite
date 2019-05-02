@@ -130,7 +130,7 @@ Python script :
 # Deployment Parameters:
 | Parameter Name| Type	 | Mandatory |Description | Allowed Value |Default Value |
 | ------ | ------ | ------ | ------ |------ | ------ |
-| DomainName |	String | Yes | Mention Existing Registered Domain Name(<DomainName>.com) in AWS,If DomainName is not there , click[here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Route53domain/README.md) to Refer another service for Domain creation |  |   |
+| DomainName |	String | Yes | Mention Existing Registered Domain Name(DomainName.com) in AWS,If DomainName is not there , click [here](https://github.com/datacenter/cloudcentersuite/blob/master/Content/Networking/Route53domain/README.md) to Refer another service for Domain creation |  |   |
 | subDomainName | String | Yes	| Mention Unique Sub Domain Name for accessing your application |  | |
 | IpAddress | String |	Yes |IpAddress of your web application or your website | | |
 | healthCheckName | String | Yes | Mention unique healthcheck name for creating healthcheck |  | |
