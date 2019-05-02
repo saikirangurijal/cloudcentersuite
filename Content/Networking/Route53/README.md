@@ -16,7 +16,7 @@ Please refer the below link for more details.
 
 Step 1 : Download the service bundle from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Route53/WorkloadManager/ServiceBundle/awsroute53.zip).
 
-Step 2 : Place the service bundle from Step 1 under services/<bundle.zip> and application bundle in your file repository.
+Step 2 : Place the service bundle from Step 1 under services/<bundle.zip> in your file repository.
           
 
  - Service Bundle under services/<bundle.zip>
@@ -130,7 +130,7 @@ Python script :
 # Deployment Parameters:
 | Parameter Name| Type	 | Mandatory |Description | Allowed Value |Default Value |
 | ------ | ------ | ------ | ------ |------ | ------ |
-| DomainName |	String | Yes | Mention Existing Registered Domain Name in AWS,If DomainName is not there , click[here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/blob/master/Networking/Route53domain/README.md) to Refer another service for Domain creation |  |   |
+| DomainName |	String | Yes | Mention Existing Registered Domain Name(<DomainName>.com) in AWS,If DomainName is not there , click[here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Route53domain/README.md) to Refer another service for Domain creation |  |   |
 | subDomainName | String | Yes	| Mention Unique Sub Domain Name for accessing your application |  | |
 | IpAddress | String |	Yes |IpAddress of your web application or your website | | |
 | healthCheckName | String | Yes | Mention unique healthcheck name for creating healthcheck |  | |
