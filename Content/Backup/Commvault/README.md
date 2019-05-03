@@ -17,7 +17,7 @@
     
 ## Pre-Requisites
  - Commserve (Commvault's server component) should be up and running with minimum configuration. For details on Minimum configuration, System requirement and Installation setup, Please refer [here](https://github.com/datacenter/cloudcentersuite/blob/master/Content/Backup/Commvault/Commvault_Installation_And_SetUp_Manual.docx). 
- - To install CommServe agent in client VMs as part of app profile deployment, Download the Commvault Linux agent from [here](https://cloud.commvault.com/webconsole/downloadcenter/packageDetails.do?packageId=11968&status=0&type=details). Place it in a file repository.Register in commvault.com in order to download. 
+ - To install CommServe agent in client VMs as part of app profile deployment, Download the Commvault Linux agent from [here](https://cloud.commvault.com/webconsole/downloadcenter/packageDetails.do?packageId=11968&status=0&type=details). Place it in a public access URL(/linux_pkg.tar). Register in commvault.com in order to download. 
  - For File Backup, App Profile should contain any VM with Agent Service (Sample App profile provided).
  - For DB Backup, App Profile should contain VM with MYSQL Service (Sample App profile provided).
 
@@ -104,7 +104,7 @@ S.No    | Resource    |  Value   | Remarks
 
 Parameter Name        | Type    |  Description  | Allowed Value  | Default Value       |  Mandatory  
 ----                 | ----------| ---------| ------- | ----- | ----- 
-commvaultCustomPackageURL    |String    |   CommVault Client Custom Package TAR File to Install in VMs | | commvault/linux_pkg.tar| Yes
+commvaultCustomPackageURL    |String    |   CommVault Client Custom Package TAR File to Install in VMs | | http://xxxx/linux_pkg.tar| Yes
 commserveName | String |Commvault Server Host Name / Server Name | | | Yes
 commvaultServerIp    |String    |   commvault account host name | | | Yes
 commvaultUserName   | String    |   commvault account user name |  | | Yes      
@@ -114,13 +114,12 @@ backupType   | List  |   File System , Database  | | | Yes
 dbName   | String  |   Database Name to be backed up | | |No
 path   | String  |   File Path to be backed up || | No
 authcodevalue   | String  |   Generated Auth Code while downloading Commvault Bundle if exists | | | No
-cliqrIgnoreAppFailure   | String  |    | |true| Yes
 
 # Global Parameters for Commvault Restore
 
 Parameter Name        | Type    |  Description  | Allowed Value  | Default Value       |    Mandatory
 ----                 | ----------| ---------| ------- | ----- | ----- 
-commvaultCustomPackageURL    |String    |   CommVault Client Custom Package TAR File to Install in VMs | | commvault/linux_pkg.tar|  Yes
+commvaultCustomPackageURL    |String    |   CommVault Client Custom Package TAR File to Install in VMs  | | http://xxxx/linux_pkg.tar|  Yes
 commserveName | String |Commvault Server Host Name / Server Name | | |  Yes
 commvaultServerIp    |String    |   commvault account host name |  | |   Yes
 commvaultUserName   | String    |   commvault account user name |    | |     Yes    
@@ -128,7 +127,6 @@ commvaultPassword   | Password  |   commvault account password |  | |   Yes
 commCellId  | Number  |   CommCell ID | | 2 |  Yes
 restoreType   | List  |   File System , Database  |  | |   Yes
 sourceClient   | String  |   From Which The Backup set would be retrieved for Restore  | | |  Yes
-sourceInstance   | String  |   From this Instance from Source Client, Backup date would be retrieved for Restore action  |   | | Yes
 destinationClient   | String  |   To where Backedup Files/Databases to be Restored. Whether it is same Client or Different client  | |current-system|  No
 dbName   | String  |   Database Name to be backed up | | |  No
 path   | String  |   File Path to be backed up | | |  No
