@@ -1,0 +1,123 @@
+{
+   "displayName":"POSTGRESQL",
+   "name":"psqlserver",
+   "description":"",
+   "parentServiceId":"40",
+   "costPerHour":"0.00",
+   "bundleLocation":"services/psqlserver.zip",
+   "systemService":false,
+   "serviceType":"VM_AGENT",
+   "logoPath":"custom/assets/img/serviceLogo/0b42ea36-b4d3-453c-8469-f1fcc6e7872c.png",
+   "serviceActions":[
+      {
+         "actionName":"INSTALL",
+         "actionType":"SCRIPT",
+         "actionValue":"service install",
+         "value":"service install",
+         "key":"INSTALL"
+      },
+      {
+         "actionName":"CONFIGURE",
+         "actionType":"SCRIPT",
+         "actionValue":"service configure",
+         "value":"service configure",
+         "key":"CONFIGURE"
+      },
+      {
+         "actionName":"STOP",
+         "actionType":"SCRIPT",
+         "actionValue":"service stop",
+         "value":"service stop",
+         "key":"STOP"
+      },
+      {
+         "actionName":"RESTART",
+         "actionType":"SCRIPT",
+         "actionValue":"service restart",
+         "value":"service restart",
+         "key":"RESTART"
+      }
+   ],
+   "externalBundleLocation":"null",
+   "externalActions":[
+
+   ],
+   "actions":[
+
+   ],
+   "serviceParamSpecs":[
+      {
+         "paramName":"UserName",
+         "displayName":"UserName",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"testuser",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {
+         "paramName":"SqlPassword",
+         "displayName":"SqlPassword",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"123456",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      }
+   ],
+   "servicePorts":[
+      {
+         "fromPort":"5432",
+         "toPort":"5432",
+         "protocol":"TCP"
+      }
+   ],
+   "images":[
+      {
+         "id":"4"
+      },
+      {
+         "id":"21"
+      },
+      {
+         "id":"26"
+      }
+   ],
+   "defaultImageId":"21",
+   "containerImages":[
+
+   ],
+   "containerPorts":[
+
+   ],
+   "repositories":[]
+}
+
