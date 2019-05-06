@@ -19,6 +19,7 @@
 - CloudCenter 5.0.1 and above
 - Knowledge on how to use Workload Manager
 - Supported OS: Ubuntu16
+- Supported clouds: Google and Azure.
 
 
 ## Download the service bundles
