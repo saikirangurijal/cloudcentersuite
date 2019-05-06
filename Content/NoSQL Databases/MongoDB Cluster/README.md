@@ -168,5 +168,6 @@ Agent Lifecycle Actions:
 | minClusterSize | number|Minimum Number of Nodes | 2 | 2 |
 | maxClusterSize | number| Maximum Number of Nodes | 3 | 3 |
 | dbName | string| Database Name | mongodb-cluster | mongodb-cluster |
-| dbUsername | string| Database Username | mongo | mongo |
+| dbUsername | string| Database Username | mongo | mongo 
+| dbPassword | string| Database Password | mongocluster | mongocluster |
 
