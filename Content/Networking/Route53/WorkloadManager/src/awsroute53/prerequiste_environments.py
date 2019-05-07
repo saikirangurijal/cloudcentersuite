@@ -23,7 +23,16 @@ try:
     #Getting inputs from user for creaating sub domain and health check from environment variable.
     domainName = os.environ["DomainName"]
     subDomainName = os.environ["subDomainName"]
-    IpAddress = os.environ["IpAddress"]
+    dependents = os.environ.get('CliqrDependencies', "")
+
+    if os.environ["IpAddress"]:
+        IpAddress = os.environ["IpAddress"]
+    else:
+        if len(dependents) > 0:
+            IpAddress = str(os.environ['CliqrTier_' + dependents + '_PUBLIC_IP'])
+            print("my instances Ip address is : ===================>{}".format(IpAddress))
+
+
     healthCheckport = os.environ["healthCheckport"]
     healthCheckpath = os.environ["healthCheckpath"]
 
@@ -98,7 +107,7 @@ def delete_record_set_json():
     return json_data
 
 def create_healthcheck():
-    json_data["HealthCheckConfig"]["IPAddress"]= IpAddress
+    json_data["HealthCheckConfig"]["IPAddress"]= str(IpAddress)
     print(type(healthCheckport))
     json_data["HealthCheckConfig"]["Port"]= int(healthCheckport)
     json_data["HealthCheckConfig"]["Type"]= "HTTP"

@@ -147,6 +147,12 @@ class route53management():
             domainName = os.environ["DomainName"]
             subDomainName = os.environ["subDomainName"]
             print_log("Access your Application from this {}".format(subDomainName+'.'+domainName))
+
+            result = {"hostName": "Route53"}
+            result['ipAddress'] = str(subDomainName+'.'+domainName)
+            print("Result is :", result)
+            print_result(json.dumps(result))
+
         except Exception as er:
             print_error(er)
             sys.exit(127)

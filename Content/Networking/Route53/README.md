@@ -16,22 +16,26 @@ Please refer the below link for more details.
 
 Step 1 : Download the service bundle from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Route53/WorkloadManager/ServiceBundle/awsroute53.zip).
 
-Step 2 : Place the service bundle from Step 1 under services/<bundle.zip> in your file repository.
-          
+Step 2 : Download the application bundle to be used with application profile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Route53/WorkloadManager/ApplicationProfiles/artifacts/petclinic.war)
 
+Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and step 2 application bundle in your file repository.
+          
  - Service Bundle under services/<bundle.zip>
                     
                     Example : http://<Your_REPO_Server_IP>/services/awsroute53.zip
+- Application Bundle under apps/<your_package_name>
+        
+                Example : http://<Your_REPO_Server_IP>/apps/petclinic.war
 					
-Step 3 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Route53/WorkloadManager/route53_iu.zip)
+Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/Route53/WorkloadManager/route53_iu.zip)
 
-Step 4: Extract the above bundle on any linux based machine and navigate to extracted folder
+Step 5: Extract the above bundle on any linux based machine and navigate to extracted folder
 
-Step 5 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
+Step 6 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
  
-Step 6: Copy the Service Import script zip file to the directory extracted above in Step 5 and Unzip the service import script bundle.
+Step 7: Copy the Service Import script zip file to the directory extracted above in Step 6 and Unzip the service import script bundle.
 
-Step 7 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 4
+Step 8 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
  
 ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
    
@@ -61,7 +65,7 @@ Install Docker by following the steps provided [here](https://github.com/datacen
 
 ##### Step 1 :Provide executable permissions to the above files. Navigate to the directory where all the files are placed and run the below command:
    
-   chmod 755 <your file> or chmod 755 *
+   chmod 755 <your file>
 
 Example : 
     [root@ip-172-31-27-127 route53]# chmod 755 route53_service.json serviceimport.zip logo.png route53_sample_app.zip Dockerfile
@@ -80,8 +84,6 @@ Example :
 
     docker run -v **[DIRECTORY WHERE DOWNLOADED FILES ARE PLACED]**:/ccsworker -w /ccsworker -it 
     **[Your IMAGE ID]** /bin/bash
-
-#### Note: Make sure there is no other zip file than app profile zip before execute docker run.
 
 Example:  
 
@@ -130,9 +132,9 @@ Python script :
 # Deployment Parameters:
 | Parameter Name| Type	 | Mandatory |Description | Allowed Value |Default Value |
 | ------ | ------ | ------ | ------ |------ | ------ |
-| DomainName |	String | Yes | Mention Existing Registered Domain Name(DomainName.com) in AWS,If DomainName is not there , click [here](https://github.com/datacenter/cloudcentersuite/blob/master/Content/Networking/Route53domain/README.md) to Refer another service for Domain creation |  |   |
+| DomainName |	String | Yes | Mention Existing Registered Domain Name in AWS,If DomainName is not there , click[here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/blob/master/Networking/Route53domain/README.md) to Refer another service for Domain creation |  |   |
 | subDomainName | String | Yes	| Mention Unique Sub Domain Name for accessing your application |  | |
-| IpAddress | String |	Yes |IpAddress of your web application or your website | | |
+| IpAddress | String |	Yes |IpAddress of your web application or your website (Option)| | |
 | healthCheckName | String | Yes | Mention unique healthcheck name for creating healthcheck |  | |
 | healthCheckport | String | Yes | healthcheck port number for your webapplication or website |  | |
 | healthCheckpath | String | Yes | Healthcheck path for your application |  | |
