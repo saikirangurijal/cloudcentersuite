@@ -10,14 +10,20 @@
 	For your reference : https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
 	
 ## Before you start	
-Before importing the lambda service, user must import dynamodb service in workload manager 'cause Lambda function will be invoked on dynamo db table events (Any CRUD operation).
+Before importing the lambda service, user must import dynamodb service in workload manager because Lambda function will be invoked on dynamo db table events (Any CRUD operation).
       
 Refer Readme on how to import Dynamo DB Service from [here](https://github.com/datacenter/cloudcentersuite/blob/master/Content/NoSQL%20Databases/DynamoDB/README.md).
       
 The lambda service will create a lambda function with provided name in AWS.
-when Lambda function creates , a trigger point is created with Dynamo DB Streams. As a result of it, Any change in the stream will invoke the lambda function.
 
-This application generates an email on such events. user can configure your email in application bundle (lambda.zip)
+#####How it works :
+- Once application deployed successfully user can access sample php application(which writes data into the aws dynamodb). 
+- When user writes an item into a table(users), A new stream record is written to reflect that a new item has been added to the table.
+- The new stream record triggers an AWS Lambda function(TestLambdaFunction).
+- If the stream record indicates that a new item is added to table then lambda function will add two fields(Triggered On,UUID) to the existing item of the table
+    (Tiggered On indicates time of update and UUID is an unique id of the user created from lambda function).
+- User can find the details of his entry with Triggered on and UUID from Find User functionality of sample php application.
+
 	
 ## Pre-Requisites
 #### CloudCenter
@@ -30,7 +36,7 @@ This application generates an email on such events. user can configure your emai
 
 Step 1 : Download the service bundle from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ServiceBundle/aws_lambda.zip)
 
-Step 2 : Download the application bundles to be used with application profile for dynamodb from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/dynamodb-php-app.zip) and
+Step 2 : Download the application bundles to be used with application profile for dynamodb from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/dynamodb-lambda-php-app.zip) and
          for lambda from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/lambda.zip).
 
 Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and application bundles from Step 2 under apps/<your_package_name> in your file repository.
@@ -43,7 +49,7 @@ Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and ap
             
                     Example : http://<Your_REPO_Server_IP>/apps/lambda.zip
               
-                    Example : http://<Your_REPO_Server_IP>/apps/dynamodb-php-app.zip
+                    Example : http://<Your_REPO_Server_IP>/apps/dynamodb-lambda-php-app.zip
                                         
 		
 Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/lambda_iu.zip)
