@@ -16,7 +16,7 @@ Refer Readme on how to import Dynamo DB Service from [here](https://github.com/d
       
 The lambda service will create a lambda function with provided name in AWS.
 
-#####How it works :
+How it works :
 - Once application deployed successfully user can access sample php application(which writes data into the aws dynamodb). 
 - When user writes an item into a table(users), A new stream record is written to reflect that a new item has been added to the table.
 - The new stream record triggers an AWS Lambda function(TestLambdaFunction).
