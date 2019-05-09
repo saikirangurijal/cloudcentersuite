@@ -1,4 +1,4 @@
-# AWS Route53
+# AWS Route 53
 ## Introduction
 
 	Amazon Route 53 is a highly available and scalable Domain Name System (DNS) web service.
@@ -45,7 +45,7 @@ Step 8 : Download the Dockerfile from [here](https://github.com/datacenter/cloud
 - Service import script zip file (named as serviceimport.zip)
 - main.py file
 - serviceimport.sh
-- Route53 logo (named as logo.png)
+- Route 53 logo (named as logo.png)
 - Modelled application profile(named as route53_sample_app.zip)
 - Dockerfile (named as Dockerfile) , **Only needed if you wish to create a Docker image for the first time**
 
@@ -105,7 +105,7 @@ Step 6: You will be prompted to select the file repository in which you have pre
 
     - Select the corresponding Repository ID and Hit Enter.
 
-If service creation is successful, You will be presented with a message **"Route53 Service imported successfully. Imported Application Profile Successfully"**
+If service creation is successful, You will be presented with a message **"Route 53 Service imported successfully. Imported Application Profile Successfully"**
 
 ## Service Package Bundle
 The Package Service bundle consists of the following files:
@@ -115,9 +115,9 @@ Shell script:
 
 Python script :
  - install_setup.py: The script will check all mandatory parameters available and installs necessary python packages also invokes external life cycle action.
- - amazon_route53_management.py: script that invokes the api for route53 functions like create record set DNS configuration and healthcheck.
- - prerequiste_environments.py : Script will check required parameter for route53 management
- - createRecordSet.json : input template json for route53 management 
+ - amazon_route53_management.py: script that invokes the api for route 53 functions like create record set DNS configuration and healthcheck.
+ - prerequiste_environments.py : Script will check required parameter for route 53 management
+ - createRecordSet.json : input template json for route 53 management 
  - util.py: utility file
  - error_utils.py: A script that handles error functionalities
 
