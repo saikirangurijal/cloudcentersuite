@@ -9,7 +9,7 @@
   "serviceType": "EXTERNAL",
   "logoPath": "null",
   "serviceActions": [],
-  "externalBundleLocation": "%REPO_ID_1%services/f5lb.zip",
+  "externalBundleLocation": "services/f5lb.zip",
   "externalActions": [
     {
       "actionName": "UPDATE",
