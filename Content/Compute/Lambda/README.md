@@ -22,7 +22,7 @@ How it works :
 - The new stream record triggers an AWS Lambda function(TestLambdaFunction).
 - If the stream record indicates that a new item is added to table then lambda function will add two fields(Triggered On,UUID) to the existing item of the table
     (Tiggered On indicates time of update and UUID is an unique id of the user created from lambda function).
-- User can find the details of his entry with Triggered on and UUID from Find User functionality of sample php application.
+- User can find the details of his entry with 'Triggered on' and 'UUID' from Find User functionality of sample php application.
 
 	
 ## Pre-Requisites
@@ -36,7 +36,7 @@ How it works :
 
 Step 1 : Download the service bundle from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ServiceBundle/aws_lambda.zip)
 
-Step 2 : Download the application bundles to be used with application profile for dynamodb from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/dynamodb-lambda-php-app.zip) and
+Step 2 : Download the application bundles to be used with application profile for dynamodb from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/lambda-dynamodb-php-app.zip) and
          for lambda from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/ApplicationProfiles/artifacts/lambda.zip).
 
 Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and application bundles from Step 2 under apps/<your_package_name> in your file repository.
@@ -49,7 +49,7 @@ Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and ap
             
                     Example : http://<Your_REPO_Server_IP>/apps/lambda.zip
               
-                    Example : http://<Your_REPO_Server_IP>/apps/dynamodb-lambda-php-app.zip
+                    Example : http://<Your_REPO_Server_IP>/apps/lambda-dynamodb-php-app.zip
                                         
 		
 Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Lambda/WorkloadManager/lambda_iu.zip)
