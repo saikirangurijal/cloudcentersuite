@@ -1,14 +1,14 @@
 
-# POSTGRESQL Server
+# PostgreSQL Server
 
 ## Introduction
 
     The Workload Manager platform supports integration to various Database third party services.
 
-    This document provides information on POSTGRESQL server integration with Cisco Workload Manager by creating a 
+    This document provides information on PostgreSQL server integration with Cisco Workload Manager by creating a 
     Virtual Machine (VM) with Agent service .
 
-    POSTGRESQL is a open source Relational Database system  which gives you the ability to manage the database.
+    PostgreSQL is a open source Relational Database system  which gives you the ability to manage the database.
 
     Please refer the below link for more details.
 
@@ -22,9 +22,9 @@
 
 ## Download the service bundles
 
- Step 1 : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/POSTGRESQL/WorkloadManager/ServiceBundle/psqlserver.zip). 
+ Step 1 : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/PostgreSQL/WorkloadManager/ServiceBundle/psqlserver.zip). 
    
- Step 2 : Download the application bundle to be used with application profile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/POSTGRESQL/WorkloadManager/ApplicationProfiles/artifacts/psql-app.zip).
+ Step 2 : Download the application bundle to be used with application profile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/PostgreSQL/WorkloadManager/ApplicationProfiles/artifacts/psql-app.zip).
    
  Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and application bundle from Step 2 under apps/<your_package_name> in your file repository.
           
@@ -36,7 +36,7 @@
             
                     Example : http://<Your_REPO_Server_IP>/apps/psql-app.zip
    
- Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/POSTGRESQL/WorkloadManager/psql_iu.zip)
+ Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/PostgreSQL/WorkloadManager/psql_iu.zip)
  
  Step 5: Extract the above bundle on any linux based machine and navigate to extracted folder
 
