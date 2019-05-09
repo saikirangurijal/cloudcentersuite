@@ -16,10 +16,12 @@
     https://www.commvault.com/
     
 ## Pre-Requisites
- - Commserve (Commvault's server component) should be up and running with minimum configuration. For details on Minimum configuration, System requirement and Installation setup, Please refer [here](https://github.com/datacenter/cloudcentersuite/blob/master/Content/Backup/Commvault/Commvault_Installation_And_SetUp_Manual.docx). 
+ - Commserve (Commvault's server component) should be up and running with minimum configuration. For details on Minimum configuration, System requirement and Installation setup, Please refer [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Backup/Commvault/Commvault_Installation_And_SetUp_Manual.docx). 
  - To install CommServe agent in client VMs as part of app profile deployment, Download the Commvault Linux agent from [here](https://cloud.commvault.com/webconsole/downloadcenter/packageDetails.do?packageId=11968&status=0&type=details). Place it in a public access URL(/linux_pkg.tar). Register in commvault.com in order to download. 
  - For File Backup, App Profile should contain any VM with Agent Service (Sample App profile provided).
  - For DB Backup, App Profile should contain VM with MYSQL Service (Sample App profile provided).
+
+Note: Storage Policy/Plan by name "Server Plan" will be created automatically by default. If the plan needs to be customised, Please create a storage plan by referring [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Backup/Commvault/Commvault_Installation_And_SetUp_Manual.docx). 
 
 ##### CloudCenter
 
@@ -27,21 +29,21 @@
    - Knowledge on how to use Workload Manager
    - Supported OS (client): CentOS 7
     
-# Download the App bundles
+# Download App bundles
 
-Step 1 : Download the commvault app package zip file from [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/Backup/Commvault/WorkloadManager/ServiceBundle/commvault.zip).
+Step 1 : Download the commvault app package zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Backup/Commvault/WorkloadManager/ServiceBundle/commvault-agent.zip).
 
 Step 2 : Place the app package bundle from Step 1 under apps/<bundle.zip> in a file repository. Its location will be http://YourIP/apps/commvault.zip.
 
-Step 3 : For File/MySQL DB Backup, Download the Sample Modelled Application Profile for Commvault Backup, from [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/Backup/Commvault/WorkloadManager/Commvault_Backup_sample_app.zip).
+Step 3 : For File/MySQL DB Backup, Download the Sample Modelled Application Profile for Commvault Backup, from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Backup/Commvault/WorkloadManager/ApplicationProfiles/commvault_backup_sample_app.zip).
 
-Step 4 : For File/MySQL DB Restore, Download the Sample Modelled Application Profile for Commvault Restore, from [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/Backup/Commvault/WorkloadManager/Commvault_Restore_sample_app.zip).
+Step 4 : For File/MySQL DB Restore, Download the Sample Modelled Application Profile for Commvault Restore, from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Backup/Commvault/WorkloadManager/ApplicationProfiles/commvault_restore_sample_app.zip).
 
 Step 5 : For App Profile for Commvault Backup, Pre-start and Post-start script in service Initialization Actions are pre-configured with paths mentioned in section "Service Initialization actions / Node Initialization & Clean Up". Sample App Profile has been given for demo.
 
 Step 6 : For App Profile for Commvault Restore, Pre-start and Post-start script in service Initialization Actions are pre-configured with paths mentioned in section "Service Initialization actions / Node Initialization & Clean Up". Sample App Profile has been given for demo.
 
-Step 7 : Verify whether the commvault app package zip file is placed correctly in file Repository. By default, it will be under apps/<your-packages>.
+Step 7 : Verify whether the commvault app package zip file is placed correctly in file Repository. By default, it will be under apps/commvault.zip.
 
 Step 8 : Login into your Cloud Center Suite with your credentials namely IP address, Email address, Password & Tenant ID. Navigate to App profiles section under Workload Manager.
  - Click on "Import" button found on the top right corner of App profiles section. You will be prompted to choose the application profile that needs to be imported.
