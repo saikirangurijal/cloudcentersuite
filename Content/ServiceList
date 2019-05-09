@@ -1,0 +1,18 @@
+[
+  {
+    "name": "GoogleSQL",
+    "description": "Google SQL Integration Unit",
+	"supportedVersion": "5.0.1",
+    "serviceVersion": "1.0",
+    "annotations": {
+      "productName": "Cisco Workload Manager"
+    },
+    "urls": [
+      "serviceLibraryBundle": "Databases/GoogleSQL/WorkloadManager/googlesql_iu.zip"
+	  "dockerFile": "dockerimages/Dockerfile"
+	  "serviceImport": "Scripts/serviceimport.zip"
+    ],
+    "created": "2019-05-09T01:44:42Z",
+    "digest": "f3c39b4962133dfe725e927e813056e4a3ca74afa7503cdd262479cd3b71651c"
+  }
+]
