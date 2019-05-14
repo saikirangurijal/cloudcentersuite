@@ -18,5 +18,8 @@ RUN echo \
 && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
 && apk add --no-cache $PACKAGES || (sed -i -e 's/dl-cdn/dl-4/g' /etc/apk/repositories && apk add --no-cache $PACKAGES)
 
+RUN pip install requests
+RUN pip install urllib3
+
 
 ENTRYPOINT ["bash", "/ccsworker/serviceimport.sh"]
