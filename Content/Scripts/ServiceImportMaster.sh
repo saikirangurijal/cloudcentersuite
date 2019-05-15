@@ -47,12 +47,14 @@ fi
 ##### STEP 3: COPY THE SERVICE IMPORT AND SERVICE LIBRARY BUNDLE on to ccsworker 
 
 
-	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/GoogleSQL/WorkloadManager/googlesql_iu.zip -q -O googlesql_iu.zip
-	echo "PWDeeee : $PWD"
-	unzip -o googlesql_iu.zip -d $PWD
+	#wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/GoogleSQL/WorkloadManager/googlesql_iu.zip -q -O googlesql_iu.zip
+	#echo "PWDeeee : $PWD"
+	#unzip -o googlesql_iu.zip -d $PWD
 
 	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip -q -O serviceimport.zip
 	unzip -o serviceimport.zip -d $PWD
+	
+	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/categoryList.py -q -O categoryList.py
 
 ##### STEP 4: Run the Docker 
 
