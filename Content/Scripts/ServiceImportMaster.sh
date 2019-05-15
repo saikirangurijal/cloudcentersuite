@@ -55,7 +55,7 @@ fi
 	unzip -o serviceimport.zip -d $PWD
 	
 	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/categoryList.py -q -O categoryList.py
-
+	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/ServiceList.json -q -O ServiceList.json
 ##### STEP 4: Run the Docker 
 
 	docker run -v $PWD:/ccsworker -w /ccsworker -it  ccs_service_import:v1 /bin/bash
