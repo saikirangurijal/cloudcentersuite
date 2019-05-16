@@ -46,8 +46,8 @@ fi
 ##### STEP 3: COPY THE SERVICE IMPORT AND SERVICE LIBRARY BUNDLE on to ccsworker 
 
 	echo "Downloading the files for service import..."
-	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport_master.zip -q -O serviceimport_master.zip
-	unzip -o serviceimport_master.zip -d $PWD
+	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip -q -O serviceimport.zip
+	unzip -o serviceimport.zip -d $PWD
 	
 	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/categoryList.py -q -O categoryList.py
 	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/ServiceList.json -q -O ServiceList.json
