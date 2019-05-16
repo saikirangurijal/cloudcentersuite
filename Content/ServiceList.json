@@ -1,6 +1,6 @@
 [
   {
-    "name": "GoogleSQL",
+    "name": "Google SQL",
 	"serviceID":"googlesql",
 	"serviceCategory":"Databases",
     "description": "Google Cloud SQL Integration Unit",
@@ -30,7 +30,7 @@
     "digest": ""
   },
   {
-    "name": "Memcached Container",
+    "name": "MemcachedContainer",
 	"serviceID":"memcachedcontainer",
 	"serviceCategory":"Backend Cache",
     "description": "Memcached Running in Container",
@@ -60,7 +60,7 @@
     "digest": ""
   },
   {
-    "name": "MSSQL",
+    "name": "MSSQl UBUNTU",
 	"serviceID":"mssqlserver",
 	"serviceCategory":"Databases",
     "description": "MSSQL Integration Unit",
@@ -75,7 +75,7 @@
     "digest": ""
   },
   {
-    "name": "PostgreSQL",
+    "name": "POSTGRESQL",
 	"serviceID":"psqlserver",
 	"serviceCategory":"Databases",
     "description": "PostgreSQL Integration Unit",
@@ -120,7 +120,7 @@
     "digest": ""
   },
   {
-    "name": "Oracle Weblogic",
+    "name": "WebLogic",
 	"serviceID":"weblogic",
 	"serviceCategory":"Middleware",
     "description": "Oracle WebLogic Server",
@@ -135,7 +135,7 @@
     "digest": ""
   },
   {
-    "name": "Sensu",
+    "name": "Sensu Server",
 	"serviceID":"sensu",
 	"serviceCategory":"Monitoring",
     "description": "Application Monitoring",
@@ -195,7 +195,7 @@
     "digest": ""
   },
   {
-    "name": "Route53",
+    "name": "route53",
 	"serviceID":"route53",
 	"serviceCategory":"Networking",
     "description": "AWS Route53",
@@ -210,7 +210,7 @@
     "digest": ""
   },
   {
-    "name": "Route53domain",
+    "name": "awsroute53domain",
 	"serviceID":"awsroute53domain",
 	"serviceCategory":"Networking",
     "description": "AWS domain creation",
@@ -232,7 +232,7 @@
     "supportedVersion": "5.0.1",
     "serviceVersion": "1.0",
     "urls": {
-        "serviceLibraryBundle": "Networking/loadbalancers/AzureLB/WorkloadManager/AzureLB.zip",
+        "serviceLibraryBundle": "Networking/loadbalancers/AzureLB/WorkloadManager/AzureELB.zip",
         "dockerFile": "dockerimages/Dockerfile",
         "serviceImport": "Scripts/serviceimport.zip"
     },
@@ -247,7 +247,7 @@
     "supportedVersion": "5.0.1",
     "serviceVersion": "1.0",
     "urls": {
-        "serviceLibraryBundle": "Networking/loadbalancers/F5/WorkloadManager/F5LB.zip",
+        "serviceLibraryBundle": "Networking/loadbalancers/F5/WorkloadManager/F5.zip",
         "dockerFile": "dockerimages/Dockerfile",
         "serviceImport": "Scripts/serviceimport.zip"
     },
@@ -262,7 +262,7 @@
     "supportedVersion": "5.0.1",
     "serviceVersion": "1.0",
     "urls": {
-        "serviceLibraryBundle": "Networking/loadbalancers/GoogleELB/WorkloadManager/GoogleLB.zip",
+        "serviceLibraryBundle": "Networking/loadbalancers/GoogleELB/WorkloadManager/GoogleELB.zip",
         "dockerFile": "dockerimages/Dockerfile",
         "serviceImport": "Scripts/serviceimport.zip"
     },
