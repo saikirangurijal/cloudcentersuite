@@ -23,7 +23,7 @@ J2EE-EcommerceApp - Typical J2EE Ecommerce Web Application using Shopizer
 
 ## Feature of the Application
 
-    It is a J2EE Ecommerce web application. Admin user can manage page contents, configure catalogue, payment settings
+    It is a J2EE Ecommerce web application. Admin user can manage contents, configure catalogue, payments
 	and schedule feature products. Guest users can add products to cart, checkout and submit the orders.
 	
 	User authentication and Management is happening through Relational Database.
