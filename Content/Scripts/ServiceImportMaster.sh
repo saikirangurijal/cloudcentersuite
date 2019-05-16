@@ -45,17 +45,24 @@ fi
 
 ##### STEP 3: COPY THE SERVICE IMPORT AND SERVICE LIBRARY BUNDLE on to ccsworker 
 
-	echo " Downloading the files for service import..."
+	echo "Downloading the files for service import..."
 	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip -q -O serviceimport.zip
 	unzip -o serviceimport.zip -d $PWD
 	
 	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/categoryList.py -q -O categoryList.py
 	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/ServiceList.json -q -O ServiceList.json
-	echo " File downloading complete ..."
+	echo "File downloading complete ..."
 ##### STEP 4: Run the Docker 
 	echo "Initiating the docker run ..."
-	docker run -v $PWD:/ccsworker -w /ccsworker -it  ccs_service_import:v1 /bin/bash
 	echo "Invokes the Entrypoint script ..."
-	echo "____________________________________________________________________________"
-	echo "Please wait while the service import is in progress..." 
-	echo "____________________________________________________________________________"
+        echo "____________________________________________________________________________"
+        echo "Please wait while the service import is in progress..."
+        echo "____________________________________________________________________________"
+
+	docker run -v $PWD:/ccsworker -w /ccsworker -it  ccs_service_import:v1 /bin/bash
+
+	if [ $? -eq 0 ]; then
+		echo "Service Import is completed successfully..."
+	else
+		echo "$?"
+	fi
