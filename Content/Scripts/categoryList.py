@@ -11,10 +11,10 @@ def service_category():
     :return:
     """
     try:
-        path = os.getcwd()
+	path = os.getcwd()
         json_path = path +"/ServiceList.json"
         service_data = json.load(open(json_path, 'r'))
-        print(service_data)
+        #print(service_data)
         category = []
         for data in service_data:
             category.append(data["serviceCategory"])
@@ -83,7 +83,7 @@ def downloadFiles(url_list):
             dockerFile = list["dockerFile"]
             serviceLibraryBundle = list["serviceLibraryBundle"]
 
-        print(serviceImportUrl,dockerFile,serviceLibraryBundle)
+        #print(serviceImportUrl,dockerFile,serviceLibraryBundle)
 
         serviceImportUrl = githubUrl+"/"+serviceImportUrl
 
@@ -91,7 +91,11 @@ def downloadFiles(url_list):
         try:
             iubundleUrl = githubUrl+'/'+serviceLibraryBundle
             name = iubundleUrl.split("/")[-1]
-            r = requests.get(url=iubundleUrl)
+            if name:
+                f = open('outfile.txt', 'w')
+                f.write(name)
+                f.close()
+	    r = requests.get(url=iubundleUrl)
             with open(name,'wb') as file:
                 file.write(r.content)
                 #zip = ZipFile(os.getcwd()+"/"+name,'r')
