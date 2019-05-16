@@ -19,9 +19,9 @@
 
 ## Download the service bundles
 
- Step 1 : Download the Service Bundle zip from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Databases/GoogleSQL/WorkloadManager/ServiceBundle/googlesql.zip). 
+ Step 1 : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/GoogleSQL/WorkloadManager/ServiceBundle/googlesql.zip). 
    
- Step 2 : Download the application bundle to be used with application profile from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Databases/GoogleSQL/WorkloadManager/ApplicationProfiles/artifacts/googlesql-petclinic-app.zip).
+ Step 2 : Download the application bundle to be used with application profile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/GoogleSQL/WorkloadManager/ApplicationProfiles/artifacts/googlesql-petclinic-app.zip).
    
  Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and application bundle from Step 2 under apps/<your_package_name> in your file repository.
           
@@ -33,15 +33,15 @@
             
                     Example : http://<Your_REPO_Server_IP>/apps/googlesql-petclinic-app.zip
    
- Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Databases/GoogleSQL/WorkloadManager/googlesql_iu.zip)
+ Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/GoogleSQL/WorkloadManager/googlesql_iu.zip)
  
  Step 5: Extract the above bundle on any linux based machine and navigate to extracted folder
 
- Step 6 : Download the Service Import script zip file from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Scripts/serviceimport.zip) 
+ Step 6 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
  
  Step 7: Copy the Service Import script zip file to the directory extracted above in Step 5 and Unzip the service import script bundle.
 
- Step 8 : Download the Dockerfile from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
+ Step 8 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
  
  ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
    
@@ -54,14 +54,14 @@
 - Google SQL logo (named as logo.png)
 - Modelled application profile(named as googlesql_sample_app.zip)
 - Dockerfile (named as Dockerfile) , **Only needed if you wish to create a Docker image for the first time**
- 
+   
 ## How to Create a Service in Cisco Workload Manager
 
 User can create the service by using **Import Service** functionality using script.
 
 #### Prerequisite for creating a service through service import script:
 
-Install Docker by following the steps provided [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx) on any linux based client machine.
+Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx) on any linux based client machine.
 
 **NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
 - You can check , if docker is installed , by running docker -v
@@ -71,7 +71,7 @@ Install Docker by following the steps provided [here](https://wwwin-github.cisco
 
 ##### Step 1 :Provide executable permissions to the above files. Navigate to the directory where all the files are placed and run the below command:
    
-    chmod 755 <your file>
+    chmod 755 <your file> or chmod 755 *
     
     
 Example : 
@@ -91,6 +91,8 @@ Example :
 
     docker run -v **[DIRECTORY WHERE DOWNLOADED FILES ARE PLACED]**:/ccsworker -w /ccsworker -it 
     **[Your IMAGE ID]** /bin/bash
+
+#### Note: Make sure there is no other zip file than app profile zip before execute docker run.
 
 Example:  
 
@@ -134,7 +136,7 @@ Python script :
 
 - util.py: utility file
 
-- error_messages.json : Json file contails error messages.
+- error_messages.json : Json file contains error messages.
 
 - error_utils.py: The script that handles error functionality
 
