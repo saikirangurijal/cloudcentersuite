@@ -313,22 +313,5 @@
     },
     "created": "",
     "digest": ""
-  },
-  {
-    "name": "Turbonomics",
-	"serviceID":"",
-	"serviceCategory":"Resource placement",
-    "description": "Turbonomics Integration Unit",
-    "supportedVersion": "5.0.1",
-    "serviceVersion": "1.0",
-    "urls": {
-        "serviceLibraryBundle": "Resource placement/Turbonomics/WorkloadManager/Turbonomics.zip",
-        "dockerFile": "dockerimages/Dockerfile",
-        "serviceImport": "Scripts/serviceimport.zip"
-    },
-   "created": "",
-    "digest": ""
   }
-  
-  
 ]
