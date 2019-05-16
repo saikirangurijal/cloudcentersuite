@@ -91,7 +91,8 @@ def downloadFiles(url_list):
         try:
             iubundleUrl = githubUrl+'/'+serviceLibraryBundle
             name = iubundleUrl.split("/")[-1]
-            if name:
+            #servicename = name.replace(".zip", "")
+	    if name:
                 f = open('outfile.txt', 'w')
                 f.write(name)
                 f.close()
