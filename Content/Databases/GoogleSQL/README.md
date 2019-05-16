@@ -68,7 +68,7 @@ Step 6 : User will be prompted to select the file repository in which you wish t
 
      - Select the corresponding Repository ID and Hit Enter.
      1  content-repo
-     2	sample-repo
+     2  sample-repo
      
  
 Step 7 : User will be prompted to select the option for importing the combination of service and/or app profile.
