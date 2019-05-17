@@ -21,6 +21,7 @@
     "description": "AWS Lambda functions",
 	"supportedVersion": "5.0.1",
     "serviceVersion": "1.0",
+    "dependencyTag":["dynamodb"],
     "urls": {
       "serviceLibraryBundle": "Compute/Lambda/WorkloadManager/Lambda.zip",
 	  "dockerFile": "dockerimages/Dockerfile",
