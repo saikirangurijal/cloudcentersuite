@@ -28,13 +28,13 @@ Before you start with service import, Install Docker by following the steps prov
 
 ## Download the Files
 
-Step 1 : Copy the content of service import script file from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
+Step 1 : Copy the contents of service import script file from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
 
 	    Example: 
         wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
 				
 
-Step 2 : Run the script from Step 1 using the following command.
+Step 2 : Execute the script from Step 1 using the following command.
 
         sh ServiceImportMaster.sh
 
@@ -57,7 +57,7 @@ Step 4 : User will be prompted to select the Service Category. Select the number
      2	Compute
 	 3	Networking
 
-Step 5 : User will be prompted to select the service under category that was selected in Step 4. select the number against the service that you wish to import else select 0 to exit.
+Step 5 : User will be prompted to select the service under category that was selected in Step 4. Select the number against the service that you wish to import else select 0 to exit.
 
      - Select the service ID  from the list (press 0 to exit):
      1	GoogleSQL
@@ -80,7 +80,7 @@ Step 7 : User will be prompted to select the option for importing the combinatio
     
 If service and/or app profile import is successful, You will be presented with a message **"<Service Name> Service imported successfully. Imported Application Profile Successfully"**.
 
-##### PLEASE NOTE : User will be prompted with location of service bundle zip and application bundle zip on your client machine. Copy the files on to the repository before you proceed to deploy.
+##### PLEASE NOTE : User will be prompted with location of service bundle zip and application bundle zip on client machine. The files must be copied on to the repository before proceeding to deploy.
 
          - Service Zip file under services/<your_bundle_name>
                     
