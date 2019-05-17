@@ -45,7 +45,7 @@ Once the script is run, please follow the prompts to import the service or the c
     
          - Application Zip file under <app_path>/<your_package_name>
             
-             Example: http://<Your_REPO_Server_IP>/<app_path>/petclinic.zip
+             Example: http://<Your_REPO_Server_IP>/<app_path>/petclinic.war
 
 
 ## Service Package Bundle
