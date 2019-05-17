@@ -165,36 +165,6 @@
     "digest": ""
   },
   {
-    "name": "Infoblox",
-	"serviceID":"",
-	"serviceCategory":"Networking",
-    "description": "Infoblox Integration Unit",
-    "supportedVersion": "5.0.1",
-    "serviceVersion": "1.0",
-    "urls": {
-        "serviceLibraryBundle": "Networking/Infoblox/WorkloadManager/Infoblox.zip",
-        "dockerFile": "dockerimages/Dockerfile",
-        "serviceImport": "Scripts/serviceimport.zip"
-    },
-    "created": "",
-    "digest": ""
-  },
-  {
-    "name": "Phpipam",
-	"serviceID":"",
-	"serviceCategory":"Networking",
-    "description": "Phpipam Integration Unit",
-    "supportedVersion": "5.0.1",
-    "serviceVersion": "1.0",
-    "urls": {
-        "serviceLibraryBundle": "Networking/Phpipam/WorkloadManager/PhpIPAM.zip",
-        "dockerFile": "dockerimages/Dockerfile",
-        "serviceImport": "Scripts/serviceimport.zip"
-    },
-    "created": "",
-    "digest": ""
-  },
-  {
     "name": "route53",
 	"serviceID":"route53",
 	"serviceCategory":"Networking",
@@ -247,7 +217,7 @@
     "supportedVersion": "5.0.1",
     "serviceVersion": "1.0",
     "urls": {
-        "serviceLibraryBundle": "Networking/loadbalancers/F5/WorkloadManager/F5-BIG-IP.zip",
+        "serviceLibraryBundle": "Networking/loadbalancers/F5/WorkloadManager/F5LB.zip",
         "dockerFile": "dockerimages/Dockerfile",
         "serviceImport": "Scripts/serviceimport.zip"
     },
