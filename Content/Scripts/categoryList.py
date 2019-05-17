@@ -3,21 +3,48 @@ import requests
 
 githubUrl = "https://github.com/datacenter/cloudcentersuite/raw/master/Content"
 
+def _decode_list(data):
+    rv = []
+    for item in data:
+        if isinstance(item, unicode):
+            item = item.encode('utf-8')
+        elif isinstance(item, list):
+            item = _decode_list(item)
+        elif isinstance(item, dict):
+            item = _decode_dict(item)
+        rv.append(item)
+    return rv
+
+def _decode_dict(data):
+    rv = {}
+    for key, value in data.iteritems():
+        if isinstance(key, unicode):
+            key = key.encode('utf-8')
+        if isinstance(value, unicode):
+            value = value.encode('utf-8')
+        elif isinstance(value, list):
+            value = _decode_list(value)
+        elif isinstance(value, dict):
+            value = _decode_dict(value)
+        rv[key] = value
+    return rv
+
 def service_category():
     """
     Function is used to get the services zip file in category vice and stored
     required directory
-
     :return:
     """
     try:
-	path = os.getcwd()
+        path = os.getcwd()
         json_path = path +"/ServiceList.json"
-        service_data = json.load(open(json_path, 'r'))
+        service_data = json.load(open(json_path, 'r'),object_hook=_decode_dict)
         #print(service_data)
         category = []
+        
         for data in service_data:
             category.append(data["serviceCategory"])
+        category = sorted(set(category))
         if len(category) > 0:
             print "--------------------------------"
             print "ID Name of the Category"
@@ -74,7 +101,6 @@ def service_category():
 def downloadFiles(url_list):
     """
     Function used to download ServiceImport,iu & dockerfile file from github
-
     :return:
     """
     try:
@@ -110,3 +136,4 @@ def downloadFiles(url_list):
         print("Error while Getting url and downloading file from github",Er)
 
 service_category()
+
