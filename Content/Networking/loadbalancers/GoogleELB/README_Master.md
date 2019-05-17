@@ -33,7 +33,7 @@ Step 2 : Execute the script from Step 1 using the following command.
 
         sh ServiceImportMaster.sh
 
-Once the script is run, please follow the prompts to import the service or the correspondong application profile.
+Once the script is run, please follow the prompts to import the service or the corresponding application profile.
 
 
 ##### PLEASE NOTE : You be prompted with location of service bundle zip and/or application bundle zip on client machine. The files must be copied on to the repository before proceeding to deploy.
