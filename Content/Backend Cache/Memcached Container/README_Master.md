@@ -4,9 +4,9 @@
     This document provides information on memcached integration as container with Cisco Workload Manager by creating 
     Container Service.
     
-    Memcached is a general-purpose distributed memory caching system. It is often used to speed up dynamic database-driven 
-    websites by caching data and objects in RAM to reduce the number of times an external data source (such as a database 
-    or API).
+    Memcached is a general-purpose distributed memory caching system. It is often used to speed up dynamic 
+    database-driven websites by caching data and objects in RAM to reduce the number of times an external data source 
+    (such as a database or API).
 	
     Please refer the below link for more details.
     https://memcached.org/
