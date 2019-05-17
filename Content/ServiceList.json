@@ -67,7 +67,7 @@
     "supportedVersion": "5.0.1",
     "serviceVersion": "1.0",
     "urls": {
-        "serviceLibraryBundle": "Databases/MSSQL/WorkloadManager/MSSQL.zip",
+        "serviceLibraryBundle": "Databases/MSSQL/WorkloadManager/MSSQLUbuntu.zip",
         "dockerFile": "dockerimages/Dockerfile",
         "serviceImport": "Scripts/serviceimport.zip"
     },
@@ -127,7 +127,7 @@
     "supportedVersion": "5.0.1",
     "serviceVersion": "1.0",
     "urls": {
-        "serviceLibraryBundle": "Middleware/Oracle Weblogic/WorkloadManager/OracleWeblogic.zip",
+        "serviceLibraryBundle": "Middleware/Oracle Weblogic/WorkloadManager/Weblogic.zip",
         "dockerFile": "dockerimages/Dockerfile",
         "serviceImport": "Scripts/serviceimport.zip"
     },
@@ -142,7 +142,7 @@
     "supportedVersion": "5.0.1",
     "serviceVersion": "1.0",
     "urls": {
-        "serviceLibraryBundle": "Monitoring/Sensu/WorkloadManager/Sensu.zip",
+        "serviceLibraryBundle": "Monitoring/Sensu/WorkloadManager/SensuServer.zip",
         "dockerFile": "dockerimages/Dockerfile",
         "serviceImport": "Scripts/serviceimport.zip"
     },
@@ -232,7 +232,7 @@
     "supportedVersion": "5.0.1",
     "serviceVersion": "1.0",
     "urls": {
-        "serviceLibraryBundle": "Networking/loadbalancers/AzureLB/WorkloadManager/AzureELB.zip",
+        "serviceLibraryBundle": "Networking/loadbalancers/AzureLB/WorkloadManager/AzureLoadBalancer.zip",
         "dockerFile": "dockerimages/Dockerfile",
         "serviceImport": "Scripts/serviceimport.zip"
     },
@@ -247,7 +247,7 @@
     "supportedVersion": "5.0.1",
     "serviceVersion": "1.0",
     "urls": {
-        "serviceLibraryBundle": "Networking/loadbalancers/F5/WorkloadManager/F5.zip",
+        "serviceLibraryBundle": "Networking/loadbalancers/F5/WorkloadManager/F5-BIG-IP.zip",
         "dockerFile": "dockerimages/Dockerfile",
         "serviceImport": "Scripts/serviceimport.zip"
     },
