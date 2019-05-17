@@ -16,7 +16,7 @@
 ## Pre-Requisites
 
 #### CloudCenter
-- CloudCenter 5.0.1 and above
+- CloudCenter 5.x,x and above
 - Knowledge on how to use Workload Manager
 
 #### Before you start
