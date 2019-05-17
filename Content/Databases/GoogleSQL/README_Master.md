@@ -26,69 +26,30 @@ Before you start with service import, Install Docker by following the steps prov
 - You can check , if docker is installed , by running "docker -v"
 - You can check , if docker is running , by executing the command "systemctl status docker"
 
-## Download the Files
+## Importing the service
 
-Step 1 : Copy the contents of service import script file from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
+Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
 
 	    Example: 
-        wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+       wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
 				
 
 Step 2 : Execute the script from Step 1 using the following command.
 
         sh ServiceImportMaster.sh
 
-Once the script is run, a docker image tagged as "ccs_service_import:v1" will be built, if it is not already available.
+Once the script is run, please follow the prompts to import the service or the correspondong application profile.
 
-Step 3 : User will be prompted to enter the following inputs.
 
-	Enter IP Address for Cloud Center Suite: XXX.XXX.XXX.XXX
+##### PLEASE NOTE : You be prompted with location of service bundle zip and/or application bundle zip on client machine. The files must be copied on to the repository before proceeding to deploy.
 
-	Enter Cloud Center Suite Email Address : YourEmail@XXX.com
-
-	Enter the password: ***********
-
-	Enter the Tenant ID  : YourTenantID
-
-Step 4 : User will be prompted to select the Service Category. Select the number against the category else select 0 to exit.
-
-     - Select the Service Category ID from the list (press 0 to exit):
-     1	Databases
-     2	Compute
-	 3	Networking
-
-Step 5 : User will be prompted to select the service under category that was selected in Step 4. Select the number against the service that you wish to import else select 0 to exit.
-
-     - Select the service ID  from the list (press 0 to exit):
-     1	GoogleSQL
-     2	Lambda
-	 3	Route 53
-	 
-Step 6 : User will be prompted to select the file repository in which you wish to place the Service Bundle and application bundle zip files. 
-
-     - Select the corresponding Repository ID and Hit Enter.
-     1  content-repo
-     2  sample-repo
-     
- 
-Step 7 : User will be prompted to select the option for importing the combination of service and/or app profile.
- 
-    - Select the corresponding ID and Hit Enter
-    1 Import Service Only
-    2 Import Application Profile Only
-    3 Import both Service & Application Profile
-    
-If service and/or app profile import is successful, You will be presented with a message **"<Service Name> Service imported successfully. Imported Application Profile Successfully"**.
-
-##### PLEASE NOTE : User will be prompted with location of service bundle zip and application bundle zip on client machine. The files must be copied on to the repository before proceeding to deploy.
-
-         - Service Zip file under services/<your_bundle_name>
+         - Service Zip file under <services_path>/<your_bundle_name>
                     
-             Example : http://<Your_REPO_Server_IP>/services/googlesql.zip 
+             Example : http://<Your_REPO_Server_IP>/<service_path>/googlesql.zip 
     
-         - Application Zip file under apps/<your_package_name>
+         - Application Zip file under <app_path>/<your_package_name>
             
-             Example: http://<Your_REPO_Server_IP>/apps/googlesql-petclinic-app.zip
+             Example: http://<Your_REPO_Server_IP>/<app_path>/googlesql-petclinic-app.zip
    
 ## Service Package Bundle
 
