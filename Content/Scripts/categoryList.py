@@ -46,18 +46,18 @@ def service_category():
             category.append(data["serviceCategory"])
         category = sorted(set(category))
         if len(category) > 0:
-            print "--------------------------------"
-            print "ID Name of the Category"
-            print "--------------------------------"
-            print "0   exit"
+            print "_______________________________"
+            print "ID	Service Category"
+            print "_______________________________"
+            print "0	exit"
             i = 1
             for item in category:
-                print str(i) + "   " + item
+                print str(i) + "	" + item
                 i = i + 1
             print ""
-            print "Select the Category ID  from the list (press 0 to exit): "
+            print "Select the service category ID  from the list (press 0 to exit): "
         else:
-            print "No Repository"
+            print "No service category available"
             exit()
         input = int(raw_input())
         if input == 0:
@@ -71,18 +71,18 @@ def service_category():
                 serviceList.append(data["name"])
 
         if len(serviceList) > 0:
-            print "--------------------------------"
-            print "ID Name of the ServiceList"
-            print "--------------------------------"
-            print "0   exit"
+            print "_______________________________"
+            print "ID	Service"
+            print "_______________________________"
+            print "0	exit"
             i = 1
             for item in serviceList:
-                print str(i) + "   " + item
+                print str(i) + "	" + item
                 i = i + 1
             print ""
-            print "Select the Category ID  from the list (press 0 to exit): "
+            print "Select the service ID from the list (press 0 to exit): "
         else:
-            print "No Repository"
+            print "No service available"
             exit()
         service_input = int(raw_input())
         if input == 0:

@@ -52,9 +52,10 @@ fi
 	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/categoryList.py -q -O categoryList.py
 	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/ServiceList.json -q -O ServiceList.json
 	echo "File downloading complete ..."
+
 ##### STEP 4: Run the Docker 
 	echo "Initiating the docker run ..."
-	echo "Invokes the Entrypoint script ..."
+	echo "Invoking entrypoint script ..."
         echo "____________________________________________________________________________"
         echo "Please wait while the service import is in progress..."
         echo "____________________________________________________________________________"
