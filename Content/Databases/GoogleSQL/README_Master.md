@@ -16,7 +16,7 @@
 ## Pre-Requisites
 
 #### CloudCenter
-- CloudCenter 5.x,x and above
+- CloudCenter 5.x.x and above
 - Knowledge on how to use Workload Manager
 
 #### Before you start
@@ -29,10 +29,12 @@ Before you start with service import, Install Docker by following the steps prov
 ## Importing the service
 
 Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
+- wget command may not be installed. Need to add "yum install wget -y" incase of centos7.
 
 	    Example: 
        wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
 				
+- After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
 
 Step 2 : Execute the script from Step 1 using the following command.
 
