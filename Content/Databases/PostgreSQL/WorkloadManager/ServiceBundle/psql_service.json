@@ -1,5 +1,5 @@
 {
-   "displayName":"POSTGRESQL",
+   "displayName":"PostgreSQL",
    "name":"psqlserver",
    "description":"",
    "parentServiceId":"40",
