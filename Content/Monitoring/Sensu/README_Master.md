@@ -25,9 +25,12 @@ Before you start with service import, Install Docker by following the steps prov
 ## Importing the service
 
 Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
+- wget command may not be installed. Need to add "yum install wget -y" in case of centos7.
 
 	    Example: 
-       wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+        wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+				
+- After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
 				
 
 Step 2 : Execute the script from Step 1 using the following command.
@@ -38,7 +41,7 @@ Once the script is run, please follow the prompts to import the service or the c
 
 ##### PLEASE NOTE : You will be prompted with location of service bundle zip on client machine. The file must be copied on to the repository before proceeding to deploy.
 
-         - Service Zip file under <services_path>/<your_bundle_name>
+         - Service Zip file under <service_path>/<your_bundle_name>
                     
              Example : http://<Your_REPO_Server_IP>/<service_path>/sensu.zip 
  
@@ -47,7 +50,7 @@ Once the script is run, please follow the prompts to import the service or the c
 The Package of Service bundle consists of the following files:
 
 Shell script:
- - service: This script will set all required environment variables, installs necessary packages and also invokes the external life cycle actions.
+ - service: This script will set all required environment variables, install necessary packages and also invokes the external life cycle actions.
  
 # Minimum Resource Specifications
 
@@ -66,4 +69,3 @@ Agent Lifecycle Actions:
  - Start: Script from bundle: **service start**
  - Stop: Script from bundle: **service stop**
  - Restart: Script from bundle: **service restart**
-
