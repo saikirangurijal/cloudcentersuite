@@ -8,7 +8,8 @@
 	and visualize the data gathered from the components of your IT infrastructure or business. 
 	Splunk Enterprise takes in data from websites, applications, sensors, devices, and so on. 
 	The latest released version of splunk enterprise is '6.5'.
-	After you define the data source, Splunk Enterprise indexes the data stream and parses it into a series of individual events that you can view and search.
+	After you define the data source, Splunk Enterprise indexes the data stream and parses it into a 
+	series of individual events that you can view and search.
       
     Please refer the below link for more details.
     https://docs.splunk.com/Documentation
@@ -29,9 +30,12 @@ Before you start with service import, Install Docker by following the steps prov
 ## Importing the service
 
 Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
+- wget command may not be installed. Need to add "yum install wget -y" in case of centos7.
 
 	    Example: 
-       wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+        wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+				
+- After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
 				
 
 Step 2 : Execute the script from Step 1 using the following command.
@@ -42,7 +46,7 @@ Once the script is run, please follow the prompts to import the service or the c
 
 ##### PLEASE NOTE : You will be prompted with location of service bundle zip on client machine. The file must be copied on to the repository before proceeding to deploy.
 
-         - Service Zip file under <services_path>/<your_bundle_name>
+         - Service Zip file under <service_path>/<your_bundle_name>
                     
              Example : http://<Your_REPO_Server_IP>/<service_path>/splunk.zip 
 
@@ -81,6 +85,5 @@ Agent Lifecycle Actions:
 | -------------- | ------ | ------------------ | -------------------------- | ------------ |
 |  serverPort    | Number |  Server Web Port   | 80-65534 (Any Unused Port) |     80       |
 |  receiverPort  | Number | Data Receiver Port | 81-65534 (Any Unused Port) |    9997      | 
-
 
 
