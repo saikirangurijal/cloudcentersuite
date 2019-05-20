@@ -1,11 +1,11 @@
 # Sensu Agent
 ## Introduction
-    The Workload Manager supports integration to various third party services. This document briefs down information 
-    on integration with Sensu Server by creating a Virtual Machine (VM) with Agent service in Workload Manager.
+    The Workload Manager supports integration to various third party services. This document briefs down 
+    information on integration with Sensu Server by creating a Virtual Machine (VM) with Agent service in Workload Manager.
     
-    Sensu agent is a lightweight client that runs on the infrastructure components you want to monitor. Agents register 
-    with the Sensu backend as monitoring entities with type: "agent". Agent entities are responsible for creating 
-    check and metrics events to send to the backend event pipeline. 
+    Sensu agent is a lightweight client that runs on the infrastructure components you want to monitor. 
+    Agents register with the Sensu backend as monitoring entities with type: "agent". Agent entities are responsible
+    for creating check and metrics events to send to the backend event pipeline. 
     
     Please refer the below link for more details.
     https://docs.sensu.io/sensu-go/5.3/reference/agent/
@@ -26,9 +26,12 @@ Before you start with service import, Install Docker by following the steps prov
 ## Importing the Application Profile
 
 Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
+- wget command may not be installed. Need to add "yum install wget -y" in case of centos7.
 
 	    Example: 
-       wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+        wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+				
+- After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
 				
 
 Step 2 : Execute the script from Step 1 using the following command.
@@ -78,4 +81,3 @@ S.No    | Resource    |  Value   | Remarks
 | Parameter Name	| Type	 | Description | Allowed Value |Default Value |
 | ------ | ------ | ------ |------ | ------ |
 | rabbitmqPort | Number | Port for connecting to Sensu Server  |  | 5672 | 
-
