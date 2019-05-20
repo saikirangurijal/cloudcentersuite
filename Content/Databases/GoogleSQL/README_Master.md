@@ -29,10 +29,10 @@ Before you start with service import, Install Docker by following the steps prov
 ## Importing the service
 
 Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
-- wget command may not be installed. Need to add "yum install wget -y" incase of centos7.
+- wget command may not be installed. Need to add "yum install wget -y" in case of centos7.
 
 	    Example: 
-       wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+        wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
 				
 - After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
 
@@ -45,7 +45,7 @@ Once the script is run, please follow the prompts to import the service or the c
 
 ##### PLEASE NOTE : You be prompted with location of service bundle zip and/or application bundle zip on client machine. The files must be copied on to the repository before proceeding to deploy.
 
-         - Service Zip file under <services_path>/<your_bundle_name>
+         - Service Zip file under <service_path>/<your_bundle_name>
                     
              Example : http://<Your_REPO_Server_IP>/<service_path>/googlesql.zip 
     
@@ -63,7 +63,7 @@ Shell script:
 
 Python script :
 
-- install_setup.py: The script will installs necessary python packages also invokes external life cycle action.
+- install_setup.py: The script will install necessary python packages also invokes external life cycle action.
 
 - google_sql.py : The script will invoke the creation and deletion service based on user selection type (MYSQL/POSTGRESQL) using google management client.
 
@@ -73,7 +73,7 @@ Python script :
 
 - util.py: utility file
 
-- error_messages.json : Json file contails error messages.
+- error_messages.json : Json file contains error messages.
 
 - error_utils.py: The script that handles error functionality
 
@@ -102,6 +102,5 @@ External Lifecycle Actions:
 | geDbPassword| Password | Database password to be configured for the service. |
 | geDbName | String | Database name to be configured for the service.| User Defined Value | petclinic |
 | geDbHost | String | Database host to be configured for the service.| % | %
-
 
 
