@@ -14,7 +14,7 @@
   - Oracle WebLogic 12C JAR file is mandatory to run weblogic, Please make it available, by purchasing the same from its proprietor. For further details please refer [here](http://download.oracle.com/otn/nt/middleware/12c/12213/fmw_12.2.1.3.0_wls_Disk1_1of1.zip). 
   
 #### CloudCenter
- - CloudCenter 5.0.1 and above
+ - CloudCenter 5.x.x and above
  - Knowledge on how to use Workload Manager 
  - Supported OS: CentOS 7
 
@@ -30,9 +30,12 @@ Also, Convert the Oracle WebLogic JAR file you had purchased, into .zip format, 
 ## Importing the service
 
 Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
+- wget command may not be installed. Need to add "yum install wget -y" in case of centos7.
 
 	    Example: 
         wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+				
+- After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
 				
 
 Step 2 : Execute the script from Step 1 using the following command.
@@ -43,9 +46,9 @@ Once the script is run, please follow the prompts to import the service or the c
 
 ##### PLEASE NOTE : You will be prompted with location of service bundle zip, application bundle zip on client machine. The files (including the weblogic jar_to_zip converted file) must be copied on to the repository before proceeding to deploy.
 
-    - Service Bundle under <services_path>/<bundle.zip>
+    - Service Bundle under <service_path>/<bundle.zip>
                     
-               Example : http://<Your_REPO_Server_IP>/<services_path>/weblogic.zip 
+               Example : http://<Your_REPO_Server_IP>/<service_path>/weblogic.zip 
     
     - Application Bundle under <app_path>/<your_package_name>
             
@@ -68,7 +71,7 @@ Once the script is run, please follow the prompts to import the service or the c
 The Package of Service bundle consists of the following files:
 
 Shell script:
- - service: This script will set all required environment variables, installs necessary packages and also invokes the external life cycle actions.
+ - service: This script will set all required environment variables, install necessary packages and also invokes the external life cycle actions.
  - create-swapspace: This script will create the desired swapspace, which is a mandatory prerequisite before installing weblogic server. 
  - msserver: This shell script will start child nodes NodeManager.
  
