@@ -42,10 +42,12 @@ How it works :
 ## Importing the service
 
 Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
+- wget command may not be installed. Need to add "yum install wget -y" in case of centos7.
 
 	    Example: 
         wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
 				
+- After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
 
 Step 2 : Execute the script from Step 1 using the following command.
 
@@ -56,9 +58,9 @@ Once the script is run, please follow the prompts to import the service or the c
 
 ##### PLEASE NOTE : You be prompted with location of service bundle zip and/or application bundle zip(s) on client machine. The files must be copied on to the repository before proceeding to deploy.
           
-           - Service Bundle under <services_path>/<your_bundle_name>
+           - Service Bundle under <service_path>/<your_bundle_name>
                     
-                    Example : http://<Your_REPO_Server_IP>/<services_path>/aws_lambda.zip 
+                    Example : http://<Your_REPO_Server_IP>/<service_path>/aws_lambda.zip 
     
             - Application Bundle under <app_path>/<your_package_name>
             
@@ -73,7 +75,7 @@ Shell script:
  - service: Initiates the python script to start integration.
 
 Python script :
- - install_setup.py: The script will check all mandatory parameters available and installs necessary python packages also invokes external life cycle action.
+ - install_setup.py: The script will check all mandatory parameters available and install necessary python packages also invokes external life cycle action.
  - main.py:script will get required environment variables and execute the required functionalities. 
  - lambda_management.py: script that invokes the api for aws_lambda and creates the lambda function with provided deployment package.
  - util.py: utility file.
