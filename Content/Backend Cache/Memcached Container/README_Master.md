@@ -1,12 +1,12 @@
 # Memcached Container
 ## Introduction
     The  Workload Manager platform supports integration to various Backend Cache as Container service.
-    This document provides information on memcached integration as container with Cisco Workload Manager by creating 
-    Container Service.
+    This document provides information on memcached integration as container with Cisco Workload Manager
+    by creating Container Service.
     
     Memcached is a general-purpose distributed memory caching system. It is often used to speed up dynamic 
-    database-driven websites by caching data and objects in RAM to reduce the number of times an external data source 
-    (such as a database or API).
+    database-driven websites by caching data and objects in RAM to reduce the number of times an external 
+    data source (such as a database or API).
 	
     Please refer the below link for more details.
     https://memcached.org/
@@ -27,9 +27,12 @@ Before you start with service import, Install Docker by following the steps prov
 ## Importing the service
 
 Step 1 : Download the service import utility file from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
+- wget command may not be installed. Need to add "yum install wget -y" in case of centos7.
 
 	    Example: 
         wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+				
+- After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
 				
 
 Step 2 : Execute the script from Step 1 using the following command.
