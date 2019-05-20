@@ -26,10 +26,12 @@ Before you start with service import, Install Docker by following the steps prov
 ## Importing the service
 
 Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
+- wget command may not be installed. Need to add "yum install wget -y" in case of centos7.
 
 	    Example: 
-       wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+      wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
 				
+- After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
 
 Step 2 : Execute the script from Step 1 using the following command.
 
@@ -39,7 +41,7 @@ Once the script is run, please follow the prompts to import the service or the c
 
 ##### PLEASE NOTE : You be prompted with location of service bundle zip and/or application bundle zip on client machine. The files must be copied on to the repository before proceeding to deploy.
 
-         - Service Zip file under <services_path>/<your_bundle_name>
+         - Service Zip file under <service_path>/<your_bundle_name>
                     
              Example : http://<Your_REPO_Server_IP>/<service_path>/azurelb.zip 
     
@@ -86,7 +88,7 @@ External Lifecycle Actions:
 | healthProbePort | Number | Yes | Port Number to check health probe path for application. | <80> | 80
 | healthCheckProtocol | List | Yes | Ping Protocol Type. | TCP / HTTP / HTTPS | HTTP
 | healthCheckInterval | Number | Yes | Health Check Interval in seconds (Max 30 Seconds). | <30> | 30
-| unhealthThreshold | Number | Yes | Number of health check failures for unhealthly threshold. | <2> | 2
+| unhealthThreshold | Number | Yes | Number of health check failures for unhealthy threshold. | <2> | 2
 
 
 # Deployment Parameters:
