@@ -32,11 +32,7 @@ Step 1 : Download the service import utility file  from [here](https://raw.githu
 - wget command may not be installed. Need to add "yum install wget -y" in case of centos7.
 
 	    Example: 
-<<<<<<< HEAD
         wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
-=======
-      wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
->>>>>>> 9e8504c298ad8e3b5ca87f9b49e331e6f5f35dc3
 				
 - After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
 
