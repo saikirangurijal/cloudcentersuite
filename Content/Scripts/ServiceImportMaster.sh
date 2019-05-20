@@ -61,9 +61,4 @@ fi
         echo "____________________________________________________________________________"
 
 	docker run -v $PWD:/ccsworker -w /ccsworker -it  ccs_service_import:v1 /bin/bash
-
-	if [ $? -eq 0 ]; then
-		echo "Service Import is completed successfully..."
-	else
-		echo "$?"
-	fi
+	
