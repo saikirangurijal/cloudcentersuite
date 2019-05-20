@@ -1,11 +1,12 @@
 # Sensu Agent
 ## Introduction
-    The Workload Manager supports integration to various third party services. This document briefs down 
-    information on integration with Sensu Server by creating a Virtual Machine (VM) with Agent service in Workload Manager.
+    The Workload Manager supports integration to various third party services. 
+	This document briefs down information on integration with Sensu Server by creating 
+	a Virtual Machine (VM) with Agent service in Workload Manager.
     
     Sensu agent is a lightweight client that runs on the infrastructure components you want to monitor. 
-    Agents register with the Sensu backend as monitoring entities with type: "agent". Agent entities are responsible
-    for creating check and metrics events to send to the backend event pipeline. 
+    Agents register with the Sensu backend as monitoring entities with type: "agent". 
+	Agent entities are responsible for creating check and metrics events to send to the backend event pipeline. 
     
     Please refer the below link for more details.
     https://docs.sensu.io/sensu-go/5.3/reference/agent/
