@@ -34,8 +34,8 @@ cd ccsworker
 if [[ "$(docker images -q ccs_service_import:v1 2> /dev/null)" != "" ]]; then
 	  
 	echo "Docker image available. skipping  install..." >> $PWD/serviceimport.log
-	docker stop $(docker container ps -a --filter status=exited | grep ccs_service_import:v1 | awk '{ print $1 }')
-	docker rm $(docker container ps -a --filter status=exited | grep ccs_service_import:v1 | awk '{ print $1 }')
+	#docker stop $(docker container ps -a --filter status=exited | grep ccs_service_import:v1 | awk '{ print $1 }')
+	#docker rm $(docker container ps -a --filter status=exited | grep ccs_service_import:v1 | awk '{ print $1 }')
 	
 else
  	echo "Creating docker image ccs_service_import:v1 using Dockerfile..." 
