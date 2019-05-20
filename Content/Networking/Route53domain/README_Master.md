@@ -22,10 +22,12 @@ Before you start with service import, Install Docker by following the steps prov
 ## Importing the service
 
 Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
+- wget command may not be installed. Need to add "yum install wget -y" in case of centos7.
 
 	    Example: 
-        wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+      wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
 				
+- After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
 
 Step 2 : Execute the script from Step 1 using the following command.
 
@@ -48,12 +50,12 @@ Shell script:
  - service: Initiates the python script to start integration.
 
 Python script :
- - install_setup.py: The script will check all mandatory parameters available and installs necessary python packages also invokes external life cycle action.
- - amazon_domain_creation.py: script that invokes the api for route53 functions will domain availability and creatoing domain.
- - prerequiste_environments.py : Script will check required parameter for route53 management
- - domaincreation.json : input template json for route53 domain creation
- - util.py: utility file
- - error_utils.py: A script that handles error functionality
+ - install_setup.py: This script will check all mandatory parameters available and installs necessary python packages also invokes external life cycle action.
+ - amazon_domain_creation.py: This script will invoke the api for route53 functions, will check domain availability and create domain.
+ - prerequiste_environments.py : This Script will check required parameter for route53 management.
+ - domaincreation.json : input template json for route53 domain creation.
+ - util.py: utility file.
+ - error_utils.py: The script will handle error functionality.
 
 # External Lifecycle Actions as below
 External Action Bundle:  services/awsroute53.zip
