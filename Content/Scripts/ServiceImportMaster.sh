@@ -58,7 +58,7 @@ fi
 	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport_master.zip -q -O serviceimport_master.zip
 	unzip -o serviceimport_master.zip -d $PWD > /dev/null 2>&1
 	
-	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/categoryList.py -q -O categoryList.py
+	#wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/categoryList.py -q -O categoryList.py
 	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/ServiceList.json -q -O ServiceList.json
 	echo "File downloading complete ..." >>$PWD/serviceimport.log 
 
