@@ -7,7 +7,7 @@ echo "________________________________________________________________________"
 echo " This script will create a docker image using Dockerfile , creates the "
 echo " container and import the services on to workload manager."
 echo "________________________________________________________________________"
-which docker
+which docker > /dev/null 2>&1
 
 if [ $? -eq 0 ]
 then
@@ -38,8 +38,8 @@ if [[ "$(docker images -q ccs_service_import:v1 2> /dev/null)" != "" ]]; then
 	#docker rm $(docker container ps -a --filter status=exited | grep ccs_service_import:v1 | awk '{ print $1 }')
 	if [[ "$(docker container ps -a --filter status=exited | grep ccs_service_import:v1 2> /dev/null)" != "" ]]; then
 
-        	docker stop $(docker container ps -a --filter status=exited | grep ccs_service_import:v1 | awk '{ print $1 }')
-       		docker rm $(docker container ps -a --filter status=exited | grep ccs_service_import:v1 | awk '{ print $1 }')
+            docker stop $(docker container ps -a --filter status=exited | grep ccs_service_import:v1 | awk '{ print $1 }') > /dev/null 2>&1
+       	    docker rm $(docker container ps -a --filter status=exited | grep ccs_service_import:v1 | awk '{ print $1 }') > /dev/null 2>&1
 	else
 
         	echo "there is no containers in exit status" > /dev/null 2>&1
