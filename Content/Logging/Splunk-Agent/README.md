@@ -7,46 +7,71 @@
     Splunk Enterprise is a software product that enables you to search, analyze, 
 	and visualize the data gathered from the components of your IT infrastructure or business. 
 	Splunk Enterprise takes in data from websites, applications, sensors, devices, and so on. 
-	After you define the data source, Splunk Enterprise indexes the data stream and parses it into a series of individual events that you can view and search.
+	After you define the data source, Splunk Enterprise indexes the data stream and parses 
+	it into a series of individual events that you can view and search.
 
 	There are three types of Data forwarders:
 
-		- The universal forwarder contains only the components that are necessary to forward data. Learn more about the universal forwarder in the Universal Forwarder manual.
-		- A heavy forwarder is a full Splunk Enterprise instance that can index, search, and change data as well as forward it. 
-			The heavy forwarder has some features disabled to reduce system resource usage.
-		- A light forwarder is also a full Splunk Enterprise instance, with more features disabled to achieve as small a resource footprint as possible. 
-			The universal forwarder supersedes the light forwarder for nearly all purposes and represents the best tool for sending data to indexers.
+		- The universal forwarder contains only the components that are necessary to forward 
+		  data. Learn more about the universal forwarder in the Universal Forwarder manual.
+		- A heavy forwarder is a full Splunk Enterprise instance that can index, search, and 
+		  change data as well as forward it. 
+			 The heavy forwarder has some features disabled to reduce system resource usage.
+		- A light forwarder is also a full Splunk Enterprise instance, with more features disabled 
+		  to achieve as small a resource footprint as possible. 
+			 The universal forwarder supersedes the light forwarder for nearly all purposes and 
+			 represents the best tool for sending data to indexers.
 
     Please refer the below link for more details.
     https://docs.splunk.com/Documentation/Splunk/6.0/Forwarding/Typesofforwarders
 	
 ## Pre-Requisites
 #### CloudCenter
-- CloudCenter 5.0.1 and above
+- CloudCenter 5.x.x and above
 - Knowledge on how to use Workload Manager  
 - Ensure Splunk server is up and running
-- Supported OS: CentOS 7  
+- Supported OS: CentOS 7
 
-## Where to Download the service bundles
- Step 1 : Fetch Splunk agent File by copying & pasting the contents from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk-Agent/WorkloadManager/src/splunk-agent/splunk-agent) into a new file named "splunk-agent". Place the file in a repository and its location is http://YourIP/services/splunk-agent/splunk-agent.
- 
- Step 2 : With any existing App Profile, this agent script can be configured by defining value with proper repository path like  "services/splunk-agent/splunk-agent" under "Post Start script" in service Initialization  Actions. Sample App Profile has been given for demo.
-   
- Step 3 : Download the Sample Modelled Application Profiles with splunk agent pre-configured in Service lifecycle action, from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Splunk-Agent/WorkloadManager/splunk-agent_iu.zip)
- 
- Step 4 : Verify the location of the application packages and Agent File in file Repository. Make sure its placed correctly, By default Application Package will be under apps/your-packages and Node Lifecycle Agent file will be under services/splunk-agent/<splunk-agent-file>.
-   
- Step 5 : Login into your Cloud Center Suite with your credentials namely IP address, Email address, Password & Tenant ID. Navigate to App profiles section under Workload Manager. Click on "Import" button found on the top right corner of App profiles section. You will be prompted to choose the application profile that needs to be imported. Choose the Modelled Application Profile Zip file extracted from Step-3 downloaded splunk-agent_iu.zip file. Then You will be prompted to map your file repository in which you have placed the Node Lifecycle Agent file. Map your file repository.
-   
-You will be presented with a message saying "Application Profile Imported Successfully".
-   
-# Service Package Bundle
+#### Before you start
+Before you start with service import, Install Docker by following the steps provided [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx), on any linux based client machine.
 
-The Package of Service bundle consists of the following files:
+**NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
+- You can check , if docker is installed , by running "docker -v"
+- You can check , if docker is running , by executing the command "systemctl status docker"
+
+## Importing the application profile
+
+Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
+- wget command may not be installed. Need to add "yum install wget -y" in case of centos7.
+
+	    Example: 
+        wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+				
+- After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
+				
+
+Step 2 : Execute the script from Step 1 using the following command.
+
+        sh ServiceImportMaster.sh
+
+Once the script is run, please follow the prompts to import the application profile.
+
+##### PLEASE NOTE : You will be prompted with location of agent script file and application bundle zip on client machine. The files must be copied on to the repository before proceeding to deploy.
+
+         - Service Zip file under <service_path>/splunk-agent/<your_script_name>
+                    
+             Example : http://<Your_REPO_Server_IP>/<service_path>/splunk-agent/splunk-agent 
+    
+         - Application Zip file under <app_path>/<your_package_name>
+            
+             Example: http://<Your_REPO_Server_IP>/<app_path>/petclinic.war
+
+# Agent Bundle
+
+The Package of Agent bundle consists of the following files:
 
 Shell script:
  - splunk-agent: This script will install agent and configure the splunk agent with splunk server.
-
 
 # Service Initialization actions
    - Under "Post-Start Script" lifecycle action, agent script would be configured like services/splunk-agent/splunk-agent

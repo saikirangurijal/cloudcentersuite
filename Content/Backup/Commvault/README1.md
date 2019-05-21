@@ -23,41 +23,38 @@
 
 Note: Storage Policy/Plan by name "Server Plan" will be created automatically by default. If the plan needs to be customised, Please create a storage plan by referring [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Backup/Commvault/Commvault_Installation_And_SetUp_Manual.docx). 
 
-#### CloudCenter
+##### CloudCenter
 
-   - CloudCenter 5.x.x and above
+   - CloudCenter 5.0.1 and above
    - Knowledge on how to use Workload Manager
    - Supported OS (client): CentOS 7
+    
+# Download App bundles
 
-#### Before you start
-Before you start with service import, Install Docker by following the steps provided [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx), on any linux based client machine.
+Step 1 : Download the commvault app package zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Backup/Commvault/WorkloadManager/ServiceBundle/commvault-agent.zip).
 
-**NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
-- You can check , if docker is installed , by running "docker -v"
-- You can check , if docker is running , by executing the command "systemctl status docker"
+Step 2 : Place the app package bundle from Step 1 under apps/<bundle.zip> in a file repository. Its location will be http://YourIP/apps/commvault.zip.
 
-## Importing the Application Profile
+Step 3 : For File/MySQL DB Backup, Download the Sample Modelled Application Profile for Commvault Backup, from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Backup/Commvault/WorkloadManager/ApplicationProfiles/commvault_backup_sample_app.zip).
 
-Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
-- wget command may not be installed. Need to add "yum install wget -y" in case of centos7.
+Step 4 : For File/MySQL DB Restore, Download the Sample Modelled Application Profile for Commvault Restore, from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Backup/Commvault/WorkloadManager/ApplicationProfiles/commvault_restore_sample_app.zip).
 
-	    Example: 
-        wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
-				
-- After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
+Step 5 : For App Profile for Commvault Backup, Pre-start and Post-start script in service Initialization Actions are pre-configured with paths mentioned in section "Service Initialization actions / Node Initialization & Clean Up". Sample App Profile has been given for demo.
 
-Step 2 : Execute the script from Step 1 using the following command.
+Step 6 : For App Profile for Commvault Restore, Pre-start and Post-start script in service Initialization Actions are pre-configured with paths mentioned in section "Service Initialization actions / Node Initialization & Clean Up". Sample App Profile has been given for demo.
 
-        sh ServiceImportMaster.sh
+Step 7 : Verify whether the commvault app package zip file is placed correctly in file Repository. By default, it will be under apps/commvault.zip.
 
-Once the script is run, please follow the prompts to import application profile.
+Step 8 : Login into your Cloud Center Suite with your credentials namely IP address, Email address, Password & Tenant ID. Navigate to App profiles section under Workload Manager.
+ - Click on "Import" button found on the top right corner of App profiles section. You will be prompted to choose the application profile that needs to be imported.
+ - Choose the App Profile Zip file for Commvault Backup downloaded from Step-3. 
+ - Then You will be prompted to map your file repository in which you have placed the commvault app package bundle zip file. Map your file repository.
 
-##### PLEASE NOTE : You will be prompted with location of application bundle zip on client machine. The files must be copied on to the repository before proceeding to deploy.
+You will be presented with a message saying "Application Profile Imported Successfully".
 
-    - Application Bundle under <app_path>/<your_package_name>
-            
-               Example : http://<Your_REPO_Server_IP>/<app_path>/commvault-agent.zip
+Step 9: Repeat Step 8 for importing the App Profile for Commvault Restore by choosing the App Profile Zip file for Commvault restore downloaded from Step-4.
 
+You will be presented with a message saying "Application Profile Imported Successfully".
 
 # Application Package Bundle
 
