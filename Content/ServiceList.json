@@ -166,7 +166,7 @@
     "digest": ""
   },
   {
-    "name": "route53",
+    "name": "Route53",
 	"serviceID":"route53",
 	"serviceCategory":"Networking",
     "description": "AWS Route53",
@@ -181,7 +181,7 @@
     "digest": ""
   },
   {
-    "name": "awsroute53domain",
+    "name": "AWSRoute53domain",
 	"serviceID":"awsroute53domain",
 	"serviceCategory":"Networking",
     "description": "AWS domain creation",
