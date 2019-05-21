@@ -1,17 +1,19 @@
 # Mongodb Cluster
 ## Introduction
-    The  Workload Manager platform supports integration to various NoSQL database as Virtual Machine with Agent.
-    This document provides information on Mongodb integration with Cisco Workload Manager by creating Virtual Machine 
-    with Agent.
+    The  Workload Manager platform supports integration to various NoSQL database as Virtual 
+	Machine with Agent.
+    This document provides information on Mongodb integration with Cisco Workload Manager by creating 
+	Virtual Machine with Agent.
     
-    MongoDB is a cross-platform, document oriented database that provides, high performance, high availability, 
-    and easy scalability. MongoDB works on concept of collection and document.
+    MongoDB is a cross-platform, document oriented database that provides, high performance, 
+	high availability, and easy scalability. MongoDB works on concept of collection and document.
     
-    The service which we have created will support Mongo DB Cluster with 'n' nodes. Of which the Final node 
-    will have Config server, Router and a Shard server. Remaining nodes(n-1) will have one shard server 
-    per node with its own Replica.
+    The service which we have created will support Mongo DB Cluster with 'n' nodes. Of which 
+	the Final node will have Config server, Router and a Shard server. Remaining nodes(n-1) 
+	will have one shard server per node with its own Replica.
     
-    Router is configured in Port 27011, Config server in 27010, and all Shard Servers will work on default Port 27017.
+    Router is configured in Port 27011, Config server in 27010, and all Shard Servers will work on 
+	default Port 27017.
     
     Please refer the below link for more details.
     https://docs.mongodb.com/manual/tutorial/deploy-shard-cluster/
