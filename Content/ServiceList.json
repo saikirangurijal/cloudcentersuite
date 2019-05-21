@@ -203,7 +203,7 @@
     "supportedVersion": "5.0.1",
     "serviceVersion": "1.0",
     "urls": {
-        "serviceLibraryBundle": "Networking/loadbalancers/AzureLB/WorkloadManager/AzureLoadBalancer.zip",
+        "serviceLibraryBundle": "Networking/loadbalancers/AzureELB/WorkloadManager/AzureLoadBalancer.zip",
         "dockerFile": "dockerimages/Dockerfile",
         "serviceImport": "Scripts/serviceimport.zip"
     },
