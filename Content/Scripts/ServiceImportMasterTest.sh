@@ -56,11 +56,11 @@ fi
 ##### STEP 3: COPY THE SERVICE IMPORT AND SERVICE LIBRARY BUNDLE on to ccsworker 
 
 	echo "Downloading the files for service import..." >>$PWD/serviceimport.log 
-	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip -q -O serviceimport.zip
-	unzip -o serviceimport.zip -d $PWD > /dev/null 2>&1
+	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport_test.zip -q -O serviceimport_test.zip
+	unzip -o serviceimport_test.zip -d $PWD > /dev/null 2>&1
 	
 	#wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/categoryList.py -q -O categoryList.py
-	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/ServiceList.json -q -O ServiceList.json
+	wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/ServiceListTest.json -q -O ServiceListTest.json
 	echo "File downloading complete ..." >>$PWD/serviceimport.log 
 
 ##### STEP 4: Run the Docker 
