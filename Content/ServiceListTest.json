@@ -105,6 +105,7 @@
                     "description": "Application Monitoring",
                     "supportedVersion": "5.0.1",
                     "serviceVersion": "1.0",
+					"isService": false,
                     "urls": {
                       "serviceLibraryBundle": "Monitoring/Sensu-Agent/WorkloadManager/SensuAgent.zip",
                       "dockerFile": "dockerimages/Dockerfile",
@@ -162,6 +163,7 @@
                     "description": "Commvault Integration Unit",
                     "supportedVersion": "5.0.1",
                     "serviceVersion": "1.0",
+					"isService": false,
                     "urls": {
                         "serviceLibraryBundle": "Backup/Commvault/WorkloadManager/Commvault.zip",
                         "dockerFile": "dockerimages/Dockerfile",
@@ -320,6 +322,7 @@
                   "description": "Data Logging",
                   "supportedVersion": "5.0.1",
                   "serviceVersion": "1.0",
+				  "isService": false,
                   "urls": {
                       "serviceLibraryBundle": "Logging/Splunk-Agent/WorkloadManager/SplunkAgent.zip",
                       "dockerFile": "dockerimages/Dockerfile",
