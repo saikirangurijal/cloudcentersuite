@@ -1,0 +1,206 @@
+{
+	"displayName": "Cassandra Cluster",
+	"name": "cassandracluster",
+	"description": "Cassandra multi node cluster VM with agent",
+	"parentServiceId": "41",
+	"costPerHour": "0.00",
+	"bundleLocation": "services/cassandracluster.zip",
+	"systemService": false,
+	"serviceType": "VM_AGENT",
+	"logoPath": "logo.png",
+	"serviceActions": [{
+		"actionName": "INSTALL",
+		"actionType": "SCRIPT",
+		"actionValue": "service install",
+		"value": "service install",
+		"key": "INSTALL"
+	}, {
+		"actionName": "START",
+		"actionType": "SCRIPT",
+		"actionValue": "service start",
+		"value": "service start",
+		"key": "START"
+	}, {
+		"actionName": "STOP",
+		"actionType": "SCRIPT",
+		"actionValue": "service stop",
+		"value": "service stop",
+		"key": "STOP"
+	}, {
+		"actionName": "RESTART",
+		"actionType": "SCRIPT",
+		"actionValue": "service restart",
+		"value": "service restart",
+		"key": "RESTART"
+	}],
+	"externalBundleLocation": "null",
+	"externalActions": [],
+	"actions": [],
+	"serviceParamSpecs": [{
+		"paramName": "NoSqlClusterName",
+		"displayName": "Cluster Name",
+		"helpText": "Default cluster name would be TestCluster",
+		"type": "string",
+		"valueConstraint": {
+			"maxLength": 255,
+			"allowSpaces": true,
+			"remainingChars": 255
+		},
+		"valueList": null,
+		"collectionList": null,
+		"defaultValue": "TestCluster",
+		"secret": null,
+		"confirmValue": null,
+		"pathSuffixValue": null,
+		"userVisible": true,
+		"userEditable": true,
+		"optional": false,
+		"multiselectSupported": false,
+		"webserviceListParams": null,
+		"systemParam": true
+	}, {
+		"paramName": "NoSqlDatabaseName",
+		"displayName": "Keyspace Name",
+		"helpText": "",
+		"type": "string",
+		"valueConstraint": {
+			"maxLength": 255,
+			"allowSpaces": true,
+			"remainingChars": 255
+		},
+		"valueList": null,
+		"collectionList": null,
+		"defaultValue": "demo_cassdb",
+		"secret": null,
+		"confirmValue": null,
+		"pathSuffixValue": null,
+		"userVisible": true,
+		"userEditable": true,
+		"optional": false,
+		"multiselectSupported": false,
+		"webserviceListParams": null,
+		"systemParam": true
+	}, {
+		"paramName": "NoSqlDatabaseRootPass",
+		"displayName": "DB Password",
+		"helpText": "Database Password for Superuser cassandra",
+		"type": "password",
+		"valueConstraint": {
+			"maxLength": 255,
+			"minLength": 8,
+			"remainingChars": 255
+		},
+		"valueList": null,
+		"collectionList": null,
+		"defaultValue": "uDMesjPESuAxUlT4YL+Rqw==",
+		"secret": null,
+		"confirmValue": "uDMesjPESuAxUlT4YL+Rqw==",
+		"pathSuffixValue": null,
+		"userVisible": true,
+		"userEditable": true,
+		"optional": false,
+		"multiselectSupported": false,
+		"webserviceListParams": null,
+		"systemParam": true
+	}, {
+		"paramName": "numClusterNodes",
+		"displayName": "Number of Nodes in the Cluster",
+		"helpText": "",
+		"type": "number",
+		"valueConstraint": {
+			"minValue": "0",
+			"maxValue": "999999"
+		},
+		"valueList": null,
+		"collectionList": null,
+		"defaultValue": "2",
+		"secret": null,
+		"confirmValue": null,
+		"pathSuffixValue": null,
+		"userVisible": true,
+		"userEditable": true,
+		"optional": false,
+		"multiselectSupported": false,
+		"webserviceListParams": null,
+		"systemParam": true
+	}, {
+		"paramName": "numSeedNodes",
+		"displayName": "Number of Seed Nodes",
+		"helpText": "Number of Seed Nodes should be less than total Cassandra Nodes in the cluster.",
+		"type": "number",
+		"valueConstraint": {
+			"minValue": "0",
+			"maxValue": "999999"
+		},
+		"valueList": null,
+		"collectionList": null,
+		"defaultValue": "1",
+		"secret": null,
+		"confirmValue": null,
+		"pathSuffixValue": null,
+		"userVisible": true,
+		"userEditable": true,
+		"optional": false,
+		"multiselectSupported": false,
+		"webserviceListParams": null,
+		"systemParam": true
+	}, {
+		"paramName": "minClusterSize",
+		"displayName": "Minimum Number of Nodes",
+		"helpText": "",
+		"type": "number",
+		"valueConstraint": {
+			"minValue": "0",
+			"maxValue": "999999"
+		},
+		"valueList": null,
+		"collectionList": null,
+		"defaultValue": "2",
+		"secret": null,
+		"confirmValue": null,
+		"pathSuffixValue": null,
+		"userVisible": true,
+		"userEditable": true,
+		"optional": false,
+		"multiselectSupported": false,
+		"webserviceListParams": null,
+		"systemParam": true
+	}, {
+		"paramName": "maxClusterSize",
+		"displayName": "Maximum Number of Nodes",
+		"helpText": "",
+		"type": "number",
+		"valueConstraint": {
+			"minValue": "0",
+			"maxValue": "999999"
+		},
+		"valueList": null,
+		"collectionList": null,
+		"defaultValue": "3",
+		"secret": null,
+		"confirmValue": null,
+		"pathSuffixValue": null,
+		"userVisible": true,
+		"userEditable": true,
+		"optional": false,
+		"multiselectSupported": false,
+		"webserviceListParams": null,
+		"systemParam": true
+	}],
+	"servicePorts": [{
+	      "fromPort": "1",
+	      "toPort": "65000",
+	      "protocol": "TCP"
+	    }],
+	"images": [{
+		"id": "4"
+	}, {
+		"id": "21"
+	}],
+	"defaultImageId": "21",
+	"containerImages": [],
+	"containerPorts": [],
+	"repositories": [{
+		"id": "1"
+	}]
+}

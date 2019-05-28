@@ -1,0 +1,192 @@
+{  
+   "displayName":"Google SQL",
+   "name":"googlesql",
+   "description":"Google SQL",
+   "parentServiceId":"40",
+   "costPerHour":"0.00",
+   "bundleLocation":"",
+   "systemService":false,
+   "serviceType":"EXTERNAL",
+   "logoPath":"null",
+   "serviceActions":[
+
+   ],
+   "externalBundleLocation":"services/googlesql.zip",
+   "externalActions":[  
+      {  
+         "actionName":"START",
+         "actionType":"SCRIPT",
+         "actionValue":"service start",
+         "value":"service start",
+         "key":"START"
+      },
+      {  
+         "actionName":"STOP",
+         "actionType":"SCRIPT",
+         "actionValue":"service stop",
+         "value":"service stop",
+         "key":"STOP"
+      }
+   ],
+   "actions":[  
+
+   ],
+   "serviceParamSpecs":[  
+      {  
+         "paramName":"geSqlType",
+         "displayName":"Sql Type",
+         "helpText":"",
+         "type":"list",
+         "valueConstraint":{  
+            "allowSpaces":true
+         },
+         "valueList":"MYSQL,POSTGRESQL",
+         "collectionList":null,
+         "defaultValue":"MYSQL",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      },
+      {  
+         "paramName":"geInstanceName",
+         "displayName":"Instance Name",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      },
+      {  
+         "paramName":"geDbUserName",
+         "displayName":"Database Usename",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"petclinic",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true,
+         "deploymentParam":false
+      },
+      {  
+         "paramName":"geDbPassword",
+         "displayName":"Database Password",
+         "helpText":"",
+         "type":"password_input",
+         "valueConstraint":{  
+
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":null,
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true,
+         "deploymentParam":false
+      },
+      {  
+         "paramName":"geDbName",
+         "displayName":"Database Name",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"petclinic",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true,
+         "deploymentParam":false
+      },
+      {  
+         "paramName":"geDbHost",
+         "displayName":"Host",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"%",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":false,
+         "userEditable":false,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true,
+         "deploymentParam":false
+      }
+   ],
+   "servicePorts":[  
+
+   ],
+   "images":[  
+
+   ],
+   "defaultImageId":"",
+   "containerImages":[  
+
+   ],
+   "containerPorts":[  
+
+   ],
+   "repositories":[  
+
+   ]
+}

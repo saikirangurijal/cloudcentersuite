@@ -1,0 +1,210 @@
+{  
+   "displayName":"Mongo DB Cluster",
+   "name":"mongodbcluster",
+   "description":"mongocluster with config server, sharding server and router server",
+   "parentServiceId":"41",
+   "costPerHour":"0.00",
+   "bundleLocation":"services/mongodbcluster.zip",
+   "systemService":false,
+   "serviceType":"VM_AGENT",
+   "logoPath":"custom/assets/img/serviceLogo/072e3485-01f5-4b32-992a-5bc53527d62f.png",
+   "serviceActions":[  
+      {  
+         "actionName":"INSTALL",
+         "actionType":"SCRIPT",
+         "actionValue":"service install",
+         "value":"service install",
+         "key":"INSTALL"
+      },
+      {  
+         "actionName":"CONFIGURE",
+         "actionType":"SCRIPT",
+         "actionValue":"service configure",
+         "value":"service configure",
+         "key":"CONFIGURE"
+      },
+      {  
+         "actionName":"STOP",
+         "actionType":"SCRIPT",
+         "actionValue":"service stop",
+         "value":"service stop",
+         "key":"STOP"
+      }
+   ],
+   "externalBundleLocation":"null",
+   "externalActions":[  
+
+   ],
+   "actions":[  
+
+   ],
+   "serviceParamSpecs":[  
+      {  
+         "paramName":"numClusterNodes",
+         "displayName":"Number of Nodes in the Cluster",
+         "helpText":"",
+         "type":"number",
+         "valueConstraint":{  
+            "minValue":"0",
+            "maxValue":"999999"
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"2",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {  
+         "paramName":"minClusterSize",
+         "displayName":"Minimum Number of Nodes",
+         "helpText":"",
+         "type":"number",
+         "valueConstraint":{  
+            "minValue":"0",
+            "maxValue":"999999"
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"2",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {  
+         "paramName":"maxClusterSize",
+         "displayName":"Maximum Number of Nodes",
+         "helpText":"",
+         "type":"number",
+         "valueConstraint":{  
+            "minValue":"0",
+            "maxValue":"999999"
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"3",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {  
+         "paramName":"dbName",
+         "displayName":"dbName",
+         "helpText":"default  Database Name  is \"mongodb-cluster\"",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"mongodb-cluster",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {  
+         "paramName":"dbUsername",
+         "displayName":"dbUsername",
+         "helpText":"default username is \"mongo\"",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"mongo",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {  
+         "paramName":"dbPassword",
+         "displayName":"dbPassword",
+         "helpText":"default password is \"mongocluster\"",
+         "type":"password",
+         "valueConstraint":{  
+            "maxLength":255,
+            "minLength":8,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"3veFNiTJEYBPahh91sKQuRNG0qWyaFv6oT/11nP6d98=",
+         "secret":null,
+         "confirmValue":"3veFNiTJEYBPahh91sKQuRNG0qWyaFv6oT/11nP6d98=",
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      }
+   ],
+   "servicePorts":[  
+      {  
+         "fromPort":"20000",
+         "toPort":"30000",
+         "protocol":"TCP"
+      },
+      {  
+         "fromPort":"2000",
+         "toPort":"3000",
+         "protocol":"TCP"
+      }
+   ],
+   "images":[  
+      {  
+         "id":"4"
+      },
+      {  
+         "id":"21"
+      },
+      {  
+         "id":"26"
+      }
+   ],
+   "defaultImageId":"4",
+   "containerImages":[  
+
+   ],
+   "containerPorts":[  
+
+   ],
+   "repositories":[  
+   ] 
+}

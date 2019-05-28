@@ -1,0 +1,18 @@
+{
+    "account": {
+        "subscriptionId": "",
+        "tenantId": "",
+        "clientId": "",
+        "clientSecret": "",
+        "location": ""
+    },
+    "resourceGroup": "",
+    "name": "",
+    "administrator_login": "",
+    "administrator_login_password": "",
+    "vmResourceGroup": "",
+    "dbName":"",
+    "publicIP":""
+}
+
+

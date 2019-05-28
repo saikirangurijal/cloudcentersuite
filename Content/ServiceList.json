@@ -3,21 +3,23 @@
   [
           {
       "DNS": [
-          {
+        {
+          "Route 53":{
           "name": "route53",
-          "serviceID":"route53",
-          "serviceCategory":"Networking",
+          "serviceID": "route53",
+          "serviceCategory": "Networking",
           "serviceSubcategory": "DNS/AWS/route53",
           "description": "AWS Route53",
           "supportedVersion": "5.0.1",
           "serviceVersion": "1.0",
           "urls": {
-              "serviceLibraryBundle": "Networking/Route53/WorkloadManager/Route53.zip",
-              "dockerFile": "dockerimages/Dockerfile",
-              "serviceImport": "Scripts/serviceimport.zip"
+            "serviceLibraryBundle": "Networking/Route53/WorkloadManager/Route53.zip",
+            "dockerFile": "dockerimages/Dockerfile",
+            "serviceImport": "Scripts/serviceimport.zip"
           },
-         "created": "",
+          "created": "",
           "digest": ""
+        }
         }
       ],
       "LoadBalancer":[
@@ -114,7 +116,7 @@
 		}
 
        }],
-  "Monitering":
+  "Monitoring":
           [
             {
               "Sensu-Agent": {
@@ -196,120 +198,125 @@
   "Databases":
           [
             {
-              "Google SQL":{
-                  "name": "Google SQL",
-                  "serviceID":"googlesql",
-                  "serviceCategory":"Databases",
-                  "description": "Google Cloud SQL Integration Unit",
-                  "supportedVersion": "5.0.1",
-                  "serviceVersion": "1.0",
-                  "urls": {
-                      "serviceLibraryBundle": "Databases/GoogleSQL/WorkloadManager/GoogleSQL.zip",
+              "DBaaS": [
+                {
+                  "GoogleSQl": {
+                    "name": "Google SQL",
+                    "serviceID": "googlesql",
+                    "serviceCategory": "Databases",
+                    "description": "Google Cloud SQL Integration Unit",
+                    "supportedVersion": "5.0.1",
+                    "serviceVersion": "1.0",
+                    "urls": {
+                      "serviceLibraryBundle": "Databases/DBaaS/GoogleSQL/WorkloadManager/GoogleSQL.zip",
                       "dockerFile": "dockerimages/Dockerfile",
                       "serviceImport": "Scripts/serviceimport.zip"
+                    },
+                    "created": "",
+                    "digest": ""
                   },
-                  "created": "",
-                  "digest": ""
-                },
-              "MSSql Ubuntu":{
-                  "name": "MSSQl UBUNTU",
-                  "serviceID":"mssqlserver",
-                  "serviceCategory":"Databases",
-                  "description": "MSSQL Integration Unit",
-                  "supportedVersion": "5.0.1",
-                  "serviceVersion": "1.0",
-                  "urls": {
-                      "serviceLibraryBundle": "Databases/MSSQL/WorkloadManager/MSSQLUbuntu.zip",
-                      "dockerFile": "dockerimages/Dockerfile",
-                      "serviceImport": "Scripts/serviceimport.zip"
-                  },
-                  "created": "",
-                  "digest": ""
-                },
-              "PostgreSQL":{
-                  "name": "POSTGRESQL",
-                  "serviceID":"psqlserver",
-                  "serviceCategory":"Databases",
-                  "description": "PostgreSQL Integration Unit",
-                  "supportedVersion": "5.0.1",
-                  "serviceVersion": "1.0",
-                  "urls": {
-                      "serviceLibraryBundle": "Databases/PostgreSQL/WorkloadManager/PostgreSQL.zip",
-                      "dockerFile": "dockerimages/Dockerfile",
-                      "serviceImport": "Scripts/serviceimport.zip"
-                  },
-                  "created": "",
-                  "digest": ""
-                },
                   "AzureSQL": {
-                      "name": "AzureSQL",
-                      "serviceID": "azuresql",
-                      "serviceCategory": "Databases",
-                      "description": "AzureSQL Integration Unit",
-                      "supportedVersion": "5.0.1",
-                      "serviceVersion": "1.0",
-                      "urls": {
-                          "serviceLibraryBundle": "Databases/PostgreSQL/WorkloadManager/AzureSQL.zip",
-                          "dockerFile": "dockerimages/Dockerfile",
-                          "serviceImport": "Scripts/serviceimport.zip"
-                     },
-                    "created": "",
-                    "digest": ""
-                }
-
-            }
-          ],
-  "NoSQL Databases":
-          [
-            {
-              "Cassandra Cluster":{
-                    "name": "Cassandra Cluster",
-                    "serviceID":"cassandracluster",
-                    "serviceCategory":"NoSQL Databases",
-                    "description": "Cassandra multi node cluster VM with agent",
+                    "name": "AzureSQL",
+                    "serviceID": "azuresql",
+                    "serviceCategory": "Databases",
+                    "description": "AzureSQL Integration Unit",
                     "supportedVersion": "5.0.1",
                     "serviceVersion": "1.0",
                     "urls": {
-                        "serviceLibraryBundle": "NoSQL Databases/Cassandra Cluster/WorkloadManager/CassandraCluster.zip",
-                        "dockerFile": "dockerimages/Dockerfile",
-                        "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                   "created": "",
-                    "digest": ""
-                  },
-              "DynamoDB":{
-                    "name": "DynamoDB",
-                    "serviceID":"dynamodb",
-                    "serviceCategory":"NoSQL Databases",
-                    "description": "AWS DynamoDB",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-                    "urls": {
-                        "serviceLibraryBundle": "NoSQL Databases/DynamoDB/WorkloadManager/DynamoDB.zip",
-                        "dockerFile": "dockerimages/Dockerfile",
-                        "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
-  },
-              "MongoDB Cluster":{
-                    "name": "Mongo DB Cluster",
-                    "serviceID":"mongodbcluster",
-                    "serviceCategory":"NoSQL Databases",
-                    "description": "Mongocluster with config server, sharding server and router server",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-                    "urls": {
-                        "serviceLibraryBundle": "NoSQL Databases/MongoDB Cluster/WorkloadManager/MongoDBCluster.zip",
-                        "dockerFile": "dockerimages/Dockerfile",
-                        "serviceImport": "Scripts/serviceimport.zip"
+                      "serviceLibraryBundle": "Databases/DBaaS/AzureSQL/WorkloadManager/AzureSQL.zip",
+                      "dockerFile": "dockerimages/Dockerfile",
+                      "serviceImport": "Scripts/serviceimport.zip"
                     },
                     "created": "",
                     "digest": ""
                   }
+                }
+              ],
+              "NoSQL Databases": [
+                {
+                  "Cassandra Cluster": {
+                    "name": "Cassandra Cluster",
+                    "serviceID": "cassandracluster",
+                    "serviceCategory": "NoSQL Databases",
+                    "description": "Cassandra multi node cluster VM with agent",
+                    "supportedVersion": "5.0.1",
+                    "serviceVersion": "1.0",
+                    "urls": {
+                      "serviceLibraryBundle": "Databases/NoSQL Databases/Cassandra Cluster/WorkloadManager/CassandraCluster.zip",
+                      "dockerFile": "dockerimages/Dockerfile",
+                      "serviceImport": "Scripts/serviceimport.zip"
+                    },
+                    "created": "",
+                    "digest": ""
+                  },
+                  "DynamoDB": {
+                    "name": "DynamoDB",
+                    "serviceID": "dynamodb",
+                    "serviceCategory": "NoSQL Databases",
+                    "description": "AWS DynamoDB",
+                    "supportedVersion": "5.0.1",
+                    "serviceVersion": "1.0",
+                    "urls": {
+                      "serviceLibraryBundle": "Databases/NoSQL Databases/DynamoDB/WorkloadManager/DynamoDB.zip",
+                      "dockerFile": "dockerimages/Dockerfile",
+                      "serviceImport": "Scripts/serviceimport.zip"
+                    },
+                    "created": "",
+                    "digest": ""
+                  },
+                  "MongoDB Cluster": {
+                    "name": "Mongo DB Cluster",
+                    "serviceID": "mongodbcluster",
+                    "serviceCategory": "NoSQL Databases",
+                    "description": "Mongocluster with config server, sharding server and router server",
+                    "supportedVersion": "5.0.1",
+                    "serviceVersion": "1.0",
+                    "urls": {
+                      "serviceLibraryBundle": "Databases/NoSQL Databases/MongoDB Cluster/WorkloadManager/MongoDBCluster.zip",
+                      "dockerFile": "dockerimages/Dockerfile",
+                      "serviceImport": "Scripts/serviceimport.zip"
+                    },
+                    "created": "",
+                    "digest": ""
+                  }
+                }
+              ],
+              "Relational Databases": [
+                {
+                  "MSSql Ubuntu": {
+                    "name": "MSSQl UBUNTU",
+                    "serviceID": "mssqlserver",
+                    "serviceCategory": "Databases",
+                    "description": "MSSQL Integration Unit",
+                    "supportedVersion": "5.0.1",
+                    "serviceVersion": "1.0",
+                    "urls": {
+                      "serviceLibraryBundle": "Databases/Relational Databases/MSSQL/WorkloadManager/MSSQLUbuntu.zip",
+                      "dockerFile": "dockerimages/Dockerfile",
+                      "serviceImport": "Scripts/serviceimport.zip"
+                    },
+                    "created": "",
+                    "digest": ""
+                  },
+                  "PostgreSQL": {
+                    "name": "POSTGRESQL",
+                    "serviceID": "psqlserver",
+                    "serviceCategory": "Databases",
+                    "description": "PostgreSQL Integration Unit",
+                    "supportedVersion": "5.0.1",
+                    "serviceVersion": "1.0",
+                    "urls": {
+                      "serviceLibraryBundle": "Databases/Relational Databases/PostgreSQL/WorkloadManager/PostgreSQL.zip",
+                      "dockerFile": "dockerimages/Dockerfile",
+                      "serviceImport": "Scripts/serviceimport.zip"
+                    },
+                    "created": "",
+                    "digest": ""
+                  }
+                }
+              ]
+            }],
 
-            }
-          ],
   "Middleware":
           [
             {

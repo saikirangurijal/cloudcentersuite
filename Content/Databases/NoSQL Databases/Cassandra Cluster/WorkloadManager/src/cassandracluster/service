@@ -1,0 +1,707 @@
+#!/bin/bash
+
+# Hadoop node configurator
+exec > >(tee -a /usr/local/osmosix/logs/service.log) 2>&1
+
+echo "Executing service script.."
+OSSVC_HOME=/usr/local/osmosix/service
+
+. /usr/local/osmosix/etc/.osmosix.sh
+. /usr/local/osmosix/etc/userenv
+. $OSSVC_HOME/utils/cfgutil.sh
+. $OSSVC_HOME/utils/install_util.sh
+. $OSSVC_HOME/utils/os_info_util.sh
+
+cmd=$1
+SVCNAME=cassandra
+
+USER_ENV="/usr/local/osmosix/etc/userenv";
+CASSANDRA_CONF_FILE="/etc/cassandra/cassandra.yaml";
+DB_INIT_INDICATOR="/data/cassandra/.dbInitIndicator";
+DB_START_INDICATOR="/var/log/cassandra/.dbStartIndicator";
+CASSANDRA_CONF="/usr/local/osmosix/service/cassandracluster/conf";
+SETUP_USER_FILE="$CASSANDRA_CONF/dbsetup.sql";
+CASSANDRA_LOG_FILE="/var/log/cassandra/system.log";
+export SHARED_FOLDER="/shared/output"
+export SEED_LOCK="$SHARED_FOLDER/$parentJobId/$cliqrAppTierName/seedLock";
+export SEED_LIST="$SHARED_FOLDER/$parentJobId/$cliqrAppTierName/ClusterConnectList";
+export RUNNING_LIST="$SHARED_FOLDER/$parentJobId/$cliqrAppTierName/runList";
+export SEED_INDICATOR="/data/cassandra/.seedIndicator";
+export CLUSTER_NAME=$NoSqlClusterName
+export ALL_IP_LIST="/tmp/allClusterIplist"
+export IPListName='echo $CliqrTier_'$cliqrAppTierName"_IP"
+export IPList=`eval $IPListName`
+export nfsMountPath="/var/shared"
+export NFS_MASTER_INDICATOR="/data/cassandra/.nfsMasterIndicator";
+export NFS_CLIENT_INDICATOR="/data/cassandra/.nfsClientIndicator";
+
+if [ $os == "Ubuntu" ]; then
+        installJava8_181
+        export JAVA_HOME="/usr/lib/jvm/java-8-sun";
+        export PATH=$JAVA_HOME/bin:$PATH
+elif ([[ "$ver" =~ "release 7" ]] && [ $os == "CentOS" ]); then
+        installJava8_131
+        export JAVA_HOME="/usr/lib/jvm/java-8-sun";
+        export PATH=$JAVA_HOME/bin:$PATH
+elif ([[ "$ver" =~ "release 7" ]] && [ $os == "RHEL" ]); then
+        installJava8_131
+        export JAVA_HOME="/usr/lib/jvm/java-8-sun";
+        export PATH=$JAVA_HOME/bin:$PATH
+elif ([[ "$ver" =~ "release 6" ]] && [ $os == "CentOS" ]); then
+        installJava7
+        export JAVA_HOME="/usr/lib/jvm/java-7-sun";
+        export PATH=$JAVA_HOME/bin:$PATH
+fi
+
+#installJava7	
+
+# A map of os-name to installation-package
+declare -A cassandraPackages=(
+    ["Ubuntu"]="cassandra"
+    ["CentOS"]="cassandra"
+    ["RHEL"]="cassandra"
+)
+
+if [ ! -z $CUSTOM_REPO_URL ]; then
+    cassandraPackages["Ubuntu"]="cassandra"
+    cassandraPackages["CentOS"]="cassandra"
+    cassandraPackages["RHEL"]="cassandra"
+fi
+
+if ([ $os == "CentOS" ]  &&  [[ $ver =~ "release 6" ]])
+then
+    SVCNAME=dsc20
+    cassandraPackages["CentOS"]="dsc20"
+fi 
+
+if ([ $os == "CentOS" ] || [ $os == "RHEL" ])
+then
+        export CASSANDRA_CONF_FILE='/etc/cassandra/conf/cassandra.yaml'
+else
+        CASSANDRA_CONF_FILE='/etc/cassandra/cassandra.yaml'
+fi
+
+installCassandra() {
+    echo "[INSTALL] Starting $SVCNAME installation"
+    echo "OS is : $os "
+    
+    if ([ $os == "CentOS" ]  &&  [[ "$ver" =~ "release 7" ]]);then
+    		REPO_FILE='/etc/yum.repos.d/cassandra.repo'
+		cat >${REPO_FILE} <<EOL
+[cassandra]
+name=Apache Cassandra
+baseurl=https://www.apache.org/dist/cassandra/redhat/311x/
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://www.apache.org/dist/cassandra/KEYS
+EOL
+        	preInstall "package-update"
+    		echo "Call Installation Module for Cassandra ..."
+		yum install -y perl
+		yum install -y cassandra
+
+        elif ([ $os == "RHEL" ]  &&  [[ "$ver" =~ "release 7" ]]);then
+                REPO_FILE='/etc/yum.repos.d/cassandra.repo'
+                cat >${REPO_FILE} <<EOL
+[cassandra]
+name=Apache Cassandra
+baseurl=https://www.apache.org/dist/cassandra/redhat/311x/
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://www.apache.org/dist/cassandra/KEYS
+EOL
+                preInstall "package-update"
+                echo "Call Installation Module for Cassandra ..."
+                yum install -y perl
+                yum install -y cassandra
+
+       elif ([ $os == "CentOS" ]  &&  [[ "$ver" =~ "release 6" ]]);then
+	echo ">>>>>Checking <<<<<<<"
+	echo $JAVA_HOME
+	echo $PATH
+	REPO_FILE='/etc/yum.repos.d/datastax.repo'
+        cat >${REPO_FILE} <<EOL
+[datastax]
+name = DataStax Repo for Apache Cassandra
+baseurl = http://rpm.datastax.com/community
+enabled = 1
+gpgcheck = 0
+EOL
+        preInstall "package-update"
+    	echo "Call Installation Module for Cassandra ..."
+	yum install -y perl
+	yum install -y dsc20
+     else
+	echo "OS is not CentOS nor RHEL but Ubuntu"
+	echo "deb http://www.apache.org/dist/cassandra/debian 36x main" | tee -a /etc/apt/sources.list.d/cassandra.sources.list
+  	curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
+  	sudo apt-key adv --keyserver pool.sks-keyservers.net --recv-key A278B781FE4B2BDA
+	# Add Cassandra repo to apt repo list ,The datastax community no longer supports cassandra.
+        #echo 'deb http://debian.datastax.com/community stable main' > /etc/apt/sources.list.d/cassandra.sources.list
+        #curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
+        preInstall "apt-update"
+	#needs java8 and ntp to run
+	apt-get -y install ntp
+        echo "Call cassandra install for Ubuntu Trusty"
+	echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
+	echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 seen true" | debconf-set-selections
+	#echo "Call java installer8 without which cassandra install fails but does *NOT* work with this version"
+        #nasty hack as the java packgae referenced by installer is archived and hence no longer acceesible.
+        #end the hack!
+	#apt-get install -y oracle-java8-installer
+        apt-get install oracle-java8-set-default
+	echo 'N' | apt-get -y install cassandra 
+    fi
+
+    if [ $? -ne 0 ]
+    then
+            echo 'Cassandra install failed'
+            exit 1
+    fi
+    
+    # Stop and remove cassandra service
+    if ([ $os == "CentOS" ]  &&  [[ "$ver" =~ "release 6" ]]);then
+    	/etc/init.d/cassandra stop
+    else
+    	service cassandra stop
+    fi
+
+    if ([ $os == "CentOS" ] || [ $os == "RHEL" ])
+    then
+        postInstall chkconfig cassandra
+        export CASSANDRA_CONF_FILE='/etc/cassandra/conf/cassandra.yaml'
+    else
+        postInstall update-rc cassandra
+        CASSANDRA_CONF_FILE='/etc/cassandra/cassandra.yaml'
+    fi
+    
+    rm -fr /var/lib/cassandra/data
+
+    echo "Path of Cassandra conf file being used : $CASSANDRA_CONF_FILE "
+    perl -pi -e 's/^rpc_address:.*$/rpc_address: 0.0.0.0/' $CASSANDRA_CONF_FILE
+    perl -pi -e 's?/var/lib/cassandra/data?/data/cassandra?' $CASSANDRA_CONF_FILE
+    perl -pi -e 's/^authenticator:.*$/authenticator: PasswordAuthenticator/' $CASSANDRA_CONF_FILE
+    perl -pi -e 's/^authorizer:.*$/authorizer: CassandraAuthorizer/' $CASSANDRA_CONF_FILE
+   
+    if ([[ "$ver" =~ "release 7" ]] && [ $os == "CentOS" ]); then
+    	perl -pi -e 's/^rpc_address:.*$/rpc_address: localhost/' $CASSANDRA_CONF_FILE
+    fi
+    if ([[ "$ver" =~ "release 7" ]] && [ $os == "RHEL" ]); then
+    	perl -pi -e 's/^rpc_address:.*$/rpc_address: localhost/' $CASSANDRA_CONF_FILE
+    fi
+    exit 0
+}
+
+isSeed() {
+for (( i=1; i<=$numSeedNodes; i++ )) ;
+do
+        thisIp=`awk "NR==$i" $ALL_IP_LIST`
+        if [ "$thisIp" == "$HOSTNAME" ]; then
+                return 0
+                break;
+        fi
+done
+return 1
+}
+
+isNfsServer() {
+        nfsIp=`awk "NR==1" $ALL_IP_LIST`
+        if [ "$nfsIp" == "$HOSTNAME" ]; then
+        	echo $nfsIp > $NFS_MASTER_INDICATOR
+			return 0;
+        else
+        	echo $nfsIp > $NFS_CLIENT_INDICATOR
+        	return 1;
+        fi
+}
+
+getNfsMasterIp() {
+		if [ -f $NFS_MASTER_INDICATOR ];
+        then
+			export masterIp=`awk "NR==1" $NFS_MASTER_INDICATOR`
+		elif [ -f $NFS_CLIENT_INDICATOR ];
+		then
+			export masterIp=`awk "NR==1" $NFS_CLIENT_INDICATOR`
+		else
+        	export masterIp=`awk "NR==1" $ALL_IP_LIST`
+        fi
+}
+
+generateExportConfig() {
+        exportStr="$nfsMountPath"
+        exportStr+=" "
+        for (( i=2; i<=$numClusterNodes; i++ )) ;
+        do
+                thisIp=`awk "NR==$i" $ALL_IP_LIST`
+                exportStr+=$thisIp
+                exportStr+="(rw,sync,no_subtree_check) "
+        done
+
+        cat /etc/exports | grep "$nfsMountPath" > /dev/null 2>&1
+        if [ $? == 0 ]; then
+            echo "/etc/exports file set already"
+        else
+            echo $exportStr >> /etc/exports
+        fi
+		exportfs -a
+}
+
+setupNfsServer() {
+	mkdir -p $nfsMountPath
+	chmod 0777 -R $nfsMountPath
+	if [ $os == "Ubuntu" ]; then
+        apt-get update
+        apt-get -y install nfs-server
+        service nfs-kernel-server start
+    else
+        yum install -y nfs-utils nfs-utils-lib
+        chkconfig nfs on
+        if ([ $os == "CentOS" ]  &&  [[ "$ver" =~ "release 6" ]]);then
+            /etc/init.d/nfs start	
+        else
+            service nfs start
+	fi
+    fi
+	generateExportConfig
+}
+
+mountSharedFolder() {
+	if [ "$os" == "Ubuntu" ]; then
+		apt-get -y -qq install nfs-common
+	elif [ "$os" == "CentOS" ] || [ "$os" == "RHEL" ]; then
+		yum -y install nfs-utils nfs-utils-lib
+	else
+		yum -y install nfs-utils nfs-utils-lib
+	fi
+
+	echo "Mounting the shared folder on the tier level nfs server"
+	for (( i=1; i<=50; i++ )) ;
+	do
+			mkdir -p $nfsMountPath
+			getNfsMasterIp
+			mount "$masterIp":"$nfsMountPath" "$nfsMountPath"
+			if [ $? == 0 ]; then
+            	break;
+			else
+				echo "Waiting for the NFS Server to come up"
+				sleep 20
+				if [ i -eq 50 ]; then
+					exit 1;
+				fi
+			fi
+	done
+}
+
+initDBStorage() {
+
+	log "Storage Volume Size : $cliqrDBDataStorageSize"
+
+	if [ ! -d /data ]; then
+		mkdir /data
+	fi
+
+    # For virtualbox, no mount for db, just start cassandra service
+    if [ "$OSMOSIX_CLOUD" == "virtualbox" ]; then
+        return;
+    fi
+
+    if [ "$cliqrDBDataStorageSize" == "0" ] || [ -z "$cliqrDBDataStorageSize" ] || [ "$cliqrDBDataStorageSize" == "" ]; then
+		log "cliqrDBDataStorageSize is 0 or Not-Specified, do not mount disk"
+	else
+    	while true; do
+			deviceName=$(getPersistenceDevice)
+			if [ $deviceName ]; then
+				break
+			fi
+			sleep 5
+		done
+		partName=$deviceName"1"
+
+		echo "[INIT-DB] disk=$deviceName"
+		echo "[INIT-DB] partition=$partName"
+
+		if [ ! -b $partName ]; then
+			if [ -b $deviceName ]; then
+				(echo n; echo p; echo 1; echo ; echo ; echo w) | fdisk $deviceName > /dev/null 2>&1
+				mkfs.ext4 $partName  > /dev/null 2>&1
+			else
+				log "$deviceName does not exist!"
+			fi
+		fi
+
+		if [ $(mount | grep -c /data) != 1 ]; then
+			mount $partName /data
+		fi
+    fi
+
+
+	if [ ! -d /data/cassandra ]; then
+		mkdir /data/cassandra
+	fi
+
+	chmod a+w /data -R
+	chown cassandra:cassandra /data/cassandra -R
+
+}
+
+configureNfsServer() {
+	export HOSTNAME="$cliqrNodePrivateIp"
+	export CQLSH_HOST=$HOSTNAME
+    export sshUserName=`cat /usr/local/osmosix/etc/.user.name`
+	echo "export CQLSH_HOST=$HOSTNAME" >> /home/$sshUserName/.bashrc
+	echo "export CQLSH_HOST=$HOSTNAME" >> /root/.bashrc
+
+	if [ -f $NFS_MASTER_INDICATOR ];
+	then
+		setupNfsServer
+	elif [ -f $NFS_CLIENT_INDICATOR ];
+	then
+		mountSharedFolder
+	else
+		#setup NFS if no shared storage is present.
+		echo $IPList | sed 's/,/\n/g' > $ALL_IP_LIST
+		if [ ! -d $SHARED_FOLDER ]; then
+			echo "no shared storage exists proceeding for NFS setup"
+			if isNfsServer; then
+				echo "Setting up NFS server on this node"
+				setupNfsServer
+
+			else
+				echo "Waiting for the NFS server to be Up and get the shared folder"
+				mountSharedFolder
+			fi
+
+			mkdir -p /shared
+			ln -s $nfsMountPath $SHARED_FOLDER
+			chmod 0777 -R $nfsMountPath
+			chmod 0777 -R $SHARED_FOLDER
+			mkdir -p $SHARED_FOLDER/$parentJobId/$cliqrAppTierName
+			chmod 0777 -R $SHARED_FOLDER/
+			chmod 0777 -R $SHARED_FOLDER/$parentJobId/$cliqrAppTierName
+		fi
+	fi
+
+}
+
+configureAndStartCluster() {
+
+	if [ -f $DB_INIT_INDICATOR ];
+	then
+		startCassandraService
+		echo $HOSTNAME >> $RUNNING_LIST
+		chmod 0777 $RUNNING_LIST
+		waitForNodesStart
+	else	
+		if isSeed;
+		then
+			waitForSeedLock
+			if [ $numSeedNodes -eq `cat $SEED_LIST | wc -l` ];
+			then
+				execNonSeed
+			else
+				touch $SEED_LOCK
+				chmod 0777 $SEED_LOCK
+				execSeed
+			fi
+		else
+			execNonSeed
+		fi
+	fi
+	
+}
+
+waitForSeedLock() {
+	while true; do
+		if [ -f $SEED_LOCK ]; 
+		then
+			sleep 10
+		else
+			break
+		fi
+	done
+}
+
+waitForSeedComplete() {
+	while true; do
+		if [ -f $SEED_LIST ]; 
+		then
+			if [ $numSeedNodes -eq `cat $SEED_LIST | wc -l` ];
+			then
+				break
+			else
+				sleep 10
+			fi
+		else
+			sleep 10
+		fi
+	done
+}
+
+waitForSeedsStart() {
+	while true; do
+		if [ -f $RUNNING_LIST ]; 
+		then
+			if [ $numSeedNodes -le `cat $RUNNING_LIST | wc -l` ];
+			then
+				break
+			else
+				sleep 10
+			fi
+		else
+			sleep 10
+		fi
+	done
+}
+
+waitForNodesStart() {
+	while true; do
+		if [ -f $RUNNING_LIST ]; 
+		then
+			if [ $numClusterNodes -eq `cat $RUNNING_LIST | wc -l` ];
+			then
+				break
+			else
+				sleep 10
+			fi
+		else
+			sleep 10
+		fi
+	done
+}
+
+waitForAppStart() {
+        #echo ">>>> enter waitfor app start loop"
+	for EACH in `seq 1 15`
+	do
+		sleep 10;
+		#grep -i 'Listening for thrift clients...' /var/log/cassandra/system.log
+                grep -i 'Starting listening for CQL clients' /var/log/cassandra/system.log
+		if [ $? -eq 0 ]
+		then
+			break
+		fi
+		grep -i 'Service exit with a return value' /var/log/cassandra/system.log 
+		if [ $? -eq 0 ]
+		then
+			if [ -f $DB_START_INDICATOR ];
+			then
+				log "Failed to start Cassandra";
+				exit 127;
+			else
+				rm -rf $CASSANDRA_LOG_FILE
+				if ([ $os == "CentOS" ] || [ $os == "RHEL" ])
+                		then
+				   if [[ "$ver" =~ "release 6" ]];then
+        				/etc/init.d/cassandra start
+				   else	
+					service cassandra start
+  				   fi	
+                		elif [[ $os == "Ubuntu" && $codename == "xenial" ]]
+				then
+					systemctl start cassandra
+				else
+                    			/etc/init.d/cassandra start
+                		fi
+				if `touch $DB_START_INDICATOR`
+				then
+					log "Successfully created the DB start indicator";
+				else
+					log "Error occurred while creating DB start indicator";
+				fi
+			fi
+		fi
+	done
+
+}
+
+execSeed() {
+        echo ">>>>>>Execute seed node"
+	echo $HOSTNAME >> $SEED_LIST
+	chmod 0777 $SEED_LIST
+	touch $SEED_INDICATOR
+	chmod 0777 $SEED_INDICATOR
+	rm -f $SEED_LOCK
+	waitForSeedComplete
+	configureSeed
+	startCassandraService
+	echo $HOSTNAME >> $RUNNING_LIST
+	chmod 0777 $RUNNING_LIST
+	waitForNodesStart
+}
+
+
+configureSeed() {
+	export SEED_IP=`cat $SEED_LIST | tr '\n' ',' | sed 's/,*$//'`
+	echo "auto_bootstrap: false" >> $CASSANDRA_CONF_FILE
+	perl -pi -e 's/^rpc_address:.*$/rpc_address: $ENV{HOSTNAME}/' $CASSANDRA_CONF_FILE
+	perl -pi -e 's/^listen_address:.*$/listen_address: $ENV{HOSTNAME}/' $CASSANDRA_CONF_FILE
+	perl -pi -e 's/^cluster_name:.*$/cluster_name: $ENV{CLUSTER_NAME}/' $CASSANDRA_CONF_FILE
+	perl -pi -e 's?seeds: "127.0.0.1"?seeds: "$ENV{SEED_IP}"?' $CASSANDRA_CONF_FILE	
+    	
+}
+
+execNonSeed() {
+        echo ">>>>>>>Execute non seed node"
+	waitForSeedComplete
+	waitForSeedsStart
+	configureNonSeed
+	startCassandraService
+	echo $HOSTNAME >> $RUNNING_LIST
+	waitForNodesStart
+}
+
+configureNonSeed() {
+	export SEED_IP=`cat $SEED_LIST | tr '\n' ',' | sed 's/,*$//'`
+	perl -pi -e 's/^rpc_address:.*$/rpc_address: $ENV{HOSTNAME}/' $CASSANDRA_CONF_FILE
+	perl -pi -e 's/^listen_address:.*$/listen_address: $ENV{HOSTNAME}/' $CASSANDRA_CONF_FILE
+	perl -pi -e 's/^cluster_name:.*$/cluster_name: $ENV{CLUSTER_NAME}/' $CASSANDRA_CONF_FILE
+	perl -pi -e 's?seeds: "127.0.0.1"?seeds: "$ENV{SEED_IP}"?' $CASSANDRA_CONF_FILE	
+}
+
+startCassandraService() {
+
+	if [ -f $CASSANDRA_LOG_FILE ];
+	then
+		rm -rf $CASSANDRA_LOG_FILE
+	fi
+	check_systemctl_presence
+	if [[ $? -ne 0 ]]; then
+	    if ([ $os == "CentOS" ]  &&  [[ "$ver" =~ "release 6" ]]);then
+        	/etc/init.d/cassandra start
+	    else
+		service cassandra start
+	    fi
+	else
+		systemctl start cassandra
+	fi
+	waitForAppStart
+	
+}
+
+stopCassandraService() {
+	check_systemctl_presence
+	if [[ $? -ne 0 ]]; then
+	    if ([ $os == "CentOS" ]  &&  [[ "$ver" =~ "release 6" ]]);then
+        	/etc/init.d/cassandra stop
+            else
+		service cassandra stop
+	    fi	
+	else
+		systemctl stop cassandra
+	fi
+}
+
+restartCassandraService() {
+	check_systemctl_presence
+	if [[ $? -ne 0 ]]; then
+	    if ([ $os == "CentOS" ]  &&  [[ "$ver" =~ "release 6" ]]);then
+                /etc/init.d/cassandra restart
+            else
+                service cassandra restart
+            fi
+	else
+		systemctl restart cassandra
+	fi
+}
+
+log() {
+	logger -t "OSMOSIX" "[$SVCNAME] $*"
+}
+
+runDBInit(){
+
+	if [ -f $DB_INIT_INDICATOR ];
+	then
+		log "DB Setup has already been run.";
+	else	
+		rootPasswd="";
+		if [ -z $NoSqlDatabaseRootPass ];
+		then
+			rootPasswd="cliqrtech";
+		else
+			rootPasswd=$NoSqlDatabaseRootPass;
+		fi
+		
+		replaceToken $SETUP_USER_FILE "%DB_NAME%" $NoSqlDatabaseName
+		replaceToken $SETUP_USER_FILE "%DB_PASS%" $rootPasswd
+		sleep 120	
+		cqlsh -u cassandra -p cassandra <$SETUP_USER_FILE
+		if [ $? -eq 0 ]
+		then
+			if `touch $DB_INIT_INDICATOR`
+			then
+				log "Successfully created the DB init indicator";
+			else
+				log "Error occurred while creating DB Setup indicator";
+			fi
+		else
+			log "Error occurred while running the User Setup script.";
+			exit 127;
+		fi
+	fi
+  
+}
+
+# main entry
+if [ -z "$OSSVC_HOME" ]; then
+	log "missing parameter, exit now"
+	exit 127
+fi
+SVCHOME="$OSSVC_HOME/$SVCNAME"
+
+case $cmd in
+    install)
+        installCassandra
+        ;;
+	start)
+		if [ ! -d /data/cassandra ]; then
+			log "[START] Voume is not mounted. Mounting now"
+			initDBStorage
+			log "[START] Successfully mounted volume."
+        fi
+
+        configureNfsServer
+		configureAndStartCluster
+		
+        if [ "$appMigrating" = "true" ]; then
+        	runMigrationRestoreScript
+    	else
+			if [ `head -1 $SEED_LIST` == $HOSTNAME ];then
+				runDBInit
+				rm -rf $RUNNING_LIST
+			fi    		
+    	fi	
+		
+		if `touch $DB_INIT_INDICATOR`
+		then
+			log "Successfully created the DB init indicator";
+		else
+			log "Error occurred while creating DB Setup indicator";
+		fi
+
+		;;
+	stop)
+
+		stopCassandraService
+		
+		;;
+	restart)
+	
+		restartCassandraService
+		
+		;;
+    cleanup)
+
+        ;;
+    reload)
+        ;;
+    upgrade)
+
+        ;;
+	*)
+		log "unknown command"
+		exit 127
+		;;
+esac
+
+
