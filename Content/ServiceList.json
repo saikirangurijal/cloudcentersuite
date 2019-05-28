@@ -93,7 +93,26 @@
           },
           "created": "",
           "digest": ""
-        }
+        },
+         "Google cloud functions": {
+        "name": "Google cloud functions",
+        "serviceID": "googlecloudfunction",
+        "serviceCategory": "Compute",
+        "description": "Google cloud functions",
+        "supportedVersion": "5.0.1",
+        "serviceVersion": "1.0",
+        "dependencyTag": [
+          "googlesql"
+        ],
+        "urls": {
+          "serviceLibraryBundle": null,
+          "dockerFile": "dockerimages/Dockerfile",
+          "serviceImport": "Scripts/serviceimport.zip"
+        },
+        "created": "",
+        "digest": ""
+		}
+
        }],
   "Monitering":
           [
@@ -221,6 +240,21 @@
                   },
                   "created": "",
                   "digest": ""
+                },
+                  "AzureSQL": {
+                      "name": "AzureSQL",
+                      "serviceID": "azuresql",
+                      "serviceCategory": "Databases",
+                      "description": "AzureSQL Integration Unit",
+                      "supportedVersion": "5.0.1",
+                      "serviceVersion": "1.0",
+                      "urls": {
+                          "serviceLibraryBundle": "Databases/PostgreSQL/WorkloadManager/AzureSQL.zip",
+                          "dockerFile": "dockerimages/Dockerfile",
+                          "serviceImport": "Scripts/serviceimport.zip"
+                     },
+                    "created": "",
+                    "digest": ""
                 }
 
             }
@@ -255,8 +289,8 @@
                         "dockerFile": "dockerimages/Dockerfile",
                         "serviceImport": "Scripts/serviceimport.zip"
                     },
-    "created": "",
-    "digest": ""
+                    "created": "",
+                    "digest": ""
   },
               "MongoDB Cluster":{
                     "name": "Mongo DB Cluster",
