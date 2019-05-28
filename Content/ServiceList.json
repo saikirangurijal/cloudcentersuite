@@ -207,7 +207,7 @@
                   "created": "",
                   "digest": ""
                 },
-              "PostgressSql":{
+              "PostgreSQL":{
                   "name": "POSTGRESQL",
                   "serviceID":"psqlserver",
                   "serviceCategory":"Databases",
