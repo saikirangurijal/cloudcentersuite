@@ -24,6 +24,16 @@ else
     exit
 fi
 
+which unzip > /dev/null 2>&1
+
+if [ $? -eq 0 ]
+then
+     echo "The unzip utility  is avilable..." > /dev/null 2>&1
+else
+     echo "The Unzip Utility is not available on the underlying OS. Please install and retry..."
+     exit	
+fi  
+	
 ##### STEP 2 : CHECK IF DOCKER IMAGE IS ALREADY AVAILABLE #####
 
 if [ ! -d "$PWD/ccsworker" ]; then
@@ -69,6 +79,6 @@ fi
         echo "____________________________________________________________________________"
         echo "Please wait while the service import is in progress..."
         echo "____________________________________________________________________________"
-
-	docker run -v $PWD:/ccsworker -w /ccsworker -it  ccs_service_import:v1 /bin/bash
+	PWD=`pwd`
+	docker run -v $PWD:/ccsworker --env ABS_PATH=$PWD -w /ccsworker -it  ccs_service_import:v1 /bin/bash
 	
