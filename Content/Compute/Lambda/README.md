@@ -36,16 +36,16 @@ How it works :
 - When user writes an item into a table(users), A new stream record is written to reflect that a new item has been added to the table.
 - The new stream record triggers an AWS Lambda function(TestLambdaFunction).
 - If the stream record indicates that a new item is added to table then lambda function will add two fields(Triggered On,UUID) to the existing item of the table
-    (Tiggered On indicates time of update and UUID is an unique id of the user created from lambda function).
+    (Triggered On indicates time of update and UUID is an unique id of the user created from lambda function).
 - User can find the details of his entry with 'Triggered on' and 'UUID' from Find User functionality of sample php application.
 
 ## Importing the service
 
 Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
-- wget command may not be installed. Need to add "yum install wget -y" in case of centos7.
+- wget command may not be installed. Need to execute "yum install wget -y" in case of centos7.
 
 	    Example: 
-        wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+      wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
 				
 - After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
 

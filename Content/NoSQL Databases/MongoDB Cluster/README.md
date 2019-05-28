@@ -35,7 +35,7 @@ Before you start with service import, Install Docker by following the steps prov
 ## Importing the service
 
 Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
-- wget command may not be installed. Need to add "yum install wget -y" in case of centos7.
+- wget command may not be installed. Need to execute "yum install wget -y" in case of centos7.
 
 	    Example: 
       wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
