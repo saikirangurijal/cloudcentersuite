@@ -15,7 +15,7 @@
 ## Before you start	
 Before importing the Google cloud functions service, user must import Google SQL service in workload manager 'cause google cloud functions function will be invoked on google sql table events (Any CRUD operation).
       
-Refer Readme on how to import Google SQL Service from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/tree/master/Databases/GoogleSQL).
+Refer Readme on how to import Google SQL Service from [here](https://github.com/datacenter/cloudcentersuite/blob/master/Content/Databases/GoogleSQL/README1.md).
       
 
 
@@ -35,10 +35,10 @@ How it works :
 
 ## Download the service bundles
 
-Step 1 : Download the service bundle from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/blob/master/Compute/Google%20Cloud%20Functions/WorkloadManager/ServiceBundle/googlecloudfunction.zip?raw=true).
+Step 1 : Download the service bundle from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Google%20Cloud%20Functions/WorkloadManager/ServiceBundle/googlecloudfunction.zip).
 
 Step 2 : Download the application bundles to be used with application profile
-         for google cloud function from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/blob/master/Compute/Google%20Cloud%20Functions/WorkloadManager/ApplicationProfiles/artifacts/quiz-app.zip?raw=true).
+         for google cloud function from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Google%20Cloud%20Functions/WorkloadManager/ApplicationProfiles/artifacts/quiz-app.zip).
 
 Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and application bundles from Step 2 under apps/<your_package_name> in your file repository.
           
@@ -47,32 +47,30 @@ Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and ap
                     Example : http://<Your_REPO_Server_IP>/services/googlecloudfunction.zip 
     
             - Application Bundle under apps/<your_package_name>
-            
-                    Example : http://<Your_REPO_Server_IP>/apps/googlecloudfunction.zip
               
-                    Example : http://<Your_REPO_Server_IP>/quiz-app.zip
+                    Example : http://<Your_REPO_Server_IP>/apps/quiz-app.zip
                                         
 		
-Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/blob/master/Compute/Google%20Cloud%20Functions/WorkloadManager/googlecloudfunctions_iu.zip?raw=true)
+Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Compute/Google%20Cloud%20Functions/WorkloadManager/googlecloudfunctions_iu.zip)
 
 Step 5 : Extract the above bundle on any linux based machine and navigate to extracted folder
 
-Step 6 : Download the Service Import script zip file from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Scripts/serviceimport.zip) 
+Step 6 : Download the Service Import script zip file from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/serviceimport.zip) 
 
 Step 7: Copy the Service Import script zip file to the directory extracted above in Step 5 and Unzip the service import script bundle.
 
-Step 8 : Download the Dockerfile from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
+Step 8 : Download the Dockerfile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Dockerfile) and copy to the extracted folder in Step 5
  
 ##### NOTE : Download the "Dockerfile" only if Docker image for service import is not created earlier
    
  Ensure your directory in the linux based client machine contains :
 
-- Service import json file (named as googlecloudfunctions_service.json.json)
+- Service import json file (named as googlecloudfunctions_service.json)
 - Service import script zip file (named as serviceimport.zip)
 - main.py file
 - serviceimport.sh
 -  logo (named as logo.png)
-- Modelled application profile(named as googlecloudfunctions_iu.zip)
+- Modelled application profile(named as googlecloudfunction_sample_app.zip)
 - Dockerfile (named as Dockerfile) , **Only needed if you wish to create a Docker image for the first time**
 
 ## How to Create a Service in Cisco Workload Manager
@@ -81,7 +79,7 @@ User can create the service by using **Import Service** functionality using scri
 
 #### Prerequisite for creating a service through service import script:
 
-Install Docker by following the steps provided [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx) on any linux based client machine.
+Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx) on any linux based client machine.
 
 **NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
 - You can check , if docker is installed , by running docker -v
@@ -145,7 +143,7 @@ Python script :
  - googlefunction.py: script that invokes the api for google cloud functions and creates the google cloud function with provided deployment package.
  - util.py: utility file.
 
-# External Lifecycle Actions as below
+# External Lifecycle Actions
     - External Action Bundle:  services/googlecloudfunction.zip
     - External Lifecycle Actions:
         Start:
