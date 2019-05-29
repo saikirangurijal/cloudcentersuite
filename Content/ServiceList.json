@@ -24,7 +24,7 @@
       ],
       "LoadBalancer":[
         {
-          "Googlelb": {
+          "GoogleLB": {
             "name": "Google ELB",
             "serviceID": "Google ELB",
             "serviceCategory": "Networking",
@@ -56,7 +56,7 @@
             "created": "",
             "digest": ""
           },
-          "Azurelb":  {
+          "AzureLB":  {
                 "name": "Azure Load Balancer",
                 "serviceID":"azurelb",
                 "serviceCategory":"Networking",
@@ -78,7 +78,7 @@
   "Compute":
   [
           {
-          "lambda":{
+          "Lambda":{
           "name": "Lambda",
           "serviceID": "lambda",
           "serviceCategory": "Compute",
@@ -96,7 +96,7 @@
           "created": "",
           "digest": ""
         },
-         "Google cloud functions": {
+         "Google Cloud Functions": {
         "name": "Google cloud functions",
         "serviceID": "googlecloudfunction",
         "serviceCategory": "Compute",
@@ -185,6 +185,14 @@
                     "supportedVersion": "5.0.1",
                     "serviceVersion": "1.0",
 					"isService": false,
+					"appProfiles": {
+						"1": {
+							"commvault_backup_sample_app.zip": "Backup Sample App"
+						}, 
+						"2": {
+							"commvault_restore_sample_app.zip": "Restore Sample App"
+						}
+					},
                     "urls": {
                         "serviceLibraryBundle": "Backup/Commvault/WorkloadManager/Commvault.zip",
                         "dockerFile": "dockerimages/Dockerfile",
@@ -200,7 +208,7 @@
             {
               "DBaaS": [
                 {
-                  "GoogleSQl": {
+                  "Google SQL": {
                     "name": "Google SQL",
                     "serviceID": "googlesql",
                     "serviceCategory": "Databases",
@@ -215,7 +223,7 @@
                     "created": "",
                     "digest": ""
                   },
-                  "AzureSQL": {
+                  "Azure SQL": {
                     "name": "AzureSQL",
                     "serviceID": "azuresql",
                     "serviceCategory": "Databases",
@@ -283,7 +291,7 @@
               ],
               "Relational Databases": [
                 {
-                  "MSSql Ubuntu": {
+                  "MSSQL(Ubuntu)": {
                     "name": "MSSQl UBUNTU",
                     "serviceID": "mssqlserver",
                     "serviceCategory": "Databases",
