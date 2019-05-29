@@ -371,7 +371,42 @@
                   },
                   "created": "",
                   "digest": ""
-                }
+                },
+			  "Kibana":{
+                "name": "Kibana",
+                "serviceID":"kibana",
+                "serviceCategory":"Logging",
+                "description": "Data Visualization Plugin For Elasticsearch",
+                "supportedVersion": "5.0.1",
+                "serviceVersion": "1.0",
+                "urls": {
+                    "serviceLibraryBundle": "Logging/Kibana/WorkloadManager/Kibana.zip",
+                    "dockerFile": "dockerimages/Dockerfile",
+                    "serviceImport": "Scripts/serviceimport.zip"
+                },
+                "created": "",
+                "digest": ""
+              },
+			  
+			   "Elasticsearch":{
+                "name": "ElasticSearch",
+                "serviceID":"elasticsearch",
+                "serviceCategory":"Logging",
+                "description": "Logging",
+                "supportedVersion": "5.0.1",
+                "serviceVersion": "1.0",
+				"dependencyTag": [
+                           "kibana"
+                        ],
+                "urls": {
+                    "serviceLibraryBundle": "Logging/Elasticsearch/WorkloadManager/Elasticsearch.zip",
+                    "serviceLibraryBundle": "Logging/Elasticsearch/WorkloadManager/Elasticsearch.zip",
+                    "dockerFile": "dockerimages/Dockerfile",
+                    "serviceImport": "Scripts/serviceimport.zip"
+                },
+                "created": "",
+                "digest": ""
+              }
 
             }
 

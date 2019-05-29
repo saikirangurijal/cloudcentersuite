@@ -1,0 +1,101 @@
+{
+   "displayName":"ElasticSearch",
+   "name":"elasticsearch",
+   "description":"Logging",
+   "parentServiceId":"48",
+   "costPerHour":"0.00",
+   "bundleLocation":"services/elasticsearch.zip",
+   "systemService":false,
+   "serviceType":"VM_AGENT",
+   "logoPath":"logo.png",
+   "serviceActions":[
+      {
+         "actionName":"INSTALL",
+         "actionType":"SCRIPT",
+         "actionValue":"service install",
+         "value":"service install",
+         "key":"INSTALL"
+      },
+      {
+         "actionName":"CONFIGURE",
+         "actionType":"SCRIPT",
+         "actionValue":"service configure",
+         "value":"service configure",
+         "key":"CONFIGURE"
+      },
+      {
+         "actionName":"STOP",
+         "actionType":"SCRIPT",
+         "actionValue":"service stop",
+         "value":"service stop",
+         "key":"STOP"
+      },
+      {
+         "actionName":"RESTART",
+         "actionType":"SCRIPT",
+         "actionValue":"service restart",
+         "value":"service restart",
+         "key":"RESTART"
+      }
+   ],
+   "externalBundleLocation":"null",
+   "externalActions":[
+
+   ],
+   "actions":[
+
+   ],
+   "serviceParamSpecs":[
+      {
+         "paramName":"Indexparam",
+         "displayName":"Indexparam",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"samplelogs",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      }
+   ],
+   "servicePorts":[
+      {
+         "fromPort":"9200",
+         "toPort":"9300",
+         "protocol":"TCP"
+      }
+   ],
+   "images":[
+      {
+         "id":"21"
+      },
+	  {
+         "id":"26"
+      }
+   ],
+   "defaultImageId":"21",
+   "containerImages":[
+
+   ],
+   "containerPorts":[
+
+   ],
+    "repositories": [
+    {
+      "id": "1"
+    }
+  ]
+}

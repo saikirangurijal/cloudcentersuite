@@ -1,0 +1,118 @@
+
+
+#!/bin/bash
+#Elasticsearch for linux
+
+ # Logging while running Elasticsearch service script
+ exec > >(tee -a /usr/local/osmosix/logs/service.log) 2>&1
+
+ echo "Executing service script.."
+ OSSVC_HOME=/usr/local/osmosix/service
+
+ . /usr/local/osmosix/etc/.osmosix.sh
+ . /usr/local/osmosix/etc/userenv
+ . $OSSVC_HOME/utils/cfgutil.sh
+ . $OSSVC_HOME/utils/install_util.sh
+ . $OSSVC_HOME/utils/os_info_util.sh
+
+ # Sourcing variables from service directory
+ cmd=$1
+
+ #source /usr/local/osmosix/etc/userenv
+ 
+ if ([[ "$ver" =~ "release 7" ]] && [ $os == "CentOS" ]); then
+        installJava8_131
+        export JAVA_HOME="/usr/lib/jvm/java-8-sun";
+        export PATH=$JAVA_HOME/bin:$PATH
+ else 
+      echo "when OS is ubuntu 16.04"
+      installJava8_181
+        export JAVA_HOME="/usr/lib/jvm/java-8-sun";
+        export PATH=$JAVA_HOME/bin:$PATH
+
+ fi
+
+ 
+install(){
+        
+        if ([ $os == "CentOS" ]  &&  [[ "$ver" =~ "release 7" ]]); then
+
+        rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        cat >/etc/yum.repos.d/elasticsearch.repo <<EOL
+[elasticsearch-6.x]
+name=Elasticsearch repository for 6.x packages
+baseurl=https://artifacts.elastic.co/packages/6.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+EOL
+        yum install -y elasticsearch
+        sed -i "s@#JAVA_HOME=@JAVA_HOME=/usr/lib/jvm/java-8-sun/@" /etc/sysconfig/elasticsearch
+
+      else
+          echo "when OS is ubuntu 16.04"
+          wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+          sudo apt-get install apt-transport-https
+          echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
+          sudo apt-get update
+          export JAVA_HOME=/usr/lib/jvm/java-8-sun;
+          apt-get install elasticsearch
+          sed -i "s@#JAVA_HOME=@JAVA_HOME=/usr/lib/jvm/java-8-sun/@" /etc/default/elasticsearch
+     fi
+
+
+}
+configure(){
+       
+        sed -i "s@#network.host: 192.168.0.1@network.host: 0.0.0.0@" /etc/elasticsearch/elasticsearch.yml
+        sed -i "s@#http.port: 9200@http.port: 9200@" /etc/elasticsearch/elasticsearch.yml       
+	#sed -i "s@#JAVA_HOME=@JAVA_HOME=/usr/lib/jvm/java-8-sun/@" /etc/sysconfig/elasticsearch
+	chmod -R 777 /usr/share/elasticsearch	
+	systemctl start elasticsearch
+        systemctl enable elasticsearch
+        sleep 60s
+        curl -X PUT "http://localhost:9200/$Indexparam"
+        
+}
+
+start(){
+        sudo systemctl start elasticsearch
+        }
+
+stop(){
+        sudo systemctl stop elasticsearch
+        }
+
+restart(){
+        sudo systemctl restart elasticsearch
+        }
+
+runscripts() {
+    case $cmd in
+        install)
+            log "[INSTALL] Installing Elasticsearch"
+            install
+            ;;
+                configure)
+                    log "[START] Configuring Elasticsearch"
+                    configure
+                    ;;
+                stop)
+                    log "[STOP] Stopping Elasticsearch"
+                        stop
+                        ;;
+                restart)
+                    log "[RESTART] Restarting Elasticsearch"
+                        restart
+                        ;;
+                *)
+                    exit 127
+                        ;;
+
+        esac
+
+}
+
+runscripts
