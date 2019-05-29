@@ -17,9 +17,9 @@ Please refer the below link for more details.
 
 ## Download the service bundles
 
-Step 1 : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/AzureSQL/WorkloadManager/ServiceBundle/azuresql.zip)
+Step 1 : Download the Service Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/DBaaS/AzureSQL/WorkloadManager/ServiceBundle/azuresql.zip)
 
-Step 2 : Download the application bundle to be used with application profile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/AzureSQL/WorkloadManager/ApplicationProfiles/artifacts/azuresql_app.war).
+Step 2 : Download the application bundle to be used with application profile from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/DBaaS/AzureSQL/WorkloadManager/ApplicationProfiles/artifacts/azuresql_app.war).
 
 Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and application bundle from Step 2 under apps/<your_package_name> in your file repository.
           
@@ -31,7 +31,7 @@ Step 3 : Place the service bundle from Step 1 under services/<bundle.zip> and ap
             
                     Example : http://<Your_REPO_Server_IP>/apps/azuresql_app.war
 					
-Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/AzureSQL/WorkloadManager/azuresql_iu.zip)
+Step 4 : Download the integration unit bundle (that contains logo, service json and application profile) from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Databases/DBaaS/AzureSQL/WorkloadManager/azuresql_iu.zip)
 	
 Step 5: Extract the above bundle on any linux based machine and navigate to extracted folder
 
