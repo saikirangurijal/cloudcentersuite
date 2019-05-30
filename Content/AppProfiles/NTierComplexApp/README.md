@@ -3,7 +3,7 @@ NTierComplexApp - Typical J2EE Web App
 ## Introduction
 
     The Workload Manager platform supports to create and deploy N-Tier complex application profiles
-        using  various servies already onboarded on it.
+        using  various services already onboarded on it.
 
     This document provides information to create  JAVA/J2EE Based Web Application Profile
         with multiple Service Integration.
@@ -44,14 +44,14 @@ NTierComplexApp - Typical J2EE Web App
 	
 # Pre-requisite
 
-   1. CloudCenter 5.0.1 and above
+   1. CloudCenter 5.x.x and above
    
-   2. Knowledge on how to Workload Manager  
+   2. Knowledge on how to use Workload Manager  
    
    3. Mongo DB Cluster Service should be created in Workload Manager for the NOSQL Database Tier 
       - How to Create Mongo DB Cluster Server - Refer from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/NoSQL%20Databases/MongoDB%20Cluster)
 
-   4. Make sure that you keep the  Artifacts/Application Package Bundle for the Profiles in your repository under '<repoistory>/apps/complexapp/' folder. Download the Artificat from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/AppProfiles/NTierComplexApp/artifacts/complexapp.zip) 
+   4. Make sure that you keep the  Artifacts/Application Package Bundle for the Profiles in your repository under '<repoistory>/apps/complexapp/' folder. Download the Artifact from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/AppProfiles/NTierComplexApp/artifacts/complexapp.zip) 
    
    5. Make sure that Sensu Service is exist in Workload Manager.  Refer the Sensu Server service creation steps [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Monitoring/Sensu) 
    
