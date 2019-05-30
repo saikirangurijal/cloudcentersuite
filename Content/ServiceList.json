@@ -460,6 +460,9 @@
 						}, 
 						"2": {
 							"NTierComplexAppWeblogic.zip": "Complex App(Weblogic)"
+						},
+						"3": {
+							"NTierComplexAppWithoutSensu.zip": "Complex App(Tomcat)(Without Sensu)"
 						}
 					},
                     "urls": {
