@@ -67,12 +67,17 @@ NTierComplexApp - Typical J2EE Web App
 
 # Download the Application Profile and Package Bundle
 
-   Tomcat  :
-      Download the Modeled Application Profile with Tomcat from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/AppProfiles/NTierComplexApp/NTierComplexAppTomcat.zip)
-
-   WebLogic :
-     Download the Modeled Application Profile with Weblogic from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/AppProfiles/NTierComplexApp/NTierComplexAppWeblogic.zip)
-	  
+   Tomcat without Sensu:
+    
+Download the Modeled Application Profile with Tomcat from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/AppProfiles/NTierComplexApp/NTierComplexAppWithoutSensu.zip)
+   
+   Tomcat with Sensu:
+  
+Download the Modeled Application Profile with Tomcat from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/AppProfiles/NTierComplexApp/NTierComplexAppTomcat.zip)
+ 
+   WebLogic without Sensu:
+  
+Download the Modeled Application Profile with Weblogic from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/AppProfiles/NTierComplexApp/NTierComplexAppWeblogic.zip)
 	  
 
 # How to create a App Profile in Cisco Workload Manager
@@ -80,7 +85,7 @@ NTierComplexApp - Typical J2EE Web App
    WorkLoad Manager -> Application Profile -> Import --> Select  App Profile zip file
 
 # How to configure Sensu agent
-   
+
    - By Default it is pre-configured for all tiers except Front-end cache, LB.
         - No other action required . Just go ahead with Deployment 
    
