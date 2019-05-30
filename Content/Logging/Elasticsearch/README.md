@@ -43,6 +43,8 @@ Step 2 : Execute the script from Step 1 using the following command.
 
 Once the script is run, please follow the prompts to import the service or the corresponding application profile.
 
+Step 3 : Download the logstashservice Bundle zip from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Logging/Elasticsearch/WorkloadManager/ApplicationProfiles/artifacts/logstashservice.zip).
+
 ##### PLEASE NOTE : You be prompted with location of service bundle zip, logstashservice bundle zip and/or application bundle zip on client machine. The files must be copied on to the repository before proceeding to deploy.
 
          - Service Zip file under <service_path>/<your_bundle_name>
