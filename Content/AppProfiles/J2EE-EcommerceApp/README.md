@@ -3,7 +3,7 @@ J2EE-EcommerceApp - Typical J2EE Ecommerce Web Application using Shopizer
 ## Introduction
 
     The Workload Manager platform supports to create and deploy N-Tier complex application profiles
-        using  various servies already onboarded on it.
+        using  various services already onboarded on it.
 
     This document provides information to create  JAVA/J2EE Based Web Application Profile
         with multiple Service Integration.
@@ -52,10 +52,10 @@ J2EE-EcommerceApp - Typical J2EE Ecommerce Web Application using Shopizer
    3. Mongo DB Cluster Service should be created in Workload Manager for the NOSQL Database Tier 
       - How to Create Mongo DB Cluster Server - Refer from [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/NoSQL%20Databases/MongoDB%20Cluster)
 
-   4. Make sure that you keep the  Application Package related pre/post scripts for the Profiles in your repository under '<repoistory>/apps/shopizer/' folder. Download the Artificat from [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/AppProfiles/J2EE-EcommerceApp/artifacts/shopizer.zip) 
+   4. Make sure that you keep the  Application Package related pre/post scripts for the Profiles in your repository under '<repoistory>/apps/shopizer/' folder. Download the Artifact from [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/AppProfiles/J2EE-EcommerceApp/artifacts/shopizer.zip) 
    
    5. Make sure that you keep the  Application Package Bundles/WAR for the Profiles in your repository under '<repoistory>/apps/shopizer/' folder.
-      Download the Artificat from [here](https://s3.amazonaws.com/contentfactory/apps/shoppingcart/complexapp.war) 
+      Download the Artifact from [here](https://s3.amazonaws.com/contentfactory/apps/shoppingcart/complexapp.war) 
    
    6. Optional: Make sure that Sensu Service is exist in Workload Manager if you are using App Profile with Sensu Service Enabled.  Refer the Sensu Server service creation steps [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/Monitoring/Sensu) 
    
