@@ -4,6 +4,42 @@ import json, sys, time, os
 import base64
 from google.cloud import storage
 from util import print_error, print_log, print_result
+def check_googlesql(dependents,project_name,function_name):
+    req_body = {
+        "name": "projects/" + project_name + "/locations/" + os.environ['Region'] + "/functions/" + function_name,
+        "description": "",
+        "entryPoint": os.environ['EntryPoint'],
+        "timeout": "60s",
+        "availableMemoryMb": 256,
+        "labels": {
+            "deployment-tool": "console-cloud"
+        },
+        "runtime": os.environ['Runtime'],
+        "httpsTrigger": {},
+        "maxInstances": 0,
+        "vpcConnector": "",
+        "serviceAccountEmail": project_name + "@appspot.gserviceaccount.com",
+        "sourceArchiveUrl": "",
+    }
+    if "googlesql" in dependents:
+        try:
+            InstanceName = os.environ['CliqrTier_' + dependents + '_instanceName']
+            MysqlUser = os.environ['CliqrTier_' + dependents + '_Database_Username']
+            Mysqlpassword = os.environ['CliqrTier_' + dependents + '_param1']
+            Mysqlpassword = base64.b64decode(Mysqlpassword).decode()
+            Mysqldatabase = os.environ['CliqrTier_' + dependents + '_Database_Name']
+        except Exception as err:
+            print("Error getting paraameters from mysql")
+            sys.exit(127)
+        data= {
+        "INSTANCE_CONNECTION_NAME": project_name + ":" + os.environ["CliqrCloud_Region"] + ":" + InstanceName,
+        "MYSQL_USER": MysqlUser,
+        "MYSQL_PASSWORD": Mysqlpassword,
+        "MYSQL_DATABASE": Mysqldatabase}
+        req_body["environmentVariables"]=data
+        return req_body
+    else:
+        return req_body
 def create_bucket(credentials,project_name,bucket_name):
     try:
         """Creates a new bucket."""
@@ -38,7 +74,7 @@ def get_package_base_name(appPackage):
     return package_zip[0]
 # Creating google cloud function
 def createcloudfunction(service, req_body, project_name, bucket_name, credentials):
-    destination_blob_name = "storage"
+    destination_blob_name = os.environ['Storage']
     try:
         storage_path = upload_blob(credentials, bucket_name, source_file_name, destination_blob_name, project_name)
         req_body["sourceArchiveUrl"] = "gs://" + bucket_name + "/" + storage_path
@@ -52,9 +88,10 @@ def createcloudfunction(service, req_body, project_name, bucket_name, credential
         operation = service.projects().locations().functions().create(
             location='projects/' + project_name + '/locations/'+os.environ['Region'], body=req_body)
         response = operation.execute()
-        print(response)
         print_result(json.dumps(response))
-        print("Function created successfully")
+        print_log("Click this link to access your application %s"%("https://"+os.environ['Region']+"-"+project_name+".cloudfunctions.net/"+os.environ["FunctionName"]))
+        print_log(response)
+
     except Exception as e:
         print(e)
         print_error(e)
@@ -64,7 +101,7 @@ def delete_blob(credentials,project_name):
     """Deletes a blob from the bucket."""
     storage_client = storage.Client(credentials=credentials, project=project_name)
     bucket_name="serverlessfunction"
-    blob_name="storage"
+    blob_name=os.environ['Storage']
     bucket = storage_client.get_bucket(bucket_name)
     blob = bucket.blob(blob_name)
     blob.delete()
@@ -82,20 +119,23 @@ def deletecloudfunction(credentials,service, function_name, project_name):
             print(items)
         storage_client = storage.Client(credentials=credentials, project=project_name)
         delete_blob(credentials,project_name)
-        bucket = storage_client.get_bucket("serverlessfunction")
-        bucket.delete()
     except Exception as err:
         print(err)
         print_error(err)
         sys.exit(127)
+    try:
+        bucket = storage_client.get_bucket("serverlessfunction")
+        bucket.delete()
+    except:
+        pass
+
+
 command = sys.argv[1]
 if __name__ == "__main__":
     app_package = os.environ["AppPackage"]
     print(app_package)
     app_package_base_name = get_package_base_name(app_package)
     source_file_name = "/opt/remoteFiles/cliqr_local_file/" + app_package_base_name + ".zip"
-#    source_file_name="quiz.zip"
-#SERVICE_ACCOUNT_FILE = r'serviceaccount.json'
     auth_security = os.environ['CliqrCloud_JsonServiceAccount']
     auth_security = auth_security.replace('\n', '')
     auth_security = json.loads(auth_security)
@@ -105,38 +145,8 @@ if __name__ == "__main__":
     function_name = os.environ["FunctionName"]
     dependents = os.environ['CliqrDependencies']
     print(os.environ)
-    try:
-    	InstanceName =os.environ['CliqrTier_' + dependents + '_instanceName']
-    	MysqlUser =os.environ['CliqrTier_' + dependents + '_Database_Username']
-    	Mysqlpassword =os.environ['CliqrTier_' + dependents + '_param1']
-        Mysqlpassword= base64.b64decode(Mysqlpassword).decode()
-    	Mysqldatabase = os.environ['CliqrTier_' + dependents + '_Database_Name']
-    except Exception as err:
-    	print("Error getting paraameters from mysql")
-    	sys.exit(127)
-    req_body = {
-    "name": "projects/" + project_name + "/locations/"+os.environ['Region']+"/functions/" + function_name,
-    "description": "",
-    "entryPoint": os.environ['EntryPoint'],
-    "timeout": "60s",
-    "availableMemoryMb": 256,
-    "labels": {
-        "deployment-tool": "console-cloud"
-    },
-    "runtime": os.environ['Runtime'],
-    "environmentVariables": {},
-    "httpsTrigger": {},
-    "maxInstances": 0,
-    "vpcConnector": "",
-    "serviceAccountEmail": project_name + "@appspot.gserviceaccount.com",
-    "sourceArchiveUrl": "",
-    "environmentVariables": {"INSTANCE_CONNECTION_NAME": project_name +":" +os.environ["CliqrCloud_Region"]+":"+InstanceName,
-                             "MYSQL_USER": MysqlUser,
-                             "MYSQL_PASSWORD": Mysqlpassword,
-                             "MYSQL_DATABASE": Mysqldatabase}
-}
     bucket_name = "serverlessfunction"
-# Authenticating Google account
+    req_body=check_googlesql(dependents,project_name,function_name)
     print(req_body)
     try:
         SCOPES = [
@@ -160,3 +170,4 @@ if __name__ == "__main__":
     else:
         print("Command error")
         print_error("Getting Service Account Failed.")
+
