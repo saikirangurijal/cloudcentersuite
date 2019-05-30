@@ -169,6 +169,30 @@
       "tabularTypeData": null,
       "collectionList": []
     },
+	{
+		"paramName": "Storage",
+		"displayName": "Storage Name",
+		"helpText": "",
+		"type": "string",
+		"valueConstraint": {
+			"maxLength": 255,
+			"allowSpaces": true,
+			"remainingChars": 255
+		},
+		"valueList": null,
+		"collectionList": null,
+		"defaultValue": "",
+		"secret": null,
+		"confirmValue": null,
+		"pathSuffixValue": null,
+		"userVisible": true,
+		"userEditable": true,
+		"optional": false,
+		"multiselectSupported": false,
+		"webserviceListParams": null,
+		"systemParam": false,
+		"deploymentParam": true
+	}, 
     {
       "collectionList": null,
       "confirmValue": null,
@@ -188,7 +212,7 @@
       "valueConstraint": {
         "allowSpaces": true
       },
-      "valueList": "Iowa us-central:us-central1,South Carolina us-east1:us-east1,Belgium europe-west1:europe-west1,London europe-west2:europe-west2,Hong Kong asia-east2:asia-east2:Tokyo asia-northeast1:asia-northeast1",
+      "valueList": "Iowa us-central:us-central1,South Carolina us-east1:us-east1,Belgium europe-west1:europe-west1,London europe-west2:europe-west2,Hong Kong asia-east2:asia-east2,Tokyo asia-northeast1:asia-northeast1",
       "webserviceListParams": null
     }
   ],
