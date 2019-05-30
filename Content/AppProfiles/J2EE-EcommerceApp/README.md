@@ -45,7 +45,7 @@ J2EE-EcommerceApp - Typical J2EE Ecommerce Web Application using Shopizer
 	
 # Pre-requisite
 
-   1. CloudCenter 5.0.1 and above
+   1. CloudCenter 5.x.x and above
    
    2. Knowledge on how to use CloudCenter
    
