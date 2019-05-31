@@ -51,13 +51,11 @@ J2EE-EcommerceApp - Typical J2EE Ecommerce Web Application using Shopizer
    
    3. Mongo DB Cluster Service should be created in Workload Manager for the NOSQL Database Tier 
       - How to Create Mongo DB Cluster Server - Refer from [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/NoSQL%20Databases/MongoDB%20Cluster)
-
-   4. Make sure that you keep the  Application Package related pre/post scripts for the Profiles in your repository under '<repoistory>/apps/shopizer/' folder. Download the Artifact from [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/AppProfiles/J2EE-EcommerceApp/artifacts/shopizer.zip) 
    
-   5. Make sure that you keep the  Application Package Bundles/WAR for the Profiles in your repository under '<repoistory>/apps/shopizer/' folder.
+   4. Make sure that you keep the  Application Package Bundles/WAR for the Profiles in your repository under '<repoistory>/apps/shopizer/' folder.
       Download the Artifact from [here](https://s3.amazonaws.com/contentfactory/apps/shoppingcart/complexapp.war) 
    
-   6. Optional: Make sure that Sensu Service is exist in Workload Manager if you are using App Profile with Sensu Service Enabled.  Refer the Sensu Server service creation steps [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/Monitoring/Sensu) 
+   5. Optional: Make sure that Sensu Service is exist in Workload Manager if you are using App Profile with Sensu Service Enabled.  Refer the Sensu Server service creation steps [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/Monitoring/Sensu) 
    
 #### Before you start
 Before you start with service import, Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx), on any linux based client machine.
