@@ -23,7 +23,7 @@ Before you start with service import, Install Docker by following the steps prov
 ### Googlesql Import
 Before importing the Google cloud functions service, user must import Googlesql service in workload manager because Google cloud functions will be invoked on Googlesql table events (Any CRUD operation).
       
-Refer Readme on how to import Google cloud functions Service from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/tree/master/Databases/GoogleSQL).
+Refer Readme on how to import Google cloud functions Service from [here](https://github.com/datacenter/cloudcentersuite/blob/master/Content/Databases/DBaaS/GoogleSQL/README1.md).
       
 The Google cloud function service will create a Cloud function with provided name in Google Cloud.
 
