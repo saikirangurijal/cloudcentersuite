@@ -21,7 +21,7 @@ Cisco Cloud Center will maintain the application services catalog, provide consi
 - BIG-IP must be licensed
 
 #### Before you start
-Before you start with service import, Install Docker by following the steps provided [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx), on any linux based client machine.
+Before you start with service import, Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx), on any linux based client machine.
 
 **NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
 - You can check , if docker is installed , by running "docker -v"
