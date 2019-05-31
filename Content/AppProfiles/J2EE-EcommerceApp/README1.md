@@ -59,37 +59,22 @@ J2EE-EcommerceApp - Typical J2EE Ecommerce Web Application using Shopizer
    
    6. Optional: Make sure that Sensu Service is exist in Workload Manager if you are using App Profile with Sensu Service Enabled.  Refer the Sensu Server service creation steps [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/Monitoring/Sensu) 
    
-#### Before you start
-Before you start with service import, Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx), on any linux based client machine.
-
-**NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
-- You can check , if docker is installed , by running "docker -v"
-- You can check , if docker is running , by executing the command "systemctl status docker"
-
-## Importing the service
-
-Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
-- wget command may not be installed. Need to execute "yum install wget -y" in case of centos7.
-
-	    Example: 
-      wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
-				
-- After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
-
-Step 2 : Execute the script from Step 1 using the following command.
-
-        sh ServiceImportMaster.sh
-
-Once the script is run, please follow the prompts to import the service or the corresponding application profile.
 
 
-##### PLEASE NOTE : You be prompted with location of service bundle zip and/or application bundle zip on client machine. The files must be copied on to the repository before proceeding to deploy.
+# Download the Application Profile and Package Bundle
 
-    
-         - Application Zip file under <app_path>/<your_package_name>
-            
-             Example: http://<Your_REPO_Server_IP>/<app_path>/shopizer/shopizer.zip
-			 
+   Sensu Enabled :
+      Download the Modeled Application Profile with Sensu Enabled from [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/AppProfiles/J2EE-EcommerceApp/j2ee-ecommerce_app_with_sensu.zip)
+
+   Without Sensu :
+      Download the Modeled Application Profile without Sensu from [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/AppProfiles/J2EE-EcommerceApp/j2ee-ecommerce_app_without_sensu.zip)
+
+# How to create a App Profile in Cisco Workload Manager
+   User can create the App Profile by importing the downloaded zip file in
+   WorkLoad Manager -> Application Profile -> Import --> Select  App Profile zip file
+
+# How to configure Sensu agent
+   - By Default it is pre-configured with all Service tiers except Front-end cache, LB. No further action required.
 # Note :
   - App Can be viewed in Front-End cache Public ip : 80 port 
   - Sensu dashboard can be viewed in Public IP of Sensu server with port 80 or 3000
