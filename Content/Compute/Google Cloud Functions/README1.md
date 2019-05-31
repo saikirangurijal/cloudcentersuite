@@ -30,9 +30,9 @@ The Google cloud function service will create a Cloud function with provided nam
 How it works :
 - Once application deployed successfully user can access sample Quiz application(which writes data into the google sql). 
 - When user triggers the application the inputs of user writes  into a table(dataans)
-- To access the application after deployment trigger the url with required changes.
+- After your successful deployment, you can find the URL under Task logs to access your application.
 
-    https://<Region>-<Project - ID>.cloudfunctions.net/<Function_Name>
+    https://<"Region Name"> - <"Project ID">.cloudfunctions.net/<"Function_Name">
 
 ## Pre-Requisites
 #### CloudCenter
