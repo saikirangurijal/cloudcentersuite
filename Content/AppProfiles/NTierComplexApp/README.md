@@ -51,16 +51,14 @@ NTierComplexApp - Typical J2EE Web App
    
    3. Mongo DB Cluster Service should be created in Workload Manager for the NOSQL Database Tier 
       - How to Create Mongo DB Cluster Server - Refer from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/tree/master/NoSQL%20Databases/MongoDB%20Cluster)
+   
+   4. Make sure that Sensu Service is exist in Workload Manager.  Refer the Sensu Server service creation steps [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/tree/master/Monitoring/Sensu) 
+   
+   5. For Weblogic: Make sure that you keep the War for Weblogic in your repository under '<repoistory>/apps/complexapp/' folder. Download the war from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/blob/master/AppProfiles/NTierComplexApp/artifacts/multi-tier-app.war) 
 
-   4. Make sure that you keep the  Artifacts/Application Package Bundle for the Profiles in your repository under '<repoistory>/apps/complexapp/' folder. Download the Artificat from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/blob/master/AppProfiles/NTierComplexApp/artifacts/complexapp.zip) 
+   6. For Weblogic : App With Middleware/Weblogic Cluster option, after steps 4,  Refer the Weblogic Cluster service creation steps [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/tree/master/Middleware/Oracle%20Weblogic)
    
-   5. Make sure that Sensu Service is exist in Workload Manager.  Refer the Sensu Server service creation steps [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/tree/master/Monitoring/Sensu) 
-   
-   6. For Weblogic: In addition to Step 4, Make sure that you keep the War for Weblogic in your repository under '<repoistory>/apps/complexapp/' folder. Download the war from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/blob/master/AppProfiles/NTierComplexApp/artifacts/multi-tier-app.war) 
-
-   7. For Weblogic : App With Middleware/Weblogic Cluster option, after steps 4,  Refer the Weblogic Cluster service creation steps [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/tree/master/Middleware/Oracle%20Weblogic)
-   
-   8. For Weblogic : According to details steps in WebLogic, Make sure download Weblogic Installation Bundle from Oracle website and keept it in your repository under 'images' as 'images/fmw_12.2.1.3.0_wls.zip'.
+   7. For Weblogic : According to details steps in WebLogic, Make sure download Weblogic Installation Bundle from Oracle website and keept it in your repository under 'images' as 'images/fmw_12.2.1.3.0_wls.zip'.
       Please refer Weblogic pre-requisite.
     
 #### Before you start
