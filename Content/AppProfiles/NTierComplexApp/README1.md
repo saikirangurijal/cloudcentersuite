@@ -2,7 +2,7 @@ NTierComplexApp - Typical J2EE Web App
 
 ## Introduction
 
-    The Workload Manager platform supports to create and deploy N-Tier complex application profiles
+     The Workload Manager platform supports to create and deploy N-Tier complex application profiles
         using  various servies already onboarded on it.
 
     This document provides information to create  JAVA/J2EE Based Web Application Profile
@@ -42,9 +42,10 @@ NTierComplexApp - Typical J2EE Web App
  
     **Default Login** : admin/admin 
 	
+	
 # Pre-requisite
 
-   1. CloudCenter 5.0.1 and above
+   1. CloudCenter 5.x.x and above
    
    2. Knowledge on how to use CloudCenter
    
