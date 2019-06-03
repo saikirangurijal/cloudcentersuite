@@ -1,0 +1,58 @@
+#!/bin/bash
+# My first script
+. /utils.sh
+
+
+cmd=$1
+
+apk add --update build-base
+apk add libffi-dev openssl-dev
+
+# RUN EVERYTHING AS ROOT
+if [ "$(id -u)" != "0" ]; then
+    exec sudo "$0" "$@"
+fi
+
+pip install --upgrade pip
+
+pip list
+print_log "env() : `env`"
+# while executing shell error msg will write on FAILURE file.
+function executionStatus() {
+ FILE="FAILURE"
+ if [ -f $FILE ];
+ then
+    status=`cat $FILE`
+    print_error "Service execution failed"
+    print_error "$status"
+    exit 127
+  else
+    FILE="SUCCESS"
+    status="Service execution successful"
+    print_log "$status"
+ fi
+}
+
+# Start command will install required python peackages
+# Will invoke the Azure sdk and creating Azure functions
+# stop command  reverting Azure functions.
+case $cmd in
+	start)
+		print_log "Executing Service.."
+		python install_setup.py start
+        sleep 5m
+		executionStatus
+		exit 0
+		;;
+	stop)
+		print_log "Deleting Service.."
+		python install_setup.py stop
+		sleep 5m
+		executionStatus
+		exit 0
+		;;
+	*)
+		serviceStatus="Invalid command"
+		exit 127
+		;;
+esac
