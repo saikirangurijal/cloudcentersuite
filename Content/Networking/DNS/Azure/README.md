@@ -57,13 +57,15 @@ Python script:
 - External Action Bundle:  services/Azure_dns_zones.zip
 - External Lifecycle Actions:
             Start:
+			
                 Script from bundle: service start
             Stop:
+			
                 Script from bundle: service stop
 # Deployment Parameters:
 
 | Parameter Name | Type | Mandotory | Description | Allowed Value | Default Value | 
 | ---- |----| ----| ---- | ---- | ----|
 | DomainName |	String | Yes|	Mention Existing Registered Domain Name in Azure,If DomainName is not Please create a DomainName in Azure App Service Eg : <SampleDomainName.com>|
-|SubDomainName | Sting | Yes | Mention new  valid subdomain Eg : <SubDomainName>| | |
+|SubDomainName | Sting | Yes | Mention new  valid subdomain Eg: <SubDomainName> | | |
 |IpAddress |String |Yes| Mention IpAddress of your Webapplication or Application Ip
