@@ -4,7 +4,7 @@
           {
       "DNS": [
         {
-          "Route 53":{
+          "AWS":{
           "name": "route53",
           "serviceID": "route53",
           "serviceCategory": "Networking",
@@ -14,6 +14,23 @@
           "serviceVersion": "1.0",
           "urls": {
             "serviceLibraryBundle": "Networking/Route53/WorkloadManager/Route53.zip",
+            "dockerFile": "dockerimages/Dockerfile",
+            "serviceImport": "Scripts/serviceimport.zip"
+          },
+          "created": "",
+          "digest": ""
+        },
+	
+		"AzureDNSzones":{
+          "name": "AzureDNS",
+          "serviceID": "azuredns",
+          "serviceCategory": "Networking",
+          "serviceSubcategory": "DNS/Azure",
+          "description": "Azure NDS",
+          "supportedVersion": "5.0.1",
+          "serviceVersion": "1.0",
+          "urls": {                 
+            "serviceLibraryBundle": "Networking/DNS/Azure/WorkloadManager/AzureDnsZones.zip",
             "dockerFile": "dockerimages/Dockerfile",
             "serviceImport": "Scripts/serviceimport.zip"
           },
@@ -107,7 +124,7 @@
           "googlesql"
         ],
         "urls": {
-          "serviceLibraryBundle": "Compute/Google Cloud Functions/WorkloadManager/googlecloudfunction.zip",
+          "serviceLibraryBundle": null,
           "dockerFile": "dockerimages/Dockerfile",
           "serviceImport": "Scripts/serviceimport.zip"
         },
@@ -418,61 +435,5 @@
 
             }
 
-          ],
-		  "AppProfiles":
-          [
-            {
-              "Shopizer":  {
-                    "name": "J2EE-EcommerceApp",
-                    "serviceID":"",
-                    "serviceCategory":"AppProfiles",
-                    "description": "Shopizer Ecommerce App",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-					"isService": false,
-					"appProfiles": {
-						"1": {
-							"j2ee-ecommerce_app_with_sensu.zip": "Shopizer App(with Sensu)"
-						}, 
-						"2": {
-							"j2ee-ecommerce_app_without_sensu.zip": "Shopizer App(without Sensu)"
-						}
-					},
-                    "urls": {
-                        "serviceLibraryBundle": "AppProfiles/J2EE-EcommerceApp/J2EE-EcommerceApp.zip",
-                        "dockerFile": "dockerimages/Dockerfile",
-                        "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
-				},
-				"Complex App":  {
-                    "name": "NTierComplexApp",
-                    "serviceID":"",
-                    "serviceCategory":"AppProfiles",
-                    "description": "Complex App",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-					"isService": false,
-					"appProfiles": {
-						"1": {
-							"NTierComplexAppTomcat.zip": "Complex App(Tomcat)"
-						}, 
-						"2": {
-							"NTierComplexAppWeblogic.zip": "Complex App(Weblogic)"
-						},
-						"3": {
-							"NTierComplexAppWithoutSensu.zip": "Complex App(Tomcat)(Without Sensu)"
-						}
-					},
-                    "urls": {
-                        "serviceLibraryBundle": "AppProfiles/NTierComplexApp/NTierComplexApp.zip",
-                        "dockerFile": "dockerimages/Dockerfile",
-                        "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
-                  }
-            }
           ]
 }
