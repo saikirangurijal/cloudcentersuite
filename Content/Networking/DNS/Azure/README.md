@@ -1,11 +1,13 @@
 ## Azure DNS zones  
 
 # Introduction
-    Azure DNS is a hosting service for DNS domains that provides name resolution by using Microsoft Azure infrastructure. By hosting your domains in Azure, you can manage your DNS records
+    Azure DNS is a hosting service for DNS domains that provides name resolution by using 
+    Microsoft Azure infrastructure. By hosting your domains in Azure, you can manage your DNS records
     to your website or web application
 
 Please refer the below link for more details.
 For your reference : https://docs.microsoft.com/en-us/azure/dns/dns-overview
+
 # Pre-Requisites
  CloudCenter
    - CloudCenter 5.x.x and above
@@ -17,12 +19,16 @@ NOTE : You can skip the above step, if Docker Client is already installed and ru
 
 - You can check , if docker is installed , by running "docker -v"
 - You can check , if docker is running , by executing the command "systemctl status docker"
-- Importing the service
+
+# Importing the service
+
 - Step 1 : Download the service import utility file from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
 
     wget command may not be installed. Need to execute "yum install wget -y" in case of centos7.
 
-        Example:  wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+        Example:  
+        wget https://github.com/datacenter/cloudcentersuite/raw/master/Content/Scripts/ServiceImportMaster.sh
+        
     After downloading ServiceImportMaster.sh, provide file permissions by executing "chmod 755 ServiceImportMaster.sh".
 
 - Step 2 : Execute the script from Step 1 using the following command.
@@ -67,6 +73,6 @@ Python script:
 
 | Parameter Name | Type | Mandotory | Description | Allowed Value | Default Value | 
 | ---- |----| ----| ---- | ---- | ----|
-| DomainName |	String | Yes|	Mention Existing Registered Domain Name in Azure,If DomainName is not Please create a DomainName in Azure App Service Eg : <SampleDomainName.com>|
+| DomainName |	String | Yes|	Mention Existing Registered Domain Name in Azure,If DomainName is not registered Please create a DomainName in Azure App Service Eg : <SampleDomainName.com>|
 |SubDomainName | Sting | Yes | Mention new  valid subdomain Eg : SubDomainName| | |
-|IpAddress |String |Yes| Mention IpAddress of your Webapplication or Application Ip | | 
+|IpAddress |String |No| Mention IpAddress of your Webapplication or Application Ip | | 
