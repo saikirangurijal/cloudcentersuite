@@ -1,0 +1,124 @@
+{  
+   "displayName":"Google ELB",
+   "name":"gelb",
+   "description":"Service for google Load Balancer",
+   "parentServiceId":"36",
+   "costPerHour":"0.00",
+   "bundleLocation":"",
+   "systemService":false,
+   "serviceType":"EXTERNAL",
+   "logoPath":"null",
+   "serviceActions":[  
+
+   ],
+   "externalBundleLocation":"services/gelb.zip",
+   "externalActions":[  
+      {  
+         "actionName":"START",
+         "actionType":"SCRIPT",
+         "actionValue":"service start",
+         "value":"service start",
+         "key":"START"
+      },
+      {  
+         "actionName":"STOP",
+         "actionType":"SCRIPT",
+         "actionValue":"service stop",
+         "value":"service stop",
+         "key":"STOP"
+      }
+   ],
+   "actions":[  
+
+   ],
+   "serviceParamSpecs":[  
+      {  
+         "paramName":"gelbLoadBalancerName",
+         "displayName":"gelbLoadBalancerName",
+         "helpText":"Mention gelbLoadBalancerName in small case.",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      },
+      {  
+         "paramName":"gelbLoadBalancerType",
+         "displayName":"gelbLoadBalancerType",
+         "helpText":"gelbLoadBalancerType",
+         "type":"list",
+         "valueConstraint":{  
+            "allowSpaces":true
+         },
+         "valueList":"TCP:TCP, HTTP:HTTP, UDP:UDP",
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      },
+      {  
+         "paramName":"gelbHealthCheck",
+         "displayName":"gelbHealthCheck",
+         "helpText":"gelbHealthCheck",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      }
+   ],
+   "servicePorts":[  
+
+   ],
+   "images":[  
+
+   ],
+   "defaultImageId":"",
+   "containerImages":[  
+
+   ],
+   "containerPorts":[  
+
+   ],
+   "repositories":[  
+      {  
+         "id":"1"
+      }
+   ]
+}

@@ -1,0 +1,193 @@
+{  
+   "displayName":"route53",
+   "name":"route53",
+   "description":"Aws Route53",
+   "parentServiceId":"48",
+   "costPerHour":"0.00",
+   "bundleLocation":"",
+   "systemService":false,
+   "serviceType":"EXTERNAL",
+   "logoPath":"custom/assets/img/serviceLogo/fe482181-4475-4334-a544-48f1aae073b8.png",
+   "serviceActions":[  
+
+   ],
+   "externalBundleLocation":"services/awsroute53.zip",
+   "externalActions":[  
+      {  
+         "actionName":"START",
+         "actionType":"SCRIPT",
+         "actionValue":"service start",
+         "value":"service start",
+         "key":"START"
+      },
+      {  
+         "actionName":"STOP",
+         "actionType":"SCRIPT",
+         "actionValue":"service stop",
+         "value":"service stop",
+         "key":"STOP"
+      }
+   ],
+   "actions":[  
+
+   ],
+   "serviceParamSpecs":[  
+      {  
+         "paramName":"DomainName",
+         "displayName":"DomainName",
+         "helpText":"Give  valid existing DomainName in aws cloud",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      },
+      {  
+         "paramName":"subDomainName",
+         "displayName":"subDomainName",
+         "helpText":"Mention Subdomain for access your application through Subdomain Name",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      },
+      {  
+         "paramName":"IpAddress",
+         "displayName":"IpAddress",
+         "helpText":"IpAddress of your application want to access.",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      },
+      {  
+         "paramName":"healthCheckName",
+         "displayName":"healthCheckName",
+         "helpText":"healthCheckName wanth to create health",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      },
+      {  
+         "paramName":"healthCheckport",
+         "displayName":"healthCheckport",
+         "helpText":"mention healthCheckport ",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      },
+      {  
+         "paramName":"healthCheckpath",
+         "displayName":"healthCheckpath",
+         "helpText":"Mention healthCheckpath to be access your application",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      }
+   ],
+   "servicePorts":[  
+
+   ],
+   "images":[  
+
+   ],
+   "defaultImageId":"",
+   "containerImages":[  
+
+   ],
+   "containerPorts":[  
+
+   ]
+}
