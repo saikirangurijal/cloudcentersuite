@@ -1,0 +1,52 @@
+#!/bin/bash
+# Author: Riyas Ahamed
+# Type: External Service for Google Cloud DNS
+
+#For external-service
+. /utils.sh
+
+cmd=$1
+
+# RUN EVERYTHING AS ROOT
+if [ "$(id -u)" != "0" ]; then
+    exec sudo "$0" "$@"
+fi
+
+pip install --upgrade pip
+# Return execution status
+function executionStatus() {
+ FILE="FAILURE"
+ if [ -f $FILE ];
+ then
+    status=`cat $FILE`
+    print_log "Configuration Failed"
+    print_log "$status"
+    exit 127   
+  else
+    FILE="SUCCESS"
+    status="Successfully Configured"
+    print_log "$status"
+ fi
+}
+
+# External Life-Cycle actions
+case $cmd in
+	start)
+		print_log "Executing Service.."
+        python install_setup.py start
+		python main.py start
+		executionStatus
+		exit 0
+		;;
+	stop)
+		echo "Service Action -  $cmd"
+		python install_setup.py stop
+		python main.py stop
+		executionStatus
+        exit 0
+		;;
+	*)
+		echo "unknown command"
+		exit 127
+		;;
+esac

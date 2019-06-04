@@ -1,0 +1,8 @@
+{
+    "BundleError": "Internal Bundle Error, bundle zip does not have all required files",
+    "InternalError": "Internal server encountered an internal error. Please retry the request.Please try again after some time",
+    "ValidationError": "Mandatory parameters are missing.",
+    "MandatoryParamsEmpty": "Required parameters are empty.",
+    "MandatoryParamsMissing": "Required parameters are missing",
+    "DomainAlreadyExists":"The specified domain name {name} already exists"
+}
