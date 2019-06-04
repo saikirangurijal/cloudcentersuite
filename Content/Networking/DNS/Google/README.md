@@ -47,9 +47,8 @@ Shell script:
    
 Python Script :
 
-- install_setup.py: The script will check all mandatory parameters available and installs necessary - 
-- python packages also invokes external life cycle action.
-- google_dns_client.py: script that invokes the api for google dns functions like create record set DNS configuration .
+- install_setup.py: The script will check all mandatory parameters available and installs necessary - python packages also invokes external life cycle action.
+- google_dns_client.py: script that invokes the api for google dns functions like create record set DNS configuration.
 - main.py : Script will invoke lifecycle actions
 - util.py: utility file
 - error_utils.py: A script that handles error functionalities
