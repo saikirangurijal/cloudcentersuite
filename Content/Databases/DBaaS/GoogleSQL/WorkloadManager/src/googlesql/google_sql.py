@@ -1,3 +1,4 @@
+
 import time
 import json
 import sys,os
@@ -7,6 +8,7 @@ from google.oauth2 import service_account
 from util import print_error,print_log,print_result,write_error
 from error_utils import ErrorUtils
 import re
+import base64
 
 class mysql_instance():
     def __init__(self,auth_security):
@@ -296,15 +298,16 @@ def main(cmd):
         ip_address = ''
         networks = []
         if len(dependents) > 0:
-            istances = str(os.environ['CliqrTier_' + dependents + '_HOSTNAME']).split(',')
-            network_ip =  str(os.environ['CliqrTier_' + dependents + '_PUBLIC_IP']).split(',') 
-            ip_address = str(os.environ['CliqrTier_' + dependents + '_IP']).split(',') 
-            print("my instances is ===================>{}".format(istances))
-            print("my vm instance public ip is ===================>{}".format(network_ip))
-            networks.append({
-                "name": "Compute Engine",
-                "value": network_ip
-            })
+			if 'CliqrTier_' + dependents + '_PUBLIC_IP' in os.environ:
+				istances = str(os.environ['CliqrTier_' + dependents + '_HOSTNAME']).split(',')
+				network_ip =  str(os.environ['CliqrTier_' + dependents + '_PUBLIC_IP']).split(',') 
+				ip_address = str(os.environ['CliqrTier_' + dependents + '_IP']).split(',') 
+				print("my instances is ===================>{}".format(istances))
+				print("my vm instance public ip is ===================>{}".format(network_ip))
+				networks.append({
+					"name": "Compute Engine",
+					"value": network_ip
+				})
         
     except Exception as er:
         print_error(er.message)
@@ -346,6 +349,7 @@ def main(cmd):
                 data = _object.instance_info
                 ip = data["ipAddresses"][0]["ipAddress"]
                 sql_type =  sqlType.lower()
+		param1 =  base64.b64encode(db_params['password'].encode())
                 response =   {
                         'driverClassName' : sql_type,
                         'url' : sql_type+'://'+ip+':3306/'+db_name,
@@ -354,7 +358,9 @@ def main(cmd):
                         'DB_TIER_IP' : ip,
                         'Database_IP': ip,                     
                         'CloudCenter_Database_IP': ip,
-                        'CloudCenter_DB_TIER_IP': ip
+                        'CloudCenter_DB_TIER_IP': ip,
+			'param1': param1,
+			'instanceName': body['name']
 
                     }
             return response
