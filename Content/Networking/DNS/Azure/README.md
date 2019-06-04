@@ -33,7 +33,7 @@ NOTE : You can skip the above step, if Docker Client is already installed and ru
 PLEASE NOTE : You be prompted with location of service bundle zip and/or application bundle zip on client machine. The files must be copied on to the repository before proceeding to deploy.
      - Service Zip file under <service_path>/<your_bundle_name>
                 
-         Example : http://<Your_REPO_Server_IP>/<service_path>/AzureDnsZones.zip 
+         Example : http://<Your_REPO_Server_IP>/<service_path>/Azure_dns_zones.zip 
 
      - Application Zip file under <app_path>/<your_package_name>
         
@@ -56,6 +56,7 @@ Python script:
 # External Lifecycle Actions as below
 - External Action Bundle:  services/Azure_dns_zones.zip
 - External Lifecycle Actions:
+
             Start:
 			
                 Script from bundle: service start
@@ -67,5 +68,5 @@ Python script:
 | Parameter Name | Type | Mandotory | Description | Allowed Value | Default Value | 
 | ---- |----| ----| ---- | ---- | ----|
 | DomainName |	String | Yes|	Mention Existing Registered Domain Name in Azure,If DomainName is not Please create a DomainName in Azure App Service Eg : <SampleDomainName.com>|
-|SubDomainName | Sting | Yes | Mention new  valid subdomain Eg: <SubDomainName> | | |
+|SubDomainName | Sting | Yes | Mention new  valid subdomain Eg:   <SubDomainName> | | |
 |IpAddress |String |Yes| Mention IpAddress of your Webapplication or Application Ip
