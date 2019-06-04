@@ -68,5 +68,5 @@ Python script:
 | Parameter Name | Type | Mandotory | Description | Allowed Value | Default Value | 
 | ---- |----| ----| ---- | ---- | ----|
 | DomainName |	String | Yes|	Mention Existing Registered Domain Name in Azure,If DomainName is not Please create a DomainName in Azure App Service Eg : <SampleDomainName.com>|
-|SubDomainName | Sting | Yes | Mention new  valid subdomain Eg:   <SubDomainName> | | |
+|SubDomainName | Sting | Yes | Mention new  valid subdomain Eg : <SubDomainName> | | |
 |IpAddress |String |Yes| Mention IpAddress of your Webapplication or Application Ip
