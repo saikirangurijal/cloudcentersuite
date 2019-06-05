@@ -11,14 +11,14 @@ For your reference : https://docs.microsoft.com/en-us/azure/dns/dns-overview
    - CloudCenter 5.x.x and above
    - Knowledge on how to use Workload Manager
 
-Before you start with service import, Install Docker by following the steps provided here, on any linux based client machine.
+Before you start with service import, Install Docker by following the steps provided [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx), on any linux based client machine.
 
 NOTE : You can skip the above step, if Docker Client is already installed and running in your machine.
 
 - You can check , if docker is installed , by running "docker -v"
 - You can check , if docker is running , by executing the command "systemctl status docker"
 - Importing the service
-- Step 1 : Download the service import utility file from here, and save the file on to your linux machine.
+- Step 1 : Download the service import utility file from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
 
     wget command may not be installed. Need to execute "yum install wget -y" in case of centos7.
 
