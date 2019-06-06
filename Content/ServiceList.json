@@ -124,7 +124,7 @@
           "googlesql"
         ],
         "urls": {
-          "serviceLibraryBundle": null,
+          "serviceLibraryBundle": "Compute/Google Cloud Functions/WorkloadManager/googlecloudfunction.zip",
           "dockerFile": "dockerimages/Dockerfile",
           "serviceImport": "Scripts/serviceimport.zip"
         },
