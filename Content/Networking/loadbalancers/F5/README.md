@@ -66,3 +66,5 @@ e.g. Root Volume Size,root_volume_size,10
       The parameter name is key here and should match the parameter name in the UI
 ```
 - bigip_rest.py: script that calls the F5 APIs. This python script is called from the main service script.
+
+##### PLEASE NOTE : Once the service is imported update the BIG IP credentials in the service definition.
