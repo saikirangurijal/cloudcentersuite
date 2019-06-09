@@ -5,10 +5,13 @@ from util import *
 import os
 from error_utils import ErrorUtils
 import sys
+from google.oauth2 import service_account
 
 class GoogleDNSClient(object):
-    def __init__(self, project_id):
-        self.client = dns.Client(project=project_id)
+    def __init__(self, project_id, service_account_json):
+        credentials = service_account.Credentials.from_service_account_info(service_account_json)
+
+        self.client = dns.Client(project=project_id, credentials=credentials)
 
     # Create Zone
     def create_zone(self, name, dns_name, description):
@@ -71,7 +74,7 @@ class GoogleDNSClient(object):
 
         ip_address = os.environ.get("ipAddress", False)
 
-        app_tier_name = os.environ.get("cliqrAppTierName", False)
+        app_tier_name = os.environ.get("CliqrDependencies", False)
         if not ip_address:
             if not app_tier_name:
                 print_error(ErrorUtils.mandatory_params_missing("PublicIPAddress"), "PublicIPAddress")
@@ -92,15 +95,23 @@ class GoogleDNSClient(object):
             time.sleep(60)     # or whatever interval is appropriate
             changes.reload()
 
-        print_log("Record Set added")
+        print_log("Record Set created")
+        print_log("Please update all below name servers into your registerd domain server.")
+        records = zone.list_resource_record_sets()
+        for record in records:
+            if record.record_type in 'NS':
+                log = '''{0}
+{1}
+{2}
+{3}'''
+                print_log(log.format(*record.rrdatas))
+
+
+        print_log("Please wait until your subdomain got up, please ensure domain registrar got updated with all name servers.")
+        sub_domain = name + "." + domain
         result = {
-            "hostName":app_tier_name,
-            "environment": {
-                "instanceName":zone_name,
-                "instanceType": "DNS",
-                "serviceType": "azurelb",
-                "ipAddress": ip_address
-            }
+            "hostName":"Google DNS Zone",
+            "ipAddress": str(sub_domain)
         }
 
         return result
@@ -128,12 +139,6 @@ class GoogleDNSClient(object):
         result = {
             "hostName":app_tier_name,
             "status": "Terminated"
-        }   
-
-        return result 
+        }
         
-
-
-
-
-
+        return result

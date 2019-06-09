@@ -13,7 +13,11 @@ cmd = sys.argv[1]
 # Create Google Management Object with credentials
 try:
     project_id = os.environ.get("Cloud_Setting_projectName", False)
-    google_dns_client = GoogleDNSClient(project_id)
+    
+    service_account_str = str(os.environ['CliqrCloud_JsonServiceAccount']).replace('\n', '')
+    service_account_json = json.loads(service_account_str)
+
+    google_dns_client = GoogleDNSClient(project_id, service_account_json)
 except Exception as aerr:
     write_error(aerr)
 

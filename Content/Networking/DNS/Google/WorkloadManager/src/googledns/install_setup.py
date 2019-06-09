@@ -12,7 +12,8 @@ import json
     Required Google DNS Python Packages
 '''
 pip_sources = [
-    "google-cloud-dns"
+    "google-cloud-dns",
+    "oauth2client"
 ]
 
 cmd = sys.argv[1]
@@ -47,14 +48,6 @@ try:
             sys.exit(127)
 
     check_mandatory_params()
-    account_access_info = os.environ['CliqrCloud_JsonServiceAccount']
-    auth_security = account_access_info.replace('\n', '')
-    auth_security = json.loads(auth_security)
-
-    with open("serviceaccount.json", "w") as file:
-        file.write(json.dumps(auth_security))
-
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"]= "./serviceaccount.json"
 
 except Exception as e:
     print_error(ErrorUtils.internal_error(e.message))
