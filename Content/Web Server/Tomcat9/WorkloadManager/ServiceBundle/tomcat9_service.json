@@ -1,0 +1,215 @@
+{
+  "displayName": "tomcat9",
+  "name": "tomcat9",
+  "description": "Implementation of the Java Servlet v9",
+  "parentServiceId": "37",
+  "costPerHour": "0.00",
+  "bundleLocation": "services/tomcat9.zip",
+  "systemService": false,
+  "serviceType": "VM_AGENT",
+  "logoPath": "custom/assets/img/serviceLogo/0666debf-62d7-4313-a909-d4b685532608.png",
+  "serviceActions": [
+    {
+      "actionName": "INSTALL",
+      "actionType": "SCRIPT",
+      "actionValue": "service install",
+      "value": "service install",
+      "key": "INSTALL"
+    },
+    {
+      "actionName": "DEPLOY",
+      "actionType": "SCRIPT",
+      "actionValue": "service deploy",
+      "value": "service deploy",
+      "key": "DEPLOY"
+    },
+    {
+      "actionName": "CONFIGURE",
+      "actionType": "SCRIPT",
+      "actionValue": "service configure",
+      "value": "service configure",
+      "key": "CONFIGURE"
+    },
+    {
+      "actionName": "START",
+      "actionType": "SCRIPT",
+      "actionValue": "service start",
+      "value": "service start",
+      "key": "START"
+    },
+    {
+      "actionName": "STOP",
+      "actionType": "SCRIPT",
+      "actionValue": "service stop",
+      "value": "service stop",
+      "key": "STOP"
+    },
+    {
+      "actionName": "RESTART",
+      "actionType": "SCRIPT",
+      "actionValue": "service restart",
+      "value": "service restart",
+      "key": "RESTART"
+    },
+    {
+      "actionName": "RELOAD",
+      "actionType": "SCRIPT",
+      "actionValue": "service reload",
+      "value": "service reload",
+      "key": "RELOAD"
+    },
+    {
+      "actionName": "UPGRADE",
+      "actionType": "SCRIPT",
+      "actionValue": "service upgrade",
+      "value": "service upgrade",
+      "key": "UPGRADE"
+    },
+    {
+      "actionName": "CLEANUP",
+      "actionType": "SCRIPT",
+      "actionValue": "service cleanup",
+      "value": "service cleanup",
+      "key": "CLEANUP"
+    }
+  ],
+  "externalBundleLocation": "null",
+  "externalActions": [],
+  "actions": [],
+  "serviceParamSpecs": [
+    {
+      "paramName": "cliqrJDKVersion",
+      "displayName": "APP Run Time",
+      "helpText": "JDK Version",
+      "type": "list",
+      "valueConstraint": {
+        "allowSpaces": true
+      },
+      "valueList": "JDK 6:JDK6,JDK 7:JDK7,JDK 8:JDK8",
+      "collectionList": null,
+      "defaultValue": "JDK8",
+      "secret": null,
+      "confirmValue": null,
+      "pathSuffixValue": null,
+      "userVisible": true,
+      "userEditable": true,
+      "optional": false,
+      "multiselectSupported": false,
+      "webserviceListParams": null,
+      "systemParam": true
+    },
+    {
+      "paramName": "cliqrWARFile",
+      "displayName": "App Package",
+      "helpText": "Application package file. The file is in relative path from %rootPath%.",
+      "type": "path",
+      "valueConstraint": {
+        "maxLength": 255,
+        "allowSpaces": true,
+        "remainingChars": 255
+      },
+      "valueList": null,
+      "collectionList": null,
+      "defaultValue": "",
+      "secret": null,
+      "confirmValue": null,
+      "pathSuffixValue": "",
+      "userVisible": true,
+      "userEditable": true,
+      "optional": false,
+      "multiselectSupported": false,
+      "webserviceListParams": null,
+      "systemParam": true
+    },
+    {
+      "paramName": "cliqrWebappConfigFiles",
+      "displayName": "App Config Files",
+      "helpText": "Application config files that contain CliQr system tokens and will be modified at deployment time. The config file is a relative path from the webapp context folder, e.g., WEB-INF/classes/db.conf. If there are multiple files, separate with semicolon.",
+      "type": "string",
+      "valueConstraint": {
+        "maxLength": 255,
+        "allowSpaces": true,
+        "remainingChars": 255
+      },
+      "valueList": null,
+      "collectionList": null,
+      "defaultValue": "",
+      "secret": null,
+      "confirmValue": null,
+      "pathSuffixValue": null,
+      "userVisible": true,
+      "userEditable": true,
+      "optional": true,
+      "multiselectSupported": false,
+      "webserviceListParams": null,
+      "systemParam": true
+    },
+    {
+      "paramName": "cliqrWebappContext",
+      "displayName": "Deploy Context",
+      "helpText": "Deployment Directory",
+      "type": "string",
+      "valueConstraint": {
+        "maxLength": 255,
+        "allowSpaces": true,
+        "remainingChars": 255
+      },
+      "valueList": null,
+      "collectionList": null,
+      "defaultValue": "ROOT",
+      "secret": null,
+      "confirmValue": null,
+      "pathSuffixValue": null,
+      "userVisible": true,
+      "userEditable": true,
+      "optional": false,
+      "multiselectSupported": false,
+      "webserviceListParams": null,
+      "systemParam": true
+    }
+  ],
+  "servicePorts": [
+    {
+      "fromPort": "8080",
+      "toPort": "8080",
+      "protocol": "TCP"
+    },
+    {
+      "fromPort": "8443",
+      "toPort": "8443",
+      "protocol": "TCP"
+      
+    },
+    {
+      "fromPort": "80",
+      "toPort": "80",
+      "protocol": "TCP"
+    },
+    {
+      "fromPort": "443",
+      "toPort": "443",
+      "protocol": "TCP"
+    }
+  ],
+  "images": [
+    {
+      "id": "4"
+    },
+    {
+      "id": "21"
+    },
+	{
+      "id": "26"
+    }
+  ],
+  "defaultImageId": "21",
+"containerImages":[
+
+   ],
+   "containerPorts":[
+
+   ],
+   "repositories":[
+
+   ]
+}
