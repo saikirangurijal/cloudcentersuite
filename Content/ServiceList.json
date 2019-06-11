@@ -133,6 +133,23 @@
 		}
 
        }],
+	"WebServer":[{
+		"Tomcat 9": {
+			 "name": "Tomcat9",
+			"serviceID":"tomcat9",
+			"serviceCategory":"WebServer",
+			"description": "WebServer",
+			"supportedVersion": "5.0.1",
+			"serviceVersion": "1.0",
+			"urls": {
+				"serviceLibraryBundle": "WebServer/Tomcat9/WorkloadManager/Tomcat9.zip",
+				"dockerFile": "dockerimages/Dockerfile",
+				"serviceImport": "Scripts/serviceimport.zip"
+			},
+			"created": "",
+			"digest": ""
+		}
+	}],
   "Monitoring":
           [
             {
