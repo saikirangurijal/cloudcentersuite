@@ -19,7 +19,7 @@
 - CloudCenter 5.x.x and above
 - Knowledge on how to use Workload Manager
 - Supported OS: CentOS/Ubuntu
-- Supported clouds: Google and Azure.
+- Supported clouds: Google, Amazon and Azure.
 
 
 #### Before you start
