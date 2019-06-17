@@ -86,4 +86,16 @@ Agent Lifecycle Actions:
  - Stop: Script from bundle: **service stop**
  - Restart: Script from bundle: **service restart**
 
+ 
+Detailed Steps To Retrieve Data From Elasticsearch To Kibana Dashboard
+
+
+Step 1 : Deploy ELK application.
+
+Step 2 : In a web browser, go to the public IP address of your Kibana server. You will see the Kibana homepage.
+
+               - http://your_server_ip:5601/
+Step 3 : Goto Discover in the left side menu, create one index pattern same as elasticsearch index pattern.
+
+Step 4 : Refresh the discover to check the data of elasticsearch in kibana dashboard.
 
