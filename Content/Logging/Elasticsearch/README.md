@@ -112,7 +112,7 @@ Step 1 : Deploy ELK application.
 
 Step 2 : In a web browser, follow below format url to check data in Elasticsearch
          
-     		- http://your_Elasticsearch_server_ip:9200/your_indexname/_search?pretty
+     	- http://your_Elasticsearch_server_ip:9200/your_indexname/_search?pretty
           
 
 
