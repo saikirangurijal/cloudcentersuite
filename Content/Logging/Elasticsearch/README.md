@@ -106,3 +106,13 @@ External Lifecycle Actions:
 | LogPath          | String  | location of log file| user Defined Value|/var/log/httpd/error.log|
 
 
+##### Detailed Steps To Retrieve Data From Elasticsearch
+
+Step 1 : Deploy ELK application.
+
+Step 2 : In a web browser, follow below format url to check data in Elasticsearch
+         
+     		- http://your_Elasticsearch_server_ip:9200/your_indexname/_search?pretty
+          
+
+
