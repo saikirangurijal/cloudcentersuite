@@ -1,0 +1,331 @@
+#!/bin/bash 
+
+#required library for adding template
+OSSVC_HOME=/usr/local/osmosix/service
+
+. /usr/local/osmosix/etc/.osmosix.sh
+. /usr/local/osmosix/etc/userenv
+. $OSSVC_HOME/utils/cfgutil.sh
+
+
+if [ -f /etc/redhat-release ]; then
+osName="centos"  
+elif [ -f /etc/lsb-release ]; then
+osName="ubuntu"  
+fi
+
+dbHost="localhost"
+rootUser="root"
+PUBLIC_IP=`wget http://ipecho.net/plain -O - -q ; echo`
+
+hash_salt=`head -c 30 /dev/random | base64`
+
+cmd=$1
+
+# RUN EVERYTHING AS ROOT
+if [ "$(id -u)" != "0" ]; then
+    exec sudo "$0" "$@"
+fi
+
+function install() {
+
+### Removing Default PHP Version #####
+#yum -y remove php-cli mod_php php-common
+
+if [ "$osName" = "centos" ]; then
+### Apache Installation ###
+yum -y install httpd
+systemctl start httpd
+systemctl enable httpd
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --permanent --zone=public --add-service=https
+firewall-cmd --reload
+systemctl restart httpd
+
+###Add Repo and Install PHP7.2 Version ###
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+yum -y install php72w php72w-opcache php72w-mbstring php72w-gd php72w-xml php72w-pear php72w-fpm php72w-mysql php72w-pdo
+
+### Add http_input=pass ####
+sed -i "s,^;mbstring.http_input =.*$,;mbstring.http_input = pass," /etc/php.ini
+sed -i "s,^;mbstring.http_output =.*$,;mbstring.http_output = pass," /etc/php.ini
+sed -i "s,^memory_limit = 128M.*$,memory_limit = 1024M," /etc/php.ini
+
+echo "<?php  phpinfo(); ?>" > /var/www/html/info.php
+
+
+systemctl restart httpd
+
+### Create MariaDB.repo ###
+cat <<'EOF' >> /etc/yum.repos.d/MariaDB.repo
+# MariaDB 10.3 CentOS repository list - created 2019-06-04 12:30 UTC
+# http://downloads.mariadb.org/mariadb/repositories/
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.1/centos7-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+EOF
+
+### Mysql/MariaDB Installation ###
+yum -y install mariadb-server mariadb
+
+systemctl start mysql  
+
+### Updating Password for root user ###
+mysql_secure_installation <<EOF
+
+y
+$dbPassword
+$dbPassword
+y
+y
+y
+y
+EOF
+
+
+mysql -u$rootUser -p$dbPassword -e "create database $dbName;"
+mysql -u$rootUser -p$dbPassword -e "create user $dbUsername@localhost identified by '$dbPassword';"
+mysql -u$rootUser -p$dbPassword -e "grant all on $dbName.* to $dbUsername@localhost  IDENTIFIED BY'$dbPassword' WITH GRANT OPTION;"
+mysql -u$rootUser -p$dbPassword -e "flush privileges;" 
+mysql -u$rootUser -p$dbPassword $dbName < drupalSetup.sql
+
+mysql -u${rootUser} -p${dbPassword} -D ${dbName} -e "UPDATE users_field_data SET name = '${siteUsername}', mail = '${siteUserEmail}' WHERE mail='cliqrtech@cisco.com';"
+
+### Drupal Installation ###
+
+yum -y install wget gzip
+
+wget https://ftp.drupal.org/files/projects/drupal-8.5.0.tar.gz 
+
+tar -zxvf drupal-8.5.0.tar.gz 
+
+mv drupal-8.5.0 /var/www/html/drupal
+
+sudo mkdir -p /var/www/html/drupal/sites/default/files
+sudo chmod 777 /var/www/html/drupal/sites/default/files
+cd /var/www/html/drupal/sites/default/
+cp default.settings.php settings.php
+chown -R apache:apache /var/www/html/drupal/
+chcon -R -t httpd_sys_content_rw_t /var/www/html/drupal/sites/
+ 
+
+### Database Configuration ###
+cat <<'EOF' >> /var/www/html/drupal/sites/default/settings.php
+$settings['hash_salt'] = "%HASH_SALT%";
+$databases['default']['default'] = array (
+  'database' => "%DB_NAME%",
+  'username' => "%DB_USERNAME%",
+  'password' => "%DB_PASSWORD%",
+  'prefix' => '',
+  'host' => "%DB_HOST%",
+  'port' => '3306',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
+);
+$settings['install_profile'] = 'standard';
+EOF
+
+sed -i "s/%HASH_SALT%/$hash_salt/g" /var/www/html/drupal/sites/default/settings.php
+sed -i "s/%DB_HOST%/$dbHost/g" /var/www/html/drupal/sites/default/settings.php
+sed -i "s/%DB_NAME%/${dbName}/g" /var/www/html/drupal/sites/default/settings.php
+sed -i "s/%DB_USERNAME%/${dbUsername}/g" /var/www/html/drupal/sites/default/settings.php
+sed -i "s/%DB_PASSWORD%/${dbPassword}/g" /var/www/html/drupal/sites/default/settings.php
+
+
+cat <<'EOF' >> /etc/httpd/conf/httpd.conf
+<Directory "/var/www/html/drupal">    
+    Options Indexes FollowSymLinks 
+    AllowOverride All 
+    Require all granted
+</Directory>	
+EOF
+
+systemctl restart httpd
+
+elif [ "$osName" = "ubuntu" ];  then
+	
+sudo apt update
+### Apache Installation ####
+sudo apt-get -y install apache2 --allow-unauthenticated
+systemctl stop apache2.service
+systemctl start apache2.service
+systemctl enable apache2.service
+
+### Mysql/MariaDB Installation ####
+sudo apt-get -y install mariadb-server --allow-unauthenticated
+systemctl stop mysql.service
+systemctl start mysql.service
+systemctl enable mysql.service
+
+### Updating Password for root user ###
+sudo mysql_secure_installation <<EOF
+
+y
+$dbPassword
+$dbPassword
+y
+y
+y
+y
+EOF
+
+### Adding PHP Repository ###
+sudo apt-get -y install software-properties-common
+sudo add-apt-repository ppa:ondrej/php -y
+apt-get update
+
+### PHP Installation ###
+sudo apt-get -y install php7.2 libapache2-mod-php7.2 php7.2-common php7.2-mbstring php7.2-xmlrpc php7.2-soap php7.2-gd php7.2-xml php7.2-intl php7.2-mysql php7.2-cli php7.2-zip php7.2-curl
+
+### Updating .ini file ###
+cat <<'EOF' >> /etc/php/7.2/apache2/php.ini 
+file_uploads = On
+allow_url_fopen = On
+memory_limit = 256M
+upload_max_filesize = 100M
+max_execution_time = 360
+date.timezone = America/Chicago
+EOF
+
+systemctl restart apache2.service
+
+echo "<?php  phpinfo(); ?>" > /var/www/html/info.php
+
+
+mysql -u$rootUser -p$dbPassword -e "create database $dbName;"
+mysql -u$rootUser -p$dbPassword -e "create user $dbUsername@localhost identified by '$dbPassword';"
+mysql -u$rootUser -p$dbPassword -e "grant all on $dbName.* to $dbUsername@localhost  IDENTIFIED BY'$dbPassword' WITH GRANT OPTION;"
+mysql -u$rootUser -p$dbPassword -e "flush privileges;" 
+mysql -u$rootUser -p$dbPassword $dbName < drupalSetup.sql
+
+mysql -u${rootUser} -p${dbPassword} -D ${dbName} -e "UPDATE users_field_data SET name = '${siteUsername}', mail = '${siteUserEmail}' WHERE mail='cliqrtech@cisco.com';" 
+
+
+apt-get -y install wget gzip 
+
+### Drupal Installation ###
+
+wget https://ftp.drupal.org/files/projects/drupal-8.5.0.tar.gz 
+
+tar -zxvf drupal-8.5.0.tar.gz 
+
+mv drupal-8.5.0 /var/www/html/drupal
+
+sudo chown -R www-data:www-data /var/www/html/drupal/
+
+
+### Drupal Sites Enalbed Configuration ###
+cat <<'EOF' >> /etc/apache2/sites-available/drupal.conf
+<VirtualHost *:80>
+
+	# Server Info
+	ServerName example.com
+	ServerAlias example.com
+	ServerAdmin webmaster@localhost
+
+	# Web root
+	DocumentRoot /var/www/html/
+
+	# Log configuration
+	ErrorLog ${APACHE_LOG_DIR}/drupal-error.log
+	CustomLog ${APACHE_LOG_DIR}/drupal-access.log combined               
+
+	<Directory "/var/www/html">
+			Options FollowSymLinks
+			AllowOverride All
+			Require all granted
+	</Directory>
+
+</VirtualHost>
+EOF
+
+sed -i "s/example.com/$PUBLIC_IP/g" /etc/apache2/sites-available/drupal.conf
+
+apachectl configtest
+a2ensite drupal.conf
+a2enmod rewrite
+a2enmod env
+a2enmod dir
+a2enmod mime
+systemctl restart apache2.service
+
+cd /var/www/html/drupal/sites/default/
+cp default.settings.php settings.php
+
+sudo mkdir -p /var/www/html/drupal/sites/default/files
+sudo chmod 777 /var/www/html/drupal/sites/default/files
+sudo cp -R /var/www/html/drupal/sites/default/default.settings.php /var/www/html/drupal/sites/default/settings.php
+sudo chmod 777 /var/www/html/drupal/sites/default/settings.php
+
+### Database Configuration ###
+
+cat <<'EOF' >> /var/www/html/drupal/sites/default/settings.php
+$settings['hash_salt'] = "%HASH_SALT%";
+$databases['default']['default'] = array (
+  'database' => "%DB_NAME%",
+  'username' => "%DB_USERNAME%",
+  'password' => "%DB_PASSWORD%",
+  'prefix' => '',
+  'host' => "%DB_HOST%",
+  'port' => '3306',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
+);
+$settings['install_profile'] = 'standard';
+EOF
+
+sed -i "s/%HASH_SALT%/$hash_salt/g" /var/www/html/drupal/sites/default/settings.php
+sed -i "s/%DB_HOST%/$dbHost/g" /var/www/html/drupal/sites/default/settings.php
+sed -i "s/%DB_NAME%/${dbName}/g" /var/www/html/drupal/sites/default/settings.php
+sed -i "s/%DB_USERNAME%/${dbUsername}/g" /var/www/html/drupal/sites/default/settings.php
+sed -i "s/%DB_PASSWORD%/$dbPassword/g" /var/www/html/drupal/sites/default/settings.php
+
+
+fi
+
+}
+
+
+stop() {
+	echo "Stop Apache ..."
+	
+	if [[ $? -ne 0 ]]; then
+		if [ "$osName" = "centos" ]; then
+			service httpd stop
+		elif [ "$osName" = "ubuntu" ];  then 
+			service apache2 stop
+		fi
+	else
+		if [ "$osName" = "centos" ]; then
+			systemctl stop httpd.service
+		elif [ "$osName" = "ubuntu" ];  then 
+			systemctl stop apache2
+		fi
+	fi
+}
+
+case $cmd in
+    install)
+		echo "Executing Service.."
+		
+		;;
+
+	start)
+		echo "Executing Start Service.."
+        install		 
+		;;
+		
+	stop)
+		echo "Stopping service"
+        stop
+        echo "successfully stopped."
+		
+		;;
+	*)
+		serviceStatus="Invalid command"
+		exit 127
+		;;
+esac

@@ -1,0 +1,194 @@
+{  
+   "displayName":"Drupal",
+   "name":"drupal",
+   "description":"Content Management System that is built upon LAMP Stack.",
+   "parentServiceId":"37",
+   "costPerHour":"0.00",
+   "bundleLocation":"services/drupal.zip",
+   "systemService":false,
+   "serviceType":"VM_AGENT",
+   "logoPath":"custom/assets/img/serviceLogo/a4ec95ef-19b8-4057-b624-af077236dfb7.png",
+   "serviceActions":[  
+      {  
+         "actionName":"START",
+         "actionType":"SCRIPT",
+         "actionValue":"service start",
+         "value":"service start",
+         "key":"START"
+      },
+      {  
+         "actionName":"STOP",
+         "actionType":"SCRIPT",
+         "actionValue":"service stop",
+         "value":"service stop",
+         "key":"STOP"
+      }
+   ],
+   "externalBundleLocation":"null",
+   "externalActions":[  
+
+   ],
+   "actions":[  
+
+   ],
+   "serviceParamSpecs":[  
+      {  
+         "paramName":"dbUsername",
+         "displayName":"Database Username",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"drupaluser",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {  
+         "paramName":"dbPassword",
+         "displayName":"Database Password",
+         "helpText":"default  Database Password is \"admin@123\"",
+         "type":"password",
+         "valueConstraint":{  
+            "maxLength":255,
+            "minLength":8,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"cumpeF1LFHw8Hg+SWAYqQw==",
+         "secret":null,
+         "confirmValue":"cumpeF1LFHw8Hg+SWAYqQw==",
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {  
+         "paramName":"siteUserPassword",
+         "displayName":"Site Maintenance Account Password",
+         "helpText":"default Password  is \"welcome2cliqr\"",
+         "type":"password_input",
+         "valueConstraint":{  
+
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"4iEa63q3PFrGluoOPfegqw==",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":true
+      },
+      {  
+         "paramName":"siteUsername",
+         "displayName":"Site Maintenance Account Username",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"cliqrtech",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      },
+      {  
+         "paramName":"siteUserEmail",
+         "displayName":"Site Maintenance Account Email",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"cliqrtech@cisco.com",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      },
+      {  
+         "paramName":"dbName",
+         "displayName":"Database Name",
+         "helpText":"",
+         "type":"string",
+         "valueConstraint":{  
+            "maxLength":255,
+            "allowSpaces":true,
+            "remainingChars":255
+         },
+         "valueList":null,
+         "collectionList":null,
+         "defaultValue":"drupal",
+         "secret":null,
+         "confirmValue":null,
+         "pathSuffixValue":null,
+         "userVisible":true,
+         "userEditable":true,
+         "optional":false,
+         "multiselectSupported":false,
+         "webserviceListParams":null,
+         "systemParam":false,
+         "deploymentParam":true
+      }
+   ],
+   "servicePorts":[  
+
+   ],
+   "images":[  
+      {  
+         "id":"21"
+      },
+      {  
+         "id":"26"
+      }
+   ],
+   "defaultImageId":"21",
+   "containerImages":[  
+
+   ],
+   "containerPorts":[  
+
+   ],
+   "repositories":[] 
+}
