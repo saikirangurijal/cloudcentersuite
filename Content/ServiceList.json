@@ -157,7 +157,7 @@
 			"supportedVersion": "5.0.1",
 			"serviceVersion": "1.0",
 			"urls": {
-				"serviceLibraryBundle": "WebServer/Drupal/WorkloadManager/drupal.zip",
+				"serviceLibraryBundle": "WebServer/Drupal/WorkloadManager/Drupal.zip",
 				"dockerFile": "dockerimages/Dockerfile",
 				"serviceImport": "Scripts/serviceimport.zip"
 			},
