@@ -21,6 +21,13 @@
 - Supported OS: CentOS 7/Ubuntu 16.04
 - Supported clouds: Google and Azure.
 
+#### Before you start
+Before you start with service import, Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx), on any linux based client machine.
+
+**NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
+- You can check , if docker is installed , by running "docker -v"
+- You can check , if docker is running , by executing the command "systemctl status docker"	
+
 ## Importing the service
 
 Step 1 : Download the service import utility file  from [here](https://raw.githubusercontent.com/datacenter/cloudcentersuite/master/Content/Scripts/ServiceImportMaster.sh), and save the file on to your linux machine.
