@@ -148,6 +148,21 @@
 			},
 			"created": "",
 			"digest": ""
+		},
+		"Drupal": {
+			"name": "Drupal",
+			"serviceID":"drupal",
+			"serviceCategory":"WebServer",
+			"description": "WebServer",
+			"supportedVersion": "5.0.1",
+			"serviceVersion": "1.0",
+			"urls": {
+				"serviceLibraryBundle": "WebServer/Drupal/WorkloadManager/drupal.zip",
+				"dockerFile": "dockerimages/Dockerfile",
+				"serviceImport": "Scripts/serviceimport.zip"
+			},
+			"created": "",
+			"digest": ""
 		}
 	}],
   "Monitoring":
