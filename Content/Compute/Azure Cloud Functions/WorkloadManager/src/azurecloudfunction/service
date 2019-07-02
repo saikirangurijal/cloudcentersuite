@@ -1,0 +1,134 @@
+#!/bin/bash
+#For external-service
+. /utils.sh
+
+#Initializing variables
+app_id=${app_id}
+password=${password}
+tenant_id=${tenant_id}
+resource_group=${Cloud_Setting_ResourceGroup}
+storage_name=${storage_name}
+os_type=Windows
+language=${runtime}
+app_name=${app_name}
+location=${region}
+app_package=${AppPackage}
+app_tier_name=${cliqrAppTierName}
+
+# Sourcing variables from service directory
+arg1=$1
+
+#Function for creating function in azure function app
+create_function(){
+    python main.py deploy
+}
+
+#Check error file is there
+function executionStatus() {
+ FILE="FAILURE"
+ if [ -f $FILE ];
+ then
+    status=`cat $FILE`
+    print_error "Service execution failed"
+    print_error "error ins script"
+    exit 127
+  else
+    FILE="SUCCESS"
+    status="Service execution successful"
+    print_log "$status"
+ fi
+}
+
+#Function for creating functionapp in azure
+create_functionapp(){
+    print_log "Create function called"
+    check_grp=`az group exists -n $resource_group`
+    if [ "$check_grp" = true ] ; then
+        grp_exists=true
+    else
+        python main.py resource
+        grp_exists=false
+    fi
+    check_stor=`az storage account check-name --name $storage_name`
+    if [[ $check_stor == *"AlreadyExists"* ]]; then
+        stor_exists=true
+    else
+        python main.py storage
+        stor_exists=false
+    fi
+    check_fnapp=`az functionapp list --resource-group $resource_group`
+    if [[ $check_fnapp == *"$app_name.azurewebsites.net"* ]]; then
+        fnapp_exists=true
+        print_log "Function with $resource_group already exists"
+    else
+        python main.py create
+        fnapp_exists=false
+    	#calling create_function for zip deploy
+    	create_function
+    fi
+}
+
+login(){
+        pip install --upgrade pip
+        apk add --update build-base
+        apk add libffi-dev openssl-dev
+        pip install azure-cli
+        pip install cryptography==2.5
+        sleep 10
+        python main.py login
+        create_functionapp
+        }
+
+stop(){
+    print_log "Stop function called"
+    print_log ${storeexists}
+    pip install --upgrade pip
+    apk add --update build-base
+    apk add libffi-dev openssl-dev
+    pip install azure-cli
+    pip install cryptography==2.5
+    print_log "stroewexists"
+    print_log ${storeexists}
+    if [[ $check_valid != *"ERROR"* ]]; then
+        az login --service-principal --username $app_id --password $password --tenant $tenant_id
+        az functionapp delete --name $app_name --resource-group $resource_group 
+        if [ "${storeexists}" = false ] ; then
+            print_log "Condition Came"
+            print_log "az storage account delete -n $storage_name -g $resource_group --yes"
+            az storage account delete -n $storage_name -g $resource_group --yes
+        fi
+    fi
+    sleep 5
+}
+
+runscripts() {
+    case $arg1 in
+        stop)
+            echo "[INSTALL] Installing Packages"
+            stop
+            executionStatus
+            ;;
+                start)
+                    echo "[START] Creating Function app"
+                    login
+                    executionStatus
+                    ;;
+                *)
+                    exit 127
+                        ;;
+
+        esac
+
+}
+
+runscripts
+
+result="hostName: $app_tier_name
+ipAddress:
+environment:
+   storeexists: $stor_exists"
+
+
+print_ext_service_result "$result"
+
+sleep 30

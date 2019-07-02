@@ -130,6 +130,24 @@
         },
         "created": "",
         "digest": ""
+		},
+        "Azure Cloud Functions": {
+        "name": "Azure cloud functions",
+        "serviceID": "azurecloudfunction",
+        "serviceCategory": "Compute",
+        "description": "Azure cloud functions",
+        "supportedVersion": "5.0.1",
+        "serviceVersion": "1.0",
+        "dependencyTag": [
+          "googlesql"
+        ],
+        "urls": {
+          "serviceLibraryBundle": "Compute/Google Cloud Functions/WorkloadManager/azurecloudfunction.zip",
+          "dockerFile": "dockerimages/Dockerfile",
+          "serviceImport": "Scripts/serviceimport.zip"
+        },
+        "created": "",
+        "digest": ""
 		}
 
        }],
