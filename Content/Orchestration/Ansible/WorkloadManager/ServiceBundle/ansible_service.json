@@ -1,0 +1,110 @@
+{
+  "displayName": "Ansible",
+  "name": "ansible",
+  "description": "Configuration Management",
+  "parentServiceId": "61",
+  "costPerHour": "0.00",
+  "bundleLocation": "services/ansible.zip",
+  "systemService": false,
+  "serviceType": "VM_AGENT",
+  "logoPath": "null",
+  "serviceActions": [
+    {
+      "actionName": "INSTALL",
+      "actionType": "SCRIPT",
+      "actionValue": "service install",
+      "value": "service install",
+      "key": "INSTALL"
+    },
+    {
+      "actionName": "CONFIGURE",
+      "actionType": "SCRIPT",
+      "actionValue": "service configure",
+      "value": "service configure",
+      "key": "CONFIGURE"
+    }
+  ],
+  "externalBundleLocation": "null",
+  "externalActions": [
+    {
+      "actionName": "UPDATE",
+      "actionType": "SCRIPT",
+      "actionValue": "service update",
+      "value": "service update",
+      "key": "UPDATE"
+    },
+    {
+      "actionName": "START",
+      "actionType": "SCRIPT",
+      "actionValue": "service start",
+      "value": "service start",
+      "key": "START"
+    }
+  ],
+  "actions": [],
+  "serviceParamSpecs": [
+    {
+      "paramName": "ansibleBundle",
+      "displayName": "Ansible Bundle",
+      "helpText": "Zipped file of ansible playbook and ansible Roles",
+      "type": "path",
+      "valueConstraint": {
+        "maxLength": 255,
+        "allowSpaces": true,
+        "remainingChars": 255
+      },
+      "valueList": null,
+      "collectionList": null,
+      "defaultValue": "",
+      "secret": null,
+      "confirmValue": null,
+      "pathSuffixValue": "",
+      "userVisible": true,
+      "userEditable": true,
+      "optional": false,
+      "multiselectSupported": false,
+      "webserviceListParams": null,
+      "systemParam": true
+    },
+    {
+      "paramName": "ansibleRole",
+      "displayName": "Ansible Role",
+      "helpText": "One or more names of Ansible Roles to be executed separated by commas.",
+      "type": "string",
+      "valueConstraint": {
+        "maxLength": 999,
+        "allowSpaces": true,
+        "remainingChars": 999
+      },
+      "valueList": null,
+      "collectionList": null,
+      "defaultValue": "",
+      "secret": null,
+      "confirmValue": null,
+      "pathSuffixValue": null,
+      "userVisible": true,
+      "userEditable": true,
+      "optional": false,
+      "multiselectSupported": false,
+      "webserviceListParams": null,
+      "systemParam": true
+    }
+  ],
+  "servicePorts": [],
+  "images": [
+    {
+      "id": "21"
+    },
+    {
+      "id": "26"
+    }
+  ],
+  "defaultImageId": "21",
+  "containerImages": [],
+  "containerPorts": [],
+  "repositories": [
+    {
+      "id": "9"
+    }
+  ],
+ }
