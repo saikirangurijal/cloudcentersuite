@@ -1,581 +1,565 @@
-{
-  "Networking":
-  [
-          {
-      "DNS": [
-        {
-          "AWS":{
-          "name": "route53",
-          "serviceID": "route53",
-          "serviceCategory": "Networking",
-          "serviceSubcategory": "DNS/AWS/route53",
-          "description": "AWS Route53",
-          "supportedVersion": "5.0.1",
-          "serviceVersion": "1.0",
-          "urls": {
-            "serviceLibraryBundle": "Networking/Route53/WorkloadManager/Route53.zip",
-            "dockerFile": "dockerimages/Dockerfile",
-            "serviceImport": "Scripts/serviceimport.zip"
-          },
-          "created": "",
-          "digest": ""
-        },
-	
-		"AzureDNSzones":{
-          "name": "AzureDNS",
-          "serviceID": "azuredns",
-          "serviceCategory": "Networking",
-          "serviceSubcategory": "DNS/Azure",
-          "description": "Azure NDS",
-          "supportedVersion": "5.0.1",
-          "serviceVersion": "1.0",
-          "urls": {                 
-            "serviceLibraryBundle": "Networking/DNS/Azure/WorkloadManager/AzureDnsZones.zip",
-            "dockerFile": "dockerimages/Dockerfile",
-            "serviceImport": "Scripts/serviceimport.zip"
-          },
-          "created": "",
-          "digest": ""
-        }
-        }
-      ],
-      "LoadBalancer":[
-        {
-          "GoogleLB": {
-            "name": "Google ELB",
-            "serviceID": "Google ELB",
-            "serviceCategory": "Networking",
-            "serviceSubcategory": "LoadBalancer/Google ELB",
-            "description": "Service for google Load Balancer",
-            "supportedVersion": "5.0.1",
-            "serviceVersion": "1.0",
-            "urls": {
-              "serviceLibraryBundle": "Networking/loadbalancers/GoogleELB/WorkloadManager/GoogleELB.zip",
-              "dockerFile": "dockerimages/Dockerfile",
-              "serviceImport": "Scripts/serviceimport.zip"
+{  
+   "Networking":[  
+      {  
+         "DNS":[  
+            {  
+               "AWS":{  
+                  "name":"route53",
+                  "serviceID":"route53",
+                  "serviceCategory":"Networking",
+                  "serviceSubcategory":"DNS/AWS/route53",
+                  "description":"AWS Route53",
+                  "supportedVersion":"5.0.1",
+                  "serviceVersion":"1.0",
+                  "urls":{  
+                     "serviceLibraryBundle":"Networking/Route53/WorkloadManager/Route53.zip",
+                     "dockerFile":"dockerimages/Dockerfile",
+                     "serviceImport":"Scripts/serviceimport.zip"
+                  },
+                  "created":"",
+                  "digest":""
+               },
+               "AzureDNSzones":{  
+                  "name":"AzureDNS",
+                  "serviceID":"azuredns",
+                  "serviceCategory":"Networking",
+                  "serviceSubcategory":"DNS/Azure",
+                  "description":"Azure NDS",
+                  "supportedVersion":"5.0.1",
+                  "serviceVersion":"1.0",
+                  "urls":{  
+                     "serviceLibraryBundle":"Networking/DNS/Azure/WorkloadManager/AzureDnsZones.zip",
+                     "dockerFile":"dockerimages/Dockerfile",
+                     "serviceImport":"Scripts/serviceimport.zip"
+                  },
+                  "created":"",
+                  "digest":""
+               }
+            }
+         ],
+         "LoadBalancer":[  
+            {  
+               "GoogleLB":{  
+                  "name":"Google ELB",
+                  "serviceID":"Google ELB",
+                  "serviceCategory":"Networking",
+                  "serviceSubcategory":"LoadBalancer/Google ELB",
+                  "description":"Service for google Load Balancer",
+                  "supportedVersion":"5.0.1",
+                  "serviceVersion":"1.0",
+                  "urls":{  
+                     "serviceLibraryBundle":"Networking/loadbalancers/GoogleELB/WorkloadManager/GoogleELB.zip",
+                     "dockerFile":"dockerimages/Dockerfile",
+                     "serviceImport":"Scripts/serviceimport.zip"
+                  },
+                  "created":"",
+                  "digest":""
+               },
+               "F5-BIG-IP":{  
+                  "name":"F5-BIG-IP",
+                  "serviceID":"F5-BIG-IP",
+                  "serviceCategory":"Networking",
+                  "serviceSubcategory":"LoadBalancer/F5-BIG-IP",
+                  "description":"F5 BIG IP Load balancer",
+                  "supportedVersion":"5.0.1",
+                  "serviceVersion":"1.0",
+                  "urls":{  
+                     "serviceLibraryBundle":"Networking/loadbalancers/F5/WorkloadManager/F5LB.zip",
+                     "dockerFile":"dockerimages/Dockerfile",
+                     "serviceImport":"Scripts/serviceimport.zip"
+                  },
+                  "created":"",
+                  "digest":""
+               },
+               "AzureLB":{  
+                  "name":"Azure Load Balancer",
+                  "serviceID":"azurelb",
+                  "serviceCategory":"Networking",
+                  "description":"Distributes network or application traffic across a number of servers. Load balancers are used to increase capacity and reliability of applications",
+                  "supportedVersion":"5.0.1",
+                  "serviceVersion":"1.0",
+                  "urls":{  
+                     "serviceLibraryBundle":"Networking/loadbalancers/AzureELB/WorkloadManager/AzureLoadBalancer.zip",
+                     "dockerFile":"dockerimages/Dockerfile",
+                     "serviceImport":"Scripts/serviceimport.zip"
+                  },
+                  "created":"",
+                  "digest":""
+               }
+            }
+         ]
+      }
+   ],
+   "Compute":[  
+      {  
+         "Lambda":{  
+            "name":"Lambda",
+            "serviceID":"lambda",
+            "serviceCategory":"Compute",
+            "description":"AWS Lambda functions",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "dependencyTag":[  
+               "dynamodb"
+            ],
+            "urls":{  
+               "serviceLibraryBundle":"Compute/Lambda/WorkloadManager/Lambda.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
             },
-            "created": "",
-            "digest": ""
-          },
-          "F5-BIG-IP": {
-            "name": "F5-BIG-IP",
-            "serviceID": "F5-BIG-IP",
-            "serviceCategory": "Networking",
-            "serviceSubcategory": "LoadBalancer/F5-BIG-IP",
-            "description": "F5 BIG IP Load balancer",
-            "supportedVersion": "5.0.1",
-            "serviceVersion": "1.0",
-            "urls": {
-              "serviceLibraryBundle": "Networking/loadbalancers/F5/WorkloadManager/F5LB.zip",
-              "dockerFile": "dockerimages/Dockerfile",
-              "serviceImport": "Scripts/serviceimport.zip"
+            "created":"",
+            "digest":""
+         },
+         "Google Cloud Functions":{  
+            "name":"Google cloud functions",
+            "serviceID":"googlecloudfunction",
+            "serviceCategory":"Compute",
+            "description":"Google cloud functions",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "dependencyTag":[  
+               "googlesql"
+            ],
+            "urls":{  
+               "serviceLibraryBundle":"Compute/Google Cloud Functions/WorkloadManager/googlecloudfunction.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
             },
-            "created": "",
-            "digest": ""
-          },
-          "AzureLB":  {
-                "name": "Azure Load Balancer",
-                "serviceID":"azurelb",
-                "serviceCategory":"Networking",
-                "description": "Distributes network or application traffic across a number of servers. Load balancers are used to increase capacity and reliability of applications",
-                "supportedVersion": "5.0.1",
-                "serviceVersion": "1.0",
-                "urls": {
-                    "serviceLibraryBundle": "Networking/loadbalancers/AzureELB/WorkloadManager/AzureLoadBalancer.zip",
-                    "dockerFile": "dockerimages/Dockerfile",
-                    "serviceImport": "Scripts/serviceimport.zip"
-                },
-                "created": "",
-                "digest": ""
-              }
-        }
-      ]
-    }
-  ],
-  "Compute":
-  [
-          {
-          "Lambda":{
-          "name": "Lambda",
-          "serviceID": "lambda",
-          "serviceCategory": "Compute",
-          "description": "AWS Lambda functions",
-          "supportedVersion": "5.0.1",
-          "serviceVersion": "1.0",
-          "dependencyTag": [
-            "dynamodb"
-          ],
-          "urls": {
-            "serviceLibraryBundle": "Compute/Lambda/WorkloadManager/Lambda.zip",
-            "dockerFile": "dockerimages/Dockerfile",
-            "serviceImport": "Scripts/serviceimport.zip"
-          },
-          "created": "",
-          "digest": ""
-        },
-         "Google Cloud Functions": {
-        "name": "Google cloud functions",
-        "serviceID": "googlecloudfunction",
-        "serviceCategory": "Compute",
-        "description": "Google cloud functions",
-        "supportedVersion": "5.0.1",
-        "serviceVersion": "1.0",
-        "dependencyTag": [
-          "googlesql"
-        ],
-        "urls": {
-          "serviceLibraryBundle": "Compute/Google Cloud Functions/WorkloadManager/googlecloudfunction.zip",
-          "dockerFile": "dockerimages/Dockerfile",
-          "serviceImport": "Scripts/serviceimport.zip"
-        },
-        "created": "",
-        "digest": ""
-		},
-        "Azure Cloud Functions": {
-        "name": "Azure cloud functions",
-        "serviceID": "azurecloudfunction",
-        "serviceCategory": "Compute",
-        "description": "Azure cloud functions",
-        "supportedVersion": "5.0.1",
-        "serviceVersion": "1.0",
-        "dependencyTag": [
-          "azuresql"
-        ],
-        "urls": {
-          "serviceLibraryBundle": "Compute/Azure Cloud Functions/WorkloadManager/azurecloudfunction.zip",
-          "dockerFile": "dockerimages/Dockerfile",
-          "serviceImport": "Scripts/serviceimport.zip"
-        },
-        "created": "",
-        "digest": ""
-		}
-
-       }],
-  "WebServer":[{
-		"Tomcat 9": {
-			 "name": "Tomcat9",
-			"serviceID":"tomcat9",
-			"serviceCategory":"WebServer",
-			"description": "WebServer",
-			"supportedVersion": "5.0.1",
-			"serviceVersion": "1.0",
-			"urls": {
-				"serviceLibraryBundle": "WebServer/Tomcat9/WorkloadManager/Tomcat9.zip",
-				"dockerFile": "dockerimages/Dockerfile",
-				"serviceImport": "Scripts/serviceimport.zip"
-			},
-			"created": "",
-			"digest": ""
-		},
-		"Drupal": {
-			"name": "Drupal",
-			"serviceID":"drupal",
-			"serviceCategory":"WebServer",
-			"description": "WebServer",
-			"supportedVersion": "5.0.1",
-			"serviceVersion": "1.0",
-			"urls": {
-				"serviceLibraryBundle": "WebServer/Drupal/WorkloadManager/Drupal.zip",
-				"dockerFile": "dockerimages/Dockerfile",
-				"serviceImport": "Scripts/serviceimport.zip"
-			},
-			"created": "",
-			"digest": ""
-		}
-	}],
-  "Monitoring":
-          [
-            {
-              "Sensu-Agent": {
-                    "name": "Sensu-Agent",
-                    "serviceID": "",
-                    "serviceCategory": "Monitoring",
-                    "description": "Application Monitoring",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-					"isService": false,
-                    "urls": {
-                      "serviceLibraryBundle": "Monitoring/Sensu-Agent/WorkloadManager/SensuAgent.zip",
-                      "dockerFile": "dockerimages/Dockerfile",
-                      "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
+            "created":"",
+            "digest":""
+         },
+         "Azure Cloud Functions":{  
+            "name":"Azure cloud functions",
+            "serviceID":"azurecloudfunction",
+            "serviceCategory":"Compute",
+            "description":"Azure cloud functions",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "dependencyTag":[  
+               "azuresql"
+            ],
+            "urls":{  
+               "serviceLibraryBundle":"Compute/Azure Cloud Functions/WorkloadManager/azurecloudfunction.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         }
+      }
+   ],
+   "WebServer":[  
+      {  
+         "Tomcat 9":{  
+            "name":"Tomcat9",
+            "serviceID":"tomcat9",
+            "serviceCategory":"WebServer",
+            "description":"WebServer",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "urls":{  
+               "serviceLibraryBundle":"WebServer/Tomcat9/WorkloadManager/Tomcat9.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         },
+         "Drupal":{  
+            "name":"Drupal",
+            "serviceID":"drupal",
+            "serviceCategory":"WebServer",
+            "description":"WebServer",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "urls":{  
+               "serviceLibraryBundle":"WebServer/Drupal/WorkloadManager/Drupal.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         }
+      }
+   ],
+   "Monitoring":[  
+      {  
+         "Sensu-Agent":{  
+            "name":"Sensu-Agent",
+            "serviceID":"",
+            "serviceCategory":"Monitoring",
+            "description":"Application Monitoring",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "isService":false,
+            "urls":{  
+               "serviceLibraryBundle":"Monitoring/Sensu-Agent/WorkloadManager/SensuAgent.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         },
+         "Sensu":{  
+            "name":"Sensu Server",
+            "serviceID":"sensu",
+            "serviceCategory":"Monitoring",
+            "description":"Application Monitoring",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "urls":{  
+               "serviceLibraryBundle":"Monitoring/Sensu/WorkloadManager/SensuServer.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         }
+      }
+   ],
+   "Backend Cache":[  
+      {  
+         "Memcached Container":{  
+            "name":"MemcachedContainer",
+            "serviceID":"memcachedcontainer",
+            "serviceCategory":"Backend Cache",
+            "description":"Memcached Running in Container",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "urls":{  
+               "serviceLibraryBundle":"Backend Cache/Memcached Container/WorkloadManager/MemcachedContainer.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         }
+      }
+   ],
+   "Backup":[  
+      {  
+         "Commvault":{  
+            "name":"Commvault",
+            "serviceID":"",
+            "serviceCategory":"Backup",
+            "description":"Commvault Integration Unit",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "isService":false,
+            "appProfiles":{  
+               "1":{  
+                  "commvault_backup_sample_app.zip":"Backup Sample App"
+               },
+               "2":{  
+                  "commvault_restore_sample_app.zip":"Restore Sample App"
+               }
+            },
+            "urls":{  
+               "serviceLibraryBundle":"Backup/Commvault/WorkloadManager/Commvault.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         }
+      }
+   ],
+   "Databases":[  
+      {  
+         "DBaaS":[  
+            {  
+               "Google SQL":{  
+                  "name":"Google SQL",
+                  "serviceID":"googlesql",
+                  "serviceCategory":"Databases",
+                  "description":"Google Cloud SQL Integration Unit",
+                  "supportedVersion":"5.0.1",
+                  "serviceVersion":"1.0",
+                  "urls":{  
+                     "serviceLibraryBundle":"Databases/DBaaS/GoogleSQL/WorkloadManager/GoogleSQL.zip",
+                     "dockerFile":"dockerimages/Dockerfile",
+                     "serviceImport":"Scripts/serviceimport.zip"
                   },
-
-              "Sensu" :{
-                    "name": "Sensu Server",
-                    "serviceID":"sensu",
-                    "serviceCategory":"Monitoring",
-                    "description": "Application Monitoring",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-                    "urls": {
-                        "serviceLibraryBundle": "Monitoring/Sensu/WorkloadManager/SensuServer.zip",
-                        "dockerFile": "dockerimages/Dockerfile",
-                        "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
-                  }
-            }
-
-          ],
-  "Backend Cache":
-          [
-            {
-              "Memcached Container":{
-                      "name": "MemcachedContainer",
-                      "serviceID":"memcachedcontainer",
-                      "serviceCategory":"Backend Cache",
-                      "description": "Memcached Running in Container",
-                      "supportedVersion": "5.0.1",
-                      "serviceVersion": "1.0",
-                      "urls": {
-                        "serviceLibraryBundle": "Backend Cache/Memcached Container/WorkloadManager/MemcachedContainer.zip",
-                        "dockerFile": "dockerimages/Dockerfile",
-                        "serviceImport": "Scripts/serviceimport.zip"
-                      },
-                      "created": "",
-                      "digest": ""
-                    }
-            }
-          ],
-  "Backup":
-          [
-            {
-              "Commvault":  {
-                    "name": "Commvault",
-                    "serviceID":"",
-                    "serviceCategory":"Backup",
-                    "description": "Commvault Integration Unit",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-					"isService": false,
-					"appProfiles": {
-						"1": {
-							"commvault_backup_sample_app.zip": "Backup Sample App"
-						}, 
-						"2": {
-							"commvault_restore_sample_app.zip": "Restore Sample App"
-						}
-					},
-                    "urls": {
-                        "serviceLibraryBundle": "Backup/Commvault/WorkloadManager/Commvault.zip",
-                        "dockerFile": "dockerimages/Dockerfile",
-                        "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
-                  }
-            }
-          ],
-  "Databases":
-          [
-		  
-            {
-              "DBaaS": [
-                {
-                  "Google SQL": {
-                    "name": "Google SQL",
-                    "serviceID": "googlesql",
-                    "serviceCategory": "Databases",
-                    "description": "Google Cloud SQL Integration Unit",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-                    "urls": {
-                      "serviceLibraryBundle": "Databases/DBaaS/GoogleSQL/WorkloadManager/GoogleSQL.zip",
-                      "dockerFile": "dockerimages/Dockerfile",
-                      "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
+                  "created":"",
+                  "digest":""
+               },
+               "Azure SQL":{  
+                  "name":"AzureSQL",
+                  "serviceID":"azuresql",
+                  "serviceCategory":"Databases",
+                  "description":"AzureSQL Integration Unit",
+                  "supportedVersion":"5.0.1",
+                  "serviceVersion":"1.0",
+                  "urls":{  
+                     "serviceLibraryBundle":"Databases/DBaaS/AzureSQL/WorkloadManager/AzureSQL.zip",
+                     "dockerFile":"dockerimages/Dockerfile",
+                     "serviceImport":"Scripts/serviceimport.zip"
                   },
-                  "Azure SQL": {
-                    "name": "AzureSQL",
-                    "serviceID": "azuresql",
-                    "serviceCategory": "Databases",
-                    "description": "AzureSQL Integration Unit",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-                    "urls": {
-                      "serviceLibraryBundle": "Databases/DBaaS/AzureSQL/WorkloadManager/AzureSQL.zip",
-                      "dockerFile": "dockerimages/Dockerfile",
-                      "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
-                  }
-                }
-              ],
-              "NoSQL Databases": [
-                {
-                  "Cassandra Cluster": {
-                    "name": "Cassandra Cluster",
-                    "serviceID": "cassandracluster",
-                    "serviceCategory": "NoSQL Databases",
-                    "description": "Cassandra multi node cluster VM with agent",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-                    "urls": {
-                      "serviceLibraryBundle": "Databases/NoSQL Databases/Cassandra Cluster/WorkloadManager/CassandraCluster.zip",
-                      "dockerFile": "dockerimages/Dockerfile",
-                      "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
-                  },
-                  "DynamoDB": {
-                    "name": "DynamoDB",
-                    "serviceID": "dynamodb",
-                    "serviceCategory": "NoSQL Databases",
-                    "description": "AWS DynamoDB",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-                    "urls": {
-                      "serviceLibraryBundle": "Databases/NoSQL Databases/DynamoDB/WorkloadManager/DynamoDB.zip",
-                      "dockerFile": "dockerimages/Dockerfile",
-                      "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
-                  },
-                  "MongoDB Cluster": {
-                    "name": "Mongo DB Cluster",
-                    "serviceID": "mongodbcluster",
-                    "serviceCategory": "NoSQL Databases",
-                    "description": "Mongocluster with config server, sharding server and router server",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-                    "urls": {
-                      "serviceLibraryBundle": "Databases/NoSQL Databases/MongoDB Cluster/WorkloadManager/MongoDBCluster.zip",
-                      "dockerFile": "dockerimages/Dockerfile",
-                      "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
-                  }
-                }
-              ],
-              "Relational Databases": [
-                {
-                  "MSSQL(Ubuntu)": {
-                    "name": "MSSQl UBUNTU",
-                    "serviceID": "mssqlserver",
-                    "serviceCategory": "Databases",
-                    "description": "MSSQL Integration Unit",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-                    "urls": {
-                      "serviceLibraryBundle": "Databases/Relational Databases/MSSQL/WorkloadManager/MSSQLUbuntu.zip",
-                      "dockerFile": "dockerimages/Dockerfile",
-                      "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
-                  },
-                  "PostgreSQL": {
-                    "name": "POSTGRESQL",
-                    "serviceID": "psqlserver",
-                    "serviceCategory": "Databases",
-                    "description": "PostgreSQL Integration Unit",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-                    "urls": {
-                      "serviceLibraryBundle": "Databases/Relational Databases/PostgreSQL/WorkloadManager/PostgreSQL.zip",
-                      "dockerFile": "dockerimages/Dockerfile",
-                      "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
-                  }
-                }
-              ]
-            }],
-  "Orchestration":
-		   [
-		   {
-              "Terraform":{
-                "name": "Terraform",
-                "serviceID":"terraform",
-                "serviceCategory":"Orchestration",
-                "description": "Terraform creating cloud infrastructure",
-                "supportedVersion": "5.0.1",
-                "serviceVersion": "1.0",
-                "urls": {
-                    "serviceLibraryBundle": "Orchestration/Terraform/WorkloadManager/terraform_aws.zip",
-                    "dockerFile": "dockerimages/Dockerfile",
-                    "serviceImport": "Scripts/serviceimport.zip"
-                },
-                "created": "",
-                "digest": ""
-              },
-			  
-			  "Ansible":{
-				"name": "Ansible",
-				"serviceID":"ansible",
-				"serviceCategory":"Orchestration",
-				"description": "Configuration Management",
-				"supportedVersion": "5.0.1",
-				"serviceVersion": "1.0",
-				"urls": {
-					"serviceLibraryBundle": "Orchestration/Ansible/WorkloadManager/ansible.zip",
-					"dockerFile": "dockerimages/Dockerfile",
-					"serviceImport": "Scripts/serviceimport.zip"
-				},
-				"created": "",
-				"digest": ""
-		    	}
-			}
-		   ],
-  "Middleware":
-          [
-            {
-              "Oracle Weblogic":{
-                "name": "WebLogic",
-                "serviceID":"weblogic",
-                "serviceCategory":"Middleware",
-                "description": "Oracle WebLogic Server",
-                "supportedVersion": "5.0.1",
-                "serviceVersion": "1.0",
-                "urls": {
-                    "serviceLibraryBundle": "Middleware/Oracle Weblogic/WorkloadManager/Weblogic.zip",
-                    "dockerFile": "dockerimages/Dockerfile",
-                    "serviceImport": "Scripts/serviceimport.zip"
-                },
-                "created": "",
-                "digest": ""
-              }
+                  "created":"",
+                  "digest":""
+               }
             }
-          ],
-  "Logging":
-          [
-            {
-              "Splunk":{
-                "name": "Splunk Server",
-                "serviceID":"splunk",
-                "serviceCategory":"Logging",
-                "description": "Data Logging",
-                "supportedVersion": "5.0.1",
-                "serviceVersion": "1.0",
-                "urls": {
-                    "serviceLibraryBundle": "Logging/Splunk/WorkloadManager/SplunkServer.zip",
-                    "dockerFile": "dockerimages/Dockerfile",
-                    "serviceImport": "Scripts/serviceimport.zip"
-                },
-                "created": "",
-                "digest": ""
-              },
-
-              "Splunk-Agent":{
-                  "name": "Splunk-Agent",
-                  "serviceID":"",
-                  "serviceCategory":"Logging",
-                  "description": "Data Logging",
-                  "supportedVersion": "5.0.1",
-                  "serviceVersion": "1.0",
-				  "isService": false,
-                  "urls": {
-                      "serviceLibraryBundle": "Logging/Splunk-Agent/WorkloadManager/SplunkAgent.zip",
-                      "dockerFile": "dockerimages/Dockerfile",
-                      "serviceImport": "Scripts/serviceimport.zip"
+         ],
+         "NoSQL Databases":[  
+            {  
+               "Cassandra Cluster":{  
+                  "name":"Cassandra Cluster",
+                  "serviceID":"cassandracluster",
+                  "serviceCategory":"NoSQL Databases",
+                  "description":"Cassandra multi node cluster VM with agent",
+                  "supportedVersion":"5.0.1",
+                  "serviceVersion":"1.0",
+                  "urls":{  
+                     "serviceLibraryBundle":"Databases/NoSQL Databases/Cassandra Cluster/WorkloadManager/CassandraCluster.zip",
+                     "dockerFile":"dockerimages/Dockerfile",
+                     "serviceImport":"Scripts/serviceimport.zip"
                   },
-                  "created": "",
-                  "digest": ""
-                },
-			  "Kibana":{
-                "name": "Kibana",
-                "serviceID":"kibana",
-                "serviceCategory":"Logging",
-                "description": "Data Visualization Plugin For Elasticsearch",
-                "supportedVersion": "5.0.1",
-                "serviceVersion": "1.0",
-                "urls": {
-                    "serviceLibraryBundle": "Logging/Kibana/WorkloadManager/Kibana.zip",
-                    "dockerFile": "dockerimages/Dockerfile",
-                    "serviceImport": "Scripts/serviceimport.zip"
-                },
-                "created": "",
-                "digest": ""
-              },
-			  
-			   "Elasticsearch":{
-                "name": "ElasticSearch",
-                "serviceID":"elasticsearch",
-                "serviceCategory":"Logging",
-                "description": "Logging",
-                "supportedVersion": "5.0.1",
-                "serviceVersion": "1.0",
-				"dependencyTag": [
-                           "kibana"
-                        ],
-                "urls": {
-                    "serviceLibraryBundle": "Logging/Elasticsearch/WorkloadManager/Elasticsearch.zip",
-                    "serviceLibraryBundle": "Logging/Elasticsearch/WorkloadManager/Elasticsearch.zip",
-                    "dockerFile": "dockerimages/Dockerfile",
-                    "serviceImport": "Scripts/serviceimport.zip"
-                },
-                "created": "",
-                "digest": ""
-              }
-
+                  "created":"",
+                  "digest":""
+               },
+               "DynamoDB":{  
+                  "name":"DynamoDB",
+                  "serviceID":"dynamodb",
+                  "serviceCategory":"NoSQL Databases",
+                  "description":"AWS DynamoDB",
+                  "supportedVersion":"5.0.1",
+                  "serviceVersion":"1.0",
+                  "urls":{  
+                     "serviceLibraryBundle":"Databases/NoSQL Databases/DynamoDB/WorkloadManager/DynamoDB.zip",
+                     "dockerFile":"dockerimages/Dockerfile",
+                     "serviceImport":"Scripts/serviceimport.zip"
+                  },
+                  "created":"",
+                  "digest":""
+               },
+               "MongoDB Cluster":{  
+                  "name":"Mongo DB Cluster",
+                  "serviceID":"mongodbcluster",
+                  "serviceCategory":"NoSQL Databases",
+                  "description":"Mongocluster with config server, sharding server and router server",
+                  "supportedVersion":"5.0.1",
+                  "serviceVersion":"1.0",
+                  "urls":{  
+                     "serviceLibraryBundle":"Databases/NoSQL Databases/MongoDB Cluster/WorkloadManager/MongoDBCluster.zip",
+                     "dockerFile":"dockerimages/Dockerfile",
+                     "serviceImport":"Scripts/serviceimport.zip"
+                  },
+                  "created":"",
+                  "digest":""
+               }
             }
-          ],
-	"AppProfiles":
-          [
-            {
-              "Shopizer":  {
-                    "name": "J2EE-EcommerceApp",
-                    "serviceID":"",
-                    "serviceCategory":"AppProfiles",
-                    "description": "Shopizer Ecommerce App",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-					"isService": false,
-					"appProfiles": {
-						"1": {
-							"j2ee-ecommerce_app_with_sensu.zip": "Shopizer App(with Sensu)"
-						}, 
-						"2": {
-							"j2ee-ecommerce_app_without_sensu.zip": "Shopizer App(without Sensu)"
-						}
-					},
-                    "urls": {
-                        "serviceLibraryBundle": "AppProfiles/J2EE-EcommerceApp/J2EE-EcommerceApp.zip",
-                        "dockerFile": "dockerimages/Dockerfile",
-                        "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
-				},
-				"Complex App":  {
-                    "name": "NTierComplexApp",
-                    "serviceID":"",
-                    "serviceCategory":"AppProfiles",
-                    "description": "Complex App",
-                    "supportedVersion": "5.0.1",
-                    "serviceVersion": "1.0",
-					"isService": false,
-					"appProfiles": {
-						"1": {
-							"NTierComplexAppTomcat.zip": "Complex App(Tomcat)"
-						}, 
-						"2": {
-							"NTierComplexAppWeblogic.zip": "Complex App(Weblogic)"
-						},
-						"3": {
-							"NTierComplexAppWithoutSensu.zip": "Complex App(Tomcat)(Without Sensu)"
-						}
-					},
-                    "urls": {
-                        "serviceLibraryBundle": "AppProfiles/NTierComplexApp/NTierComplexApp.zip",
-                        "dockerFile": "dockerimages/Dockerfile",
-                        "serviceImport": "Scripts/serviceimport.zip"
-                    },
-                    "created": "",
-                    "digest": ""
-                  }
+         ],
+         "Relational Databases":[  
+            {  
+               "MSSQL(Ubuntu)":{  
+                  "name":"MSSQl UBUNTU",
+                  "serviceID":"mssqlserver",
+                  "serviceCategory":"Databases",
+                  "description":"MSSQL Integration Unit",
+                  "supportedVersion":"5.0.1",
+                  "serviceVersion":"1.0",
+                  "urls":{  
+                     "serviceLibraryBundle":"Databases/Relational Databases/MSSQL/WorkloadManager/MSSQLUbuntu.zip",
+                     "dockerFile":"dockerimages/Dockerfile",
+                     "serviceImport":"Scripts/serviceimport.zip"
+                  },
+                  "created":"",
+                  "digest":""
+               },
+               "PostgreSQL":{  
+                  "name":"POSTGRESQL",
+                  "serviceID":"psqlserver",
+                  "serviceCategory":"Databases",
+                  "description":"PostgreSQL Integration Unit",
+                  "supportedVersion":"5.0.1",
+                  "serviceVersion":"1.0",
+                  "urls":{  
+                     "serviceLibraryBundle":"Databases/Relational Databases/PostgreSQL/WorkloadManager/PostgreSQL.zip",
+                     "dockerFile":"dockerimages/Dockerfile",
+                     "serviceImport":"Scripts/serviceimport.zip"
+                  },
+                  "created":"",
+                  "digest":""
+               }
             }
-          ]
-		  
+         ]
+      }
+   ],
+   "Orchestration":[  
+      {  
+         "Terraform":{  
+            "name":"Terraform",
+            "serviceID":"terraform",
+            "serviceCategory":"Orchestration",
+            "description":"Terraform creating cloud infrastructure",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "urls":{  
+               "serviceLibraryBundle":"Orchestration/Terraform/WorkloadManager/terraform_aws.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         },
+         "Ansible":{  
+            "name":"Ansible",
+            "serviceID":"ansible",
+            "serviceCategory":"Orchestration",
+            "description":"Configuration Management",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "urls":{  
+               "serviceLibraryBundle":"Orchestration/Ansible/WorkloadManager/ansible.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         }
+      }
+   ],
+   "Middleware":[  
+      {  
+         "Oracle Weblogic":{  
+            "name":"WebLogic",
+            "serviceID":"weblogic",
+            "serviceCategory":"Middleware",
+            "description":"Oracle WebLogic Server",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "urls":{  
+               "serviceLibraryBundle":"Middleware/Oracle Weblogic/WorkloadManager/Weblogic.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         }
+      }
+   ],
+   "Logging":[  
+      {  
+         "Splunk":{  
+            "name":"Splunk Server",
+            "serviceID":"splunk",
+            "serviceCategory":"Logging",
+            "description":"Data Logging",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "urls":{  
+               "serviceLibraryBundle":"Logging/Splunk/WorkloadManager/SplunkServer.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         },
+         "Splunk-Agent":{  
+            "name":"Splunk-Agent",
+            "serviceID":"",
+            "serviceCategory":"Logging",
+            "description":"Data Logging",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "isService":false,
+            "urls":{  
+               "serviceLibraryBundle":"Logging/Splunk-Agent/WorkloadManager/SplunkAgent.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         },
+         "Kibana":{  
+            "name":"Kibana",
+            "serviceID":"kibana",
+            "serviceCategory":"Logging",
+            "description":"Data Visualization Plugin For Elasticsearch",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "urls":{  
+               "serviceLibraryBundle":"Logging/Kibana/WorkloadManager/Kibana.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         },
+         "Elasticsearch":{  
+            "name":"ElasticSearch",
+            "serviceID":"elasticsearch",
+            "serviceCategory":"Logging",
+            "description":"Logging",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "dependencyTag":[  
+               "kibana"
+            ],
+            "urls":{  
+               "serviceLibraryBundle":"Logging/Elasticsearch/WorkloadManager/Elasticsearch.zip",
+               "serviceLibraryBundle":"Logging/Elasticsearch/WorkloadManager/Elasticsearch.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         }
+      }
+   ],
+   "AppProfiles":[  
+      {  
+         "Shopizer":{  
+            "name":"J2EE-EcommerceApp",
+            "serviceID":"",
+            "serviceCategory":"AppProfiles",
+            "description":"Shopizer Ecommerce App",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "isService":false,
+            "appProfiles":{  
+               "1":{  
+                  "j2ee-ecommerce_app_with_sensu.zip":"Shopizer App(with Sensu)"
+               },
+               "2":{  
+                  "j2ee-ecommerce_app_without_sensu.zip":"Shopizer App(without Sensu)"
+               }
+            },
+            "urls":{  
+               "serviceLibraryBundle":"AppProfiles/J2EE-EcommerceApp/J2EE-EcommerceApp.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         },
+         "Complex App":{  
+            "name":"NTierComplexApp",
+            "serviceID":"",
+            "serviceCategory":"AppProfiles",
+            "description":"Complex App",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "isService":false,
+            "appProfiles":{  
+               "1":{  
+                  "NTierComplexAppTomcat.zip":"Complex App(Tomcat)"
+               },
+               "2":{  
+                  "NTierComplexAppWeblogic.zip":"Complex App(Weblogic)"
+               },
+               "3":{  
+                  "NTierComplexAppWithoutSensu.zip":"Complex App(Tomcat)(Without Sensu)"
+               }
+            },
+            "urls":{  
+               "serviceLibraryBundle":"AppProfiles/NTierComplexApp/NTierComplexApp.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         }
+      }
+   ]
 }
