@@ -409,9 +409,8 @@
                 },
                 "created": "",
                 "digest": ""
-              }
-            },
-			{
+              },
+			  
 			  "Ansible":{
 				"name": "Ansible",
 				"serviceID":"ansible",
