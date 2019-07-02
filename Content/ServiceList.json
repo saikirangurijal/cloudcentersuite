@@ -139,7 +139,7 @@
         "supportedVersion": "5.0.1",
         "serviceVersion": "1.0",
         "dependencyTag": [
-          "googlesql"
+          "azuresql"
         ],
         "urls": {
           "serviceLibraryBundle": "Compute/Google Cloud Functions/WorkloadManager/azurecloudfunction.zip",
