@@ -142,7 +142,7 @@
           "azuresql"
         ],
         "urls": {
-          "serviceLibraryBundle": "Compute/Google Cloud Functions/WorkloadManager/azurecloudfunction.zip",
+          "serviceLibraryBundle": "Compute/Azure Cloud Functions/WorkloadManager/azurecloudfunction.zip",
           "dockerFile": "dockerimages/Dockerfile",
           "serviceImport": "Scripts/serviceimport.zip"
         },
