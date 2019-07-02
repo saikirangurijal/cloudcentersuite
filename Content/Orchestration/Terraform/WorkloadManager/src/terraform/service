@@ -1,0 +1,93 @@
+#!/bin/bash
+# My first script
+. /utils.sh
+
+
+cmd=$1
+
+
+# RUN EVERYTHING AS ROOT
+if [ "$(id -u)" != "0" ]; then
+    exec sudo "$0" "$@"
+fi
+
+pip install --upgrade pip
+
+pip list
+print_log "env() : `env`"
+# while executing shell error msg will write on FAILURE file.
+function executionStatus() {
+ FILE="FAILURE"
+ if [ -f $FILE ];
+ then
+    status=`cat $FILE`
+    print_error "Service execution failed"
+    print_error "$status"
+    exit 127
+  else
+    FILE="SUCCESS"
+    status="Service execution successful"
+    print_log "$status"
+ fi
+}
+
+case $cmd in
+	start)
+		print_log "Executing Service.."
+        sleep 1m
+        print_log "Installing yum,wget and unzip"
+        apt-get --yes --force-yes install yum
+        apt-get --yes --force-yes install wget
+        apt-get --yes --force-yes install unzip
+        print_log "Successfully installed"
+        sleep 1m
+        wget https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip
+        sleep 1m
+        unzip ./terraform_0.11.13_linux_amd64.zip -d /usr/local/bin/
+        sleep 1m
+        print_log "terraform installed successfully!!!"
+        sleep 2m
+        cd ..
+        export AWS_ACCESS_KEY_ID=$CliqrCloudAccountPwd
+        export AWS_SECRET_ACCESS_KEY=$CliqrCloud_AccessSecretKey
+        export AWS_DEFAULT_REGION=$region
+
+        terraform --version
+        terraform init
+        sleep 1m
+        terraform apply -input=false -auto-approve
+
+		exit 0
+		;;
+	stop)
+		print_log "Deleting Service.."
+		sleep 1m
+		print_log "Installing yum,wget and unzip"
+        apt-get --yes --force-yes install yum
+        apt-get --yes --force-yes install wget
+        apt-get --yes --force-yes install unzip
+        print_log "Successfully installed"
+        sleep 1m
+        wget https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip
+        sleep 1m
+        unzip ./terraform_0.11.13_linux_amd64.zip -d /usr/local/bin/
+        sleep 1m
+        print_log "terraform installed successfully!!!"
+        sleep 2m
+        cd ..
+        export AWS_ACCESS_KEY_ID=$CliqrCloudAccountPwd
+        export AWS_SECRET_ACCESS_KEY=$CliqrCloud_AccessSecretKey
+        export AWS_DEFAULT_REGION=$region
+
+        terraform --version
+		terraform init
+		terraform plan
+        sleep 1m
+        terraform destroy -input=false -auto-approve
+		exit 0
+		;;
+	*)
+		serviceStatus="Invalid command"
+		exit 127
+		;;
+esac
