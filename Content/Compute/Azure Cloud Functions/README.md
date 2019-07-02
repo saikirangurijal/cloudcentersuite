@@ -15,34 +15,34 @@
 ## Before you start	
   
    ## AzureSQL Import
-	1. Before importing the azurecloudfunction service, user must import azuresql service in workload manager 
-		  because Azure function will be invoked on azuresql db table events (Any CRUD operation).
+1. Before importing the azurecloudfunction service, user must import azuresql service in workload manager 
+	  because Azure function will be invoked on azuresql db table events (Any CRUD operation).
 
-	2. Refer Readme on how to import Azure SQL Service from [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/Databases/DBaaS/AzureSQL/README.md).
-		  
-	3. The AzurecloudFunction service will create a azure function with provided name in Microsoft Azure.
+2. Refer Readme on how to import Azure SQL Service from [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/Databases/DBaaS/AzureSQL/README.md).
+      
+3. The AzurecloudFunction service will create a azure function with provided name in Microsoft Azure.
 
    ## Docker Install
 
-	1. Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx), on any linux based client machine.
+1. Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx), on any linux based client machine.
 
-	**NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
-	- You can check , if docker is installed , by running "docker -v"
-	- You can check , if docker is running , by executing the command "systemctl status docker"	
+**NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
+- You can check , if docker is installed , by running "docker -v"
+- You can check , if docker is running , by executing the command "systemctl status docker"	
   
   ## Create Service Principal
-	User has to create service-pricipal for their microsoft account.
-		 For creating service-pricipal in azure cloud shell:
-		  
-	1. click this link https://shell.azure.com
-			
-	2. Select bash option from left corner
-			
-	3. Execute the following command for creating service principal
-			
-			az ad sp create-for-rbac --name <Your Service Principal name>
-				   
-	4. Note down the appid,tenantid and password
+User has to create service-pricipal for their microsoft account.
+     For creating service-pricipal in azure cloud shell:
+      
+1. click this link https://shell.azure.com
+		
+2. Select bash option from left corner
+		
+3. Execute the following command for creating service principal
+		
+	    az ad sp create-for-rbac --name <Your Service Principal name>
+			   
+4. Note down the appid,tenantid and password
 
    ## How it works:
     
