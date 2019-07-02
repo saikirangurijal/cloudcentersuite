@@ -533,6 +533,27 @@
             "created":"",
             "digest":""
          },
+		 "PetClinic-Demo":{  
+            "name":"PetClinic-Demo",
+            "serviceID":"",
+            "serviceCategory":"AppProfiles",
+            "description":"J2EE Ntier App",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "isService":false,
+            "appProfiles":{  
+               "1":{  
+                  "petclinicdemo-app.zip":"PetClinic Demo App"
+               }
+            },
+            "urls":{  
+               "serviceLibraryBundle":"AppProfiles/PetClinicDemoApp/NTierPetClinicDemo.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         },
          "Complex App":{  
             "name":"NTierComplexApp",
             "serviceID":"",
