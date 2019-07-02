@@ -410,7 +410,24 @@
                 "created": "",
                 "digest": ""
               }
-            }
+            },
+			{
+			  "Ansible":{
+				"name": "Ansible",
+				"serviceID":"ansible",
+				"serviceCategory":"Orchestration",
+				"description": "Configuration Management",
+				"supportedVersion": "5.0.1",
+				"serviceVersion": "1.0",
+				"urls": {
+					"serviceLibraryBundle": "Orchestration/Ansible/WorkloadManager/ansible.zip",
+					"dockerFile": "dockerimages/Dockerfile",
+					"serviceImport": "Scripts/serviceimport.zip"
+				},
+				"created": "",
+				"digest": ""
+		    	}
+			}
 		   ],
   "Middleware":
           [
