@@ -25,7 +25,7 @@ PetClinic Demo App - Typical J2EE Web App
    
    2. Knowledge on how to use CloudCenter
 
-   3. Make sure that you keep the  Artifacts/Application Package Bundle for the Profiles in your repository under '<repoistory>/apps/' folder. Download the Artificat from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/blob/master/AppProfiles/PetClinicDemoApp/artifacts/demo-app.zip) 
+   3. Make sure that you keep the  Artifacts/Application Package Bundle for the Profiles in your repository under '<repoistory>/apps/' folder. Download the Artificat from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/AppProfiles/PetClinicDemoApp/artifacts/demo-app.zip) 
     
 #### Before you start
 Before you start with service import, Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx), on any linux based client machine.
