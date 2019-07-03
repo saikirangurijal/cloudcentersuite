@@ -1,4 +1,4 @@
-#Ansible Installation
+#Ansible
 
 #!/bin/bash
 
@@ -19,10 +19,14 @@ cleanAnsible() {
          echo "Removing ansible and stale files..."
 		 
 		 if [ "$os" == "ubuntu" ]; then
-                apt-get -y autoremove ansible
-         elif [ "$os" == "centos" ] ; then
-              yum -y remove ansible
-         fi
+		 
+                      apt-get -y autoremove ansible
+                
+                 elif [ "$os" == "centos" ] ; then
+                 
+                      yum -y remove ansible
+                 fi
+                 
 		 echo "Cleaning ansible Completed"
 }
 
@@ -47,9 +51,12 @@ installOnCentOS() {
       rpm -ivh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 	  
       yum -y install ansible
+      
       if [ $? -ne 0 ]; then
+      
         echo "Failed to install Ansible package"
         exit 1
+        
       fi
 	  
 }
@@ -65,6 +72,7 @@ installAnsible() {
 		 if [ "$os" == "ubuntu" ]; then
 		 
 			  installOnUbuntu
+			  
 		 elif [ "$os" == "centos" ]; then
 		 
 			  installOnCentOS
@@ -88,7 +96,7 @@ genSSHKey() {
        # Generating SSH key pair for user
 	   
 	   mkdir -p /home/cliqruser/.ssh
-       ssh-keygen -t rsa -f authkey -C cliqruser -P ""
+           ssh-keygen -t rsa -f authkey -C cliqruser -P ""
 	   cd /home/cliqruser/.ssh/
 	   
 	   if [ ! -f authorized_keys ]; then
@@ -111,17 +119,18 @@ downloadRole(){
 
    if [ "$os" == "ubuntu" ]; then
    
-   # Install pre-requisite tools
-   apt-get install unzip
+         # Install pre-requisite tools
+         apt-get install unzip
    
    elif [ "$os" == "centos" ]; then
 
-   # Install pre-requisite tools
-   yum install unzip -y
+        # Install pre-requisite tools
+        yum install unzip -y
    
    fi
    
    # Collect Ansible Bundle Name
+   
    cd /opt/remoteFiles/ansibleBundle
    ansibleBundleName="$(echo $ansibleBundle | cut -d '/' -f 5 | cut -d "." -f1)"
    mkdir $ansibleBundleName
@@ -132,20 +141,22 @@ downloadRole(){
    rm -rf $ansibleBundleName$extn
    
    # Collect Ansible Playbook Name
+   
    cd /etc/ansible
    cp -rf /opt/remoteFiles/ansibleBundle/* .
    cd /opt/remoteFiles/ansibleBundle/$ansibleBundleName/
    for file in *
    do
-    if [ ${file: -4} == ".yml" ]; then
+   if [ ${file: -4} == ".yml" ]; then
 	    ansiblePlaybookName=$file
-		ansiblePlaybookName="$(echo $ansiblePlaybookName | cut -d '/' -f 5)"
-	fi
+	    ansiblePlaybookName="$(echo $ansiblePlaybookName | cut -d '/' -f 5)"
+   fi
    done
    
    cd /opt/remoteFiles/ansibleBundle/$ansibleBundleName/
    
    # Count the maximum number of files in unzipped ansible bundle
+   
    file_nos=$(ls | wc -l)
    
   
@@ -195,38 +206,41 @@ writeHost(){
 		 
 		    cd /etc/ansible
 			
-			sed -i "/# Ex 1: Ungrouped hosts, specify before any group headers/a[all:vars]\nansible_user=cliqruser\n\n[myhostgroup:children]\nmylocalhost\nmyremotehosts\n\n[mylocalhost]\nlocalhost ansible_connection=local ansible_python_interpreter=\"/usr/bin/env python\"\n\n[myremotehosts]" hosts
+		    sed -i "/# Ex 1: Ungrouped hosts, specify before any group headers/a[all:vars]\nansible_user=cliqruser\n\n[myhostgroup:children]\nmylocalhost\nmyremotehosts\n\n[mylocalhost]\nlocalhost ansible_connection=local ansible_python_interpreter=\"/usr/bin/env python\"\n\n[myremotehosts]" hosts
 			
-			echo "Host Added successfully"
+		    echo "Host Added successfully"
 		    
-		 elif [ "$os" == "centos" ]; then
+         elif [ "$os" == "centos" ]; then
 		 
 		    cd /etc/ansible
 	  
-	        yum install sed -y
+	            yum install sed -y
 	        
-			sed -i "/# Ex 1: Ungrouped hosts, specify before any group headers/a[all:vars]\nansible_user=cliqruser\n\n[myhostgroup:children]\nmylocalhost\nmyremotehosts\n\n[mylocalhost]\nlocalhost ansible_connection=local ansible_python_interpreter=\"/usr/bin/env python\"\n\n[myremotehosts]" hosts
+		    sed -i "/# Ex 1: Ungrouped hosts, specify before any group headers/a[all:vars]\nansible_user=cliqruser\n\n[myhostgroup:children]\nmylocalhost\nmyremotehosts\n\n[mylocalhost]\nlocalhost ansible_connection=local ansible_python_interpreter=\"/usr/bin/env python\"\n\n[myremotehosts]" hosts
 			
-		 fi
-		 echo "Host Added successfully"
+		    echo "Host Added successfully"
+		 
+         fi
+		 
+		 
 			
 }
 
 
 case $cmd in
     install)
-        cleanAnsible
-		installAnsible
-		;;
-	configure)
-        writeHost
-		genSSHKey
-        downloadRole
-		readRoles
-		runPlaybook
-        ;;
+          cleanAnsible
+	  installAnsible
+	  ;;
+    configure)
+          writeHost
+	  genSSHKey
+          downloadRole
+	  readRoles
+	  runPlaybook
+          ;;
     *)
-	   exit 127
-        ;;
+	  exit 127
+          ;;
 
 esac
