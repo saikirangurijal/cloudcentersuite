@@ -7,7 +7,7 @@
   "bundleLocation": "services/ansible.zip",
   "systemService": false,
   "serviceType": "VM_AGENT",
-  "logoPath": "null",
+  "logoPath": "ansible.png",
   "serviceActions": [
     {
       "actionName": "INSTALL",
@@ -103,8 +103,5 @@
   "containerImages": [],
   "containerPorts": [],
   "repositories": [
-    {
-      "id": "9"
-    }
-  ],
+      ]
  }
