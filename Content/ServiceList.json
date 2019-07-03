@@ -418,7 +418,7 @@
                }
             },
             "urls":{  
-               "serviceLibraryBundle":"Orchestration/Ansible/WorkloadManager/ansible.zip",
+               "serviceLibraryBundle":"Orchestration/Ansible/WorkloadManager/Ansible.zip",
                "dockerFile":"dockerimages/Dockerfile",
                "serviceImport":"Scripts/serviceimport.zip"
             },
