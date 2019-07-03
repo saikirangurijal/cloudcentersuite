@@ -1,0 +1,246 @@
+#Ansible
+
+#!/bin/bash
+
+exec > >(tee -a /usr/local/osmosix/logs/service.log) 2>&1
+
+source /usr/local/osmosix/etc/userenv
+source /etc/os-release
+os=$ID
+cmd=$1
+ansiblePlaybookName=''
+ansibleBundleName=''
+file_nos=''
+
+# Clean-up old Ansible files if any
+
+cleanAnsible() {
+
+         echo "Removing ansible and stale files..."
+		 
+		 if [ "$os" == "ubuntu" ]; then
+		 
+                      apt-get -y autoremove ansible
+                
+                 elif [ "$os" == "centos" ] ; then
+                 
+                      yum -y remove ansible
+                 fi
+                 
+		 echo "Cleaning ansible Completed"
+}
+
+# Install Ansible On Ubuntu16 OS
+
+installOnUbuntu() {
+
+	 apt-add-repository ppa:ansible/ansible -y
+	 
+	 apt-get -y update
+	 
+	 apt-get install ansible -y
+	 	 
+}
+
+
+# Install Ansible On Centos7 OS
+
+installOnCentOS() {
+
+	  
+      rpm -ivh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+	  
+      yum -y install ansible
+      
+      if [ $? -ne 0 ]; then
+      
+        echo "Failed to install Ansible package"
+        exit 1
+        
+      fi
+	  
+}
+
+
+# Install Ansible ( On Ubuntu16 / Centos7)
+
+installAnsible() {
+
+ 
+         echo "Installing Ansible on $os"
+		 
+		 if [ "$os" == "ubuntu" ]; then
+		 
+			  installOnUbuntu
+			  
+		 elif [ "$os" == "centos" ]; then
+		 
+			  installOnCentOS
+		 else
+			echo "Unsupported OS type"
+			exit 1
+		 fi
+		 exitCode=$?
+		 [ $exitCode -ne 0 ] && exit $exitCode
+		 echo "Ansible Installation Completed"
+		 
+}
+
+# Generate SSH key and share public key to hosts
+
+genSSHKey() {
+
+       #Disable SSH Host Key Checking
+	   sed -i "s/#host_key_checking = False/host_key_checking = False/g" /etc/ansible/ansible.cfg
+
+       # Generating SSH key pair for user
+	   
+	   mkdir -p /home/cliqruser/.ssh
+           ssh-keygen -t rsa -f authkey -C cliqruser -P ""
+	   cd /home/cliqruser/.ssh/
+	   
+	   if [ ! -f authorized_keys ]; then
+
+	      touch authorized_keys
+
+       fi
+	   
+	   # Transferring Public key to authorized_keys of localhost
+	   
+	   cat /etc/ansible/authkey.pub >> authorized_keys
+	   echo "Keys transferred to localhost successfully"
+	   
+	   }
+	   
+
+# Unzip to extract Ansible Bundle
+
+downloadRole(){
+
+   if [ "$os" == "ubuntu" ]; then
+   
+         # Install pre-requisite tools
+         apt-get install unzip
+   
+   elif [ "$os" == "centos" ]; then
+
+        # Install pre-requisite tools
+        yum install unzip -y
+   
+   fi
+   
+   # Collect Ansible Bundle Name
+   
+   cd /opt/remoteFiles/ansibleBundle
+   ansibleBundleName="$(echo $ansibleBundle | cut -d '/' -f 5 | cut -d "." -f1)"
+   mkdir $ansibleBundleName
+   extn=.zip
+   cp $ansibleBundleName$extn $ansibleBundleName
+   cd $ansibleBundleName
+   unzip $ansibleBundleName$extn
+   rm -rf $ansibleBundleName$extn
+   
+   # Collect Ansible Playbook Name
+   
+   cd /etc/ansible
+   cp -rf /opt/remoteFiles/ansibleBundle/* .
+   cd /opt/remoteFiles/ansibleBundle/$ansibleBundleName/
+   for file in *
+   do
+   if [ ${file: -4} == ".yml" ]; then
+	    ansiblePlaybookName=$file
+	    ansiblePlaybookName="$(echo $ansiblePlaybookName | cut -d '/' -f 5)"
+   fi
+   done
+   
+   cd /opt/remoteFiles/ansibleBundle/$ansibleBundleName/
+   
+   # Count the maximum number of files in unzipped ansible bundle
+   
+   file_nos=$(ls | wc -l)
+   
+  
+}
+
+# Read Roles to be added into Playbook
+
+readRoles() {
+
+if [[ $ansibleRole == *","* ]]; then
+
+
+for (( i=1; i < $file_nos; ++i ))
+do
+role="$(echo $ansibleRole | cut -d ',' -f $i)"
+if [[ $role != "" ]]; then
+sed -i "/roles:/a\  - $role" /etc/ansible/$ansibleBundleName/$ansiblePlaybookName
+fi
+done
+
+else
+   
+   sed -i "/roles:/a\  - $ansibleRole" /etc/ansible/$ansibleBundleName/$ansiblePlaybookName
+
+fi
+
+}
+   
+# Run Playbook with Roles   
+
+runPlaybook(){
+
+cd /etc/ansible/$ansibleBundleName
+
+ansible-playbook $ansiblePlaybookName
+
+echo "$ansiblePlaybookName ran successfully"
+
+}
+
+# Add host details into ansible "host" file
+
+writeHost(){
+
+         source /usr/local/osmosix/etc/userenv
+         if [ "$os" == "ubuntu" ]; then
+		 
+		    cd /etc/ansible
+			
+		    sed -i "/# Ex 1: Ungrouped hosts, specify before any group headers/a[all:vars]\nansible_user=cliqruser\n\n[myhostgroup:children]\nmylocalhost\nmyremotehosts\n\n[mylocalhost]\nlocalhost ansible_connection=local ansible_python_interpreter=\"/usr/bin/env python\"\n\n[myremotehosts]" hosts
+			
+		    echo "Host Added successfully"
+		    
+         elif [ "$os" == "centos" ]; then
+		 
+		    cd /etc/ansible
+	  
+	            yum install sed -y
+	        
+		    sed -i "/# Ex 1: Ungrouped hosts, specify before any group headers/a[all:vars]\nansible_user=cliqruser\n\n[myhostgroup:children]\nmylocalhost\nmyremotehosts\n\n[mylocalhost]\nlocalhost ansible_connection=local ansible_python_interpreter=\"/usr/bin/env python\"\n\n[myremotehosts]" hosts
+			
+		    echo "Host Added successfully"
+		 
+         fi
+		 
+		 
+			
+}
+
+
+case $cmd in
+    install)
+          cleanAnsible
+	  installAnsible
+	  ;;
+    configure)
+          writeHost
+	  genSSHKey
+          downloadRole
+	  readRoles
+	  runPlaybook
+          ;;
+    *)
+	  exit 127
+          ;;
+
+esac

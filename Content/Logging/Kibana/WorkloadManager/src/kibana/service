@@ -48,7 +48,7 @@ EOL
 			echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
 			apt-get -y update
 			apt-get install -y kibana
-			apt-get install -y nginx
+			apt-get -y --allow-unauthenticated  install nginx
 			apt-get install -y firewalld
 		
 		fi
