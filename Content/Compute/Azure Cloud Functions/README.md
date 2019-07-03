@@ -30,19 +30,6 @@
 - You can check , if docker is installed , by running "docker -v"
 - You can check , if docker is running , by executing the command "systemctl status docker"	
   
-  ## Create Service Principal
-User has to create service-pricipal for their microsoft account.
-     For creating service-pricipal in azure cloud shell:
-      
-1. click this link https://shell.azure.com
-		
-2. Select bash option from left corner
-		
-3. Execute the following command for creating service principal
-		
-	    az ad sp create-for-rbac --name <Your Service Principal name>
-			   
-4. Note down the appid,tenantid and password
 
    ## How it works:
     
@@ -127,11 +114,7 @@ Python script :
 
 # Deployment Parameters:
 | Parameter Name| Type	 | Mandatory |Description |  
-| ------ | ------ | ------ | ------ 
-| app_id | String | Yes | Service Pricipal appid which generated while create service principal
-| password | String | Yes | Service Pricipal Password which generated while create service principal
-| tenant_id | String | Yes | Service Pricipal tenantid which generated while create service principal
-| storage_name |	String | Yes | To store application in Cloud Storage bucket |  
+| ------ | ------ | ------ | ------   
 | app_name |	String | Yes | Name of the azure cloud function to be created. |
 | runtime | List | Yes | Need to select required run time for the azure cloud functions. | 
 

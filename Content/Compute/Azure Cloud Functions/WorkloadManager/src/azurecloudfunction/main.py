@@ -10,10 +10,12 @@ RUNTIME = os.environ['runtime']
 APP_PACKAGE = os.environ["AppPackage"]
 RESOURCE = os.environ["Cloud_Setting_ResourceGroup"]
 LOCATION = os.environ["region"]
-STORAGE_NAME = os.environ["storage_name"]
-APP_ID = os.environ["app_id"]
-TENANT_ID = os.environ["tenant_id"]
-PASSWORD = os.environ["password"]
+store = (os.environ["Cloud_Setting_StorageAccount"]).split(' ')
+STORAGE_NAME = store[1]
+print_log(STORAGE_NAME)
+APP_ID = os.environ["CliqrCloud_ClientId"]
+TENANT_ID = os.environ["CliqrCloud_TenantId"]
+PASSWORD = os.environ["CliqrCloud_ClientKey"]
 DEPENDENTS = os.environ.get('CliqrDependencies', '')
 print_log(len(DEPENDENTS))
 if(len(DEPENDENTS) > 0):

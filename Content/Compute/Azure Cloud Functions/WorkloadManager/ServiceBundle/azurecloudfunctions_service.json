@@ -7,7 +7,7 @@
    "bundleLocation":"",
    "systemService":false,
    "serviceType":"EXTERNAL",
-   "logoPath":"custom/assets/img/serviceLogo/734aa650-7538-42ef-b539-d9c7debbe3c9.png",
+   "logoPath":"custom/assets/img/serviceLogo/ab637360-2347-4d41-b3f8-2771d46da498.png",
    "serviceActions":[
 
    ],
@@ -54,100 +54,6 @@
          "multiselectSupported":false,
          "webserviceListParams":null,
          "systemParam":true
-      },
-      {
-         "paramName":"app_id",
-         "displayName":"App id(Service Principal)",
-         "helpText":"",
-         "type":"string",
-         "valueConstraint":{
-            "maxLength":255,
-            "allowSpaces":true,
-            "remainingChars":255
-         },
-         "valueList":null,
-         "collectionList":null,
-         "defaultValue":"",
-         "secret":null,
-         "confirmValue":null,
-         "pathSuffixValue":null,
-         "userVisible":true,
-         "userEditable":true,
-         "optional":false,
-         "multiselectSupported":false,
-         "webserviceListParams":null,
-         "systemParam":false,
-         "deploymentParam":true
-      },
-      {
-         "paramName":"password",
-         "displayName":"Password(Service Principal )",
-         "helpText":"",
-         "type":"password_input",
-         "valueConstraint":{
-
-         },
-         "valueList":null,
-         "collectionList":null,
-         "defaultValue":"",
-         "secret":null,
-         "confirmValue":null,
-         "pathSuffixValue":null,
-         "userVisible":true,
-         "userEditable":true,
-         "optional":false,
-         "multiselectSupported":false,
-         "webserviceListParams":null,
-         "systemParam":false,
-         "deploymentParam":true
-      },
-      {
-         "paramName":"tenant_id",
-         "displayName":"Tenant id(Service Principal )",
-         "helpText":"",
-         "type":"string",
-         "valueConstraint":{
-            "maxLength":255,
-            "allowSpaces":true,
-            "remainingChars":255
-         },
-         "valueList":null,
-         "collectionList":null,
-         "defaultValue":"",
-         "secret":null,
-         "confirmValue":null,
-         "pathSuffixValue":null,
-         "userVisible":true,
-         "userEditable":true,
-         "optional":false,
-         "multiselectSupported":false,
-         "webserviceListParams":null,
-         "systemParam":false,
-         "deploymentParam":true
-      },
-      {
-         "paramName":"storage_name",
-         "displayName":"Storage name",
-         "helpText":"",
-         "type":"string",
-         "valueConstraint":{
-            "maxLength":255,
-            "allowSpaces":true,
-            "remainingChars":255
-         },
-         "valueList":null,
-         "collectionList":null,
-         "defaultValue":"",
-         "secret":null,
-         "confirmValue":null,
-         "pathSuffixValue":null,
-         "userVisible":true,
-         "userEditable":true,
-         "optional":false,
-         "multiselectSupported":false,
-         "webserviceListParams":null,
-         "systemParam":false,
-         "deploymentParam":true
       },
       {
          "paramName":"app_name",

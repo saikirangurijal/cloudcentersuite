@@ -3,11 +3,13 @@
 . /utils.sh
 
 #Initializing variables
-app_id=${app_id}
-password=${password}
-tenant_id=${tenant_id}
+app_id=${CliqrCloud_ClientId}
+password=${CliqrCloud_ClientKey}
+tenant_id=${CliqrCloud_TenantId}
 resource_group=${Cloud_Setting_ResourceGroup}
-storage_name=${storage_name}
+Cloud_Setting_StorageAccount=${Cloud_Setting_StorageAccount}
+store=( $Cloud_Setting_StorageAccount )
+storage_name=${store[1]}
 os_type=Windows
 language=${runtime}
 app_name=${app_name}
@@ -74,7 +76,6 @@ login(){
         apk add libffi-dev openssl-dev
         pip install azure-cli
         pip install cryptography==2.5
-        sleep 10
         python main.py login
         create_functionapp
         }
