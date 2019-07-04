@@ -409,15 +409,7 @@
             "description":"Configuration Management",
             "supportedVersion":"5.0.1",
             "serviceVersion":"1.0",
-            "appProfiles":{
-               "1":{
-                  "ansible_centos_sample_app.zip":"Ansible Sample App for CentOS7"
-               },
-               "2":{
-                  "ansible_ubuntu_sample_app.zip":"Ansible Sample App for Ubuntu16.04"
-               }
-            },
-            "urls":{  
+            "urls":{
                "serviceLibraryBundle":"Orchestration/Ansible/WorkloadManager/Ansible.zip",
                "dockerFile":"dockerimages/Dockerfile",
                "serviceImport":"Scripts/serviceimport.zip"
