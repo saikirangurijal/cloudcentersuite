@@ -1,0 +1,56 @@
+#!/bin/bash
+#For external-service
+
+
+
+# Logging while running POSTGRESQl service script
+ exec > >(tee -a /usr/local/osmosix/logs/service.log) 2>&1
+
+echo "external sevice of appdynamics is running"
+cmd="start"
+
+# RUN EVERYTHING AS ROOT
+if [ "$(id -u)" != "0" ]; then
+    exec sudo "$0" "$@"
+fi
+
+
+if [[ -z "${cliqrDatabaseType}" ]]; then
+  MY_SCRIPT_VARIABLE="Some default value because DEPLOY_ENV is undefined"
+  export JAVA_HOME=/usr/lib/jvm/java-8-sun
+else
+  MY_SCRIPT_VARIABLE="${cliqrDatabaseType}"
+  yum install -y java
+
+fi
+function executionStatus() {
+ FILE="FAILURE"
+ if [ -f $FILE ];
+ then
+    status=`cat $FILE`
+    exit 127
+  else
+    FILE="SUCCESS"
+    status="Service execution successful"
+ fi
+}
+
+case $cmd in
+	start)
+		python /opt/remoteFiles/appPackage/agentsdownload.py
+		sleep 10		
+		executionStatus
+		;;
+
+	stop)
+		python agentsdownload.py
+		sleep 10
+		python agentsdownload.py
+		executionStatus
+		;;
+	*)
+		serviceStatus="Invalid command"
+		exit 127
+		;;
+esac
+

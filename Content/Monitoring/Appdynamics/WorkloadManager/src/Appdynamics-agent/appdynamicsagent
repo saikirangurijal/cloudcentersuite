@@ -1,0 +1,25 @@
+#!/bin/bash
+exec > >(tee -a /usr/local/osmosix/logs/service.log) 2>&1
+
+if [ -f /etc/redhat-release ]; then
+        echo "Centos\n"
+	yum install -y wget
+	yum install -y unzip
+	wget  ${AppdynamicPackage}
+	mkdir /opt/remoteFiles
+	mkdir  /opt/remoteFiles/appPackage
+	unzip modifiedpsql.zip -d /opt/remoteFiles/appPackage
+        cd /opt/remoteFiles/appPackage
+	./service
+elif [ -f /etc/lsb-release ]; then
+        echo "Ubuntu\n"
+	wget  ${AppdynamicPackage}
+        mkdir /opt/remoteFiles
+        mkdir  /opt/remoteFiles/appPackage
+        unzip modifiedpsql.zip -d /opt/remoteFiles/appPackage
+        cd /opt/remoteFiles/appPackage
+        ./service
+
+		
+	
+fi
