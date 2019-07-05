@@ -138,6 +138,14 @@
             "dependencyTag":[  
                "azuresql"
             ],
+			"appProfiles":{  
+               "1":{  
+                  "azurecloudfunction_sample_app.zip":"Azure Cloud (Multitier)"
+               },
+               "2":{  
+                  "singletierazurecloudfuctions_sampleapp.zip":"Azure Cloud (Singletier)"
+               },
+            },
             "urls":{  
                "serviceLibraryBundle":"Compute/Azure Cloud Functions/WorkloadManager/azurecloudfunction.zip",
                "dockerFile":"dockerimages/Dockerfile",
