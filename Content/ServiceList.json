@@ -138,14 +138,6 @@
             "dependencyTag":[  
                "azuresql"
             ],
-			"appProfiles":{  
-               "1":{  
-                  "azurecloudfunction_sample_app.zip":"Azure Cloud (Multitier)"
-               },
-               "2":{  
-                  "singletierazurecloudfuctions_sampleapp.zip":"Azure Cloud (Singletier)"
-               },
-            },
             "urls":{  
                "serviceLibraryBundle":"Compute/Azure Cloud Functions/WorkloadManager/azurecloudfunction.zip",
                "dockerFile":"dockerimages/Dockerfile",
@@ -417,7 +409,15 @@
             "description":"Configuration Management",
             "supportedVersion":"5.0.1",
             "serviceVersion":"1.0",
-            "urls":{
+            "appProfiles":{
+               "1":{
+                  "ansible_centos_sample_app.zip":"Ansible Sample App for CentOS7"
+               },
+               "2":{
+                  "ansible_ubuntu_sample_app.zip":"Ansible Sample App for Ubuntu16.04"
+               }
+            },
+            "urls":{  
                "serviceLibraryBundle":"Orchestration/Ansible/WorkloadManager/Ansible.zip",
                "dockerFile":"dockerimages/Dockerfile",
                "serviceImport":"Scripts/serviceimport.zip"
