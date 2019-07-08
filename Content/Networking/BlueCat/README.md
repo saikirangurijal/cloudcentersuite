@@ -19,9 +19,9 @@
 
 # Download and configure the callouts	
 
-   Step 1 : To Install BlueCat Address Manager,follow the guide [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Networking/Infoblox/Infoblox-Ipam%20Setup%20Guide.docx)
+   Step 1 : To Install BlueCat Address Manager,follow the guide [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/BlueCat/BlueCat%20Setup%20Guide.docx)
    
-   Step 2 : Download the Callout script from [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Networking/Infoblox/InfobloxIPAM.zip)
+   Step 2 : Download the Callout script from [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/BlueCat/bluecat.zip)
    
    Step 3 : Extract the above bundle on any linux based machine and navigate to extracted folder. 
    
@@ -66,7 +66,7 @@
                     Example : http://<Your_REPO_Server_IP>/callouts/bluecat.zip 
    
    Step 10: Open the BlueCat Address Manager application and add required external attributes-(Gateway) in the network.
-            Refer the link to know how to create external attributes [here](https://wwwin-github.cisco.com/CloudCenterSuite/Content-Factory/raw/master/Networking/Infoblox/Infoblox-Ipam%20Setup%20Guide.docx)
+            Refer the link to know how to create external attributes [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/Networking/BlueCat/BlueCat%20Setup%20Guide.docx)
             For example:
             
                 Gateway - 10.36.0.0
