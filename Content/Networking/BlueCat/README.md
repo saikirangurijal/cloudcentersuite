@@ -93,6 +93,8 @@ IP De-allocation :
 | Action | Value |
 |  ------ |------ |
 | Strategy Bundle|callouts/bluecat.zip
+| Instance Naming Strategy|Hostname callout
+| Custom VM Name|vmnaming/run.sh
 | Instance Ipam Strategy|Ipam Callout
 | Ipam alloc rule|bamalloc/run.sh
 | Ipam dealloc rule |bamdealloc/run.sh
