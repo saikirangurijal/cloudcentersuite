@@ -76,4 +76,7 @@ S.No    | Resource    |  Value   | Remarks
 | domainPassword | Password | Domain Controller password | |  |
 | domain | String | Domain Name | | |
 
+# Note
+	- Please reboot VM Instance after successfully deployed
+
 
