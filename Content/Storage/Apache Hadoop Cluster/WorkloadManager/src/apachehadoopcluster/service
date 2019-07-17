@@ -1,0 +1,395 @@
+#!/bin/bash
+#Hadoop MultiNode Cluster for linux
+
+ # Logging while running Hadoop service script
+ exec > >(tee -a /usr/local/osmosix/logs/service.log) 2>&1
+
+ echo "Executing service script.."
+ OSSVC_HOME=/usr/local/osmosix/service
+
+ . /usr/local/osmosix/etc/.osmosix.sh
+ . /usr/local/osmosix/etc/userenv
+ . $OSSVC_HOME/utils/cfgutil.sh
+ . $OSSVC_HOME/utils/install_util.sh
+ . $OSSVC_HOME/utils/os_info_util.sh
+
+ # Sourcing variables from service directory
+ cmd=$1
+
+ # RUN EVERYTHING AS ROOT
+ if [ "$(id -u)" != "0" ]; then
+     exec sudo "$0" "$@"
+ fi
+
+ 
+   
+source /usr/local/osmosix/etc/userenv
+
+
+cloudName=`cat /usr/local/osmosix/etc/cloud`
+
+if [ "$cloudName" == 'amazon' ] 
+then
+	export keyName="cliqr-user-key_1"	
+elif [ "$cloudName" == 'azure' ]
+then
+	export keyName="cliqr"
+else
+	export keyName="cliqruserKey"
+fi
+
+export ipListName='echo $CliqrTier_'$cliqrAppTierName"_IP"
+export ipList=`eval $ipListName`
+export hostListName='echo $CliqrTier_'$cliqrAppTierName"_HOSTNAME"
+export hostList=`eval $hostListName`
+
+for i in $(echo $ipList | sed "s/,/ /g")
+do
+   export masterIp=$i
+   break
+
+done
+
+install(){
+
+		
+ if ([[ "$ver" =~ "release 7" ]] && [ $os == "CentOS" ]); then
+        installJava8_131
+        export JAVA_HOME="/usr/lib/jvm/java-8-sun";
+        export PATH=$JAVA_HOME/bin:$PATH
+ else 
+      echo "when OS is ubuntu 16.04"
+		installJava8_181
+        export JAVA_HOME="/usr/lib/jvm/java-8-sun";
+        export PATH=$JAVA_HOME/bin:$PATH
+
+ fi
+	}
+configure(){ 
+		
+		mkdir -p /opt/hadoop
+		
+		chown cliqruser:cliqruser /opt/hadoop
+		
+#		if [ "$cloudName" == 'vmware' ]; then
+		
+		for i in $(echo $ipList | sed "s/,/ /g")
+            do
+                if [ "$i" != "$cliqrNodePrivateIp" ]; then
+					for j in $(echo $hostList | sed "s/,/ /g")
+						do
+							if [ "$j" != "$cliqrNodeHostname" ]; then
+                                if  grep -q "$i" "/etc/hosts" ||  grep -q "$j" "/etc/hosts" ; then
+                                    cat >> /etc/hosts <<EOL
+EOL
+                                else
+                                    cat >> /etc/hosts <<EOL
+$i $j
+EOL
+                                fi
+                            fi
+                    done
+                fi
+        done
+		
+#		fi
+
+		if [ "$cliqrNodePrivateIp" == "$masterIp" ]; then
+			su - cliqruser -c '
+cd /opt/hadoop;
+wget http://www-us.apache.org/dist/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz;
+tar -zxvf hadoop-3.2.0.tar.gz;
+mv hadoop-3.2.0 hadoop'
+		fi
+		
+		if ([ $os == "CentOS" ]  &&  [[ "$ver" =~ "release 7" ]]); then
+			
+			su - cliqruser -c 'cat >> ~/.bashrc <<EOL
+export HADOOP_HOME=/opt/hadoop/hadoop
+EOL'
+
+			su - cliqruser -c 'source ~/.bashrc'
+
+			su - cliqruser -c '
+cat >> ~/.bashrc <<EOL
+export HADOOP_INSTALL=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin	
+EOL'
+			su - cliqruser -c 'source ~/.bashrc'
+		
+		else
+			su - cliqruser -c 'cat >> ~/.bash_profile <<EOL
+export HADOOP_HOME=/opt/hadoop/hadoop
+EOL'
+
+su -c " source ~/.bash_profile " -s /bin/bash cliqruser
+
+			su - cliqruser -c '
+cat >> .bashrc <<EOL
+export HADOOP_INSTALL=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin	
+EOL'
+su - cliqruser -c '
+cat >> .bash_profile <<EOL
+export HADOOP_INSTALL=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin	
+EOL'	
+			su - cliqruser -c 'source .bashrc'
+			su -c " source ~/.bash_profile " -s /bin/bash cliqruser
+		fi
+		
+		if [ "$cliqrNodePrivateIp" == "$masterIp" ]; then
+		
+				su - cliqruser -c '
+sed -i "s@# export JAVA_HOME=@export JAVA_HOME=/usr/lib/jvm/java-8-sun/@g" $HADOOP_HOME/etc/hadoop/hadoop-env.sh;
+sed -i "s@# export HADOOP_OPTS="-Djava.net.preferIPv4Stack=true"@export HADOOP_OPTS="-Djava.net.preferIPv4Stack=true"@g" $HADOOP_HOME/etc/hadoop/hadoop-env.sh'
+				
+				su - cliqruser -c '
+source /usr/local/osmosix/etc/userenv;
+cat > $HADOOP_HOME/etc/hadoop/core-site.xml <<EOL
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+<property>
+<name>fs.default.name</name>
+<value>hdfs://$cliqrNodeHostname:9000/</value>
+</property>
+<property>
+<name>dfs.permissions</name>
+<value>false</value>
+</property>
+</configuration>
+EOL'
+			su - cliqruser -c '
+source /usr/local/osmosix/etc/userenv;
+cat > $HADOOP_HOME/etc/hadoop/mapred-site.xml <<EOL
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+<property>
+<name>mapred.job.tracker</name>
+<value>$cliqrNodeHostname:9001</value>
+</property>
+</configuration>
+EOL'
+	su - cliqruser -c '
+cat > $HADOOP_HOME/etc/hadoop/hdfs-site.xml <<EOL
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+
+<configuration>
+<property>
+<name>dfs.data.dir</name>
+<value>/opt/hadoop/hadoop/dfs/name/data</value>
+<final>true</final>
+</property>
+<property>
+<name>dfs.name.dir</name>
+<value>/opt/hadoop/hadoop/dfs/name</value>
+<final>true</final>
+</property>
+<property>
+<name>dfs.replication</name>
+<value>1</value>
+</property>
+</configuration>
+EOL'
+		for i in $(echo $ipList | sed "s/,/ /g")
+                do
+                cat > /opt/.vmList <<EOL
+EOL
+                if [ "$i" != "$cliqrNodePrivateIp" ]; then
+                        echo "export ip=$i" | sudo tee -a /opt/.vmList
+                        chown cliqruser:cliqruser /opt/.vmList
+                        su - cliqruser -c '
+                        source /opt/.vmList;
+                        scp -r -o StrictHostKeyChecking=no -i /home/cliqruser/.ssh/$keyName $HADOOP_HOME cliqruser@$ip:/opt/hadoop'
+                fi
+                done
+
+        su - cliqruser -c '
+cat > $HADOOP_HOME/etc/hadoop/workers <<EOL
+EOL'
+		for i in $(echo $hostList | sed "s/,/ /g")
+                do
+	
+                if [ "$i" != "$cliqrNodeHostname" ]; then
+			echo "export hostName=$i" | sudo tee -a /opt/.vmList
+                        su - cliqruser -c '
+                        source /opt/.vmList;
+                        cat >> $HADOOP_HOME/etc/hadoop/workers <<EOL
+$hostName
+EOL'
+                fi
+                done
+		if ([ $os == "CentOS" ]  &&  [[ "$ver" =~ "release 7" ]]); then
+			su - cliqruser -c  " hdfs namenode -format "
+		else
+			su - cliqruser -c  "/opt/hadoop/hadoop/bin/hdfs namenode -format"
+		fi
+		else
+            
+			
+			if [ "$cliqrNodePrivateIp" != "$masterIp" ]; then
+			if [ -f /opt/hadoop/hadoop ]; then
+			su - cliqruser -c '
+                        chown cliqruser:cliqruser /opt/hadoop/hadoop'
+                        fi
+			
+			su - cliqruser -c '
+			cat > $HADOOP_HOME/etc/hadoop/hdfs-site.xml <<EOL
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+
+<configuration>
+<property>
+	<name>dfs.data.dir</name>
+	<value>/opt/hadoop/dfs/name/data</value>
+	<final>true</final>
+</property>
+</configuration>
+EOL'
+	
+		fi
+		fi
+		if ([ $os == "CentOS" ]  &&  [[ "$ver" =~ "release 7" ]]); then
+			su - cliqruser -c 'start-dfs.sh'
+		else
+			sudo -H -u cliqruser bash -c 'bash /opt/hadoop/hadoop/sbin/start-dfs.sh' 
+		fi
+		
+	if [ "$cliqrNodePrivateIp" == "$masterIp" ]; then
+	if ([ $os == "CentOS" ]  &&  [[ "$ver" =~ "release 7" ]]); then
+		su - cliqruser -c '
+			hdfs dfs -mkdir /user'
+	else
+		su - cliqruser -c  "/opt/hadoop/hadoop/bin/hdfs dfs -mkdir /user"
+	fi
+	fi
+	
+}
+
+start(){
+		sudo -H -u cliqruser bash -c 'bash /opt/hadoop/hadoop/sbin/start-dfs.sh'
+}
+
+stop(){
+  
+	sudo -H -u cliqruser bash -c 'bash /opt/hadoop/hadoop/sbin/stop-dfs.sh'
+}
+
+restart(){
+
+	sudo -H -u cliqruser bash -c 'bash /opt/hadoop/hadoop/sbin/start-dfs.sh'
+	sudo -H -u cliqruser bash -c 'bash /opt/hadoop/hadoop/sbin/stop-dfs.sh'
+	 
+}
+
+
+runscripts() {
+    case $cmd in
+        install)
+            log "[INSTALL] Installing Hadoop"
+            install
+            ;;
+        configure)
+            log "[CONFIGURE] Configuring Hadoop"
+            configure
+            ;;
+		start)
+			log "[CONFIGURE] Configuring Hadoop"
+            start
+            ;;
+        stop)
+            log "[STOP] Stopping Hadoop"
+            stop
+            ;;
+        restart)
+            log "[RESTART] Restarting Hadoop"
+            restart
+            ;;
+            *)
+                exit 127
+                ;;
+
+        esac
+
+}
+
+runscripts

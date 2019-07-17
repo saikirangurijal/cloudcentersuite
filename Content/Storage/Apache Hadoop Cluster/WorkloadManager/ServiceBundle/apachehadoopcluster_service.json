@@ -1,0 +1,115 @@
+{
+	"displayName": "Apache Hadoop Cluster",
+	"name": "apachehadoopcluster",
+	"description": "Storing and processing big data",
+	"parentServiceId": "48",
+	"costPerHour": "0.00",
+	"bundleLocation": "services/apachehadoop.zip",
+	"systemService": false,
+	"serviceType": "VM_AGENT",
+	"logoPath": "logo.png",
+	"serviceActions": [{
+		"actionName": "INSTALL",
+		"actionType": "SCRIPT",
+		"actionValue": "service install",
+		"value": "service install",
+		"key": "INSTALL"
+	}, {
+		"actionName": "CONFIGURE",
+		"actionType": "SCRIPT",
+		"actionValue": "service configure",
+		"value": "service configure",
+		"key": "CONFIGURE"
+	}, {
+		"actionName": "STOP",
+		"actionType": "SCRIPT",
+		"actionValue": "service stop",
+		"value": "service stop",
+		"key": "STOP"
+	}, {
+		"actionName": "RESTART",
+		"actionType": "SCRIPT",
+		"actionValue": "service restart",
+		"value": "service restart",
+		"key": "RESTART"
+	}],
+	"externalBundleLocation": "null",
+	"externalActions": [],
+	"actions": [],
+	"serviceParamSpecs": [{
+		"paramName": "numClusterNodes",
+		"displayName": "Number of Nodes in the Cluster",
+		"helpText": "Number of Nodes in the Cluster",
+		"type": "number",
+		"valueConstraint": {
+			"minValue": "0",
+			"maxValue": "999999"
+		},
+		"valueList": null,
+		"collectionList": null,
+		"defaultValue": "2",
+		"secret": null,
+		"confirmValue": null,
+		"pathSuffixValue": null,
+		"userVisible": true,
+		"userEditable": true,
+		"optional": false,
+		"multiselectSupported": false,
+		"webserviceListParams": null,
+		"systemParam": true
+	}, {
+		"paramName": "maxClusterSize",
+		"displayName": "Maximum Number of Nodes",
+		"helpText": "Maximum Number of Nodes",
+		"type": "number",
+		"valueConstraint": {
+			"minValue": "0",
+			"maxValue": "999999"
+		},
+		"valueList": null,
+		"collectionList": null,
+		"defaultValue": "3",
+		"secret": null,
+		"confirmValue": null,
+		"pathSuffixValue": null,
+		"userVisible": true,
+		"userEditable": true,
+		"optional": false,
+		"multiselectSupported": false,
+		"webserviceListParams": null,
+		"systemParam": true
+	}, {
+		"paramName": "minClusterSize",
+		"displayName": "Minimum Number of Nodes",
+		"helpText": "Minimum Number of Nodes",
+		"type": "number",
+		"valueConstraint": {
+			"minValue": "0",
+			"maxValue": "999999"
+		},
+		"valueList": null,
+		"collectionList": null,
+		"defaultValue": "2",
+		"secret": null,
+		"confirmValue": null,
+		"pathSuffixValue": null,
+		"userVisible": true,
+		"userEditable": true,
+		"optional": false,
+		"multiselectSupported": false,
+		"webserviceListParams": null,
+		"systemParam": true
+	}],
+	"servicePorts": [],
+	"images": [{
+		"id": "21"
+	}, {
+		"id": "26"
+	}],
+	"defaultImageId": "21",
+	"containerImages": [],
+	"containerPorts": [],
+	"repositories": [{
+		"id": "1"
+	}]
+}
