@@ -4,7 +4,7 @@
 	"description": "Storing and processing big data",
 	"parentServiceId": "48",
 	"costPerHour": "0.00",
-	"bundleLocation": "services/apachehadoop.zip",
+	"bundleLocation": "services/apachehadoopcluster.zip",
 	"systemService": false,
 	"serviceType": "VM_AGENT",
 	"logoPath": "logo.png",
