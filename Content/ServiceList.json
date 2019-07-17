@@ -515,6 +515,25 @@
          }
       }
    ],
+   "Storage":[
+      {
+         "ApacheHadoopCluster": {
+            "name": "Apache Hadoop Cluster",
+            "serviceID": "apachehadoopcluster",
+            "serviceCategory": "Storage",
+            "description": "Storing and processing big data",
+            "supportedVersion": "5.0.1",
+            "serviceVersion": "1.0",
+            "urls": {
+               "serviceLibraryBundle": "Storage/Apache Hadoop Cluster/WorkloadManager/ApacheHadoopCluster.zip",
+               "dockerFile": "dockerimages/Dockerfile",
+               "serviceImport": "Scripts/serviceimport.zip"
+            },
+            "created": "",
+            "digest": ""
+         }
+      }
+   ],
    "AppProfiles":[  
       {  
          "Shopizer":{  
