@@ -200,6 +200,22 @@
             "created":"",
             "digest":""
          },
+         "Appdynamics":{  
+            "name":"Appdynamics",
+            "serviceID":"",
+            "serviceCategory":"Monitoring",
+            "description":"Application Monitoring",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "isService":false,
+            "urls":{  
+               "serviceLibraryBundle":"Monitoring/Appdynamics/WorkloadManager/Appdynamics.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         },
          "Sensu":{  
             "name":"Sensu Server",
             "serviceID":"sensu",
@@ -506,7 +522,6 @@
             ],
             "urls":{  
                "serviceLibraryBundle":"Logging/Elasticsearch/WorkloadManager/Elasticsearch.zip",
-               "serviceLibraryBundle":"Logging/Elasticsearch/WorkloadManager/Elasticsearch.zip",
                "dockerFile":"dockerimages/Dockerfile",
                "serviceImport":"Scripts/serviceimport.zip"
             },
@@ -560,6 +575,28 @@
             "created":"",
             "digest":""
          },
+      "ShopizerAppdynamics":{  
+            "name":"J2EE-EcommerceApp",
+            "serviceID":"",
+            "serviceCategory":"AppProfiles",
+            "description":"Shopizer Ecommerce App",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "isService":false,
+            "appProfiles":{  
+               "1":{  
+                  "j2ee-ecommerce_app_with_Appdynamics.zip":"Shopizer App(with Appdynamics)"
+               }
+            },
+            "urls":{  
+               "serviceLibraryBundle":"AppProfiles/J2EE-EcommerceApp-Appdynamics/j2ee-ecommerce_app_with_Appdynamics.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
+         },
+      
 		 "PetClinic-Demo":{  
             "name":"PetClinic-Demo",
             "serviceID":"",
