@@ -589,7 +589,7 @@
                }
             },
             "urls":{  
-               "serviceLibraryBundle":"AppProfiles/J2EE-EcommerceApp-Appdynamics/j2ee-ecommerce_app_with_Appdynamics.zip",
+               "serviceLibraryBundle":"AppProfiles/J2EE-EcommerceApp-Appdynamics/J2EE-EcommerceApp.zip",
                "dockerFile":"dockerimages/Dockerfile",
                "serviceImport":"Scripts/serviceimport.zip"
             },
