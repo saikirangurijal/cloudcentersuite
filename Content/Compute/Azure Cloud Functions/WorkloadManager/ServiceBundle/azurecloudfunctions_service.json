@@ -1,17 +1,17 @@
 {
    "displayName":"Azure Cloud Functions",
-   "name":"azurecloudfunction",
+   "name":"azurecloudfunctions",
    "description":"Azure Cloud Functions are serverless applications run on Microsoft Azure.",
    "parentServiceId":"48",
    "costPerHour":"0.00",
    "bundleLocation":"",
    "systemService":false,
    "serviceType":"EXTERNAL",
-   "logoPath":"custom/assets/img/serviceLogo/ab637360-2347-4d41-b3f8-2771d46da498.png",
+   "logoPath":"custom/assets/img/serviceLogo/ce90bf18-cc2c-4ec7-bf16-e36a12f5c012.png",
    "serviceActions":[
 
    ],
-   "externalBundleLocation":"services/azurecloudfunction.zip",
+   "externalBundleLocation":"services/azurecloudfunctions.zip",
    "externalActions":[
       {
          "actionName":"START",
@@ -80,14 +80,14 @@
          "deploymentParam":true
       },
       {
-         "paramName":"runtime",
-         "displayName":"Runtime",
+         "paramName":"app_type",
+         "displayName":"App Type",
          "helpText":"",
          "type":"list",
          "valueConstraint":{
             "allowSpaces":true
          },
-         "valueList":"node,java,powershell,dotnet",
+         "valueList":"Function App,Web App",
          "collectionList":null,
          "defaultValue":"",
          "secret":null,

@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python3
 #Error Utility
 from util import *
 

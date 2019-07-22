@@ -130,16 +130,24 @@
          },
          "Azure Cloud Functions":{  
             "name":"Azure cloud functions",
-            "serviceID":"azurecloudfunction",
+            "serviceID":"azurecloudfunctions",
             "serviceCategory":"Compute",
             "description":"Azure cloud functions",
             "supportedVersion":"5.0.1",
             "serviceVersion":"1.0",
+            "appProfiles":{
+               "1":{
+                  "azurecloudfunction_sample_app.zip":"Azure Function App"
+               },
+               "2":{
+                  "azurewebapp_sample_app.zip":"Azure Web App with MySQL"
+               }
+            },
             "dependencyTag":[  
-               "azuresql"
+               "mysql"
             ],
             "urls":{  
-               "serviceLibraryBundle":"Compute/Azure Cloud Functions/WorkloadManager/azurecloudfunction.zip",
+               "serviceLibraryBundle":"Compute/Azure Cloud Functions/WorkloadManager/azurecloudfunctions.zip",
                "dockerFile":"dockerimages/Dockerfile",
                "serviceImport":"Scripts/serviceimport.zip"
             },

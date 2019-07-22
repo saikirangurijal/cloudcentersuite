@@ -1,4 +1,4 @@
-# Azure Cloud Functions
+# 1.Azure Cloud Functions
 ## Introduction
 
 	Azure Functions lets you develop serverless applications on Microsoft Azure.
@@ -12,15 +12,50 @@
 	Please refer the below link for more details.
 	For your reference : https://docs.microsoft.com/en-us/azure/azure-functions/
 	
-## Before you start	
-  
-   ## AzureSQL Import
-1. Before importing the azurecloudfunction service, user must import azuresql service in workload manager 
-	  because Azure function will be invoked on azuresql db table events (Any CRUD operation).
+	## How it works:
+    
+       1.Once application deployed successfully user can access sample flask
+	   application(which writes data into the MySQL).
+	   
+       2.When user writes an item into a table(users), A new stream record is written to 
+	   reflect that a new item has been added to the table.
+	   
+       3.The new stream record triggers an Azure CloudFunction.
+	   
+       4.If the stream record indicates that a new item is added to table then azure web app will 
+	   add two fields(username, email) to the existing item of the table.
+	   
+       5.User can view the details of his entry through sample flask application.	
+	   
+	   6.After your successful deployment, you can find the URL by clicking Get function URL in your function 
+	   present under Function App in AzurePortal(https://portal.azure.com) to access your application.
+		
+		https://<"Function_Name">.azurewebsites.net/
+	
+# 2.Azure WebApp
+## Introduction
 
-2. Refer Readme on how to import Azure SQL Service from [here](https://github.com/datacenter/cloudcentersuite/tree/master/Content/Databases/DBaaS/AzureSQL/README.md).
+	Azure App Service is a fully managed compute platform that is optimized for hosting websites 
+	and web applications. 
+	
+	Azure App Service is an HTTP-based service for hosting web applications, REST APIs, 
+	and mobile back ends. 
+	
+	You can develop in your favorite language, be it .NET, .NET Core, Java, Ruby, Node.js, PHP, or Python. 
+	Applications run and scale with ease on both Windows and Linux-based environments.  
+	
+	Please refer the below link for more details.
+	For your reference : https://docs.microsoft.com/en-us/azure/azure-functions/
+	
+## Before you start	Azure WebApp
+  
+   ## MySQL Import
+1. Before importing the azurewebapp service, user must import azurewebapp service in workload manager 
+	  because Azure Web app will be invoked on MySQL db table events (Any CRUD operation).
+
+2. Refer Readme on how to import MySQL Service from [here](https://github.com/datacenter/cloudcentersuite/blob/master/Content/Databases/Relational%20Databases/MSSQL/README.md).
       
-3. The AzurecloudFunction service will create a azure function with provided name in Microsoft Azure.
+3. The Azure Web app service will create a azure web app with provided name in Microsoft Azure.
 
    ## Docker Install
 
@@ -33,18 +68,18 @@
 
    ## How it works:
     
-       1.Once application deployed successfully user can access sample nodejs 
-	   application(which writes data into the azuresql).
+       1.Once application deployed successfully user can access sample flask
+	   application(which writes data into the MySQL).
 	   
        2.When user writes an item into a table(users), A new stream record is written to 
 	   reflect that a new item has been added to the table.
 	   
        3.The new stream record triggers an Azure CloudFunction.
 	   
-       4.If the stream record indicates that a new item is added to table then azure cloud function will 
+       4.If the stream record indicates that a new item is added to table then azure web app will 
 	   add two fields(username, email) to the existing item of the table.
 	   
-       5.User can view the details of his entry through sample nodejs application.	
+       5.User can view the details of his entry through sample flask application.	
 	   
 	   6.After your successful deployment, you can find the URL by clicking Get function URL in your function 
 	   present under Function App in AzurePortal(https://portal.azure.com) to access your application.
@@ -79,7 +114,7 @@ Once the script is run, please follow the prompts to import the service or the c
 
          - Service Zip file under <service_path>/<your_bundle_name>
                     
-             Example : http://<Your_REPO_Server_IP>/<service_path>/azurecloudfunction.zip  
+             Example : http://<Your_REPO_Server_IP>/<service_path>/azurecloudfunctions.zip  
 
 
 ## Service Package Bundle
@@ -92,7 +127,9 @@ Shell script:
 Python script :
  - azure_cloud_function.py: script that invokes the azure-cli commands for creating azure cloud functions and 
     creates the azure cloud function with provided deployment package.
+ - azure_webapp.py : script that invokes the azure-cli commands for creating azure web application 
  - main.py - calling functions based on operations like login,deploy
+ - webapp_main.py - calling functions based on operations like login,createwebapp
  - util.py: utility file
  - error_messages.json : Json file contains error messages.
  - error_utils.py: The script that handles error functionality.
@@ -112,10 +149,15 @@ Python script :
 | AppPackage | Path |	Yes |Path of the Deployment Package(.zip). | 
 
 
-# Deployment Parameters:
+# Deployment Parameters(Azure Cloud Function):
 | Parameter Name| Type	 | Mandatory |Description |  
 | ------ | ------ | ------ | ------   
 | app_name |	String | Yes | Name of the azure cloud function to be created. |
 | runtime | List | Yes | Need to select required run time for the azure cloud functions. | 
+
+# Deployment Parameters(Azure WebApp):
+| Parameter Name| Type	 | Mandatory |Description |  
+| ------ | ------ | ------ | ------   
+| app_name |	String | Yes | Name of the azure web app to be created. |
 
 

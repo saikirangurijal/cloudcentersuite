@@ -14,8 +14,9 @@ os_type=Windows
 language=${runtime}
 app_name=${app_name}
 location=${region}
-app_package=${AppPackage}
+app_package1=${AppPackage}
 app_tier_name=${cliqrAppTierName}
+app_type=${app_type}
 
 # Sourcing variables from service directory
 arg1=$1
@@ -23,6 +24,7 @@ arg1=$1
 #Function for creating function in azure function app
 create_function(){
     python main.py deploy
+    echo "deploy completed"
 }
 
 #Check error file is there
@@ -74,10 +76,21 @@ login(){
         pip install --upgrade pip
         apk add --update build-base
         apk add libffi-dev openssl-dev
-        pip install azure-cli
-        pip install cryptography==2.5
-        python main.py login
-        create_functionapp
+	apk update && apk add --no-cache python3
+	apk add --no-cache --virtual .build-deps g++ python3-dev libffi-dev openssl-dev && \
+	apk add --no-cache --update python3 && \
+	if [ "$app_type" = "Web App" ] ; then
+            pip3 install azure-cli
+            pip3 install cryptography==2.5
+            python3 webapp_main.py login
+            python3 webapp_main.py createweb
+        else
+            pip install azure-cli
+            pip install cryptography==2.5
+            python main.py login
+            create_functionapp
+            echo "Completed"
+        fi
         }
 
 stop(){
@@ -92,11 +105,19 @@ stop(){
     print_log ${storeexists}
     if [[ $check_valid != *"ERROR"* ]]; then
         az login --service-principal --username $app_id --password $password --tenant $tenant_id
-        az functionapp delete --name $app_name --resource-group $resource_group 
+        if [ "$app_type" = "Web App" ] ; then
+            echo "Webapp deletes"
+            resource=$app_id"_rg_Linux_centralus"
+	    echo $resource
+            print_log "az webapp delete --name $app_name --resource-group $resource"
+            az webapp delete --name $app_name --resource-group $resource
+        else
+            az functionapp delete --name $app_name --resource-group $resource_group 
+        fi
         if [ "${storeexists}" = false ] ; then
             print_log "Condition Came"
             print_log "az storage account delete -n $storage_name -g $resource_group --yes"
-            az storage account delete -n $storage_name -g $resource_group --yes
+            #az storage account delete -n $storage_name -g $resource_group --yes
         fi
     fi
     sleep 5
