@@ -1,60 +1,56 @@
+# Azure Cloud Functions
+  ## Introduction
+Azure Cloud Functions helps you develop and deploy serverless applications . The Serverless Framework is different 
+than other application frameworks because it manages your code as well as your infrastructure and supports multiple 
+languages (Node.js, Python and more).This can implemented by two ways.
+
+1.Azure FunctionApp
+
+2.Azure Web App
+
+
 # 1.Azure FunctionApp
 
    ## Introduction
-
-	Azure Functions lets you develop serverless applications on Microsoft Azure.
-	Azure Functions is a solution for easily running small pieces of code, or "functions," in the cloud. 
-	You can write just the code you need for the problem at hand, without worrying about a whole application 
-	or the infrastructure to run it. 
-	
-	Functions can make development even more productive, and you can use your development language of choice,
-	such as C#, Node.js, Java, or Python. 
+	Azure Functions is a solution for easily running small pieces of code, or "functions," in the cloud and 
+	can use our development language of choices such as dotnet, node or Poweshell. 
 	
 	Please refer the below link for more details.
 	For your reference : https://docs.microsoft.com/en-us/azure/azure-functions/
 	
    ## How it works
-    
-       1.Once Fuctionapp deployed successfully user can view
-	   simple static HTML page.
+       1. Import the service and applicaiton profile using Import service script. Refer 
+	   section ## Importing the service.It creates an application profile Azure_Cloud_Functions.
+       
+       2. Deploy the function app using above profile and click on Access application to view static HTML page.
 	   
-	   2.After your successful deployment, you can find the URL by clicking Get function URL in your function 
-	   present under Function App in AzurePortal(https://portal.azure.com) to access your application.
+	   3.After your successful deployment, you can find the access application link under Task logs 
+	   to access your application.
 		
 		https://<"Function_Name">.azurewebsites.net/api
 	
 # 2.Azure WebApp
 
    ## Introduction
-	Azure App Service is a fully managed compute platform that is optimized for hosting websites 
-	and web applications. 
-	
-	Azure App Service is an HTTP-based service for hosting web applications, REST APIs, 
-	and mobile back ends. 
-	
-	You can develop in your favorite language, be it .NET, .NET Core, Java, Ruby, Node.js, PHP, or Python. 
-	Applications run and scale with ease on both Windows and Linux-based environments.  
+	Azure Web App Service is an HTTP-based service for hosting web applications and use our development 
+	languages like dotnet, ruby and python. 
 	
 	Please refer the below link for more details.
 	For your reference : https://docs.microsoft.com/en-us/azure/app-service/
 	
    ## How it works
     
-       1.Once application deployed successfully user can access sample flask
-	   application(which writes data into the MySQL).
+       1. Import the service and applicaiton profile using Import service script. Refer 
+	   section ## Importing the service.It creates an application profile Azure_Web_App.
+      	   
+       2.Deploy the Web app using above profile and click on Access application access sample 
+	   flask application(which writes data into the MySQL).
 	   
-       2.When user writes an item into a table(users), A new stream record is written to 
-	   reflect that a new item has been added to the table.
+       3. Data is written to table When user triggers the application with the inputs .
 	   
-       3.The new stream record triggers an Azure WebApp.
+       4.User can view the details of his entry in search feature through sample flask application.	
 	   
-       4.If the stream record indicates that a new item is added to table then azure web app will 
-	   add two fields(username, email) to the existing item of the table.
-	   
-       5.User can view the details of his entry through sample flask application.	
-	   
-	   6.After your successful deployment, you can find the URL by clicking Get Webapp URL under 
-	   your Wep App in AzurePortal(https://portal.azure.com) to access your application.
+	   5.After your successful deployment, you can find the URL under Task logs to access your webapplication.
 		
 		https://<"Wep_App_Name">.azurewebsites.net/
 	
@@ -95,7 +91,13 @@ Once the script is run, please follow the prompts to import the service or the c
 
          - Service Zip file under <service_path>/<your_bundle_name>
                     
-             Example : http://<Your_REPO_Server_IP>/<service_path>/azurecloudfunctions.zip  
+             Example : http://<Your_REPO_Server_IP>/<service_path>/azurecloudfunctions.zip
+			 
+          - Application Bundle under <app_path>/<your_package_name>
+        
+                Example(Azure WebApp) : http://<Your_REPO_Server_IP>/<app_path>/azure_webapp_mysql_sample_app.zip
+          
+                Example(Azure FunctionApp) : http://<Your_REPO_Server_IP>/<app_path>/node-app.zip
 
 
 ## Service Package Bundle
@@ -120,9 +122,9 @@ Python script :
     - External Action Bundle:   http://YourIP/services/azurecloudfunctions.zip
     - External Lifecycle Actions:
         Start:
-            Script from bundle: **service start**
+            Script from bundle: service start
         Stop:
-            Script from bundle: **service stop**
+            Script from bundle: service stop
 
 ## Service Parameters:
 | Parameter Name| Type	 | Mandatory |Description | 
