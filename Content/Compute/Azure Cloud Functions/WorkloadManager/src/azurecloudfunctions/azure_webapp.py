@@ -35,7 +35,7 @@ def create_storage(storage_name, resource, location):
 
 def get_package_base_name(app_package):
     '''Get the base name of app package'''
-    name_list = app_package.split('/')
+    name_list = app_package.split('PACKAGE_DIR%')
     package_zip = name_list[len(name_list) - 1].split('.')
     return package_zip[0]
 

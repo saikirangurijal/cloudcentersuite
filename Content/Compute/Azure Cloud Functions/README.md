@@ -1,5 +1,6 @@
-# 1.Azure Cloud Functions
-## Introduction
+# 1.Azure FunctionApp
+
+   ## Introduction
 
 	Azure Functions lets you develop serverless applications on Microsoft Azure.
 	Azure Functions is a solution for easily running small pieces of code, or "functions," in the cloud. 
@@ -12,29 +13,19 @@
 	Please refer the below link for more details.
 	For your reference : https://docs.microsoft.com/en-us/azure/azure-functions/
 	
-	## How it works:
+   ## How it works
     
-       1.Once application deployed successfully user can access sample flask
-	   application(which writes data into the MySQL).
+       1.Once Fuctionapp deployed successfully user can view
+	   simple static HTML page.
 	   
-       2.When user writes an item into a table(users), A new stream record is written to 
-	   reflect that a new item has been added to the table.
-	   
-       3.The new stream record triggers an Azure CloudFunction.
-	   
-       4.If the stream record indicates that a new item is added to table then azure web app will 
-	   add two fields(username, email) to the existing item of the table.
-	   
-       5.User can view the details of his entry through sample flask application.	
-	   
-	   6.After your successful deployment, you can find the URL by clicking Get function URL in your function 
+	   2.After your successful deployment, you can find the URL by clicking Get function URL in your function 
 	   present under Function App in AzurePortal(https://portal.azure.com) to access your application.
 		
-		https://<"Function_Name">.azurewebsites.net/
+		https://<"Function_Name">.azurewebsites.net/api
 	
 # 2.Azure WebApp
-## Introduction
 
+   ## Introduction
 	Azure App Service is a fully managed compute platform that is optimized for hosting websites 
 	and web applications. 
 	
@@ -45,17 +36,28 @@
 	Applications run and scale with ease on both Windows and Linux-based environments.  
 	
 	Please refer the below link for more details.
-	For your reference : https://docs.microsoft.com/en-us/azure/azure-functions/
+	For your reference : https://docs.microsoft.com/en-us/azure/app-service/
 	
-## Before you start	Azure WebApp
-  
-   ## MySQL Import
-1. Before importing the azurewebapp service, user must import azurewebapp service in workload manager 
-	  because Azure Web app will be invoked on MySQL db table events (Any CRUD operation).
-
-2. Refer Readme on how to import MySQL Service from [here](https://github.com/datacenter/cloudcentersuite/blob/master/Content/Databases/Relational%20Databases/MSSQL/README.md).
-      
-3. The Azure Web app service will create a azure web app with provided name in Microsoft Azure.
+   ## How it works
+    
+       1.Once application deployed successfully user can access sample flask
+	   application(which writes data into the MySQL).
+	   
+       2.When user writes an item into a table(users), A new stream record is written to 
+	   reflect that a new item has been added to the table.
+	   
+       3.The new stream record triggers an Azure WebApp.
+	   
+       4.If the stream record indicates that a new item is added to table then azure web app will 
+	   add two fields(username, email) to the existing item of the table.
+	   
+       5.User can view the details of his entry through sample flask application.	
+	   
+	   6.After your successful deployment, you can find the URL by clicking Get Webapp URL under 
+	   your Wep App in AzurePortal(https://portal.azure.com) to access your application.
+		
+		https://<"Wep_App_Name">.azurewebsites.net/
+	
 
    ## Docker Install
 
@@ -64,28 +66,7 @@
 **NOTE** : You can skip the above step, if Docker Client is already installed and running in your machine. 
 - You can check , if docker is installed , by running "docker -v"
 - You can check , if docker is running , by executing the command "systemctl status docker"	
-  
-
-   ## How it works:
-    
-       1.Once application deployed successfully user can access sample flask
-	   application(which writes data into the MySQL).
-	   
-       2.When user writes an item into a table(users), A new stream record is written to 
-	   reflect that a new item has been added to the table.
-	   
-       3.The new stream record triggers an Azure CloudFunction.
-	   
-       4.If the stream record indicates that a new item is added to table then azure web app will 
-	   add two fields(username, email) to the existing item of the table.
-	   
-       5.User can view the details of his entry through sample flask application.	
-	   
-	   6.After your successful deployment, you can find the URL by clicking Get function URL in your function 
-	   present under Function App in AzurePortal(https://portal.azure.com) to access your application.
-		
-		https://<"Function_Name">.azurewebsites.net/
-	
+ 	
 
 ## Pre-Requisites
 #### CloudCenter
@@ -136,26 +117,26 @@ Python script :
   
 
 ## External Lifecycle Actions
-    - External Action Bundle:   http://YourIP/services/azurecloudfunction.zip
+    - External Action Bundle:   http://YourIP/services/azurecloudfunctions.zip
     - External Lifecycle Actions:
         Start:
             Script from bundle: **service start**
         Stop:
             Script from bundle: **service stop**
 
-# Service Parameters:
+## Service Parameters:
 | Parameter Name| Type	 | Mandatory |Description | 
 | ------ | ------ | ------ | ------ 
 | AppPackage | Path |	Yes |Path of the Deployment Package(.zip). | 
 
 
-# Deployment Parameters(Azure Cloud Function):
+## Deployment Parameters(Azure FunctionApp):
 | Parameter Name| Type	 | Mandatory |Description |  
 | ------ | ------ | ------ | ------   
 | app_name |	String | Yes | Name of the azure cloud function to be created. |
 | runtime | List | Yes | Need to select required run time for the azure cloud functions. | 
 
-# Deployment Parameters(Azure WebApp):
+## Deployment Parameters(Azure WebApp):
 | Parameter Name| Type	 | Mandatory |Description |  
 | ------ | ------ | ------ | ------   
 | app_name |	String | Yes | Name of the azure web app to be created. |
