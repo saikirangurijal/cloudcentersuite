@@ -1,0 +1,72 @@
+#!/bin/bash
+#For external-service
+. /utils.sh
+
+#Initializing variables
+app_id=${CliqrCloud_ClientId}
+password=${CliqrCloud_ClientKey}
+tenant_id=${CliqrCloud_TenantId}
+resource_group=${Cloud_Setting_ResourceGroup}
+Cloud_Setting_StorageAccount=${Cloud_Setting_StorageAccount}
+store=( $Cloud_Setting_StorageAccount )
+storage_name=${store[1]}
+os_type=Windows
+language=${runtime}
+app_name=${app_name}
+location=${region}
+app_package=${AppPackage}
+app_tier_name=${cliqrAppTierName}
+
+# Sourcing variables from service directory
+arg1=$1
+
+#Check error file is there
+function executionStatus() {
+ FILE="FAILURE"
+ if [ -f $FILE ];
+ then
+    status=`cat $FILE`
+    print_error "Service execution failed"
+    print_error "error ins script"
+    exit 127
+  else
+    FILE="SUCCESS"
+    status="Service execution successful"
+    print_log "$status"
+ fi
+}
+
+login(){
+        pip install --upgrade pip
+        pip install requests
+        python main.py backupvm
+        }
+
+stop(){
+    pip install --upgrade pip
+    pip install requests
+    python main.py stopbackup
+}
+
+runscripts() {
+    case $arg1 in
+        stop)
+            echo "[INSTALL] Installing Packages"
+            stop
+            #executionStatus
+            ;;
+                start)
+                    echo "[START] Creating Function app"
+                    login
+                    executionStatus
+                    ;;
+                *)
+                    exit 127
+                        ;;
+
+        esac
+
+}
+
+runscripts
+

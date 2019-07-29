@@ -285,6 +285,22 @@
             },
             "created":"",
             "digest":""
+         },
+         "AzureBackupService":{
+            "name":"azurebackupservice",
+            "serviceID":"",
+            "serviceCategory":"Backup",
+            "description":"Commvault Integration Unit",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "isService":false,
+            "urls":{
+               "serviceLibraryBundle":"Backup/Azure Backup Service/WorkloadManager/azurebackupservice.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
          }
       }
    ],
