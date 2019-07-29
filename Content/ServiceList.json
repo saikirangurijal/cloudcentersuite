@@ -288,12 +288,11 @@
          },
          "AzureBackupService":{
             "name":"azurebackupservice",
-            "serviceID":"",
+            "serviceID":"azurebackupservice",
             "serviceCategory":"Backup",
             "description":"Azure Backup Service Integration Unit",
             "supportedVersion":"5.0.1",
             "serviceVersion":"1.0",
-            "isService":false,
             "urls":{
                "serviceLibraryBundle":"Backup/Azure Backup Service/WorkloadManager/azurebackupservice.zip",
                "dockerFile":"dockerimages/Dockerfile",
