@@ -11,7 +11,7 @@
    "serviceActions":[
 
    ],
-   "externalBundleLocation":"%REPO_ID_9%services/azurebackupservice.zip",
+   "externalBundleLocation":"services/azurebackupservice.zip",
    "externalActions":[
       {
          "actionName":"START",
