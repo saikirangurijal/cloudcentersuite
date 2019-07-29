@@ -288,7 +288,7 @@
          },
          "AzureBackupService":{
             "name":"azurebackupservice",
-            "serviceID":"azurebackupservice",
+            "serviceID":"",
             "serviceCategory":"Backup",
             "description":"Azure Backup Service Integration Unit",
             "supportedVersion":"5.0.1",
