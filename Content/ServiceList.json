@@ -288,9 +288,9 @@
          },
          "AzureBackupService":{
             "name":"azurebackupservice",
-            "serviceID":"",
+            "serviceID":"azurebackupservice",
             "serviceCategory":"Backup",
-            "description":"Commvault Integration Unit",
+            "description":"Azure Backup Service Integration Unit",
             "supportedVersion":"5.0.1",
             "serviceVersion":"1.0",
             "isService":false,
