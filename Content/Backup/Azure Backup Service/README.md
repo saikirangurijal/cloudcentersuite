@@ -1,40 +1,38 @@
 # Azure Backup Service
 
    ## Introduction
-	The Azure Backup service backs up on-premises resources to the Microsoft Azure cloud.It provides independent 
-	and isolated backups to guard against accidental destruction of original data. Backups are stored in a 
-	Recovery Services vault with built-in managed of recovery points. 
-	
+   The Azure Backup service backs up on-premises resources to the Microsoft Azure cloud.It provides independent and isolated backups to 
+   guard against accidental destruction of original data. Backups are stored in a Recovery Services vault with built-in managed of recovery points.
+   
 	Please refer the below link for more details.
 	For your reference : https://docs.microsoft.com/en-us/azure/backup/backup-overview
 	
-   ## Before you start
-      #Prepare Azure VMs
-	  
-	  1. Make sure that AzureVM must exists in same region where the Recovery Service Vault exists beacause
-	  the Vault will allow to take the backup of Virtual Machines if it exists in same region only.
+## Before you start
+ Make surethat AzureVM must exists in same region where the Recovery Service Vault exists beacause the Vault will allow to take the backup of Virtual Machines if it exists in same region only.
 	
-   ## How it works
-       1. Import the service and applicaiton profile using Import service script. Refer 
-	   section ## Importing the service.It creates an application profile Azure_Backup_Service.
-       
-       2. Backup the AzureVM  using above profile by providing Recovery Service vault name and Azure Virtual Machine Name.
-	   
-	   3. After your successful deployment, the Recovery Service vault will be created and our Azure Virtual Machines will 
-	   be stored under backupitems of vault,the backup will be taken as per the policy.We can find the backitems under Recovery Service
-	   vault exists in azureportal(https://portal.azure.com/)
-		
-   ## Limitations
-       1. We can create up to 500 Recovery Services vaults, per supported region of Azure Backup, per subscription.
-	   
-	   2. We can register up to 1000 Azure Virtual machines per vault.
-	   
-	   3. Backup data stored in a vault can't be moved to a different vault.
-	   
-	   4. We can  back up Azure VMs once a day.
-	   
-	   5. Azure Backup doesn't support deleting or purging individual items from stored backups.
-
+## How it works
+   1. Import the service and applicaiton profile using Import service script. Refer 
+   section ## Importing the service.It creates an application profile Azure_Backup_Service.
+   
+   2. Backup the AzureVM  using above profile by providing Recovery Service vault name and Azure Virtual Machine Name.
+   
+   3. After your successful deployment, the Recovery Service vault will be created and our Azure Virtual Machines will 
+   be stored under backupitems of vault,the backup will be taken as per the policy.We can find the backitems under Recovery Service
+   vault exists in azureportal(https://portal.azure.com/)
+   
+## Limitations
+   1. We can create up to 500 Recovery Services Service
+	  vaults, per supported region of Azure Backup, per subscription.
+   
+   2. We can register up to 1000 Azure Virtual machines per vault..
+   
+   3. Backup data stored in a vault can't be moved to a different vault.
+   
+   4. We can  back up Azure VMs once a day.
+   
+   5. Azure Backup doesn't support deleting or purging individual items from 
+      stored backups
+    
    ## Docker Install
 
 1. Install Docker by following the steps provided [here](https://github.com/datacenter/cloudcentersuite/raw/master/Content/dockerimages/Steps%20for%20Installation%20of%20Docker%20CE%20on%20CentOS7_V2.docx), on any linux based client machine.
@@ -96,16 +94,11 @@ Python script :
         Stop:
             Script from bundle: service stop
 
-## Service Parameters:
-| Parameter Name| Type	 | Mandatory |Description | 
-| ------ | ------ | ------ | ------ 
-| AppPackage | Path |	Yes |Path of the Deployment Package(.zip). | 
 
-
-## Deployment Parameters(Azure FunctionApp):
+## Deployment Parameters:
 | Parameter Name| Type	 | Mandatory |Description |  
 | ------ | ------ | ------ | ------   
-| app_name |	String | Yes | Name of the azure cloud function to be created. |
-| runtime | List | Yes | Need to select required run time for the azure cloud functions. | 
+| vaultname |	String | Yes | Name of the Recovery vault where backup will be taken. |
+| vm_name | String | Yes | Azure Virtual Machine name which we need to take backup. | 
 
 
