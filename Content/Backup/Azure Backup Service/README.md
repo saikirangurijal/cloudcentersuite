@@ -1,23 +1,24 @@
 # Azure Backup Service
 
    ## Introduction
-   The Azure Backup service backs up on-premises resources to the Microsoft Azure cloud.It provides independent and isolated backups to 
+   The Azure Backup service backs up Azure Virtual Machines to the Microsoft Azure cloud.It provides independent and isolated backups to 
    guard against accidental destruction of original data. Backups are stored in a Recovery Services vault with built-in managed of recovery points.
    
-	Please refer the below link for more details.
-	For your reference : https://docs.microsoft.com/en-us/azure/backup/backup-overview
+   Please refer the below link for more details.
+   
+   For your reference : https://docs.microsoft.com/en-us/azure/backup/backup-overview
 	
 ## Before you start
- Make surethat AzureVM must exists in same region where the Recovery Service Vault exists beacause the Vault will allow to take the backup of Virtual Machines if it exists in same region only.
+ Make sure that Azure Virtual Machines exists in same region where the Recovery Service Vault exists beacause the Vault will allow to take the backup of Virtual Machines if it exists in same region only.
 	
 ## How it works
-   1. Import the service and applicaiton profile using Import service script. Refer 
+   1. Import the service and application profile using Import service script. Refer 
    section ## Importing the service.It creates an application profile Azure_Backup_Service.
    
    2. Backup the AzureVM  using above profile by providing Recovery Service vault name and Azure Virtual Machine Name.
    
    3. After your successful deployment, the Recovery Service vault will be created and our Azure Virtual Machines will 
-   be stored under backupitems of vault,the backup will be taken as per the policy.We can find the backitems under Recovery Service
+   be stored under backupitems of vault,the backup will be taken as per the defaultpolicy.We can find the backitems under Recovery Service
    vault exists in azureportal(https://portal.azure.com/)
    
 ## Limitations
