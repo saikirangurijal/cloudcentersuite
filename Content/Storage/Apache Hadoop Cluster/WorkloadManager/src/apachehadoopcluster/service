@@ -33,7 +33,7 @@ then
 	export keyName="cliqr-user-key_1"	
 elif [ "$cloudName" == 'azure' ]
 then
-	export keyName="cliqr"
+	export keyName="cliqr-user-key_1"
 else
 	export keyName="cliqruserKey"
 fi
