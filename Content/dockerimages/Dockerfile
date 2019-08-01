@@ -20,6 +20,7 @@ RUN echo \
 
 RUN pip install requests
 RUN pip install urllib3
+RUN pip install stdiomask
 
 
 ENTRYPOINT ["bash", "/ccsworker/serviceimport.sh"]
