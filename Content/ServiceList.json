@@ -570,6 +570,23 @@
             "created": "",
             "digest": ""
          }
+      },
+      {
+         "AWSElasticMapReduce": {
+            "name": "AWS Elastic MapReduce",
+            "serviceID": "awsemr",
+            "serviceCategory": "Storage",
+            "description": "AWS tool to big data processing and analysis",
+            "supportedVersion": "5.0.1",
+            "serviceVersion": "1.0",
+            "urls": {
+               "serviceLibraryBundle": "Storage/AWS Elastic MapReduce/WorkloadManager/AWSElasticMapReduce.zip",
+               "dockerFile": "dockerimages/Dockerfile",
+               "serviceImport": "Scripts/serviceimport.zip"
+            },
+            "created": "",
+            "digest": ""
+         }
       }
    ],
    "AppProfiles":[  
