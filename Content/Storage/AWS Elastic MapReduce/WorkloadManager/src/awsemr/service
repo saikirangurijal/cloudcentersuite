@@ -1,0 +1,29 @@
+#!/bin/bash
+#AWS EMR for linux
+cmd=$1
+
+ # RUN EVERYTHING AS ROOT
+ if [ "$(id -u)" != "0" ]; then
+     exec sudo "$0" "$@"
+ fi
+
+pip install --upgrade pip
+pip install boto3
+
+runscripts() {
+    case $cmd in
+        start)
+            python createCluster.py
+            ;;
+        suspend)
+            python suspendCluster.py
+            ;;
+            *)
+                exit 127
+                ;;
+
+        esac
+
+}
+
+runscripts
