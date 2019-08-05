@@ -21,7 +21,7 @@
 
     https://chef.readthedocs.io/en/latest/essentials_chef_client.html
 ## Note
-- This ReadMe for Existing chef agent.
+- This ReadMe for Existing Chef agent.
 
 ## Prequisties
 - Navigate to service menu and edit "chef" service and change Agent Action Bundle to custom repository path.

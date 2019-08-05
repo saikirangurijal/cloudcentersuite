@@ -14,7 +14,7 @@
     https://puppet.com/docs
 	
 ## Note
-- This ReadMe for Existing puppet agent.
+- This ReadMe for Existing Puppet agent.
 
 ## Prequisties
 - Navigate to service menu and edit "puppet" service and change Agent Action Bundle to custom repository path.
