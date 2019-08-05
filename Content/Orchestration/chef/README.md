@@ -79,8 +79,11 @@ Agent Action Bundle:
  - http://YourIP/services/chef.zip - Location where your agent action bundle zip (service bundle zip file) is found.
  
 Agent Lifecycle Actions: 
- - Start: Script from bundle: **service install**
- - Stop: Script from bundle: **service configure** 
+ - Install: Script from bundle: **service install**
+ - Configure: Script from bundle: **service configure** 
+ - Start: Script from bundle: **service start** 
+ - Stop: Script from bundle: **service stop** 
+ - Restart: Script from bundle: **service restart** 
 
 #  Global Parameters:
 
