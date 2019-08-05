@@ -1,0 +1,120 @@
+#! /bin/bash
+
+exec > >(tee -a /usr/local/osmosix/logs/service.log) 2>&1
+
+OSSVC_HOME=/usr/local/osmosix/service
+
+. /usr/local/osmosix/etc/userenv
+. $OSSVC_HOME/utils/cfgutil.sh
+. $OSSVC_HOME/utils/os_info_util.sh
+
+cmd=$1
+SVCNAME=puppet
+SVCHOME=$OSSVC_HOME/$SVCNAME
+
+installPuppetAgent() {
+    echo "Installing Puppet agent"
+    if [ $os == "Ubuntu" ]; then
+        installOnUbuntu
+    elif ([ $os == "CentOS" ] || [ $os == "RHEL" ]); then
+        installOnCentOS
+    else
+        echo "Unsupported OS type"
+        exit 1
+    fi
+    exitCode=$?
+    [ $exitCode -ne 0 ] && exit $exitCode
+    echo "Installation finished"
+}
+
+installOnUbuntu() {
+    
+    if [[ -z $CUSTOM_REPO_URL ]]; then	
+    	wget https://apt.puppetlabs.com/puppetlabs-release-$codename.deb
+    	sudo dpkg -i puppetlabs-release-$codename.deb
+    	sudo apt-get update
+    fi
+    sudo apt-get -y install puppet
+
+}
+
+installOnCentOS() {
+    releaseVersion=7
+    yum -y update
+    curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo
+
+    if [[ -z $CUSTOM_REPO_URL ]]; then
+    	sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-$releaseVersion.noarch.rpm
+    fi
+    sudo yum install -y puppet
+
+}
+
+configurePuppetAgent() {
+
+    echo "Configuring Puppet agent"
+
+    [ -d /etc/puppet ] || mkdir -p /etc/puppet
+
+    puppetConf=/etc/puppet/puppet.conf
+    if [[ -z $cliqrNodeHostname ]];then
+	hostname=`hostname`
+    else
+    	hostname=$cliqrNodeHostname
+    fi
+
+    cp $SVCHOME/puppet.conf $puppetConf
+
+    echo "certname=${hostname}" >> $puppetConf
+    [ -z $puppet_hostname ] || echo "server=$puppet_hostname" >> $puppetConf
+    [ -z $puppet_environment ] || echo "environment=$puppet_environment" >> $puppetConf
+    [ -z $run_interval ] || echo "runinterval=$run_interval" >> $puppetConf
+
+    #create custom facts for Puppet
+    factsDir=/etc/facter/facts.d
+    [ -d $factsDir ] || mkdir -p $factsDir
+
+    facts=$factsDir/facts.yaml
+
+    echo "setting up puppet role: $puppet_role"
+
+    echo "---" > $facts
+    echo "role: $puppet_role" >> $facts
+
+    echo "Configuration finished"
+}
+
+startPuppetAgent() {
+    if [ $os == "Ubuntu" ] && [ $codename == "xenial" ]; then
+    	puppet agent --enable
+    fi 
+    sudo puppet agent --waitforcert 100
+    sudo puppet agent -t
+    exitCode=$?
+    #puppet agent returns 2 when succeed. Will inspect more on this
+    if [ $exitCode -eq 2 ]; then
+        exit 0
+    else
+        exit $exitCode
+    fi
+}
+
+
+case $cmd in
+    install)
+        installPuppetAgent
+        ;;
+    configure)
+        configurePuppetAgent
+        ;;
+    start)
+        [ -f /etc/puppet/.rebooted ] || startPuppetAgent
+        touch /etc/puppet/.rebooted
+        ;;
+    reload)
+        startPuppetAgent
+        ;;
+    *)
+        ;;
+
+esac

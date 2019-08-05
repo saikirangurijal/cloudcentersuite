@@ -1,0 +1,170 @@
+#!/bin/bash
+
+exec > >(tee -a /usr/local/osmosix/logs/service.log) 2>&1
+
+SVCNAME=chef
+OSSVC_HOME=/usr/local/osmosix/service
+
+. /usr/local/osmosix/etc/userenv
+. $OSSVC_HOME/utils/cfgutil.sh
+. $OSSVC_HOME/utils/os_info_util.sh
+
+installChefClient() {
+
+    echo "Installing Chef client on $os"
+    if [ "$os" == "Ubuntu" ]; then
+        installOnUbuntu
+    elif ([ "$os" == "CentOS" ] || [ "$os" == "RHEL" ]); then
+        installOnCentOS
+    fi
+    exitCode=$?
+    [ $exitCode -ne 0 ] && exit $exitCode
+    echo "Install finished"
+}
+
+configureChefClient() {
+
+    echo "Configuring Chef client"
+
+    # generate client.rb, boot.json, validation.pem
+    [ -d /etc/chef/trusted_certs  ] || mkdir -p /etc/chef/trusted_certs
+
+    validation_client_name=${chef_organization}-validator
+
+    cp $chef_user_key /etc/chef/${chef_user}.pem
+    cp $chef_validation_key /etc/chef/${validation_client_name}.pem
+
+    if [ ! -f $chef_trusted_cert ] || [ ! -s $chef_trusted_cert ]
+    then
+        knife ssl fetch -s https://$chef_hostname
+        cp /root/.chef/trusted_certs/*.crt /etc/chef/trusted_certs/
+    else
+        cp $chef_trusted_cert /etc/chef/trusted_certs/${chef_hostname}.crt
+    fi
+
+    [ -z $chef_client_conf ] && chef_client_conf=$OSSVC_HOME/$SVCNAME/client.rb
+
+    cp $chef_client_conf /etc/chef/client.rb
+    chef_client_conf=/etc/chef/client.rb
+    chef_boot_json=/etc/chef/boot.json
+
+    chef_node_name=${parentJobName}-${cliqrAppTierName}-${cliqrNodeId}
+
+    # do the parameter replacement
+    replaceToken $chef_client_conf %CHEF_HOSTNAME% $chef_hostname
+    replaceToken $chef_client_conf %VALIDATION_CLIENT% $validation_client_name
+    replaceToken $chef_client_conf %CHEF_ORGANIZATION% $chef_organization
+    replaceToken $chef_client_conf %NODE_NAME% $chef_node_name
+
+    if [ ! -z "$chef_run_list" ]; then
+        echo "{\"run_list\":[\"$chef_run_list\"]}" > $chef_boot_json
+    elif [ ! -z "$chef_recipe" ]; then # for backward compatibility
+        echo "{\"run_list\":[\"recipe[$chef_recipe]\"]}" > $chef_boot_json
+    fi
+
+    echo "Configured Chef client"
+
+}
+
+bootstrapClient() {
+
+    [ -z $chef_environment ] && chef_environment=_default
+    echo "Bootstrapping Chef client under environment $chef_environment"
+
+    chef-client -j /etc/chef/boot.json --environment $chef_environment
+
+}
+
+deleteChefClient() {
+    chef_node_name=${parentJobName}-${cliqrAppTierName}-${cliqrNodeId}
+    ./chef_api_request DELETE "/nodes/${chef_node_name}"
+}
+
+installOnUbuntu() {
+    p=ubuntu
+    version=`lsb_release -r | awk '{print $2}'`
+    arch=`uname -m`
+
+    if [[ ! -z $CUSTOM_REPO_URL ]]; then
+    	if [[ $codename == 'trusty' ]];then
+		chef_pkg=chef_install_ub14.deb
+    	elif [[ $codename == 'xenial' ]]; then
+        	chef_pkg=chef_install_ub16.deb
+	else
+	   echo "Ubuntu version not supported"
+           exit 1	
+    	fi 
+    	wget -O /tmp/chef_install.deb --no-check-certificate ${CUSTOM_REPO_URL}/bin/$chef_pkg
+    else		
+    	wget -O /tmp/chef_install.deb --no-check-certificate "https://www.chef.io/chef/download?p=$p&pv=$version&m=$arch"
+    fi  
+    if [ $? -ne 0 ]; then
+        echo "Failed to download chef package"
+        exit 1
+    fi
+
+    dpkg -i /tmp/chef_install.deb
+    if [ $? -ne 0 ]; then
+        echo "Failed to install chef package"
+        exit 1
+    fi
+
+    apt-get install -y gawk
+    if [ $? -ne 0 ]; then
+        echo "Failed to install gawk"
+        exit 1
+    fi
+}
+
+installOnCentOS() {
+    p=el
+    version=6
+    arch=`uname -m`
+	
+    if [[ ! -z $CUSTOM_REPO_URL ]];then
+	#downloads el /version =6/ x86_64
+	wget -O /tmp/chef_install.rpm ${CUSTOM_REPO_URL}/bin/chef_install.rpm
+    else	
+    	wget -O /tmp/chef_install.rpm "https://www.chef.io/chef/download?p=$p&pv=$version&m=$arch"
+    fi	
+    if [ $? -n 0 ]; then
+        echo "Failed to install chef package"
+        exit 1
+    fi
+
+    rpm -i /tmp/chef_install.rpm
+    if [ $? -ne 0 ]; then
+        echo "Failed to install chef package"
+        exit 1
+    fi
+
+    yum -y install gawk
+    if [ $? -ne 0 ]; then
+        echo "Failed to install gawk"
+        exit 1
+    fi
+}
+
+case $1 in
+    install)
+        installChefClient
+        ;;
+    configure)
+        configureChefClient
+        ;;
+    start)
+        [ -f /etc/chef/.rebooted ] || bootstrapClient
+        exitCode=$?
+        [ $exitCode -ne 0 ] && exit $exitCode
+        touch /etc/chef/.rebooted
+        ;;
+    stop)
+        deleteChefClient
+        ;;
+    reload)
+        bootstrapClient
+        ;;
+    *)
+        ;;
+esac
+
