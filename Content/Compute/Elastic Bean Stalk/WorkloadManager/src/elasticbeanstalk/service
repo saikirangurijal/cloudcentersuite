@@ -1,0 +1,66 @@
+#!/bin/bash
+# Author: Surya
+# Type: External Service AWS Elastic Bean Stalk
+
+#For external-service
+. /utils.sh
+
+cmd=$1
+
+# RUN EVERYTHING AS ROOT
+if [ "$(id -u)" != "0" ]; then
+    exec sudo "$0" "$@"
+fi
+
+
+
+# Return execution status
+function executionStatus() {
+ FILE="FAILURE"
+ if [ -f $FILE ];
+ then
+    status=`cat $FILE`
+    print "Configuration Failed"
+    #print_log "$status"
+    exit 127   
+  else
+    FILE="SUCCESS"
+    status="Successfully Configured"
+    #print_log "$status"
+ fi
+}
+
+function python3_install() {
+    pip install boto3
+    pip install --upgrade pip
+    apk add --update build-base
+    apk add libffi-dev openssl-dev
+    apk update && apk add --no-cache python3
+    apk add --no-cache --virtual .build-deps g++ python3-dev libffi-dev openssl-dev && \
+    apk add --no-cache --update python3 && \
+    pip3 install boto3
+}
+
+case $cmd in
+	start)
+                echo "Service Action -  $cmd"		
+		python3_install
+		python3 main.py start
+		#python install_setup.py start
+		echo "start service done"
+		executionStatus
+		exit 0
+		;;
+	stop)
+		echo "Service Action -  $cmd"
+		python3_install
+		python3 main.py stop
+	    	#python install_setup.py stop
+		executionStatus
+	    	exit 0
+		;;
+	*)
+		echo "unknown command"
+		exit 127
+		;;
+esac

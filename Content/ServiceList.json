@@ -154,6 +154,24 @@
             },
             "created":"",
             "digest":""
+         },
+         "Elastic Bean Stalk":{  
+            "name":"Elastic Bean Stalk",
+            "serviceID":"elasticbeanstalk",
+            "serviceCategory":"Compute",
+            "description":"Elastic Bean Stalk",
+            "supportedVersion":"5.0.1",   
+            "serviceVersion":"1.0",
+            "dependencyTag":[  
+               "mysql"
+            ],
+            "urls":{  
+               "serviceLibraryBundle":"Compute/Elastic Bean Stalk/WorkloadManager/elasticbeanstalk.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
          }
       }
    ],
