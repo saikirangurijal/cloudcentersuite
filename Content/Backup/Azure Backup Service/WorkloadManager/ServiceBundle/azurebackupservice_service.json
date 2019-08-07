@@ -7,7 +7,7 @@
    "bundleLocation":"",
    "systemService":false,
    "serviceType":"EXTERNAL",
-   "logoPath":"custom/assets/img/serviceLogo/40c8579e-85b9-4c26-bcad-b2525b0c57ed.png",
+   "logoPath":"custom/assets/img/serviceLogo/2eacb31b-1ef4-44c3-b91b-d970d486bd68.png",
    "serviceActions":[
 
    ],
@@ -57,8 +57,8 @@
          "deploymentParam":true
       },
       {
-         "paramName":"vm_name",
-         "displayName":"Azure Virtual Machine Name",
+         "paramName":"policyname",
+         "displayName":"Backuppolicy Name",
          "helpText":"",
          "type":"string",
          "valueConstraint":{
@@ -74,7 +74,7 @@
          "pathSuffixValue":null,
          "userVisible":true,
          "userEditable":true,
-         "optional":false,
+         "optional":true,
          "multiselectSupported":false,
          "webserviceListParams":null,
          "systemParam":false,

@@ -2,21 +2,6 @@
 #For external-service
 . /utils.sh
 
-#Initializing variables
-app_id=${CliqrCloud_ClientId}
-password=${CliqrCloud_ClientKey}
-tenant_id=${CliqrCloud_TenantId}
-resource_group=${Cloud_Setting_ResourceGroup}
-Cloud_Setting_StorageAccount=${Cloud_Setting_StorageAccount}
-store=( $Cloud_Setting_StorageAccount )
-storage_name=${store[1]}
-os_type=Windows
-language=${runtime}
-app_name=${app_name}
-location=${region}
-app_package=${AppPackage}
-app_tier_name=${cliqrAppTierName}
-
 # Sourcing variables from service directory
 arg1=$1
 
@@ -39,6 +24,7 @@ function executionStatus() {
 login(){
         pip install --upgrade pip
         pip install requests
+        sleep 10
         python main.py backupvm
         }
 

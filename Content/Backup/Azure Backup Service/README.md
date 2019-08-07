@@ -9,7 +9,8 @@
    For your reference : https://docs.microsoft.com/en-us/azure/backup/backup-overview
 	
 ## Before you start
- Make sure that Azure Virtual Machines exists in same region where the Recovery Service Vault exists beacause the Vault will allow to take the backup of Virtual Machines if it exists in same region only.
+ For Single-Tier, make sure that Azure Virtual Machines exists in same region where the Recovery Service Vault exists beacause the Vault 
+ will allow to take the backup of Virtual Machines if it exists in same region only.
 	
 ## How it works
    1. Import the service and application profile using Import service script. Refer 
@@ -96,10 +97,17 @@ Python script :
             Script from bundle: service stop
 
 
-## Deployment Parameters:
+## Deployment Parameters(Single-Tier):
 | Parameter Name| Type	 | Mandatory |Description |  
 | ------ | ------ | ------ | ------   
 | vaultname |	String | Yes | Name of the Recovery vault where backup will be taken. |
 | vm_name | String | Yes | Azure Virtual Machine name which we need to take backup. | 
+| policyname | String | No | Backup policy name if exists for vaultname provided. If not, DefaultPolicy will be applied |
+
+## Deployment Parameters(N-Tier):
+| Parameter Name| Type	 | Mandatory |Description |
+| ------ | ------ | ------ | ------
+| vaultname |	String | Yes | Name of the Recovery vault where backup will be taken. |
+| policyname | String | No | Backup policy name if exists for vaultname provided. If not, DefaultPolicy will be applied |
 
 

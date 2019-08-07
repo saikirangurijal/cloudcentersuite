@@ -296,6 +296,17 @@
             "description":"Azure Backup Service Integration Unit",
             "supportedVersion":"5.0.1",
             "serviceVersion":"1.0",
+            "appProfiles":{
+               "1":{
+                  "azurebackupservice_sample_app.zip":"Single-Tier Azure Backup Service"
+               },
+               "2":{
+                  "ntierazurebackup_sample_app.zip":"Azure Backup Service with MySQL vm agent"
+               }
+            },
+            "dependencyTag":[
+               "mysql"
+            ],
             "urls":{
                "serviceLibraryBundle":"Backup/Azure Backup Service/WorkloadManager/azurebackupservice.zip",
                "dockerFile":"dockerimages/Dockerfile",

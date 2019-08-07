@@ -1,9 +1,7 @@
 import requests
 import json
-import time
 import os
 import sys
-import datetime
 from util import *
 
 def  get_accesstoken(tenantid, client_id, client_secret):
@@ -136,7 +134,12 @@ def create_backup_policy(subscription_id,
             refresh_vm(subscription_id, resource_group, vaultname, policyname, tenantid,
                        "Azure", vmname, policy_id, client_id, client_secret)
         elif i["name"] == policyname:
-            print_log("Policy exists")
+			policy_exists = "true"
+            policy_id = i["id"]
+            refresh_vm(subscription_id, resource_group, vaultname, policyname, tenantid,
+                       "Azure", vmname, policy_id, client_id, client_secret)
+        else:
+            print_log("policy not exists")
 
 def create_recovery_vault(subscription_id, resource_group, vaultname, tenantid,
                           location, policyname, vmname, client_id, client_secret):
