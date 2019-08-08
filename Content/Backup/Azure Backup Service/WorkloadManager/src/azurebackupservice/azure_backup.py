@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import time
 import sys
 from util import *
 
@@ -134,7 +135,7 @@ def create_backup_policy(subscription_id,
             refresh_vm(subscription_id, resource_group, vaultname, policyname, tenantid,
                        "Azure", vmname, policy_id, client_id, client_secret)
         elif i["name"] == policyname:
-			policy_exists = "true"
+	    policy_exists = "true"
             policy_id = i["id"]
             refresh_vm(subscription_id, resource_group, vaultname, policyname, tenantid,
                        "Azure", vmname, policy_id, client_id, client_secret)

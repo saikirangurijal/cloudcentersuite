@@ -14,7 +14,7 @@
 	
 ## How it works
    1. Import the service and application profile using Import service script. Refer 
-   section ## Importing the service.It creates an application profile Azure_Backup_Service.
+   section ## Importing the service.It creates application profiles Azure_Backup_Service and NTierAzureBackupService.
    
    2. Backup the AzureVM  using above profile by providing Recovery Service vault name and Azure Virtual Machine Name.
    
