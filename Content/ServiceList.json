@@ -241,8 +241,24 @@
             },
             "created":"",
             "digest":""
+         },
+         "Appdynamics":{  
+            "name":"Appdynamics",
+            "serviceID":"",
+            "serviceCategory":"Monitoring",
+            "description":"Application Monitoring",
+            "supportedVersion":"5.0.1",
+            "serviceVersion":"1.0",
+            "urls":{  
+               "serviceLibraryBundle":"Monitoring/Appdynamics/WorkloadManager/appdynamicsagent.zip",
+               "dockerFile":"dockerimages/Dockerfile",
+               "serviceImport":"Scripts/serviceimport.zip"
+            },
+            "created":"",
+            "digest":""
          }
       }
+    
    ],
    "Backend Cache":[  
       {  
