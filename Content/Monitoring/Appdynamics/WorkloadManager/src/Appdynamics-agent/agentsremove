@@ -1,0 +1,5 @@
+#!/bin/bash
+#For external-service
+source /usr/local/cliqr/etc/userenv
+ps -ef | grep java | grep -v grep | awk '{print $2}' | xargs kill
+python /opt/remoteFiles/appPackage/removedb.py

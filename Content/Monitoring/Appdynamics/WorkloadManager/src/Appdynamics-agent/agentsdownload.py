@@ -142,15 +142,7 @@ def javaserveragent(access_token,ApplicationName,ApplicationNode,AppDynamicsCont
     print(out)
     p = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
     out, err = p.communicate()
-    #    command1 = subprocess.Popen(["./service", "start"], stdout=subprocess.PIPE)
-    #    out, err = command1.communicate()
-    #    print(out)
-    #    for line in out.splitlines():
-    #       if 'java' in line:
-    #          pid = int(line.split(None, 1)[0])
-    #         print(pid)
-    #         os.kill(pid, signal.SIGKILL)
-    os.chdir(r"/usr/local/cliqr/service/tomcat7")
+    os.chdir("/usr/local/cliqr/service/"+os.environ['cliqrWebServerType'])
     command1 = subprocess.Popen(["./service", "restart"], stdout=subprocess.PIPE)
     out, err = command1.communicate()
     print(out)

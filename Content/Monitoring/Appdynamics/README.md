@@ -47,7 +47,7 @@ Step 2 : Execute the script from Step 1 using the following command.
 Once the script is run, please follow the prompts to import the service or the correspondong application profile.
 
 
-##### PLEASE NOTE : You will be prompted with location of service bundle zip and/or application bundle zip on client machine. The files must be copied on to the repository before proceeding to deploy.
+**NOTE** :  You will be prompted with location of service bundle zip and/or application bundle zip on client machine. The files must be copied on to the repository before proceeding to deploy.
 
         - Agent Bundle under <service_path>/<your_bundle_name>
             Example: http://<Your_REPO_Server_IP>/<service_path>/appdynamics/appdynamicsagent 
@@ -77,14 +77,20 @@ The Package of agent bundle consists of the following files:
 
 Shell script:
  - appdynamicsagent : This script will download and agentsdownload.zip and invokes the service script.
+ - agentsremove  : This script will uninstall all agents
 Agents bundle :
  - service : This script will invoke python script agentsdownload.py
  - agentsdownload.py : This script will identify the agent and installs the agent.
  - httpd.conf : configuration file for apache webserver
+ - removedb.py : This script will remove collector information from Appdynamics controller 
  - appdynamics.cer : SSL certificate for appdynamics 
+ 
+ **NOTE** :  In your bundle,replace appdynamics.cer (SSL Certificate) with your Appdynamics SSL certificate with the same name (appdynamics.cer). 
+
 
 # Service Initialization actions / Node Initialization & Clean Up
-   - Under "Post-Start Script" lifecycle action, agent script would be configured like services//appdynamics/appdynamicsagent
+   - Under "Post-Start Script" lifecycle action, agent script would be configured like services/appdynamics/appdynamicsagent
+   - Under "Pre-Stop Script" lifecycle action, agent script would be configured like services/appdynamics/agentsremove
 # Global Parameters in Application Profile
 | Parameter Name	| Type	 | Description | Allowed Value |Default Value |
 | ------ | ------ | ------ |------ | ------ |
@@ -110,6 +116,12 @@ Agents bundle :
 | AppDynamicsAccessKey | String | Accesskey of controller  |  
 | AppDynamicsControllerHost | String | Host address of controller  |  
 | AppDynamicsControllerPort | Number | Port for connecting to controller  |  
+| DbType | List | Select mysql or postgresql  |  
+| ControllerUsername | String | User name of controller  |
+| ControllerPassword | String | Password of controller  |  
+| DatabaseName | String | Configured Database name  |  
+| DatabaseUsername | String | Configured Database username | 
+| DatabasePassword | Password |   Configured Database password| 
 
 
 # Deployment parameters in Application Profile for Webserver Agent 
