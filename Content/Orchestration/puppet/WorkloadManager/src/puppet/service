@@ -7,10 +7,18 @@ OSSVC_HOME=/usr/local/osmosix/service
 . /usr/local/osmosix/etc/userenv
 . $OSSVC_HOME/utils/cfgutil.sh
 . $OSSVC_HOME/utils/os_info_util.sh
-
+. $OSSVC_HOME/utils/install_util.sh
 cmd=$1
 SVCNAME=puppet
 SVCHOME=$OSSVC_HOME/$SVCNAME
+
+# Install WGET
+installWget
+if [ $? -ne 0 ]
+then
+    log "[ERROR] Failed to install wget"
+    exit 1
+fi
 
 installPuppetAgent() {
     echo "Installing Puppet agent"
@@ -28,33 +36,26 @@ installPuppetAgent() {
 }
 
 installOnUbuntu() {
-    
-    if [[ -z $CUSTOM_REPO_URL ]]; then	
-    	wget https://apt.puppetlabs.com/puppetlabs-release-$codename.deb
-    	sudo dpkg -i puppetlabs-release-$codename.deb
-    	sudo apt-get update
-    fi
-    sudo apt-get -y install puppet
+      wget https://apt.puppetlabs.com/puppet6-release-xenial.deb
+      sudo dpkg -i puppet6-release-xenial.deb
+      sudo apt -y update
+ 
+      sudo apt -y install puppet-agent
 
 }
 
 installOnCentOS() {
-    releaseVersion=7
     yum -y update
-    curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo
 
-    if [[ -z $CUSTOM_REPO_URL ]]; then
-    	sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-$releaseVersion.noarch.rpm
-    fi
-    sudo yum install -y puppet
-
+    sudo rpm -Uvh https://yum.puppet.com/puppet6-release-el-7.noarch.rpm
+    sudo yum install -y puppet-agent
 }
 
 configurePuppetAgent() {
 
     echo "Configuring Puppet agent"
 
-    [ -d /etc/puppet ] || mkdir -p /etc/puppet
+        [ -d /etc/puppet ] || mkdir -p /etc/puppet
 
     puppetConf=/etc/puppet/puppet.conf
     if [[ -z $cliqrNodeHostname ]];then
@@ -64,11 +65,12 @@ configurePuppetAgent() {
     fi
 
     cp $SVCHOME/puppet.conf $puppetConf
-
-    echo "certname=${hostname}" >> $puppetConf
+    [ -z $puppet_certname ] || echo "certname=${hostname}.${puppet_certname}" >> $puppetConf
     [ -z $puppet_hostname ] || echo "server=$puppet_hostname" >> $puppetConf
-    [ -z $puppet_environment ] || echo "environment=$puppet_environment" >> $puppetConf
     [ -z $run_interval ] || echo "runinterval=$run_interval" >> $puppetConf
+
+    rm -rf /etc/puppetlabs/puppet/puppet.conf
+    cp $puppetConf /etc/puppetlabs/puppet/puppet.conf
 
     #create custom facts for Puppet
     factsDir=/etc/facter/facts.d
@@ -86,10 +88,9 @@ configurePuppetAgent() {
 
 startPuppetAgent() {
     if [ $os == "Ubuntu" ] && [ $codename == "xenial" ]; then
-    	puppet agent --enable
-    fi 
-    sudo puppet agent --waitforcert 100
-    sudo puppet agent -t
+    	/opt/puppetlabs/puppet/bin/puppet agent --enable
+    fi
+    /opt/puppetlabs/puppet/bin/puppet agent -t
     exitCode=$?
     #puppet agent returns 2 when succeed. Will inspect more on this
     if [ $exitCode -eq 2 ]; then
@@ -108,8 +109,7 @@ case $cmd in
         configurePuppetAgent
         ;;
     start)
-        [ -f /etc/puppet/.rebooted ] || startPuppetAgent
-        touch /etc/puppet/.rebooted
+        startPuppetAgent
         ;;
     reload)
         startPuppetAgent

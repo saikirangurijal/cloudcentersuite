@@ -8,6 +8,15 @@ OSSVC_HOME=/usr/local/osmosix/service
 . /usr/local/osmosix/etc/userenv
 . $OSSVC_HOME/utils/cfgutil.sh
 . $OSSVC_HOME/utils/os_info_util.sh
+. $OSSVC_HOME/utils/install_util.sh
+
+# Install WGET
+installWget
+if [ $? -ne 0 ]
+then
+    log "[ERROR] Failed to install wget"
+    exit 1
+fi
 
 installChefClient() {
 
@@ -30,16 +39,17 @@ configureChefClient() {
     [ -d /etc/chef/trusted_certs  ] || mkdir -p /etc/chef/trusted_certs
 
     validation_client_name=${chef_organization}-validator
+	
 
-    cp $chef_user_key /etc/chef/${chef_user}.pem
-    cp $chef_validation_key /etc/chef/${validation_client_name}.pem
+    cp /tmp/chef_user_key.pem /etc/chef/
+    cp /tmp/chef_validation.pem /etc/chef/${validation_client_name}.pem
 
     if [ ! -f $chef_trusted_cert ] || [ ! -s $chef_trusted_cert ]
     then
         knife ssl fetch -s https://$chef_hostname
         cp /root/.chef/trusted_certs/*.crt /etc/chef/trusted_certs/
     else
-        cp $chef_trusted_cert /etc/chef/trusted_certs/${chef_hostname}.crt
+        cp /tmp/chef_trusted_cert.pem /etc/chef/trusted_certs/
     fi
 
     [ -z $chef_client_conf ] && chef_client_conf=$OSSVC_HOME/$SVCNAME/client.rb
@@ -49,7 +59,7 @@ configureChefClient() {
     chef_boot_json=/etc/chef/boot.json
 
     chef_node_name=${parentJobName}-${cliqrAppTierName}-${cliqrNodeId}
-
+	
     # do the parameter replacement
     replaceToken $chef_client_conf %CHEF_HOSTNAME% $chef_hostname
     replaceToken $chef_client_conf %VALIDATION_CLIENT% $validation_client_name
@@ -71,7 +81,7 @@ bootstrapClient() {
     [ -z $chef_environment ] && chef_environment=_default
     echo "Bootstrapping Chef client under environment $chef_environment"
 
-    chef-client -j /etc/chef/boot.json --environment $chef_environment
+    chef-client --config=/etc/chef/client.rb -j /etc/chef/boot.json --environment $chef_environment
 
 }
 
